@@ -8,12 +8,12 @@ const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Түрүү AI — Монголын бизнесийн AI шийдэл",
+  title: "Mongol Agent — Монголын бизнесийн AI шийдэл",
   description: "AI chatbot хөгжүүлэлт, бизнес автоматжуулалт, сургалт, зөвлөгөө. Монголын бизнесийг AI-аар хүчирхэгжүүл.",
   openGraph: {
-    title: "Түрүү AI",
+    title: "Mongol Agent",
     description: "Монголын бизнесийн AI шийдэл",
-    url: "https://turuuai.vercel.app",
+    url: "https://mongolagent.mn",
   },
 };
 
