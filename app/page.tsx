@@ -1,5 +1,6 @@
 import Link from "next/link";
 import PricingSection from "@/components/PricingSection";
+import DemoChat from "@/components/DemoChat";
 
 const PLATFORMS = [
   { name: "Facebook",      color: "#1877F2", vb: "0 0 24 24",       path: "M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" },
@@ -84,14 +85,6 @@ const PROCESS = [
     desc: "Нарийн туршиж, зохицуулсны дараа 3-7 хоногт амьд горимд нэвтрүүлнэ.",
   },
 ];
-
-const CASE_METRICS = [
-  { label: "Сарын нэмэлт орлого", value: "+₮12M" },
-  { label: "Хэмнэсэн ажлын цаг", value: "40ц/сар" },
-  { label: "Захиалга автоматжуулалт", value: "85%" },
-  { label: "Нэвтрүүлсэн хугацаа", value: "5 хоног" },
-];
-
 
 const TESTIMONIALS = [
   {
@@ -273,20 +266,6 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* ─── RESULTS ──────────────────────────────────────── */}
-      <section style={{ padding: "4rem 0" }}>
-        <div style={wrap}>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "1rem" }} className="md:grid-cols-4">
-            {RESULTS.map(r => (
-              <div key={r.label} style={{ textAlign: "center", padding: "1.5rem", borderRadius: "1rem", background: "var(--surface)", border: "1px solid var(--border)" }}>
-                <div className="stat-num" style={{ marginBottom: "0.5rem" }}>{r.num}</div>
-                <div style={{ fontSize: "0.78rem", color: "var(--text-light)", lineHeight: 1.4 }}>{r.label}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* ─── SERVICES ─────────────────────────────────────── */}
       <section id="services" style={{ padding: "5rem 0", background: "var(--surface)" }}>
         <div style={wrap}>
@@ -349,6 +328,26 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ─── PRICING ──────────────────────────────────────── */}
+      <PricingSection />
+
+      {/* ─── DEMO CHAT ────────────────────────────────────── */}
+      <DemoChat />
+
+      {/* ─── RESULTS ──────────────────────────────────────── */}
+      <section style={{ padding: "4rem 0", background: "var(--surface)" }}>
+        <div style={wrap}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "1rem" }} className="md:grid-cols-4">
+            {RESULTS.map(r => (
+              <div key={r.label} style={{ textAlign: "center", padding: "1.5rem", borderRadius: "1rem", background: "var(--surface2)", border: "1px solid var(--border2)" }}>
+                <div className="stat-num" style={{ marginBottom: "0.5rem" }}>{r.num}</div>
+                <div style={{ fontSize: "0.78rem", color: "var(--text-light)", lineHeight: 1.4 }}>{r.label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ─── PROCESS ──────────────────────────────────────── */}
       <section style={{ padding: "5rem 0" }}>
         <div style={wrap5}>
@@ -372,61 +371,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
-      {/* ─── CASE STUDY ───────────────────────────────────── */}
-      <section style={{ padding: "5rem 0", background: "var(--surface)" }}>
-        <div style={wrap5}>
-          <div style={{ textAlign: "center", marginBottom: "3rem" }}>
-            <div className="section-tag" style={{ display: "inline-flex", marginBottom: "1rem" }}>Case Study</div>
-            <h2 style={{ fontSize: "clamp(1.7rem, 3.5vw, 2.4rem)", fontWeight: 800, letterSpacing: "-0.02em" }}>Бодит үр дүн</h2>
-          </div>
-
-          <div style={{ borderRadius: "1.25rem", overflow: "hidden", border: "1px solid var(--border2)", background: "var(--surface2)" }}>
-            <div style={{ padding: "1.5rem 2rem", borderBottom: "1px solid var(--border)", background: "linear-gradient(135deg, #6366f108, transparent)", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "1rem" }}>
-              <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-                <div style={{ width: "3rem", height: "3rem", borderRadius: "0.875rem", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "1.5rem", background: "var(--surface)", border: "1px solid var(--border2)" }}>🐱</div>
-                <div>
-                  <div style={{ fontWeight: 700, fontSize: "1.05rem" }}>Kitty House Mongolia</div>
-                  <div style={{ fontSize: "0.78rem", color: "var(--text-light)" }}>Муурны бүтээгдэхүүн</div>
-                </div>
-              </div>
-              <div className="section-tag" style={{ background: "#10b98112", borderColor: "#10b98128", color: "#34d399", display: "inline-flex" }}>Амжилттай</div>
-            </div>
-
-            <div style={{ padding: "2rem" }}>
-              <div style={{ display: "grid", gridTemplateColumns: "repeat(1, 1fr)", gap: "1.5rem", marginBottom: "1.5rem" }} className="md:grid-cols-2">
-                <div>
-                  <div style={{ fontSize: "0.68rem", textTransform: "uppercase", letterSpacing: "0.1em", color: "var(--text-light)", marginBottom: "0.5rem" }}>Асуудал</div>
-                  <p style={{ color: "var(--text-mid)", fontSize: "0.875rem", lineHeight: 1.65 }}>Өдөр бүр 150+ ижил асуулт, шөнийн захиалга хаагдах асуудал</p>
-                </div>
-                <div>
-                  <div style={{ fontSize: "0.68rem", textTransform: "uppercase", letterSpacing: "0.1em", color: "var(--text-light)", marginBottom: "0.5rem" }}>Шийдэл</div>
-                  <p style={{ color: "var(--text-mid)", fontSize: "0.875rem", lineHeight: 1.65 }}>Facebook Messenger AI chatbot + QPay автомат төлбөр</p>
-                </div>
-              </div>
-
-              <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "0.75rem", marginBottom: "1.5rem" }} className="md:grid-cols-4">
-                {CASE_METRICS.map(m => (
-                  <div key={m.label} style={{ borderRadius: "0.75rem", padding: "1rem", textAlign: "center", background: "var(--surface)", border: "1px solid var(--border)" }}>
-                    <div style={{ fontSize: "1.4rem", fontWeight: 800, letterSpacing: "-0.02em", color: "#a78bfa", marginBottom: "0.25rem" }}>{m.value}</div>
-                    <div style={{ fontSize: "0.7rem", color: "var(--text-light)", lineHeight: 1.3 }}>{m.label}</div>
-                  </div>
-                ))}
-              </div>
-
-              <div style={{ borderRadius: "0.875rem", padding: "1.25rem 1.5rem", background: "#6366f10c", border: "1px solid #6366f120" }}>
-                <p style={{ fontSize: "0.92rem", color: "var(--text-mid)", fontStyle: "italic", lineHeight: 1.6 }}>
-                  "Шөнийн захиалгуудыг AI боловсруулдаг болсон. Орлого мэдэгдэхүйц өссөн."
-                </p>
-                <p style={{ marginTop: "0.6rem", fontSize: "0.78rem", color: "var(--text-light)", fontWeight: 500 }}>— Б.Оюунтунгалаг, Founder</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ─── PRICING ──────────────────────────────────────── */}
-      <PricingSection />
 
       {/* ─── TESTIMONIALS ─────────────────────────────────── */}
       <section style={{ padding: "5rem 0", background: "var(--surface)" }}>
