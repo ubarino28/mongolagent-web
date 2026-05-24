@@ -478,11 +478,11 @@ export default function HomePage() {
                 эхлүүлэх цаг болсон
               </h2>
               <p style={{ color: "var(--text-mid)", fontSize: "0.97rem", lineHeight: 1.65, maxWidth: "440px", margin: "0 auto 2.5rem" }}>
-                30 минутын үнэгүй consultation-аар бизнестэй яг тохирсон AI шийдлийг олж мэдэ. Хэрэгжүүлэлт 3 хоногоос эхэлнэ.
+                30 минутын үнэгүй consultation-аар бизнестээ яг тохирсон AI шийдлийг олж мэдээрэй.
               </p>
               <div style={{ display: "flex", flexWrap: "wrap", gap: "1rem", justifyContent: "center" }}>
                 <Link href="https://app.mongolagent.mn/register" className="btn-primary" style={{ padding: "0.95rem 2rem", fontSize: "0.95rem" }}>
-                  Үнэгүй demo авах →
+                  Агентаа бүтээх →
                 </Link>
                 <Link href="tel:80952821" className="btn-outline" style={{ padding: "0.95rem 2rem", fontSize: "0.95rem" }}>
                   📞 80952821
