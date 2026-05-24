@@ -1,10 +1,15 @@
 import Link from "next/link";
 
-const CLIENTS = [
-  "Kitty House Mongolia", "Dressy Shop", "Heal Medical", "PC Mall",
-  "BeautyMN", "GourmetUB", "FlexGym", "TravelMN",
-  "Kitty House Mongolia", "Dressy Shop", "Heal Medical", "PC Mall",
-  "BeautyMN", "GourmetUB", "FlexGym", "TravelMN",
+const PLATFORMS = [
+  { name: "Facebook",      color: "#1877F2", vb: "0 0 24 24",       path: "M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" },
+  { name: "Instagram",     color: "#E1306C", vb: "0 0 24 24",       path: "M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" },
+  { name: "QPay",          color: "#0066FF", vb: "0 0 24 24",       path: "M20 4H4c-1.11 0-2 .89-2 2v12c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z" },
+  { name: "Telegram",      color: "#26A5E4", vb: "0 0 24 24",       path: "M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z" },
+  { name: "Google Sheets", color: "#34A853", vb: "0 0 24 24",       path: "M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-2h2v2zm0-4H7v-2h2v2zm0-4H7V7h2v2zm4 8h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V7h2v2zm4 8h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V7h2v2z" },
+  { name: "Shopify",       color: "#95BF47", vb: "0 0 24 24",       path: "M18 6h-2c0-2.21-1.79-4-4-4S8 3.79 8 6H6c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-6-2c1.1 0 2 .9 2 2h-4c0-1.1.9-2 2-2zm6 16H6V8h2v2c0 .55.45 1 1 1s1-.45 1-1V8h4v2c0 .55.45 1 1 1s1-.45 1-1V8h2v12z" },
+  { name: "GitHub",        color: "#e2e8f0", vb: "0 0 24 24",       path: "M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" },
+  { name: "Render",        color: "#46E3B7", vb: "0 0 15 18.667",   path: "M0 0h7.786C11.73 0 15 3.273 15 7.22c0 2.62-1.4 4.917-3.496 6.182L15 18.667H10.02l-3.184-4.8H4.8v4.8H0V0zm4.8 9.453h2.986c1.337 0 2.42-1.087 2.42-2.427 0-1.34-1.083-2.427-2.42-2.427H4.8v4.854z" },
+  { name: "Vercel",        color: "#e2e8f0", vb: "0 0 24 22.526",   path: "M24 22.525H0l12-21.05 12 21.05z" },
 ];
 
 const RESULTS = [
@@ -248,19 +253,27 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ─── CLIENTS MARQUEE ──────────────────────────────── */}
-      <div style={{ borderTop: "1px solid var(--border)", borderBottom: "1px solid var(--border)", padding: "1.5rem 0" }}>
-        <p style={{ textAlign: "center", fontSize: "0.7rem", color: "var(--text-light)", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "1.25rem" }}>
-          Итгэлтэй ажилладаг компаниуд
+      {/* ─── PLATFORMS MARQUEE ────────────────────────────── */}
+      <div style={{ borderTop: "1px solid var(--border)", borderBottom: "1px solid var(--border)", padding: "1.75rem 0" }}>
+        <p style={{ textAlign: "center", fontSize: "0.68rem", color: "var(--text-light)", textTransform: "uppercase", letterSpacing: "0.12em", marginBottom: "1.5rem" }}>
+          Интеграцтай платформууд
         </p>
         <div style={{ overflow: "hidden", position: "relative" }}>
-          <div style={{ position: "absolute", left: 0, top: 0, bottom: 0, width: "5rem", zIndex: 10, background: "linear-gradient(90deg, var(--bg), transparent)", pointerEvents: "none" }} />
-          <div style={{ position: "absolute", right: 0, top: 0, bottom: 0, width: "5rem", zIndex: 10, background: "linear-gradient(-90deg, var(--bg), transparent)", pointerEvents: "none" }} />
+          <div style={{ position: "absolute", left: 0, top: 0, bottom: 0, width: "6rem", zIndex: 10, background: "linear-gradient(90deg, var(--bg), transparent)", pointerEvents: "none" }} />
+          <div style={{ position: "absolute", right: 0, top: 0, bottom: 0, width: "6rem", zIndex: 10, background: "linear-gradient(-90deg, var(--bg), transparent)", pointerEvents: "none" }} />
           <div className="marquee-inner">
-            {CLIENTS.map((name, i) => (
-              <div key={i} style={{ display: "flex", alignItems: "center", gap: "0.5rem", margin: "0 2rem", flexShrink: 0 }}>
-                <div style={{ width: "22px", height: "22px", borderRadius: "50%", background: "var(--border2)", flexShrink: 0 }} />
-                <span style={{ fontSize: "0.85rem", color: "var(--text-mid)", whiteSpace: "nowrap", fontWeight: 500 }}>{name}</span>
+            {[...PLATFORMS, ...PLATFORMS].map((p, i) => (
+              <div key={i} style={{ display: "flex", alignItems: "center", gap: "0.65rem", margin: "0 2.5rem", flexShrink: 0 }}>
+                <div style={{
+                  width: "32px", height: "32px", borderRadius: "8px", flexShrink: 0,
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  background: p.color + "18", border: `1px solid ${p.color}30`,
+                }}>
+                  <svg viewBox={p.vb} fill={p.color} width="16" height="16">
+                    <path d={p.path} />
+                  </svg>
+                </div>
+                <span style={{ fontSize: "0.88rem", color: "var(--text-mid)", whiteSpace: "nowrap", fontWeight: 600 }}>{p.name}</span>
               </div>
             ))}
           </div>
