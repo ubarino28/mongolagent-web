@@ -37,10 +37,10 @@ export default function Navbar() {
         </nav>
 
         <div className="hidden md:flex items-center gap-3">
-          <Link href="https://turuuai-app.vercel.app/login" className="btn-outline text-sm py-2 px-4">
+          <Link href="https://app.mongolagent.mn/login" className="btn-outline text-sm py-2 px-4">
             Нэвтрэх
           </Link>
-          <Link href="https://turuuai-app.vercel.app/register" className="btn-primary text-sm py-2 px-5">
+          <Link href="https://app.mongolagent.mn/register" className="btn-primary text-sm py-2 px-5">
             Эхлэх →
           </Link>
         </div>

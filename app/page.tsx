@@ -38,7 +38,7 @@ export default function HomePage() {
             AI chatbot, автоматжуулалт, сургалт — Монголын бизнесүүдэд зориулсан практик AI шийдлүүд.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-4">
-            <Link href="https://turuuai-app.vercel.app/register" className="btn-primary text-base px-8 py-3">Үнэгүй эхлэх →</Link>
+            <Link href="https://app.mongolagent.mn/register" className="btn-primary text-base px-8 py-3">Үнэгүй эхлэх →</Link>
             <Link href="/services" className="btn-outline text-base px-8 py-3">Үйлчилгээ харах</Link>
           </div>
         </div>
@@ -137,7 +137,7 @@ export default function HomePage() {
             <p className="mb-8 text-lg" style={{ color: "var(--text-mid)" }}>
               Үнэгүй 30 минутын consultation-аар бизнестээ ямар AI шийдэл тохирохыг мэдэж ав.
             </p>
-            <Link href="https://turuuai-app.vercel.app/register" className="btn-primary text-base px-10 py-3.5">Үнэгүй эхлэх →</Link>
+            <Link href="https://app.mongolagent.mn/register" className="btn-primary text-base px-10 py-3.5">Үнэгүй эхлэх →</Link>
           </div>
         </div>
       </section>
