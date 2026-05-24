@@ -12,11 +12,11 @@ const PLATFORMS = [
   { name: "Render",        color: "#46E3B7", vb: "0 0 15 18.667",   path: "M0 0h7.786C11.73 0 15 3.273 15 7.22c0 2.62-1.4 4.917-3.496 6.182L15 18.667H10.02l-3.184-4.8H4.8v4.8H0V0zm4.8 9.453h2.986c1.337 0 2.42-1.087 2.42-2.427 0-1.34-1.083-2.427-2.42-2.427H4.8v4.854z" },
   { name: "Vercel",        color: "#e2e8f0", vb: "0 0 24 22.526",   path: "M24 22.525H0l12-21.05 12 21.05z",    letter: "" },
   { name: "Supabase",     color: "#3ECF8E", vb: "0 0 24 24",       path: "M21.362 9.354H12V.396a.396.396 0 0 0-.716-.233L2.203 12.424l-.401.562a1.04 1.04 0 0 0 .836 1.659H12v8.959a.396.396 0 0 0 .716.233l9.081-12.261.401-.562a1.04 1.04 0 0 0-.836-1.66z", letter: "" },
-  { name: "Mobicom",      color: "#E8161C", vb: "",                 path: "",                                   letter: "M" },
-  { name: "Unitel",       color: "#0066B3", vb: "",                 path: "",                                   letter: "U" },
-  { name: "Gmobile",      color: "#00A550", vb: "",                 path: "",                                   letter: "G" },
-  { name: "Skytel",       color: "#00B4D8", vb: "",                 path: "",                                   letter: "S" },
-  { name: "Datacom",      color: "#FF6B00", vb: "",                 path: "",                                   letter: "D" },
+  { name: "Mobicom",      color: "#E8161C", vb: "",                 path: "",                                   letter: "", img: "/logo-mobicom.png" },
+  { name: "Unitel",       color: "#0066B3", vb: "",                 path: "",                                   letter: "", img: "/logo-unitel.png" },
+  { name: "Gmobile",      color: "#00A550", vb: "",                 path: "",                                   letter: "", img: "/logo-gmobile.svg" },
+  { name: "Skytel",       color: "#00B4D8", vb: "",                 path: "",                                   letter: "", img: "/logo-skytel.svg" },
+  { name: "Datacom",      color: "#FF6B00", vb: "",                 path: "",                                   letter: "D", img: "" },
 ];
 
 const RESULTS = [
@@ -250,9 +250,13 @@ export default function HomePage() {
                 <div style={{
                   width: "32px", height: "32px", borderRadius: "8px", flexShrink: 0,
                   display: "flex", alignItems: "center", justifyContent: "center",
-                  background: p.color + "18", border: `1px solid ${p.color}30`,
+                  background: p.img ? "var(--surface2)" : p.color + "18",
+                  border: p.img ? "1px solid var(--border2)" : `1px solid ${p.color}30`,
                 }}>
-                  {p.path ? (
+                  {p.img ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img src={p.img} alt={p.name} style={{ width: "22px", height: "22px", objectFit: "contain" }} />
+                  ) : p.path ? (
                     <svg viewBox={p.vb} fill={p.color} width="16" height="16">
                       <path d={p.path} />
                     </svg>
