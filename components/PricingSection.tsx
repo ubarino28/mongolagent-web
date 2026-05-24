@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 
 interface ModalFeature { title: string; desc: string; }
@@ -68,6 +68,15 @@ const PLANS: Plan[] = [
 export default function PricingSection() {
   const [activeModal, setActiveModal] = useState<string | null>(null);
   const activePlan = PLANS.find(p => p.name === activeModal) ?? null;
+
+  useEffect(() => {
+    if (activeModal) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => { document.body.style.overflow = ""; };
+  }, [activeModal]);
 
   return (
     <>
@@ -144,11 +153,13 @@ export default function PricingSection() {
       {/* Modal */}
       {activePlan && (
         <div
+          className="modal-overlay"
           onClick={() => setActiveModal(null)}
-          style={{ position: "fixed", inset: 0, zIndex: 100, display: "flex", alignItems: "center", justifyContent: "center", padding: "1rem", background: "rgba(0,0,0,0.7)", backdropFilter: "blur(8px)" }}>
+          style={{ position: "fixed", inset: 0, zIndex: 100, display: "flex", alignItems: "center", justifyContent: "center", padding: "1rem", background: "rgba(0,0,0,0.75)", backdropFilter: "blur(8px)" }}>
           <div
+            className="modal-sheet"
             onClick={e => e.stopPropagation()}
-            style={{ width: "100%", maxWidth: "600px", maxHeight: "88vh", overflowY: "auto", borderRadius: "1.5rem", background: "var(--surface2)", border: "1px solid var(--border2)", boxShadow: "0 24px 80px #00000060" }}>
+            style={{ width: "100%", maxWidth: "600px", maxHeight: "88vh", overflowY: "auto", overscrollBehavior: "contain", WebkitOverflowScrolling: "touch" as never, borderRadius: "1.5rem", background: "var(--surface2)", border: "1px solid var(--border2)", boxShadow: "0 24px 80px #00000060" }}>
 
             {/* Modal header */}
             <div style={{ position: "sticky", top: 0, zIndex: 10, padding: "1.5rem 1.75rem 1.25rem", background: "var(--surface2)", borderBottom: "1px solid var(--border)", display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: "1rem" }}>

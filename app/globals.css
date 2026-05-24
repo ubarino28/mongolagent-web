@@ -265,6 +265,19 @@ body {
   animation: ring-pulse 4.5s ease-in-out infinite;
 }
 
+/* Modal bottom sheet — mobile */
+@media (max-width: 640px) {
+  .modal-overlay {
+    align-items: flex-end !important;
+    padding: 0 !important;
+  }
+  .modal-sheet {
+    border-radius: 1.5rem 1.5rem 0 0 !important;
+    max-height: 92dvh !important;
+    width: 100% !important;
+  }
+}
+
 /* Scroll animations */
 [data-animate] {
   opacity: 0;
