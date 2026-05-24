@@ -308,31 +308,47 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(1, 1fr)", gap: "1.25rem" }} className="md:grid-cols-2">
+          <div className="services-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1.5rem" }}>
             {SERVICES.map(s => (
-              <div key={s.title} className="card card-glow" style={{ padding: "1.75rem", position: "relative", overflow: "hidden" }}>
-                <div style={{ position: "absolute", top: 0, right: 0, width: "120px", height: "120px", borderRadius: "50%", background: `radial-gradient(circle, ${s.color}12, transparent)`, transform: "translate(30%, -30%)", pointerEvents: "none" }} />
+              <div key={s.title} className="card-glow" style={{
+                position: "relative", overflow: "hidden", borderRadius: "1.25rem",
+                background: "var(--surface2)", border: "1px solid var(--border2)",
+                padding: "2rem",
+              }}>
+                {/* Top corner glow */}
+                <div style={{ position: "absolute", top: 0, right: 0, width: "160px", height: "160px", borderRadius: "50%", background: `radial-gradient(circle, ${s.color}15, transparent 70%)`, transform: "translate(40%, -40%)", pointerEvents: "none" }} />
 
-                <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", marginBottom: "1.25rem" }}>
-                  <div>
-                    <div className="section-tag" style={{ display: "inline-flex", marginBottom: "0.6rem", background: `${s.color}12`, borderColor: `${s.color}28`, color: s.color }}>
-                      {s.tag}
-                    </div>
-                    <h3 style={{ fontSize: "1.2rem", fontWeight: 700, letterSpacing: "-0.01em" }}>{s.title}</h3>
+                {/* Icon + Tag row */}
+                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "1.5rem" }}>
+                  <div style={{
+                    width: "48px", height: "48px", borderRadius: "12px", display: "flex", alignItems: "center", justifyContent: "center",
+                    fontSize: "1.5rem", background: `${s.color}15`, border: `1px solid ${s.color}25`, flexShrink: 0,
+                  }}>
+                    {s.icon}
                   </div>
-                  <span style={{ fontSize: "1.8rem" }}>{s.icon}</span>
+                  <div className="section-tag" style={{ display: "inline-flex", background: `${s.color}12`, borderColor: `${s.color}28`, color: s.color, fontSize: "0.65rem" }}>
+                    {s.tag}
+                  </div>
                 </div>
 
-                <p style={{ color: "var(--text-mid)", fontSize: "0.875rem", lineHeight: 1.65, marginBottom: "1.25rem" }}>{s.desc}</p>
+                {/* Title + desc */}
+                <h3 style={{ fontSize: "1.15rem", fontWeight: 700, letterSpacing: "-0.01em", marginBottom: "0.65rem" }}>{s.title}</h3>
+                <p style={{ color: "var(--text-mid)", fontSize: "0.84rem", lineHeight: 1.65, marginBottom: "1.25rem" }}>{s.desc}</p>
 
-                <div style={{ marginBottom: "1.25rem", display: "flex", flexDirection: "column", gap: "0.5rem" }}>
+                {/* Divider */}
+                <div style={{ height: "1px", background: "var(--border)", marginBottom: "1.25rem" }} />
+
+                {/* Features */}
+                <div style={{ display: "flex", flexDirection: "column", gap: "0.45rem", marginBottom: "1.5rem" }}>
                   {s.items.map(item => (
                     <div key={item} className="check-item">{item}</div>
                   ))}
                 </div>
 
-                <div style={{ borderRadius: "0.75rem", padding: "0.75rem 1rem", background: `${s.color}0a`, border: `1px solid ${s.color}20` }}>
-                  <p style={{ fontSize: "0.78rem", color: s.color, fontWeight: 500 }}>📈 {s.result}</p>
+                {/* Result badge */}
+                <div style={{ borderRadius: "0.65rem", padding: "0.7rem 1rem", background: `${s.color}08`, border: `1px solid ${s.color}25`, display: "flex", alignItems: "center", gap: "0.5rem" }}>
+                  <div style={{ width: "6px", height: "6px", borderRadius: "50%", background: s.color, flexShrink: 0 }} />
+                  <p style={{ fontSize: "0.78rem", color: s.color, fontWeight: 500, lineHeight: 1.4 }}>{s.result}</p>
                 </div>
               </div>
             ))}
