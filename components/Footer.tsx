@@ -7,8 +7,8 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           <div>
             <div className="font-bold text-lg mb-3">
-              <span className="gradient-text">Түрүү</span>
-              <span style={{ color: "var(--text-mid)" }}> AI</span>
+              <span className="gradient-text">Mongol</span>
+              <span style={{ color: "var(--text-mid)" }}> Agent</span>
             </div>
             <p className="text-sm" style={{ color: "var(--text-light)" }}>
               Монголын бизнесийг AI-аар хүчирхэгжүүл. Chatbot, автоматжуулалт, сургалт, зөвлөгөө.
@@ -27,12 +27,14 @@ export default function Footer() {
             <ul className="space-y-2 text-sm" style={{ color: "var(--text-light)" }}>
               <li><Link href="/pricing" className="hover:text-white transition-colors">Consultation захиалах</Link></li>
               <li><Link href="/about" className="hover:text-white transition-colors">Бидний тухай</Link></li>
+              <li>📞 80952821</li>
+              <li>📍 БЗД 3р хороо, Энэрэлцогцолбор 24а, Улаанбаатар</li>
             </ul>
           </div>
         </div>
         <div className="border-t pt-6 flex flex-col md:flex-row items-center justify-between gap-2 text-xs" style={{ borderColor: "var(--border)", color: "var(--text-light)" }}>
-          <span>© {new Date().getFullYear()} Түрүү AI. Бүх эрх хуулиар хамгаалагдсан.</span>
-          <span>turuuai.mn</span>
+          <span>© {new Date().getFullYear()} Mongol Agent. Бүх эрх хуулиар хамгаалагдсан.</span>
+          <span>mongolagent.mn</span>
         </div>
       </div>
     </footer>
