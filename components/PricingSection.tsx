@@ -28,7 +28,7 @@ const PLANS: Plan[] = [
     },
   },
   {
-    name: "Growth", price: "₮139,900", period: "/сар",
+    name: "Growth", price: "₮149,900", period: "/сар",
     desc: "Өсч буй бизнест зориулсан бүрэн шийдэл",
     features: ["15,000 мессеж/сар", "Цаг захиалга", "Коммент автоматжуулалт", "Telegram мэдэгдэл", "+ Starter бүгд"],
     highlight: true,
