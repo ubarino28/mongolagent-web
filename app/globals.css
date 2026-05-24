@@ -265,6 +265,17 @@ body {
   animation: ring-pulse 4.5s ease-in-out infinite;
 }
 
+/* Scroll animations */
+[data-animate] {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+[data-animate].animated {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 /* Typing indicator dots */
 @keyframes typing-bounce {
   0%, 80%, 100% { transform: translateY(0); opacity: 0.4; }

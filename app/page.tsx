@@ -232,7 +232,7 @@ export default function HomePage() {
       </section>
 
       {/* ─── PLATFORMS MARQUEE ────────────────────────────── */}
-      <div style={{ borderTop: "1px solid var(--border)", borderBottom: "1px solid var(--border)", padding: "1.75rem 0" }}>
+      <div data-animate style={{ borderTop: "1px solid var(--border)", borderBottom: "1px solid var(--border)", padding: "1.75rem 0" }}>
         <p style={{ textAlign: "center", fontSize: "0.68rem", color: "var(--text-light)", textTransform: "uppercase", letterSpacing: "0.12em", marginBottom: "1.5rem" }}>
           Интеграцтай платформууд
         </p>
@@ -267,7 +267,7 @@ export default function HomePage() {
       </div>
 
       {/* ─── SERVICES ─────────────────────────────────────── */}
-      <section id="services" style={{ padding: "5rem 0", background: "var(--surface)" }}>
+      <section id="services" data-animate style={{ padding: "5rem 0", background: "var(--surface)" }}>
         <div style={wrap}>
           <div style={{ textAlign: "center", marginBottom: "4rem" }}>
             <div className="section-tag" style={{ display: "inline-flex", marginBottom: "1rem" }}>Үйлчилгээ</div>
@@ -335,7 +335,7 @@ export default function HomePage() {
       <DemoChat />
 
       {/* ─── RESULTS ──────────────────────────────────────── */}
-      <section style={{ padding: "4rem 0", background: "var(--surface)" }}>
+      <section data-animate style={{ padding: "4rem 0", background: "var(--surface)" }}>
         <div style={wrap}>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "1rem" }} className="md:grid-cols-4">
             {RESULTS.map(r => (
@@ -349,7 +349,7 @@ export default function HomePage() {
       </section>
 
       {/* ─── PROCESS ──────────────────────────────────────── */}
-      <section style={{ padding: "5rem 0" }}>
+      <section data-animate style={{ padding: "5rem 0" }}>
         <div style={wrap5}>
           <div style={{ textAlign: "center", marginBottom: "3.5rem" }}>
             <div className="section-tag" style={{ display: "inline-flex", marginBottom: "1rem" }}>Процесс</div>
@@ -373,7 +373,7 @@ export default function HomePage() {
       </section>
 
       {/* ─── TESTIMONIALS ─────────────────────────────────── */}
-      <section style={{ padding: "5rem 0", background: "var(--surface)" }}>
+      <section data-animate style={{ padding: "5rem 0", background: "var(--surface)" }}>
         <div style={wrap5}>
           <div style={{ textAlign: "center", marginBottom: "3rem" }}>
             <div className="section-tag" style={{ display: "inline-flex", marginBottom: "1rem" }}>Сэтгэгдэл</div>
@@ -403,7 +403,7 @@ export default function HomePage() {
       </section>
 
       {/* ─── FAQ ──────────────────────────────────────────── */}
-      <section style={{ padding: "5rem 0" }}>
+      <section data-animate style={{ padding: "5rem 0" }}>
         <div style={wrap3}>
           <div style={{ textAlign: "center", marginBottom: "3rem" }}>
             <div className="section-tag" style={{ display: "inline-flex", marginBottom: "1rem" }}>FAQ</div>
@@ -427,7 +427,7 @@ export default function HomePage() {
       </section>
 
       {/* ─── CTA ──────────────────────────────────────────── */}
-      <section style={{ padding: "5rem 0 6rem" }}>
+      <section data-animate style={{ padding: "5rem 0 6rem" }}>
         <div style={wrap3}>
           <div style={{ position: "relative", borderRadius: "1.5rem", overflow: "hidden", padding: "4rem 3rem", textAlign: "center", background: "linear-gradient(135deg, #0d0d22 0%, #13132a 50%, #0d0d22 100%)", border: "1px solid #6366f130" }}>
             <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 80% 60% at 50% 50%, #6366f115 0%, transparent 70%)", pointerEvents: "none" }} />

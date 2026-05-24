@@ -71,7 +71,7 @@ export default function PricingSection() {
 
   return (
     <>
-      <section id="pricing" style={{ padding: "5rem 0" }}>
+      <section id="pricing" data-animate style={{ padding: "5rem 0" }}>
         <div style={{ maxWidth: "64rem", margin: "0 auto", padding: "0 1.25rem" }}>
           <div style={{ textAlign: "center", marginBottom: "3.5rem" }}>
             <div className="section-tag" style={{ display: "inline-flex", marginBottom: "1rem" }}>Үнэ</div>
