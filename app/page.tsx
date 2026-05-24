@@ -204,18 +204,18 @@ export default function HomePage() {
             <div className="hero-mascot" style={{ position: "relative", display: "flex", justifyContent: "center", alignItems: "center", minHeight: "460px" }}>
               {/* Outer glow blob */}
               <div style={{
-                position: "absolute", width: "420px", height: "420px", borderRadius: "50%",
+                position: "absolute", width: "520px", height: "520px", borderRadius: "50%",
                 background: "radial-gradient(ellipse at center, #6366f130 0%, #8b5cf622 45%, transparent 70%)",
                 filter: "blur(32px)",
               }} />
               {/* Pulsing ring 1 */}
               <div className="mascot-ring" style={{
-                position: "absolute", width: "360px", height: "360px", borderRadius: "50%",
+                position: "absolute", width: "460px", height: "460px", borderRadius: "50%",
                 border: "1px solid #6366f135",
               }} />
               {/* Pulsing ring 2 */}
               <div className="mascot-ring" style={{
-                position: "absolute", width: "300px", height: "300px", borderRadius: "50%",
+                position: "absolute", width: "380px", height: "380px", borderRadius: "50%",
                 border: "1px solid #8b5cf628",
                 animationDelay: "1s",
               }} />
@@ -236,7 +236,7 @@ export default function HomePage() {
                 src="/mascot.png"
                 alt="Mongol Agent AI Mascot"
                 className="mascot-float"
-                style={{ width: "340px", maxWidth: "90%", position: "relative", zIndex: 2, filter: "drop-shadow(0 20px 40px #6366f140) drop-shadow(0 0 60px #8b5cf625)" }}
+                style={{ width: "440px", maxWidth: "90%", position: "relative", zIndex: 2, filter: "drop-shadow(0 20px 40px #6366f140) drop-shadow(0 0 60px #8b5cf625)" }}
               />
               {/* Chat bubble decoration */}
               <div style={{
