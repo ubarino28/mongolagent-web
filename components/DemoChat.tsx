@@ -32,11 +32,12 @@ export default function DemoChat() {
   ]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
-  const bottomRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+    const el = containerRef.current;
+    if (el) el.scrollTop = el.scrollHeight;
   }, [msgs, loading]);
 
   const send = async (text: string) => {
@@ -108,7 +109,7 @@ export default function DemoChat() {
             </div>
 
             {/* Messages */}
-            <div style={{
+            <div ref={containerRef} style={{
               height: "360px", overflowY: "auto", padding: "1.5rem 1.25rem",
               display: "flex", flexDirection: "column", gap: "1rem",
               scrollbarWidth: "thin", scrollbarColor: "var(--border2) transparent",
@@ -175,7 +176,6 @@ export default function DemoChat() {
                   </div>
                 </div>
               )}
-              <div ref={bottomRef} />
             </div>
 
             {/* Quick questions */}
