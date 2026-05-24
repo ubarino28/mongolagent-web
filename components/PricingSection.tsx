@@ -76,9 +76,9 @@ export default function PricingSection() {
           <div style={{ textAlign: "center", marginBottom: "3.5rem" }}>
             <div className="section-tag" style={{ display: "inline-flex", marginBottom: "1rem" }}>Үнэ</div>
             <h2 style={{ fontSize: "clamp(1.7rem, 3.5vw, 2.4rem)", fontWeight: 800, letterSpacing: "-0.02em", marginBottom: "0.75rem" }}>
-              Бизнестэй тохирсон <span className="gradient-text">ил тод үнэ</span>
+              Бизнестээ тохируулан <span className="gradient-text">багцаа сонгоорой</span>
             </h2>
-            <p style={{ color: "var(--text-mid)", fontSize: "0.875rem" }}>Далд төлбөргүй. Хэрэгцээнийхээ дагуу багцаа сонгоно.</p>
+            <p style={{ color: "var(--text-mid)", fontSize: "0.875rem", marginBottom: "0.6rem" }}>Эхний хэрэглэгчид <span style={{ color: "#818cf8", fontWeight: 600 }}>3 хоног үнэгүй</span> Starter & Growth багцыг ашиглаарай</p>
           </div>
 
           <div className="pricing-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "0", alignItems: "stretch" }}>
