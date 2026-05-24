@@ -443,33 +443,93 @@ export default function HomePage() {
             <p style={{ color: "var(--text-mid)", fontSize: "0.875rem" }}>Далд төлбөргүй. Хэрэгцээнийхээ дагуу багцаа сонгоно.</p>
           </div>
 
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(1, 1fr)", gap: "1.25rem" }} className="md:grid-cols-3">
+          <div className="pricing-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "0", alignItems: "stretch" }}>
             {PLANS.map(plan => (
-              <div key={plan.name} style={{ position: "relative", borderRadius: "1.25rem", padding: "1.75rem", display: "flex", flexDirection: "column", background: plan.highlight ? "linear-gradient(160deg, #13132a, #0d0d1f)" : "var(--surface)", border: plan.highlight ? "1px solid #6366f155" : "1px solid var(--border)", boxShadow: plan.highlight ? "0 0 60px #6366f118" : "none" }}>
+              <div key={plan.name}
+                className={plan.highlight ? "pricing-featured" : ""}
+                style={{
+                  position: "relative",
+                  borderRadius: plan.highlight ? "1.5rem" : "1.25rem",
+                  padding: plan.highlight ? "2.25rem 2rem" : "2rem 1.75rem",
+                  display: "flex", flexDirection: "column",
+                  background: plan.highlight
+                    ? "linear-gradient(160deg, #16163a 0%, #0e0e24 100%)"
+                    : "var(--surface)",
+                  border: plan.highlight
+                    ? "1px solid #6366f160"
+                    : "1px solid var(--border)",
+                  boxShadow: plan.highlight
+                    ? "0 0 80px #6366f122, inset 0 1px 0 #6366f130"
+                    : "none",
+                  transform: plan.highlight ? "scale(1.04)" : "scale(1)",
+                  zIndex: plan.highlight ? 2 : 1,
+                  margin: plan.highlight ? "0 -4px" : "0",
+                }}>
+
+                {/* Most popular badge */}
                 {plan.highlight && (
-                  <div style={{ position: "absolute", top: "-0.875rem", left: "50%", transform: "translateX(-50%)", padding: "0.2rem 1rem", borderRadius: "100px", fontSize: "0.72rem", fontWeight: 700, background: "linear-gradient(135deg, #6366f1, #8b5cf6)", color: "white", whiteSpace: "nowrap" }}>
-                    Хамгийн алдартай
+                  <div style={{
+                    position: "absolute", top: "-1px", left: "50%", transform: "translateX(-50%)",
+                    padding: "0.3rem 1.1rem", borderRadius: "0 0 0.75rem 0.75rem",
+                    fontSize: "0.68rem", fontWeight: 700, letterSpacing: "0.06em",
+                    background: "linear-gradient(135deg, #6366f1, #8b5cf6)",
+                    color: "white", whiteSpace: "nowrap", textTransform: "uppercase",
+                  }}>
+                    ✦ Хамгийн алдартай
                   </div>
                 )}
 
-                <div style={{ marginBottom: "1.5rem" }}>
-                  <div style={{ fontSize: "0.7rem", fontWeight: 700, color: "var(--text-light)", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "0.5rem" }}>{plan.name}</div>
-                  <div style={{ display: "flex", alignItems: "flex-end", gap: "0.25rem", marginBottom: "0.5rem" }}>
-                    <span style={{ fontSize: plan.price === "Тохиролцоо" ? "1.6rem" : "2rem", fontWeight: 800, letterSpacing: "-0.02em" }}>{plan.price}</span>
-                    {plan.period && <span style={{ fontSize: "0.82rem", color: "var(--text-light)", marginBottom: "0.3rem" }}>{plan.period}</span>}
-                  </div>
-                  <p style={{ fontSize: "0.8rem", color: "var(--text-light)" }}>{plan.desc}</p>
+                {/* Inner glow top-right */}
+                {plan.highlight && (
+                  <div style={{ position: "absolute", top: 0, right: 0, width: "180px", height: "180px", borderRadius: "50%", background: "radial-gradient(circle, #8b5cf620 0%, transparent 70%)", transform: "translate(30%, -30%)", pointerEvents: "none" }} />
+                )}
+
+                {/* Plan name */}
+                <div style={{ marginBottom: "0.4rem" }}>
+                  <span style={{
+                    fontSize: "0.7rem", fontWeight: 700, textTransform: "uppercase",
+                    letterSpacing: "0.1em",
+                    color: plan.highlight ? "#818cf8" : "var(--text-light)",
+                  }}>{plan.name}</span>
                 </div>
 
-                <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: "0.6rem", marginBottom: "1.75rem" }}>
+                {/* Price */}
+                <div style={{ display: "flex", alignItems: "flex-end", gap: "0.3rem", marginBottom: "0.4rem" }}>
+                  <span style={{
+                    fontSize: "2.2rem", fontWeight: 800, letterSpacing: "-0.03em", lineHeight: 1,
+                    color: plan.highlight ? "#f1f5f9" : "var(--text)",
+                  }}>{plan.price}</span>
+                  {plan.period && (
+                    <span style={{ fontSize: "0.82rem", color: "var(--text-light)", paddingBottom: "0.3rem" }}>{plan.period}</span>
+                  )}
+                </div>
+
+                {/* Desc */}
+                <p style={{ fontSize: "0.8rem", color: "var(--text-light)", marginBottom: "1.5rem", lineHeight: 1.5 }}>{plan.desc}</p>
+
+                {/* Divider */}
+                <div style={{ height: "1px", background: plan.highlight ? "#6366f125" : "var(--border)", marginBottom: "1.25rem" }} />
+
+                {/* Features */}
+                <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: "0.6rem", marginBottom: "2rem" }}>
                   {plan.features.map(f => (
-                    <div key={f} className="check-item">{f}</div>
+                    <div key={f} className="check-item" style={{ color: plan.highlight ? "var(--text-mid)" : "var(--text-light)" }}>{f}</div>
                   ))}
                 </div>
 
-                <Link href={plan.name === "Enterprise" ? "tel:80952821" : "https://app.mongolagent.mn/register"}
-                  className={plan.highlight ? "btn-primary" : "btn-outline"}
-                  style={{ display: "flex", justifyContent: "center" }}>
+                {/* CTA */}
+                <Link
+                  href={plan.name === "Enterprise" ? "tel:80952821" : "https://app.mongolagent.mn/register"}
+                  style={{
+                    display: "flex", justifyContent: "center", alignItems: "center",
+                    padding: "0.75rem 1.5rem", borderRadius: "0.75rem",
+                    fontWeight: 600, fontSize: "0.9rem", textDecoration: "none",
+                    transition: "all 0.2s",
+                    ...(plan.highlight
+                      ? { background: "linear-gradient(135deg, #6366f1, #8b5cf6)", color: "white", boxShadow: "0 4px 20px #6366f135" }
+                      : { background: "transparent", color: "var(--text-mid)", border: "1px solid var(--border2)" }
+                    ),
+                  }}>
                   {plan.name === "Enterprise" ? "Холбоо барих" : "Эхлэх →"}
                 </Link>
               </div>

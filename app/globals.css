@@ -237,6 +237,16 @@ body {
   }
 }
 
+/* Pricing grid — mobile: single column */
+@media (max-width: 768px) {
+  .pricing-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .pricing-featured {
+    transform: none !important;
+  }
+}
+
 /* Mascot float */
 @keyframes float {
   0%, 100% { transform: translateY(0px); }
