@@ -86,7 +86,7 @@ const CASE_METRICS = [
 const PLANS = [
   {
     name: "Starter",
-    price: "₮390,000",
+    price: "₮79,900",
     period: "/сар",
     desc: "Жижиг бизнест зориулсан суурь AI шийдэл",
     features: ["Facebook Messenger chatbot", "Мэдлэгийн сан (50 Q&A)", "Лид менежмент", "Telegram мэдэгдэл", "Сарын тайлан"],
@@ -94,7 +94,7 @@ const PLANS = [
   },
   {
     name: "Growth",
-    price: "₮790,000",
+    price: "₮139,900",
     period: "/сар",
     desc: "Өсч буй бизнест зориулсан бүрэн шийдэл",
     features: ["Starter багцийн бүх зүйл", "QPay төлбөрийн интеграц", "Instagram DM автоматжуулалт", "Мэдлэгийн сан (хязгааргүй)", "CRM интеграц", "Тэргүүлэх дэмжлэг"],
@@ -102,8 +102,8 @@ const PLANS = [
   },
   {
     name: "Enterprise",
-    price: "Тохиролцоо",
-    period: "",
+    price: "₮239,900",
+    period: "/сар",
     desc: "Том бизнест зориулсан custom шийдэл",
     features: ["Growth багцийн бүх зүйл", "Custom AI agent хөгжүүлэлт", "Олон суваг интеграц", "Dedicated менежер", "SLA баталгаа", "Onsite сургалт"],
     highlight: false,
