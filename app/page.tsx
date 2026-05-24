@@ -10,7 +10,13 @@ const PLATFORMS = [
   { name: "Shopify",       color: "#95BF47", vb: "0 0 24 24",       path: "M18 6h-2c0-2.21-1.79-4-4-4S8 3.79 8 6H6c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-6-2c1.1 0 2 .9 2 2h-4c0-1.1.9-2 2-2zm6 16H6V8h2v2c0 .55.45 1 1 1s1-.45 1-1V8h4v2c0 .55.45 1 1 1s1-.45 1-1V8h2v12z" },
   { name: "GitHub",        color: "#e2e8f0", vb: "0 0 24 24",       path: "M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" },
   { name: "Render",        color: "#46E3B7", vb: "0 0 15 18.667",   path: "M0 0h7.786C11.73 0 15 3.273 15 7.22c0 2.62-1.4 4.917-3.496 6.182L15 18.667H10.02l-3.184-4.8H4.8v4.8H0V0zm4.8 9.453h2.986c1.337 0 2.42-1.087 2.42-2.427 0-1.34-1.083-2.427-2.42-2.427H4.8v4.854z" },
-  { name: "Vercel",        color: "#e2e8f0", vb: "0 0 24 22.526",   path: "M24 22.525H0l12-21.05 12 21.05z" },
+  { name: "Vercel",        color: "#e2e8f0", vb: "0 0 24 22.526",   path: "M24 22.525H0l12-21.05 12 21.05z",    letter: "" },
+  { name: "Supabase",     color: "#3ECF8E", vb: "0 0 24 24",       path: "M21.362 9.354H12V.396a.396.396 0 0 0-.716-.233L2.203 12.424l-.401.562a1.04 1.04 0 0 0 .836 1.659H12v8.959a.396.396 0 0 0 .716.233l9.081-12.261.401-.562a1.04 1.04 0 0 0-.836-1.66z", letter: "" },
+  { name: "Mobicom",      color: "#E8161C", vb: "",                 path: "",                                   letter: "M" },
+  { name: "Unitel",       color: "#0066B3", vb: "",                 path: "",                                   letter: "U" },
+  { name: "Gmobile",      color: "#00A550", vb: "",                 path: "",                                   letter: "G" },
+  { name: "Skytel",       color: "#00B4D8", vb: "",                 path: "",                                   letter: "S" },
+  { name: "Datacom",      color: "#FF6B00", vb: "",                 path: "",                                   letter: "D" },
 ];
 
 const RESULTS = [
@@ -246,9 +252,13 @@ export default function HomePage() {
                   display: "flex", alignItems: "center", justifyContent: "center",
                   background: p.color + "18", border: `1px solid ${p.color}30`,
                 }}>
-                  <svg viewBox={p.vb} fill={p.color} width="16" height="16">
-                    <path d={p.path} />
-                  </svg>
+                  {p.path ? (
+                    <svg viewBox={p.vb} fill={p.color} width="16" height="16">
+                      <path d={p.path} />
+                    </svg>
+                  ) : (
+                    <span style={{ fontSize: "0.72rem", fontWeight: 900, color: p.color, lineHeight: 1 }}>{p.letter}</span>
+                  )}
                 </div>
                 <span style={{ fontSize: "0.88rem", color: "var(--text-mid)", whiteSpace: "nowrap", fontWeight: 600 }}>{p.name}</span>
               </div>
