@@ -141,58 +141,126 @@ export default function HomePage() {
   return (
     <>
       {/* ─── HERO ─────────────────────────────────────────── */}
-      <section style={{ position: "relative", overflow: "hidden", padding: "5rem 0 5rem" }}>
+      <section style={{ position: "relative", overflow: "hidden", padding: "4rem 0 5rem" }}>
         {/* Grid bg */}
         <div style={{
-          position: "absolute", inset: 0, opacity: 0.4,
+          position: "absolute", inset: 0, opacity: 0.35,
           backgroundImage: "linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px)",
           backgroundSize: "60px 60px",
         }} />
-        {/* Glow top */}
-        <div style={{ position: "absolute", inset: 0, pointerEvents: "none", background: "radial-gradient(ellipse 70% 50% at 50% -5%, #6366f118 0%, transparent 70%)" }} />
+        {/* Glow — left for text, right for mascot */}
+        <div style={{ position: "absolute", inset: 0, pointerEvents: "none", background: "radial-gradient(ellipse 55% 60% at 20% 40%, #6366f115 0%, transparent 65%)" }} />
+        <div style={{ position: "absolute", inset: 0, pointerEvents: "none", background: "radial-gradient(ellipse 60% 70% at 78% 50%, #8b5cf622 0%, #6366f115 40%, transparent 70%)" }} />
 
         <div style={{ ...wrap, position: "relative" }}>
-          {/* Tag */}
-          <div className="section-tag" style={{ marginBottom: "1.5rem", display: "inline-flex" }}>
-            🇲🇳 Монголын #1 бизнес AI платформ
-          </div>
+          {/* Two-column grid */}
+          <div className="hero-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "2rem", alignItems: "center" }}>
 
-          {/* Headline */}
-          <h1 style={{ fontSize: "clamp(2.2rem, 5vw, 4rem)", fontWeight: 800, lineHeight: 1.1, letterSpacing: "-0.03em", marginBottom: "1.5rem", maxWidth: "680px" }}>
-            Таны бизнест<br />
-            <span className="gradient-text">цаг тутам ажилладаг</span><br />
-            AI баг
-          </h1>
-
-          <p style={{ fontSize: "1.05rem", color: "var(--text-mid)", lineHeight: 1.7, maxWidth: "520px", marginBottom: "2.5rem" }}>
-            Facebook, Instagram дээр автоматаар борлуулж, QPay-аар төлбөр авч, лид менежментийг бүрэн хийдэг. Монголын бизнест зориулсан premium AI платформ.
-          </p>
-
-          {/* CTAs */}
-          <div style={{ display: "flex", flexWrap: "wrap", gap: "1rem", marginBottom: "3rem" }}>
-            <Link href="https://app.mongolagent.mn/register" className="btn-primary" style={{ fontSize: "0.95rem", padding: "0.85rem 2rem" }}>
-              Үнэгүй demo авах →
-            </Link>
-            <Link href="#services" className="btn-outline" style={{ fontSize: "0.95rem", padding: "0.85rem 2rem" }}>
-              Үйлчилгээ харах
-            </Link>
-          </div>
-
-          {/* Proof badges */}
-          <div style={{ display: "flex", flexWrap: "wrap", gap: "0.75rem" }}>
-            {[
-              { icon: "🏢", val: "40+", label: "Клиент" },
-              { icon: "💰", val: "₮800M+", label: "Орлого үүсгэсэн" },
-              { icon: "⚡", val: "3 хоног", label: "Нэвтрүүлэлт" },
-            ].map(b => (
-              <div key={b.val} style={{ display: "flex", alignItems: "center", gap: "0.6rem", padding: "0.6rem 1rem", borderRadius: "0.75rem", background: "var(--surface)", border: "1px solid var(--border2)" }}>
-                <span style={{ fontSize: "1rem" }}>{b.icon}</span>
-                <div>
-                  <div style={{ fontSize: "0.85rem", fontWeight: 700, color: "var(--text)" }}>{b.val}</div>
-                  <div style={{ fontSize: "0.68rem", color: "var(--text-light)" }}>{b.label}</div>
-                </div>
+            {/* ── Left: text ── */}
+            <div>
+              <div className="section-tag" style={{ marginBottom: "1.5rem", display: "inline-flex" }}>
+                🇲🇳 Монголын #1 бизнес AI платформ
               </div>
-            ))}
+
+              <h1 style={{ fontSize: "clamp(2rem, 4vw, 3.6rem)", fontWeight: 800, lineHeight: 1.1, letterSpacing: "-0.03em", marginBottom: "1.5rem" }}>
+                Таны бизнест<br />
+                <span className="gradient-text">цаг тутам ажилладаг</span><br />
+                AI баг
+              </h1>
+
+              <p style={{ fontSize: "1rem", color: "var(--text-mid)", lineHeight: 1.75, maxWidth: "480px", marginBottom: "2.5rem" }}>
+                Facebook, Instagram дээр автоматаар борлуулж, QPay-аар төлбөр авч, лид менежментийг бүрэн хийдэг. Монголын бизнест зориулсан premium AI платформ.
+              </p>
+
+              {/* CTAs */}
+              <div style={{ display: "flex", flexWrap: "wrap", gap: "1rem", marginBottom: "3rem" }}>
+                <Link href="https://app.mongolagent.mn/register" className="btn-primary" style={{ fontSize: "0.95rem", padding: "0.85rem 2rem" }}>
+                  Үнэгүй demo авах →
+                </Link>
+                <Link href="#services" className="btn-outline" style={{ fontSize: "0.95rem", padding: "0.85rem 2rem" }}>
+                  Үйлчилгээ харах
+                </Link>
+              </div>
+
+              {/* Proof badges */}
+              <div style={{ display: "flex", flexWrap: "wrap", gap: "0.75rem" }}>
+                {[
+                  { icon: "🏢", val: "40+", label: "Клиент" },
+                  { icon: "💰", val: "₮800M+", label: "Орлого үүсгэсэн" },
+                  { icon: "⚡", val: "3 хоног", label: "Нэвтрүүлэлт" },
+                ].map(b => (
+                  <div key={b.val} style={{ display: "flex", alignItems: "center", gap: "0.6rem", padding: "0.6rem 1rem", borderRadius: "0.75rem", background: "var(--surface)", border: "1px solid var(--border2)" }}>
+                    <span style={{ fontSize: "1rem" }}>{b.icon}</span>
+                    <div>
+                      <div style={{ fontSize: "0.85rem", fontWeight: 700, color: "var(--text)" }}>{b.val}</div>
+                      <div style={{ fontSize: "0.68rem", color: "var(--text-light)" }}>{b.label}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* ── Right: mascot ── */}
+            <div className="hero-mascot" style={{ position: "relative", display: "flex", justifyContent: "center", alignItems: "center", minHeight: "460px" }}>
+              {/* Outer glow blob */}
+              <div style={{
+                position: "absolute", width: "420px", height: "420px", borderRadius: "50%",
+                background: "radial-gradient(ellipse at center, #6366f130 0%, #8b5cf622 45%, transparent 70%)",
+                filter: "blur(32px)",
+              }} />
+              {/* Pulsing ring 1 */}
+              <div className="mascot-ring" style={{
+                position: "absolute", width: "360px", height: "360px", borderRadius: "50%",
+                border: "1px solid #6366f135",
+              }} />
+              {/* Pulsing ring 2 */}
+              <div className="mascot-ring" style={{
+                position: "absolute", width: "300px", height: "300px", borderRadius: "50%",
+                border: "1px solid #8b5cf628",
+                animationDelay: "1s",
+              }} />
+              {/* Ground glow */}
+              <div style={{
+                position: "absolute", bottom: "40px", left: "50%", transform: "translateX(-50%)",
+                width: "200px", height: "30px",
+                background: "radial-gradient(ellipse at center, #6366f135 0%, transparent 70%)",
+                filter: "blur(12px)",
+              }} />
+              {/* Floating dots */}
+              <div style={{ position: "absolute", top: "80px", right: "80px", width: "8px", height: "8px", borderRadius: "50%", background: "#818cf8", opacity: 0.7, boxShadow: "0 0 10px #6366f1" }} />
+              <div style={{ position: "absolute", top: "140px", left: "70px", width: "5px", height: "5px", borderRadius: "50%", background: "#a78bfa", opacity: 0.5 }} />
+              <div style={{ position: "absolute", bottom: "120px", right: "70px", width: "6px", height: "6px", borderRadius: "50%", background: "#6366f1", opacity: 0.6, boxShadow: "0 0 8px #6366f1" }} />
+              {/* Mascot */}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/mascot.png"
+                alt="Mongol Agent AI Mascot"
+                className="mascot-float"
+                style={{ width: "340px", maxWidth: "90%", position: "relative", zIndex: 2, filter: "drop-shadow(0 20px 40px #6366f140) drop-shadow(0 0 60px #8b5cf625)" }}
+              />
+              {/* Chat bubble decoration */}
+              <div style={{
+                position: "absolute", top: "60px", right: "50px", zIndex: 3,
+                background: "var(--surface2)", border: "1px solid var(--border2)",
+                borderRadius: "1rem 1rem 1rem 0.25rem",
+                padding: "0.6rem 0.9rem",
+                fontSize: "0.75rem", color: "var(--text-mid)",
+                boxShadow: "0 4px 20px #00000040",
+              }}>
+                💬 Сайн байна уу?
+              </div>
+              <div style={{
+                position: "absolute", bottom: "110px", left: "30px", zIndex: 3,
+                background: "var(--surface2)", border: "1px solid var(--border2)",
+                borderRadius: "1rem 1rem 0.25rem 1rem",
+                padding: "0.6rem 0.9rem",
+                fontSize: "0.75rem", color: "var(--text-mid)",
+                boxShadow: "0 4px 20px #00000040",
+              }}>
+                ✅ Захиалга баталгаажлаа!
+              </div>
+            </div>
+
           </div>
         </div>
       </section>
