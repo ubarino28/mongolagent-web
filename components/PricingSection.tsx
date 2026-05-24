@@ -51,7 +51,7 @@ const PLANS: Plan[] = [
     highlight: false,
     modal: {
       features: [
-        { title: "Website хөгжүүлэлт", desc: "Бизнест тохирсон professional website хийж өгнө. Hosting, дизайнийг таны хүсэлд тааруулан custom хийж өгнө. (Custom domain авах бол төлбөрийг 1 удаа сарын төлбөр дээр нийцүүлэн бодож авна)" },
+        { title: "Website хөгжүүлэлт", desc: "Бизнест тохирсон professional website хийж өгнө. Hosting, дизайнийг таны хүсэлд тааруулан custom хийж өгнө. (Custom domain авах бол төлбөрийг 1 удаа сарын төлбөр дээр нийцүүлэн бодож авна)\n\n⚠️ Анхааруулга: Subscription цуцалсан тохиолдолд Mongol Agent-ийн боловсруулсан website нь Mongol Agent-ийн өмч болж үлдэнэ." },
         { title: "Custom AI agent", desc: "Стандарт chatbot-оос давсан, таны бизнесийн онцлог процессыг бүрэн автоматжуулсан AI систем боловсруулна." },
         { title: "Admin Panel", desc: "Facebook болон Instagram чатнаас орж ирсэн бүх захиалгууд таны website admin panel дээр тус тусын ангилалд хадгалагдана. (Захиалга, үнэ, хүргэх хаяг, утасны дугаар, имэйл хаяг гэх мэт)" },
         { title: "Email & SMS мэдэгдэл", desc: "Төлбөр төлөгдсөн захиалга болгонд Email & SMS мэдэгдэл автоматаар илгээгдэнэ. Жишээ: \"Таны захиалга баталгаажлаа. Хүргэлт 24-48 цагын дотор очно.\" ⚠️ Email үнэгүй, SMS-ийн төлбөрийг та төлнө (1 мэссеж ≈ 80₮)." },
@@ -176,7 +176,7 @@ export default function PricingSection() {
                   {activePlan.modal.features.map((f, i) => (
                     <div key={i} style={{ padding: "1rem 1.1rem", borderRadius: "0.875rem", background: "var(--surface3)", border: "1px solid var(--border)" }}>
                       <div style={{ fontSize: "0.875rem", fontWeight: 600, color: "var(--text)", marginBottom: "0.4rem" }}>✦ {f.title}</div>
-                      <div style={{ fontSize: "0.825rem", color: "var(--text-mid)", lineHeight: 1.7 }}>{f.desc}</div>
+                      <div style={{ fontSize: "0.825rem", color: "var(--text-mid)", lineHeight: 1.7, whiteSpace: "pre-line" }}>{f.desc}</div>
                     </div>
                   ))}
                 </div>
