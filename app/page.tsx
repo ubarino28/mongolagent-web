@@ -1,4 +1,5 @@
 import Link from "next/link";
+import PricingSection from "@/components/PricingSection";
 
 const PLATFORMS = [
   { name: "Facebook",      color: "#1877F2", vb: "0 0 24 24",       path: "M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" },
@@ -83,32 +84,6 @@ const CASE_METRICS = [
   { label: "Нэвтрүүлсэн хугацаа", value: "5 хоног" },
 ];
 
-const PLANS = [
-  {
-    name: "Starter",
-    price: "₮79,900",
-    period: "/сар",
-    desc: "Жижиг бизнест зориулсан суурь AI шийдэл",
-    features: ["10,000 мессеж/сар", "AI Chatbot", "Мэдлэгийн сан", "Тайлан", "Захиалгийн бүртгэл", "Борлуулалтын тайлан"],
-    highlight: false,
-  },
-  {
-    name: "Growth",
-    price: "₮139,900",
-    period: "/сар",
-    desc: "Өсч буй бизнест зориулсан бүрэн шийдэл",
-    features: ["15,000 мессеж/сар", "Цаг захиалга", "Коммент автоматжуулалт", "Telegram мэдэгдэл", "+ Starter бүгд"],
-    highlight: true,
-  },
-  {
-    name: "Enterprise",
-    price: "₮399,000",
-    period: "/сар",
-    desc: "Том бизнест зориулсан бүрэн шийдэл",
-    features: ["17,000 мессеж/сар", "Website хөгжүүлэлт", "Custom AI agent хөгжүүлэлт", "SLA баталгаа", "Мэдлэгийн сан хязгааргүй", "+ Growth багц бүгд"],
-    highlight: false,
-  },
-];
 
 const TESTIMONIALS = [
   {
@@ -433,115 +408,7 @@ export default function HomePage() {
       </section>
 
       {/* ─── PRICING ──────────────────────────────────────── */}
-      <section id="pricing" style={{ padding: "5rem 0" }}>
-        <div style={wrap5}>
-          <div style={{ textAlign: "center", marginBottom: "3.5rem" }}>
-            <div className="section-tag" style={{ display: "inline-flex", marginBottom: "1rem" }}>Үнэ</div>
-            <h2 style={{ fontSize: "clamp(1.7rem, 3.5vw, 2.4rem)", fontWeight: 800, letterSpacing: "-0.02em", marginBottom: "0.75rem" }}>
-              Бизнестэй тохирсон <span className="gradient-text">ил тод үнэ</span>
-            </h2>
-            <p style={{ color: "var(--text-mid)", fontSize: "0.875rem" }}>Далд төлбөргүй. Хэрэгцээнийхээ дагуу багцаа сонгоно.</p>
-          </div>
-
-          <div className="pricing-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "0", alignItems: "stretch" }}>
-            {PLANS.map(plan => (
-              <div key={plan.name}
-                className={plan.highlight ? "pricing-featured" : ""}
-                style={{
-                  position: "relative",
-                  borderRadius: plan.highlight ? "1.5rem" : "1.25rem",
-                  padding: plan.highlight ? "2.25rem 2rem" : "2rem 1.75rem",
-                  display: "flex", flexDirection: "column",
-                  background: plan.highlight
-                    ? "linear-gradient(160deg, #16163a 0%, #0e0e24 100%)"
-                    : "var(--surface)",
-                  border: plan.highlight
-                    ? "1px solid #6366f160"
-                    : "1px solid var(--border)",
-                  boxShadow: plan.highlight
-                    ? "0 0 80px #6366f122, inset 0 1px 0 #6366f130"
-                    : "none",
-                  transform: plan.highlight ? "scale(1.04)" : "scale(1)",
-                  zIndex: plan.highlight ? 2 : 1,
-                  margin: plan.highlight ? "0 -4px" : "0",
-                }}>
-
-                {/* Most popular badge */}
-                {plan.highlight && (
-                  <div style={{
-                    position: "absolute", top: "-1px", left: "50%", transform: "translateX(-50%)",
-                    padding: "0.3rem 1.1rem", borderRadius: "0 0 0.75rem 0.75rem",
-                    fontSize: "0.68rem", fontWeight: 700, letterSpacing: "0.06em",
-                    background: "linear-gradient(135deg, #6366f1, #8b5cf6)",
-                    color: "white", whiteSpace: "nowrap", textTransform: "uppercase",
-                  }}>
-                    ✦ Хамгийн алдартай
-                  </div>
-                )}
-
-                {/* Inner glow top-right */}
-                {plan.highlight && (
-                  <div style={{ position: "absolute", top: 0, right: 0, width: "180px", height: "180px", borderRadius: "50%", background: "radial-gradient(circle, #8b5cf620 0%, transparent 70%)", transform: "translate(30%, -30%)", pointerEvents: "none" }} />
-                )}
-
-                {/* Plan name */}
-                <div style={{ marginBottom: "0.4rem" }}>
-                  <span style={{
-                    fontSize: "0.7rem", fontWeight: 700, textTransform: "uppercase",
-                    letterSpacing: "0.1em",
-                    color: plan.highlight ? "#818cf8" : "var(--text-light)",
-                  }}>{plan.name}</span>
-                </div>
-
-                {/* Price */}
-                <div style={{ display: "flex", alignItems: "flex-end", gap: "0.3rem", marginBottom: "0.4rem" }}>
-                  <span style={{
-                    fontSize: "2.2rem", fontWeight: 800, letterSpacing: "-0.03em", lineHeight: 1,
-                    color: plan.highlight ? "#f1f5f9" : "var(--text)",
-                  }}>{plan.price}</span>
-                  {plan.period && (
-                    <span style={{ fontSize: "0.82rem", color: "var(--text-light)", paddingBottom: "0.3rem" }}>{plan.period}</span>
-                  )}
-                </div>
-
-                {/* Desc */}
-                <p style={{ fontSize: "0.8rem", color: "var(--text-light)", marginBottom: "1.5rem", lineHeight: 1.5 }}>{plan.desc}</p>
-
-                {/* Divider */}
-                <div style={{ height: "1px", background: plan.highlight ? "#6366f125" : "var(--border)", marginBottom: "1.25rem" }} />
-
-                {/* Features */}
-                <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: "0.6rem", marginBottom: "2rem" }}>
-                  {plan.features.map(f => (
-                    <div key={f} className="check-item" style={{ color: plan.highlight ? "var(--text-mid)" : "var(--text-light)" }}>{f}</div>
-                  ))}
-                </div>
-
-                {/* CTA */}
-                <Link
-                  href={plan.name === "Enterprise" ? "tel:80952821" : "https://app.mongolagent.mn/register"}
-                  style={{
-                    display: "flex", justifyContent: "center", alignItems: "center",
-                    padding: "0.75rem 1.5rem", borderRadius: "0.75rem",
-                    fontWeight: 600, fontSize: "0.9rem", textDecoration: "none",
-                    transition: "all 0.2s",
-                    ...(plan.highlight
-                      ? { background: "linear-gradient(135deg, #6366f1, #8b5cf6)", color: "white", boxShadow: "0 4px 20px #6366f135" }
-                      : { background: "transparent", color: "var(--text-mid)", border: "1px solid var(--border2)" }
-                    ),
-                  }}>
-                  {plan.name === "Enterprise" ? "Холбоо барих" : "Эхлэх →"}
-                </Link>
-              </div>
-            ))}
-          </div>
-
-          <p style={{ textAlign: "center", marginTop: "1.5rem", fontSize: "0.78rem", color: "var(--text-light)" }}>
-            Тохиромжтой багцаа олохгүй байна уу?{" "}
-            <Link href="tel:80952821" style={{ color: "#818cf8", textDecoration: "none" }}>80952821</Link>-д залгана уу.
-          </p>
-        </div>
-      </section>
+      <PricingSection />
 
       {/* ─── TESTIMONIALS ─────────────────────────────────── */}
       <section style={{ padding: "5rem 0", background: "var(--surface)" }}>
