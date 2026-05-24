@@ -187,6 +187,23 @@ body {
   box-shadow: 0 0 60px #6366f118, inset 0 1px 0 #6366f130;
 }
 
+/* Nav link hover */
+.nav-link {
+  color: var(--text-light);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.nav-link:hover { color: var(--text); }
+
+/* Footer link hover */
+.footer-link {
+  font-size: 0.83rem;
+  color: var(--text-light);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.footer-link:hover { color: var(--text); }
+
 /* Marquee */
 @keyframes marquee {
   from { transform: translateX(0); }

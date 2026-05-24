@@ -37,12 +37,7 @@ export default function Footer() {
                 { label: "AI Automation", href: "/#services" },
               ].map(l => (
                 <li key={l.label}>
-                  <Link href={l.href} style={{ fontSize: "0.83rem", color: "var(--text-light)", textDecoration: "none", transition: "color 0.15s" }}
-                    onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = "var(--text)"}
-                    onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = "var(--text-light)"}
-                  >
-                    {l.label}
-                  </Link>
+                  <Link href={l.href} className="footer-link">{l.label}</Link>
                 </li>
               ))}
             </ul>
@@ -61,12 +56,7 @@ export default function Footer() {
                 { label: "FAQ", href: "/#faq" },
               ].map(l => (
                 <li key={l.label}>
-                  <Link href={l.href} style={{ fontSize: "0.83rem", color: "var(--text-light)", textDecoration: "none", transition: "color 0.15s" }}
-                    onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = "var(--text)"}
-                    onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = "var(--text-light)"}
-                  >
-                    {l.label}
-                  </Link>
+                  <Link href={l.href} className="footer-link">{l.label}</Link>
                 </li>
               ))}
             </ul>
@@ -79,7 +69,7 @@ export default function Footer() {
             </h4>
             <ul className="space-y-2.5">
               <li>
-                <Link href="tel:80952821" style={{ fontSize: "0.83rem", color: "var(--text-light)", textDecoration: "none", display: "flex", alignItems: "center", gap: "0.4rem" }}>
+                <Link href="tel:80952821" className="footer-link" style={{ display: "flex", alignItems: "center", gap: "0.4rem" }}>
                   <span>📞</span> 80952821
                 </Link>
               </li>

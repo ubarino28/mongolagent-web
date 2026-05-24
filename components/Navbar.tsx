@@ -1,6 +1,5 @@
 "use client";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { useState } from "react";
 
 const LINKS = [
@@ -10,7 +9,6 @@ const LINKS = [
 ];
 
 export default function Navbar() {
-  const pathname = usePathname();
   const [open, setOpen] = useState(false);
 
   return (
@@ -18,30 +16,24 @@ export default function Navbar() {
       style={{ background: "rgba(7,7,14,0.8)", backdropFilter: "blur(16px)", borderBottom: "1px solid rgba(255,255,255,0.05)" }}>
       <div className="max-w-6xl mx-auto px-5 h-16 flex items-center justify-between">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2.5 group" style={{ textDecoration: "none" }}>
-          <div className="w-8 h-8 rounded-lg flex items-center justify-center"
+        <Link href="/" style={{ textDecoration: "none", display: "flex", alignItems: "center", gap: "0.65rem" }}>
+          <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
             style={{ background: "linear-gradient(135deg, #6366f1, #8b5cf6)" }}>
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
               <path d="M8 2L13 5V11L8 14L3 11V5L8 2Z" fill="white" opacity="0.9" />
               <path d="M8 5L11 7V11L8 13L5 11V7L8 5Z" fill="white" />
             </svg>
           </div>
-          <div>
-            <span style={{ fontWeight: 700, fontSize: "1rem", color: "var(--text)", letterSpacing: "-0.01em" }}>
-              Mongol<span style={{ color: "var(--primary2)" }}>Agent</span>
-            </span>
-          </div>
+          <span style={{ fontWeight: 700, fontSize: "1rem", color: "var(--text)", letterSpacing: "-0.01em" }}>
+            Mongol<span style={{ color: "#818cf8" }}>Agent</span>
+          </span>
         </Link>
 
         {/* Desktop nav */}
         <nav className="hidden md:flex items-center gap-1">
           {LINKS.map(l => (
             <Link key={l.href} href={l.href}
-              className="px-4 py-2 rounded-lg text-sm font-medium transition-all"
-              style={{ color: "var(--text-mid)", textDecoration: "none" }}
-              onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = "var(--text)"}
-              onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = "var(--text-mid)"}
-            >
+              className="nav-link px-4 py-2 rounded-lg text-sm font-medium">
               {l.label}
             </Link>
           ))}
@@ -49,11 +41,8 @@ export default function Navbar() {
 
         {/* Actions */}
         <div className="hidden md:flex items-center gap-3">
-          <Link href="https://app.mongolagent.mn/login"
-            style={{ fontSize: "0.875rem", fontWeight: 500, color: "var(--text-mid)", textDecoration: "none", padding: "0.45rem 1rem" }}
-            onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = "var(--text)"}
-            onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = "var(--text-mid)"}
-          >
+          <Link href="https://app.mongolagent.mn/login" className="nav-link"
+            style={{ fontSize: "0.875rem", fontWeight: 500, padding: "0.45rem 1rem" }}>
             Нэвтрэх
           </Link>
           <Link href="https://app.mongolagent.mn/register" className="btn-primary"
@@ -75,15 +64,14 @@ export default function Navbar() {
         <div className="px-5 py-4 space-y-1">
           {LINKS.map(l => (
             <Link key={l.href} href={l.href} onClick={() => setOpen(false)}
-              className="block px-3 py-2.5 rounded-lg text-sm font-medium"
-              style={{ color: "var(--text-mid)", textDecoration: "none" }}>
+              className="nav-link block px-3 py-2.5 rounded-lg text-sm font-medium">
               {l.label}
             </Link>
           ))}
           <div className="pt-3 space-y-2">
             <Link href="https://app.mongolagent.mn/login" onClick={() => setOpen(false)}
-              className="block text-center py-2.5 rounded-xl text-sm"
-              style={{ color: "var(--text-mid)", border: "1px solid var(--border)", textDecoration: "none" }}>
+              className="block text-center py-2.5 rounded-xl text-sm nav-link"
+              style={{ border: "1px solid var(--border)" }}>
               Нэвтрэх
             </Link>
             <Link href="https://app.mongolagent.mn/register" className="btn-primary justify-center"
