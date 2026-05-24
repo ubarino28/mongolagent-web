@@ -38,7 +38,7 @@ export default function HomePage() {
             AI chatbot, автоматжуулалт, сургалт — Монголын бизнесүүдэд зориулсан практик AI шийдлүүд.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-4">
-            <Link href="/pricing" className="btn-primary text-base px-8 py-3">Үнэгүй consultation авах →</Link>
+            <Link href="https://turuuai-app.vercel.app/register" className="btn-primary text-base px-8 py-3">Үнэгүй эхлэх →</Link>
             <Link href="/services" className="btn-outline text-base px-8 py-3">Үйлчилгээ харах</Link>
           </div>
         </div>
@@ -112,7 +112,7 @@ export default function HomePage() {
       <section className="py-20">
         <div className="max-w-5xl mx-auto px-5">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-3">Яагаад Түрүү AI?</h2>
+            <h2 className="text-3xl font-bold mb-3">Яагаад Mongol Agent?</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {WHY.map(w => (
@@ -137,7 +137,7 @@ export default function HomePage() {
             <p className="mb-8 text-lg" style={{ color: "var(--text-mid)" }}>
               Үнэгүй 30 минутын consultation-аар бизнестээ ямар AI шийдэл тохирохыг мэдэж ав.
             </p>
-            <Link href="/pricing" className="btn-primary text-base px-10 py-3.5">Үнэгүй consultation авах →</Link>
+            <Link href="https://turuuai-app.vercel.app/register" className="btn-primary text-base px-10 py-3.5">Үнэгүй эхлэх →</Link>
           </div>
         </div>
       </section>

@@ -18,8 +18,8 @@ export default function Navbar() {
     <header className="sticky top-0 z-50 border-b" style={{ background: "rgba(10,10,15,0.85)", backdropFilter: "blur(12px)", borderColor: "var(--border)" }}>
       <div className="max-w-6xl mx-auto px-5 h-16 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2 font-bold text-lg tracking-tight">
-          <span className="gradient-text">Түрүү</span>
-          <span style={{ color: "var(--text-mid)" }}>AI</span>
+          <span className="gradient-text">Mongol</span>
+          <span style={{ color: "var(--text-mid)" }}>Agent</span>
         </Link>
 
         {/* Desktop */}
@@ -37,8 +37,11 @@ export default function Navbar() {
         </nav>
 
         <div className="hidden md:flex items-center gap-3">
-          <Link href="/pricing" className="btn-primary text-sm py-2 px-5">
-            Consultation авах
+          <Link href="https://turuuai-app.vercel.app/login" className="btn-outline text-sm py-2 px-4">
+            Нэвтрэх
+          </Link>
+          <Link href="https://turuuai-app.vercel.app/register" className="btn-primary text-sm py-2 px-5">
+            Эхлэх →
           </Link>
         </div>
 
