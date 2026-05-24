@@ -160,9 +160,9 @@ export default function HomePage() {
                 <Link href="https://app.mongolagent.mn/register" className="btn-primary" style={{ fontSize: "0.95rem", padding: "0.85rem 2rem" }}>
                   Агентаа бүтээх
                 </Link>
-                <Link href="#services" className="btn-outline" style={{ fontSize: "0.95rem", padding: "0.85rem 2rem" }}>
+                <a href="#services" className="btn-outline" style={{ fontSize: "0.95rem", padding: "0.85rem 2rem" }}>
                   Танилцуулга үзэх ↓
-                </Link>
+                </a>
               </div>
             </div>
 
