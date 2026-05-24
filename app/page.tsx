@@ -159,7 +159,7 @@ export default function HomePage() {
             {/* ── Left: text ── */}
             <div>
               <div className="section-tag" style={{ marginBottom: "1.5rem", display: "inline-flex" }}>
-                🇲🇳 Монголын #1 бизнес AI платформ
+                🇲🇳 Монголын #1 Agentic AI Platform
               </div>
 
               <h1 style={{ fontSize: "clamp(2rem, 4vw, 3.6rem)", fontWeight: 800, lineHeight: 1.1, letterSpacing: "-0.03em", marginBottom: "1.5rem" }}>
@@ -173,30 +173,13 @@ export default function HomePage() {
               </p>
 
               {/* CTAs */}
-              <div style={{ display: "flex", flexWrap: "wrap", gap: "1rem", marginBottom: "3rem" }}>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: "1rem" }}>
                 <Link href="https://app.mongolagent.mn/register" className="btn-primary" style={{ fontSize: "0.95rem", padding: "0.85rem 2rem" }}>
-                  Үнэгүй demo авах →
+                  Агентаа бүтээх
                 </Link>
                 <Link href="#services" className="btn-outline" style={{ fontSize: "0.95rem", padding: "0.85rem 2rem" }}>
-                  Үйлчилгээ харах
+                  Танилцуулга үзэх ↓
                 </Link>
-              </div>
-
-              {/* Proof badges */}
-              <div style={{ display: "flex", flexWrap: "wrap", gap: "0.75rem" }}>
-                {[
-                  { icon: "🏢", val: "40+", label: "Клиент" },
-                  { icon: "💰", val: "₮800M+", label: "Орлого үүсгэсэн" },
-                  { icon: "⚡", val: "3 хоног", label: "Нэвтрүүлэлт" },
-                ].map(b => (
-                  <div key={b.val} style={{ display: "flex", alignItems: "center", gap: "0.6rem", padding: "0.6rem 1rem", borderRadius: "0.75rem", background: "var(--surface)", border: "1px solid var(--border2)" }}>
-                    <span style={{ fontSize: "1rem" }}>{b.icon}</span>
-                    <div>
-                      <div style={{ fontSize: "0.85rem", fontWeight: 700, color: "var(--text)" }}>{b.val}</div>
-                      <div style={{ fontSize: "0.68rem", color: "var(--text-light)" }}>{b.label}</div>
-                    </div>
-                  </div>
-                ))}
               </div>
             </div>
 
