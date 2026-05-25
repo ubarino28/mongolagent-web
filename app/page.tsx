@@ -161,15 +161,9 @@ export default function HomePage() {
     <>
       {/* ─── HERO ─────────────────────────────────────────── */}
       <section style={{ position: "relative", overflow: "hidden", padding: "6rem 0 7rem" }}>
-        {/* Grid bg */}
-        <div style={{
-          position: "absolute", inset: 0, opacity: 0.35,
-          backgroundImage: "linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px)",
-          backgroundSize: "60px 60px",
-        }} />
-        {/* Glow — left for text, right for mascot */}
-        <div style={{ position: "absolute", inset: 0, pointerEvents: "none", background: "radial-gradient(ellipse 55% 60% at 20% 40%, #6366f115 0%, transparent 65%)" }} />
-        <div style={{ position: "absolute", inset: 0, pointerEvents: "none", background: "radial-gradient(ellipse 60% 70% at 78% 50%, #8b5cf622 0%, #6366f115 40%, transparent 70%)" }} />
+        {/* Subtle color glows */}
+        <div style={{ position: "absolute", inset: 0, pointerEvents: "none", background: "radial-gradient(ellipse 50% 55% at 18% 38%, #2563eb08 0%, transparent 65%)" }} />
+        <div style={{ position: "absolute", inset: 0, pointerEvents: "none", background: "radial-gradient(ellipse 55% 65% at 78% 50%, #6366f10a 0%, #2563eb06 40%, transparent 70%)" }} />
 
         <div style={{ ...wrap, position: "relative" }}>
           {/* Two-column grid */}
@@ -270,8 +264,8 @@ export default function HomePage() {
           Интеграцтай платформууд
         </p>
         <div style={{ overflow: "hidden", position: "relative" }}>
-          <div style={{ position: "absolute", left: 0, top: 0, bottom: 0, width: "6rem", zIndex: 10, background: "linear-gradient(90deg, var(--bg), transparent)", pointerEvents: "none" }} />
-          <div style={{ position: "absolute", right: 0, top: 0, bottom: 0, width: "6rem", zIndex: 10, background: "linear-gradient(-90deg, var(--bg), transparent)", pointerEvents: "none" }} />
+          <div style={{ position: "absolute", left: 0, top: 0, bottom: 0, width: "6rem", zIndex: 10, background: "linear-gradient(90deg, #f4f3ef, transparent)", pointerEvents: "none" }} />
+          <div style={{ position: "absolute", right: 0, top: 0, bottom: 0, width: "6rem", zIndex: 10, background: "linear-gradient(-90deg, #f4f3ef, transparent)", pointerEvents: "none" }} />
           <div className="marquee-inner">
             {[...PLATFORMS, ...PLATFORMS].map((p, i) => (
               <div key={i} style={{ display: "flex", alignItems: "center", gap: "0.65rem", margin: "0 2.5rem", flexShrink: 0 }}>
@@ -507,26 +501,26 @@ export default function HomePage() {
       {/* ─── CTA ──────────────────────────────────────────── */}
       <section data-animate style={{ padding: "5rem 0 6rem" }}>
         <div style={wrap3}>
-          <div style={{ position: "relative", borderRadius: "1.5rem", overflow: "hidden", padding: "4rem 3rem", textAlign: "center", background: "linear-gradient(135deg, #0d0d22 0%, #13132a 50%, #0d0d22 100%)", border: "1px solid #6366f130" }}>
-            <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 80% 60% at 50% 50%, #6366f115 0%, transparent 70%)", pointerEvents: "none" }} />
-            <div style={{ position: "relative" }}>
-              <div className="section-tag" style={{ display: "inline-flex", marginBottom: "1.5rem" }}>Өнөөдөр эхэл</div>
-              <h2 style={{ fontSize: "clamp(1.7rem, 4vw, 2.8rem)", fontWeight: 800, letterSpacing: "-0.03em", marginBottom: "1rem" }}>
+          <div style={{ position: "relative", borderRadius: "1.5rem", overflow: "hidden", padding: "4rem 3rem", textAlign: "center", background: "linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #1e1b4b 100%)", border: "1px solid rgba(255,255,255,0.08)" }}>
+            <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 80% 60% at 50% 50%, #6366f120 0%, transparent 70%)", pointerEvents: "none" }} />
+            <div style={{ position: "relative", color: "white" }}>
+              <div className="section-tag" style={{ display: "inline-flex", marginBottom: "1.5rem", background: "rgba(255,255,255,0.1)", borderColor: "rgba(255,255,255,0.15)", color: "rgba(255,255,255,0.85)" }}>Өнөөдөр эхэл</div>
+              <h2 style={{ fontSize: "clamp(1.7rem, 4vw, 2.8rem)", fontWeight: 800, letterSpacing: "-0.03em", marginBottom: "1rem", color: "white" }}>
                 Бизнесийнхээ <span className="gradient-text">AI хувьсгалыг</span><br />
                 эхлүүлэх цаг болсон
               </h2>
-              <p style={{ color: "var(--text-mid)", fontSize: "0.97rem", lineHeight: 1.65, maxWidth: "440px", margin: "0 auto 2.5rem" }}>
+              <p style={{ color: "rgba(255,255,255,0.72)", fontSize: "0.97rem", lineHeight: 1.65, maxWidth: "440px", margin: "0 auto 2.5rem" }}>
                 30 минутын үнэгүй consultation-аар бизнестээ яг тохирсон AI шийдлийг олж мэдээрэй.
               </p>
               <div style={{ display: "flex", flexWrap: "wrap", gap: "1rem", justifyContent: "center" }}>
-                <Link href="https://app.mongolagent.mn/register" className="btn-primary" style={{ padding: "0.95rem 2rem", fontSize: "0.95rem" }}>
+                <Link href="https://app.mongolagent.mn/register" style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem", padding: "0.95rem 2rem", fontSize: "0.95rem", fontWeight: 600, textDecoration: "none", borderRadius: "0.75rem", background: "white", color: "#1e1b4b", transition: "all 0.2s" }}>
                   Агентаа бүтээх →
                 </Link>
-                <Link href="tel:80952821" className="btn-outline" style={{ padding: "0.95rem 2rem", fontSize: "0.95rem", display: "inline-flex", alignItems: "center", gap: "0.5rem" }}>
+                <Link href="tel:80952821" style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem", padding: "0.95rem 2rem", fontSize: "0.95rem", fontWeight: 500, textDecoration: "none", borderRadius: "0.75rem", background: "transparent", color: "rgba(255,255,255,0.85)", border: "1px solid rgba(255,255,255,0.25)", transition: "all 0.2s" }}>
                   <IconPhone /> 80952821
                 </Link>
               </div>
-              <p style={{ marginTop: "2rem", fontSize: "0.75rem", color: "var(--text-light)" }}>
+              <p style={{ marginTop: "2rem", fontSize: "0.75rem", color: "rgba(255,255,255,0.45)" }}>
                 Нэвтрүүлснийхээ дараа ч тасралтгүй дэмжлэг · Нуугдмал нэмэлт төлбөргүй
               </p>
             </div>

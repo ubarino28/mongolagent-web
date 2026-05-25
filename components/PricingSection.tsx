@@ -122,13 +122,13 @@ export default function PricingSection() {
                   <span style={{ fontSize: "2.2rem", fontWeight: 800, letterSpacing: "-0.03em", lineHeight: 1, color: plan.highlight ? "#f1f5f9" : "var(--text)" }}>{plan.price}</span>
                   {plan.period && <span style={{ fontSize: "0.82rem", color: "var(--text-light)", paddingBottom: "0.3rem" }}>{plan.period}</span>}
                 </div>
-                <p style={{ fontSize: "0.8rem", color: "var(--text-light)", marginBottom: "1.5rem", lineHeight: 1.5 }}>{plan.desc}</p>
+                <p style={{ fontSize: "0.8rem", color: plan.highlight ? "rgba(255,255,255,0.55)" : "var(--text-light)", marginBottom: "1.5rem", lineHeight: 1.5 }}>{plan.desc}</p>
 
                 <div style={{ height: "1px", background: plan.highlight ? "#6366f125" : "var(--border)", marginBottom: "1.25rem" }} />
 
                 <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: "0.6rem", marginBottom: "1.5rem" }}>
                   {plan.features.map(f => (
-                    <div key={f} className="check-item" style={{ color: plan.highlight ? "var(--text-mid)" : "var(--text-light)" }}>{f}</div>
+                    <div key={f} className={plan.highlight ? "check-item check-item-light" : "check-item"} style={{ color: plan.highlight ? "rgba(255,255,255,0.72)" : "var(--text-light)" }}>{f}</div>
                   ))}
                 </div>
 

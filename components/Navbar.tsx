@@ -34,7 +34,7 @@ export default function Navbar() {
 
   return (
     <header className="sticky top-0 z-50"
-      style={{ background: "rgba(7,7,14,0.8)", backdropFilter: "blur(16px)", borderBottom: "1px solid rgba(255,255,255,0.05)" }}>
+      style={{ background: "rgba(244,243,239,0.92)", backdropFilter: "blur(16px)", borderBottom: "1px solid var(--border)" }}>
       <div style={{ maxWidth: "72rem", margin: "0 auto", padding: "0 1.25rem", height: "4rem", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
 
         {/* Logo */}
