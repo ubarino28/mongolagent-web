@@ -4,9 +4,9 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 
 const LINKS = [
-  { href: "/#services", hash: "#services", label: "Үйлчилгээ" },
-  { href: "/#pricing",  hash: "#pricing",  label: "Үнэ" },
-  { href: "/about",     hash: null,         label: "Бидний тухай" },
+  { href: "/#pricing", hash: "#pricing", label: "Үнэ" },
+  { href: "/#faq",     hash: "#faq",     label: "FAQ" },
+  { href: "/about",    hash: null,        label: "Бидний тухай" },
 ];
 
 export default function Navbar() {

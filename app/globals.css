@@ -17,7 +17,7 @@
   --text: #f1f5f9;
   --text-mid: #94a3b8;
   --text-light: #475569;
-  --font-sans: var(--font-geist-sans);
+  --font-sans: var(--font-jakarta);
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -250,10 +250,10 @@ body {
 /* Mascot float */
 @keyframes float {
   0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-18px); }
+  50% { transform: translateY(-8px); }
 }
 .mascot-float {
-  animation: float 4.5s ease-in-out infinite;
+  animation: float 7s ease-in-out infinite;
 }
 
 /* Mascot ring pulse */

@@ -2,6 +2,42 @@ import Link from "next/link";
 import PricingSection from "@/components/PricingSection";
 import DemoChat from "@/components/DemoChat";
 
+const IconChat = () => (
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+  </svg>
+);
+const IconTrend = () => (
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+    <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
+    <polyline points="17 6 23 6 23 12"/>
+  </svg>
+);
+const IconUsers = () => (
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+    <circle cx="9" cy="7" r="4"/>
+    <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+    <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+  </svg>
+);
+const IconZap = () => (
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+  </svg>
+);
+const IconPhone = () => (
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.6 19.79 19.79 0 0 1 1.61 5a2 2 0 0 1 1.99-2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 10.1a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+  </svg>
+);
+const IconMapPin = () => (
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: 2 }}>
+    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+    <circle cx="12" cy="10" r="3"/>
+  </svg>
+);
+
 const PLATFORMS = [
   { name: "Facebook",      color: "#1877F2", vb: "0 0 24 24",       path: "M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" },
   { name: "Instagram",     color: "#E1306C", vb: "0 0 24 24",       path: "M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" },
@@ -32,7 +68,7 @@ const RESULTS = [
 const SERVICES = [
   {
     tag: "Мессенжер AI",
-    icon: "💬",
+    icon: <IconChat />,
     title: "AI Chatbot",
     desc: "Facebook Messenger, Instagram DM дээр Монгол хэлээр автоматаар хариулж, борлуулалт хийдэг.",
     items: ["Facebook & Instagram холболт", "Монгол хэлний дэмжлэг", "Мэдлэгийн сан суурилсан", "Хэрэглэгч хөтлөх flow"],
@@ -41,7 +77,7 @@ const SERVICES = [
   },
   {
     tag: "Борлуулалт AI",
-    icon: "🛒",
+    icon: <IconTrend />,
     title: "AI Sales Agent",
     desc: "Захиалга авч, QPay QR код илгээж, төлбөр баталгаажуулаад орлогыг автоматаар нэмнэ.",
     items: ["QPay төлбөрийн интеграц", "Автомат захиалга боловсруулалт", "Telegram мэдэгдэл", "Орлогын тайлан"],
@@ -50,7 +86,7 @@ const SERVICES = [
   },
   {
     tag: "Лид менежмент",
-    icon: "🎯",
+    icon: <IconUsers />,
     title: "AI Lead Machine",
     desc: "Харилцагчийн мэдээллийг автоматаар цуглуулж, ангилаад, таны CRM-д бэлдэж өгнө.",
     items: ["Автомат лид цуглуулалт", "Статус хянах (CRM)", "Дагаж ажиллах сануулга", "Клиентийн аналитик"],
@@ -59,7 +95,7 @@ const SERVICES = [
   },
   {
     tag: "Процесс AI",
-    icon: "⚙️",
+    icon: <IconZap />,
     title: "AI Automation",
     desc: "Захиалга, мэдэгдэл, тайлан, customer support зэрэг давтагдах ажлыг бүрэн автоматжуулна.",
     items: ["Workflow автоматжуулалт", "Олон суваг нэгтгэл", "API интеграц", "Custom AI agent"],
@@ -124,7 +160,7 @@ export default function HomePage() {
   return (
     <>
       {/* ─── HERO ─────────────────────────────────────────── */}
-      <section style={{ position: "relative", overflow: "hidden", padding: "4rem 0 5rem" }}>
+      <section style={{ position: "relative", overflow: "hidden", padding: "6rem 0 7rem" }}>
         {/* Grid bg */}
         <div style={{
           position: "absolute", inset: 0, opacity: 0.35,
@@ -141,18 +177,17 @@ export default function HomePage() {
 
             {/* ── Left: text ── */}
             <div>
-              <div className="section-tag" style={{ marginBottom: "1.5rem", display: "inline-flex" }}>
-                🇲🇳 Монголын #1 Agentic AI Platform
+              <div className="section-tag" style={{ marginBottom: "1.75rem", display: "inline-flex" }}>
+                Монголын #1 AI Platform
               </div>
 
-              <h1 style={{ fontSize: "clamp(2rem, 4vw, 3.6rem)", fontWeight: 800, lineHeight: 1.1, letterSpacing: "-0.03em", marginBottom: "1.5rem" }}>
-                Таны бизнест<br />
-                <span className="gradient-text">цаг тутам ажилладаг</span><br />
-                AI баг
+              <h1 style={{ fontSize: "clamp(2.2rem, 4.5vw, 3.8rem)", fontWeight: 800, lineHeight: 1.08, letterSpacing: "-0.035em", marginBottom: "1.5rem" }}>
+                Бизнесийн<br />харилцааг<br />
+                <span className="gradient-text">автоматжуулна.</span>
               </h1>
 
-              <p style={{ fontSize: "1rem", color: "var(--text-mid)", lineHeight: 1.75, maxWidth: "480px", marginBottom: "2.5rem" }}>
-                Facebook, Instagram дээр автоматаар борлуулж, QPay-аар төлбөр авч, лид менежментийг бүрэн хийдэг. Монголын бизнест зориулсан premium AI платформ.
+              <p style={{ fontSize: "1rem", color: "var(--text-mid)", lineHeight: 1.8, maxWidth: "460px", marginBottom: "2.5rem" }}>
+                Facebook, Instagram мессенжерт холбогдсон AI — таны хэрэглэгчтэй 24/7 Монгол хэлээр харилцаж, захиалга авч, QPay-аар төлбөр баталгаажуулна.
               </p>
 
               {/* CTAs */}
@@ -168,68 +203,66 @@ export default function HomePage() {
 
             {/* ── Right: mascot ── */}
             <div className="hero-mascot" style={{ position: "relative", display: "flex", justifyContent: "center", alignItems: "center", minHeight: "460px" }}>
-              {/* Outer glow blob */}
+              {/* Subtle glow */}
               <div style={{
-                position: "absolute", width: "520px", height: "520px", borderRadius: "50%",
-                background: "radial-gradient(ellipse at center, #6366f130 0%, #8b5cf622 45%, transparent 70%)",
-                filter: "blur(32px)",
+                position: "absolute", width: "420px", height: "420px", borderRadius: "50%",
+                background: "radial-gradient(ellipse at center, #6366f120 0%, #8b5cf612 50%, transparent 72%)",
+                filter: "blur(48px)",
               }} />
-              {/* Pulsing ring 1 */}
-              <div className="mascot-ring" style={{
-                position: "absolute", width: "460px", height: "460px", borderRadius: "50%",
-                border: "1px solid #6366f135",
-              }} />
-              {/* Pulsing ring 2 */}
-              <div className="mascot-ring" style={{
-                position: "absolute", width: "380px", height: "380px", borderRadius: "50%",
-                border: "1px solid #8b5cf628",
-                animationDelay: "1s",
-              }} />
-              {/* Ground glow */}
-              <div style={{
-                position: "absolute", bottom: "40px", left: "50%", transform: "translateX(-50%)",
-                width: "200px", height: "30px",
-                background: "radial-gradient(ellipse at center, #6366f135 0%, transparent 70%)",
-                filter: "blur(12px)",
-              }} />
-              {/* Floating dots */}
-              <div style={{ position: "absolute", top: "80px", right: "80px", width: "8px", height: "8px", borderRadius: "50%", background: "#818cf8", opacity: 0.7, boxShadow: "0 0 10px #6366f1" }} />
-              <div style={{ position: "absolute", top: "140px", left: "70px", width: "5px", height: "5px", borderRadius: "50%", background: "#a78bfa", opacity: 0.5 }} />
-              <div style={{ position: "absolute", bottom: "120px", right: "70px", width: "6px", height: "6px", borderRadius: "50%", background: "#6366f1", opacity: 0.6, boxShadow: "0 0 8px #6366f1" }} />
               {/* Mascot */}
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/mascot.png"
-                alt="Mongol Agent AI Mascot"
+                alt="Mongol Agent AI"
                 className="mascot-float"
-                style={{ width: "440px", maxWidth: "90%", position: "relative", zIndex: 2, filter: "drop-shadow(0 20px 40px #6366f140) drop-shadow(0 0 60px #8b5cf625)" }}
+                style={{ width: "400px", maxWidth: "88%", position: "relative", zIndex: 2, filter: "drop-shadow(0 16px 32px #6366f130)" }}
               />
-              {/* Chat bubble decoration */}
+              {/* Chat bubble — user */}
               <div style={{
-                position: "absolute", top: "60px", right: "50px", zIndex: 3,
+                position: "absolute", top: "72px", right: "44px", zIndex: 3,
                 background: "var(--surface2)", border: "1px solid var(--border2)",
                 borderRadius: "1rem 1rem 1rem 0.25rem",
-                padding: "0.6rem 0.9rem",
+                padding: "0.55rem 0.85rem",
                 fontSize: "0.75rem", color: "var(--text-mid)",
-                boxShadow: "0 4px 20px #00000040",
+                boxShadow: "0 4px 24px #00000050",
               }}>
-                💬 Сайн байна уу?
+                Сайн байна уу?
               </div>
+              {/* Chat bubble — AI */}
               <div style={{
-                position: "absolute", bottom: "110px", left: "30px", zIndex: 3,
-                background: "var(--surface2)", border: "1px solid var(--border2)",
+                position: "absolute", bottom: "110px", left: "28px", zIndex: 3,
+                background: "linear-gradient(135deg, #6366f1, #8b5cf6)",
                 borderRadius: "1rem 1rem 0.25rem 1rem",
-                padding: "0.6rem 0.9rem",
-                fontSize: "0.75rem", color: "var(--text-mid)",
-                boxShadow: "0 4px 20px #00000040",
+                padding: "0.55rem 0.85rem",
+                fontSize: "0.75rem", color: "white",
+                boxShadow: "0 4px 24px #6366f128",
               }}>
-                ✅ Захиалга баталгаажлаа!
+                Захиалга баталгаажлаа!
               </div>
             </div>
 
           </div>
         </div>
       </section>
+
+      {/* ─── TRUST BAR ────────────────────────────────────── */}
+      <div style={{ padding: "0 1.25rem 2.5rem" }}>
+        <div style={{ maxWidth: "64rem", margin: "0 auto" }}>
+          <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "2rem 4rem", padding: "1.75rem 2.5rem", borderRadius: "1.25rem", background: "var(--surface)", border: "1px solid var(--border)" }}>
+            {[
+              { num: "200+", label: "бизнес ашигладаг" },
+              { num: "4.9★", label: "дундаж үнэлгээ" },
+              { num: "24/7", label: "тасралтгүй ажиллагаа" },
+              { num: "10 мин", label: "тохируулахад хангалттай" },
+            ].map(s => (
+              <div key={s.label} style={{ textAlign: "center" }}>
+                <div style={{ fontSize: "1.45rem", fontWeight: 800, letterSpacing: "-0.02em", color: "var(--text)", lineHeight: 1 }}>{s.num}</div>
+                <div style={{ fontSize: "0.73rem", color: "var(--text-light)", marginTop: "0.3rem" }}>{s.label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
 
       {/* ─── PLATFORMS MARQUEE ────────────────────────────── */}
       <div data-animate style={{ borderTop: "1px solid var(--border)", borderBottom: "1px solid var(--border)", padding: "1.75rem 0" }}>
@@ -267,7 +300,7 @@ export default function HomePage() {
       </div>
 
       {/* ─── SERVICES ─────────────────────────────────────── */}
-      <section id="services" data-animate style={{ padding: "5rem 0", background: "var(--surface)" }}>
+      <section id="services" data-animate style={{ padding: "7rem 0", background: "var(--surface)" }}>
         <div style={wrap}>
           <div style={{ textAlign: "center", marginBottom: "4rem" }}>
             <div className="section-tag" style={{ display: "inline-flex", marginBottom: "1rem" }}>Үйлчилгээ</div>
@@ -294,7 +327,8 @@ export default function HomePage() {
                 <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "1.5rem" }}>
                   <div style={{
                     width: "48px", height: "48px", borderRadius: "12px", display: "flex", alignItems: "center", justifyContent: "center",
-                    fontSize: "1.5rem", background: `${s.color}15`, border: `1px solid ${s.color}25`, flexShrink: 0,
+                    background: `${s.color}15`, border: `1px solid ${s.color}25`, flexShrink: 0,
+                    color: s.color,
                   }}>
                     {s.icon}
                   </div>
@@ -349,7 +383,7 @@ export default function HomePage() {
       </section>
 
       {/* ─── PROCESS ──────────────────────────────────────── */}
-      <section data-animate style={{ padding: "5rem 0" }}>
+      <section data-animate style={{ padding: "7rem 0" }}>
         <div style={wrap5}>
           <div style={{ textAlign: "center", marginBottom: "3.5rem" }}>
             <div className="section-tag" style={{ display: "inline-flex", marginBottom: "1rem" }}>Процесс</div>
@@ -417,7 +451,7 @@ export default function HomePage() {
       </section>
 
       {/* ─── TESTIMONIALS ─────────────────────────────────── */}
-      <section data-animate style={{ padding: "5rem 0", background: "var(--surface)" }}>
+      <section data-animate style={{ padding: "7rem 0", background: "var(--surface)" }}>
         <div style={wrap5}>
           <div style={{ textAlign: "center", marginBottom: "3rem" }}>
             <div className="section-tag" style={{ display: "inline-flex", marginBottom: "1rem" }}>Сэтгэгдэл</div>
@@ -447,7 +481,7 @@ export default function HomePage() {
       </section>
 
       {/* ─── FAQ ──────────────────────────────────────────── */}
-      <section data-animate style={{ padding: "5rem 0" }}>
+      <section id="faq" data-animate style={{ padding: "7rem 0" }}>
         <div style={wrap3}>
           <div style={{ textAlign: "center", marginBottom: "3rem" }}>
             <div className="section-tag" style={{ display: "inline-flex", marginBottom: "1rem" }}>FAQ</div>
@@ -488,8 +522,8 @@ export default function HomePage() {
                 <Link href="https://app.mongolagent.mn/register" className="btn-primary" style={{ padding: "0.95rem 2rem", fontSize: "0.95rem" }}>
                   Агентаа бүтээх →
                 </Link>
-                <Link href="tel:80952821" className="btn-outline" style={{ padding: "0.95rem 2rem", fontSize: "0.95rem" }}>
-                  📞 80952821
+                <Link href="tel:80952821" className="btn-outline" style={{ padding: "0.95rem 2rem", fontSize: "0.95rem", display: "inline-flex", alignItems: "center", gap: "0.5rem" }}>
+                  <IconPhone /> 80952821
                 </Link>
               </div>
               <p style={{ marginTop: "2rem", fontSize: "0.75rem", color: "var(--text-light)" }}>
