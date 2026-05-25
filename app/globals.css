@@ -304,3 +304,13 @@ body {
     grid-template-columns: 1fr !important;
   }
 }
+
+/* Process grid — mobile: single column */
+@media (max-width: 768px) {
+  .process-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .process-connector {
+    display: none !important;
+  }
+}

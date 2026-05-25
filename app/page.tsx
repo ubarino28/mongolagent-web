@@ -358,16 +358,60 @@ export default function HomePage() {
             </h2>
           </div>
 
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(1, 1fr)", gap: "2rem" }} className="md:grid-cols-3">
-            {PROCESS.map(p => (
-              <div key={p.num}>
-                <div style={{ width: "3.25rem", height: "3.25rem", borderRadius: "0.875rem", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "1rem", fontSize: "1rem", fontWeight: 800, letterSpacing: "-0.02em", background: "linear-gradient(135deg, #6366f118, #8b5cf618)", border: "1px solid #6366f128", color: "var(--primary2)" }}>
-                  {p.num}
+          {/* Grid + connectors wrapper */}
+          <div style={{ position: "relative" }}>
+            {/* Connecting line */}
+            <div className="process-connector" style={{
+              position: "absolute", top: "2.6rem", left: "calc(16.66% + 1.6rem)", right: "calc(16.66% + 1.6rem)",
+              height: "1px",
+              background: "linear-gradient(90deg, transparent, #6366f140, #6366f140, transparent)",
+              pointerEvents: "none",
+            }} />
+
+            <div className="process-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "1.5rem" }}>
+              {PROCESS.map((p, i) => (
+                <div key={p.num} style={{
+                  position: "relative",
+                  borderRadius: "1.25rem",
+                  padding: "2rem 1.75rem",
+                  background: "var(--surface)",
+                  border: "1px solid var(--border)",
+                  transition: "border-color 0.25s, box-shadow 0.25s",
+                }}>
+                  {/* Step badge */}
+                  <div style={{
+                    width: "3rem", height: "3rem", borderRadius: "0.875rem",
+                    display: "flex", alignItems: "center", justifyContent: "center",
+                    marginBottom: "1.5rem",
+                    fontSize: "0.9rem", fontWeight: 800, letterSpacing: "-0.02em",
+                    background: i === 1
+                      ? "linear-gradient(135deg, #6366f1, #8b5cf6)"
+                      : "linear-gradient(135deg, #6366f118, #8b5cf618)",
+                    border: i === 1 ? "none" : "1px solid #6366f130",
+                    color: i === 1 ? "white" : "var(--primary2)",
+                    boxShadow: i === 1 ? "0 4px 16px #6366f135" : "none",
+                  }}>
+                    {p.num}
+                  </div>
+
+                  <h3 style={{ fontSize: "1rem", fontWeight: 700, marginBottom: "0.65rem", letterSpacing: "-0.01em" }}>
+                    {p.title}
+                  </h3>
+                  <p style={{ fontSize: "0.845rem", color: "var(--text-mid)", lineHeight: 1.7 }}>
+                    {p.desc}
+                  </p>
+
+                  {/* Arrow hint (not last) */}
+                  {i < PROCESS.length - 1 && (
+                    <div className="process-connector" style={{
+                      position: "absolute", top: "2.55rem", right: "-1rem",
+                      fontSize: "0.75rem", color: "#6366f150", zIndex: 2,
+                      pointerEvents: "none",
+                    }}>→</div>
+                  )}
                 </div>
-                <h3 style={{ fontSize: "1rem", fontWeight: 700, marginBottom: "0.5rem" }}>{p.title}</h3>
-                <p style={{ fontSize: "0.875rem", color: "var(--text-mid)", lineHeight: 1.65 }}>{p.desc}</p>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </section>
