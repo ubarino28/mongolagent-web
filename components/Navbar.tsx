@@ -1,20 +1,42 @@
 "use client";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 
 const LINKS = [
-  { href: "/#services", label: "Үйлчилгээ" },
-  { href: "/#pricing", label: "Үнэ" },
-  { href: "/about", label: "Бидний тухай" },
+  { href: "/#services", hash: "#services", label: "Үйлчилгээ" },
+  { href: "/#pricing",  hash: "#pricing",  label: "Үнэ" },
+  { href: "/about",     hash: null,         label: "Бидний тухай" },
 ];
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+  const isHome = pathname === "/";
+
+  function NavLink({ href, hash, label, onClick, className, style }: {
+    href: string; hash: string | null; label: string;
+    onClick?: () => void; className?: string; style?: React.CSSProperties;
+  }) {
+    if (isHome && hash) {
+      return (
+        <a href={hash} onClick={onClick} className={className} style={style}>
+          {label}
+        </a>
+      );
+    }
+    return (
+      <Link href={href} onClick={onClick} className={className} style={style}>
+        {label}
+      </Link>
+    );
+  }
 
   return (
     <header className="sticky top-0 z-50"
       style={{ background: "rgba(7,7,14,0.8)", backdropFilter: "blur(16px)", borderBottom: "1px solid rgba(255,255,255,0.05)" }}>
       <div style={{ maxWidth: "72rem", margin: "0 auto", padding: "0 1.25rem", height: "4rem", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+
         {/* Logo */}
         <Link href="/" style={{ textDecoration: "none", display: "flex", alignItems: "center", gap: "0.65rem" }}>
           <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
@@ -32,10 +54,8 @@ export default function Navbar() {
         {/* Desktop nav */}
         <nav className="hidden md:flex items-center gap-1">
           {LINKS.map(l => (
-            <Link key={l.href} href={l.href}
-              className="nav-link px-4 py-2 rounded-lg text-sm font-medium">
-              {l.label}
-            </Link>
+            <NavLink key={l.href} {...l}
+              className="nav-link px-4 py-2 rounded-lg text-sm font-medium" />
           ))}
         </nav>
 
@@ -63,10 +83,9 @@ export default function Navbar() {
         style={{ borderTop: "1px solid var(--border)", background: "var(--surface)" }}>
         <div className="px-5 py-4 space-y-1">
           {LINKS.map(l => (
-            <Link key={l.href} href={l.href} onClick={() => setOpen(false)}
-              className="nav-link block px-3 py-2.5 rounded-lg text-sm font-medium">
-              {l.label}
-            </Link>
+            <NavLink key={l.href} {...l}
+              onClick={() => setOpen(false)}
+              className="nav-link block px-3 py-2.5 rounded-lg text-sm font-medium" />
           ))}
           <div className="pt-3 space-y-2">
             <Link href="https://app.mongolagent.mn/login" onClick={() => setOpen(false)}
