@@ -1,366 +1,411 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 
-const MSGS = [
-  { from: "user", type: "text",  text: "Сайн уу! Үс засуулахыг хүсч байна 😊" },
-  { from: "ai",   type: "text",  text: "Сайн байна уу! Манайд дараах үйлчилгээ бэлэн байна:" },
-  { from: "ai",   type: "card"  },
-  { from: "user", type: "text",  text: "Авъя! Маргааш 14:00 цагт боломжтой юу?" },
-  { from: "ai",   type: "text",  text: "Тийм ээ, маргааш 14:00 чөлөөтэй байна 😊 Нэрээ хэлнэ үү?" },
-  { from: "user", type: "text",  text: "Оюунаа" },
-  { from: "ai",   type: "text",  text: "Баярлалаа! Утасны дугаараа хэлнэ үү?" },
-  { from: "user", type: "text",  text: "99001234" },
-  { from: "ai",   type: "text",  text: "Оюунаа, 10,000₮ урьдчилгаа QPay-ээр төлнө үү 👇" },
-  { from: "ai",   type: "qpay" },
-  { from: "user", type: "text",  text: "Төлсөн!" },
-  { from: "ai",   type: "text",  text: "✅ Маргааш 14:00д таныг хүлээж байна! 💜" },
-] as const;
-
-type MsgType = typeof MSGS[number]["type"];
-type Phase = "idle" | "typing-user" | "sending" | "thinking" | "typing-ai" | "card-in" | "done";
-
-interface Bubble {
-  id: number;
-  from: "user" | "ai";
-  type: MsgType | "thinking";
-  text?: string;
-  partial?: boolean;
+interface Msg { from: "user"|"ai"; type: "text"|"card"|"qpay"; text?: string; }
+interface Appt { name: string; detail: string; time: string; done: boolean; }
+interface S {
+  id: string; icon: string; label: string;
+  business: string; avBg: string; avTxt: string;
+  msgs: Msg[];
+  card: { emoji: string; title: string; price: string; tag: string; tagColor: string; };
+  qpay: string;
+  baseRev: number; addRev: number;
+  baseAppts: Appt[];
+  newAppt: { name: string; detail: string; time: string; };
 }
 
-const PAUSE_BEFORE   = 420;
-const PAUSE_AFTER    = 560;
-const THINKING_DUR   = 1050;
-const ENTER_PAUSE    = 300;
-const DONE_PAUSE     = 5500;
+const QR = [1,1,1,0,1,1,1,1,0,1,0,1,0,1,1,1,1,0,1,1,1,0,1,0,1,0,0,0,1,0,1,0,1,1,1,1,0,1,0,1,0,1,1,1,1,0,1,1,1];
 
-function rand(min: number, max: number) {
-  return min + Math.floor(Math.random() * (max - min));
-}
+const SC: S[] = [
+  {
+    id:"salon", icon:"💆", label:"Гоо сайхны салон",
+    business:"Lumière Salon", avBg:"linear-gradient(135deg,#f9a8d4,#ec4899)", avTxt:"L",
+    msgs:[
+      {from:"user",type:"text",text:"Сайн уу! Үс засуулахыг хүсч байна 😊"},
+      {from:"ai",  type:"text",text:"Сайн байна уу! Манайд дараах үйлчилгээ бэлэн байна:"},
+      {from:"ai",  type:"card"},
+      {from:"user",type:"text",text:"Авъя! Маргааш 14:00 цагт боломжтой юу?"},
+      {from:"ai",  type:"text",text:"Тийм, маргааш 14:00 чөлөөтэй 😊 Нэрээ хэлнэ үү?"},
+      {from:"user",type:"text",text:"Оюунаа"},
+      {from:"ai",  type:"text",text:"Баярлалаа! Утасны дугаараа хэлнэ үү?"},
+      {from:"user",type:"text",text:"99001234"},
+      {from:"ai",  type:"text",text:"Оюунаа, 10,000₮ урьдчилгаа QPay-ээр төлнө үү 👇"},
+      {from:"ai",  type:"qpay"},
+      {from:"user",type:"text",text:"Төлсөн!"},
+      {from:"ai",  type:"text",text:"✅ Маргааш 14:00д таныг хүлээж байна! 💜"},
+    ],
+    card:{emoji:"✂️",title:"Үс засах",price:"25,000₮-аас",tag:"Дээд эрэлттэй",tagColor:"#16a34a"},
+    qpay:"10,000₮", baseRev:1245000, addRev:25000,
+    baseAppts:[
+      {name:"Дэлгэрмаа",detail:"Хумс",time:"11:00",done:true},
+      {name:"Номуун",detail:"Нүүр",time:"12:30",done:true},
+    ],
+    newAppt:{name:"Оюунаа",detail:"Үс засах",time:"14:00"},
+  },
+  {
+    id:"cafe", icon:"☕", label:"Кофе шоп",
+    business:"Brew & Co", avBg:"linear-gradient(135deg,#fbbf24,#d97706)", avTxt:"B",
+    msgs:[
+      {from:"user",type:"text",text:"Капучино L хэмжээтэй 2 ширхэг авна уу?"},
+      {from:"ai",  type:"text",text:"Тийм, бэлэн байна! Манайд дараах байна 😊"},
+      {from:"ai",  type:"card"},
+      {from:"user",type:"text",text:"Авъя даа!"},
+      {from:"ai",  type:"text",text:"Хаягаа хэлнэ үү? Хүргэлт 30 минутад 🛵"},
+      {from:"user",type:"text",text:"Сүхбаатар дүүрэг, 5-р хороо"},
+      {from:"ai",  type:"text",text:"19,000₮ QPay-ээр төлнө үү 👇"},
+      {from:"ai",  type:"qpay"},
+      {from:"user",type:"text",text:"Төлсөн!"},
+      {from:"ai",  type:"text",text:"✅ Захиалга хүлээн авлаа! 30 минутад очно 🛵"},
+    ],
+    card:{emoji:"☕",title:"Капучино L",price:"9,500₮",tag:"Шинэ",tagColor:"#0ea5e9"},
+    qpay:"19,000₮", baseRev:485000, addRev:19000,
+    baseAppts:[
+      {name:"Захиалга #1",detail:"Американо x1",time:"09:15",done:true},
+      {name:"Захиалга #2",detail:"Латте x2",time:"10:00",done:true},
+    ],
+    newAppt:{name:"Захиалга #3",detail:"Капучино x2",time:"одоо"},
+  },
+  {
+    id:"shop", icon:"👗", label:"Хувцасны дэлгүүр",
+    business:"Zaya Fashion", avBg:"linear-gradient(135deg,#67e8f9,#0891b2)", avTxt:"Z",
+    msgs:[
+      {from:"user",type:"text",text:"Сайн уу! Энэ цамц L хэмжээтэй байна уу?"},
+      {from:"ai",  type:"text",text:"Сайн байна уу! Тийм, L хэмжээ байна 😊"},
+      {from:"ai",  type:"card"},
+      {from:"user",type:"text",text:"Захиалъя! Хэрхэн авах вэ?"},
+      {from:"ai",  type:"text",text:"Нэр болон хаягаа хэлнэ үү?"},
+      {from:"user",type:"text",text:"Сарнай, Чингэлтэй 3-р хороо"},
+      {from:"ai",  type:"text",text:"65,000₮ QPay-ээр төлнө үү 👇"},
+      {from:"ai",  type:"qpay"},
+      {from:"user",type:"text",text:"Төлсөн!"},
+      {from:"ai",  type:"text",text:"✅ Захиалга баталгаажлаа! 2-3 өдрийн дотор хүргэнэ 📦"},
+    ],
+    card:{emoji:"👗",title:"Цамц – L хэмжээ",price:"65,000₮",tag:"3 үлдсэн",tagColor:"#ea580c"},
+    qpay:"65,000₮", baseRev:2340000, addRev:65000,
+    baseAppts:[
+      {name:"Сарнай",detail:"Өмд M",time:"10:00",done:true},
+      {name:"Болд",detail:"Куртка XL",time:"11:30",done:true},
+    ],
+    newAppt:{name:"Сарнай",detail:"Цамц L",time:"одоо"},
+  },
+];
 
-const BizAvatar = () => (
-  <div style={{
-    width: "28px", height: "28px", borderRadius: "50%", flexShrink: 0,
-    background: "linear-gradient(135deg, #f9a8d4, #ec4899)",
-    display: "flex", alignItems: "center", justifyContent: "center",
-    alignSelf: "flex-end",
-    fontSize: "0.72rem", fontWeight: 800, color: "white",
-    letterSpacing: "-0.01em",
-    boxShadow: "0 2px 8px #ec489930",
-  }}>L</div>
-);
+const PAUSE_BEFORE=400, PAUSE_AFTER=500, THINKING_DUR=950, ENTER_PAUSE=300, DONE_PAUSE=5000;
+function rand(a:number,b:number){return a+Math.floor(Math.random()*(b-a));}
+type Phase="idle"|"typing-user"|"sending"|"thinking"|"typing-ai"|"card-in"|"done";
+interface Bubble{id:number;from:"user"|"ai";type:string;text?:string;partial?:boolean;}
 
-const ServiceCard = () => (
-  <div style={{ borderRadius: "14px", overflow: "hidden", background: "white", border: "1px solid #ede9fe", width: "195px", boxShadow: "0 2px 10px #6366f110" }}>
-    <div style={{ background: "linear-gradient(135deg, #f5f3ff, #ede9fe)", height: "80px", display: "flex", alignItems: "center", justifyContent: "center" }}>
-      <span style={{ fontSize: "2.2rem" }}>✂️</span>
-    </div>
-    <div style={{ padding: "0.55rem 0.7rem" }}>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "0.2rem" }}>
-        <div style={{ fontSize: "0.8rem", fontWeight: 700, color: "#1f2937" }}>Үс засах</div>
-        <div style={{ fontSize: "0.58rem", fontWeight: 700, background: "#f0fdf4", color: "#16a34a", border: "1px solid #bbf7d0", borderRadius: "100px", padding: "0.1rem 0.4rem", whiteSpace: "nowrap" }}>Дээд эрэлттэй</div>
-      </div>
-      <div style={{ fontSize: "0.78rem", fontWeight: 700, color: "#6366f1", marginBottom: "0.5rem" }}>25,000₮-аас</div>
-      <div style={{ display: "flex", flexDirection: "column", gap: "0.3rem" }}>
-        <button style={{ borderRadius: "7px", border: "1.5px solid #c4b5fd", background: "transparent", color: "#6366f1", fontSize: "0.7rem", padding: "0.28rem", fontWeight: 600, cursor: "default" }}>Дэлгэрэнгүй</button>
-        <button style={{ borderRadius: "7px", border: "none", background: "linear-gradient(135deg, #6366f1, #8b5cf6)", color: "white", fontSize: "0.7rem", padding: "0.3rem", fontWeight: 600, cursor: "default" }}>📅 Захиалах</button>
-      </div>
-    </div>
-  </div>
-);
+function ChatWindow({sc,onPaid}:{sc:S;onPaid:()=>void}){
+  const [bubbles,setBubbles]=useState<Bubble[]>([]);
+  const [inputText,setInputText]=useState("");
+  const [phase,setPhase]=useState<Phase>("idle");
+  const [msgIdx,setMsgIdx]=useState(0);
+  const [charIdx,setCharIdx]=useState(0);
+  const containerRef=useRef<HTMLDivElement>(null);
+  const scrolledUp=useRef(false);
+  const nextId=useRef(0);
+  const paidFired=useRef(false);
 
-const QPay = () => (
-  <div style={{ borderRadius: "14px", overflow: "hidden", background: "white", border: "1px solid #bfdbfe", width: "170px", boxShadow: "0 2px 10px #3b82f610" }}>
-    <div style={{ background: "linear-gradient(135deg, #1d4ed8, #2563eb)", padding: "0.45rem 0.7rem", display: "flex", alignItems: "center", gap: "0.4rem" }}>
-      <div style={{ width: "18px", height: "18px", borderRadius: "4px", background: "white", display: "flex", alignItems: "center", justifyContent: "center" }}>
-        <div style={{ width: "12px", height: "12px", background: "#1d4ed8", borderRadius: "2px" }} />
-      </div>
-      <span style={{ fontSize: "0.72rem", color: "white", fontWeight: 800, letterSpacing: "0.04em" }}>QPay</span>
-    </div>
-    <div style={{ padding: "0.65rem 0.7rem" }}>
-      {/* Simple QR grid */}
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(7, 1fr)", gap: "1.5px", marginBottom: "0.5rem" }}>
-        {Array.from({ length: 49 }).map((_, i) => {
-          const corners = [0,1,2,7,8,14,6,13,35,41,42,43,48,47,46,36,40];
-          const fill = corners.includes(i) || Math.random() > 0.55;
-          return <div key={i} style={{ aspectRatio: "1", borderRadius: "1px", background: fill ? "#1e3a5f" : "transparent" }} />;
-        })}
-      </div>
-      <div style={{ textAlign: "center" }}>
-        <div style={{ fontSize: "1rem", fontWeight: 800, color: "#1d4ed8" }}>10,000₮</div>
-        <div style={{ fontSize: "0.62rem", color: "#6b7280", marginTop: "1px" }}>Lumière Salon</div>
-      </div>
-    </div>
-  </div>
-);
+  useEffect(()=>{
+    if(scrolledUp.current) return;
+    const el=containerRef.current;
+    if(el) el.scrollTop=el.scrollHeight;
+  },[bubbles]);
 
-export default function AIChatDemo() {
-  const [bubbles, setBubbles] = useState<Bubble[]>([]);
-  const [inputText, setInputText] = useState("");
-  const [phase, setPhase] = useState<Phase>("idle");
-  const [msgIdx, setMsgIdx] = useState(0);
-  const [charIdx, setCharIdx] = useState(0);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const userScrolledUp = useRef(false);
-  const nextId = useRef(0);
-
-  useEffect(() => {
-    if (userScrolledUp.current) return;
-    const el = containerRef.current;
-    if (el) el.scrollTop = el.scrollHeight;
-  }, [bubbles]);
-
-  const handleScroll = () => {
-    const el = containerRef.current;
-    if (!el) return;
-    userScrolledUp.current = el.scrollHeight - el.scrollTop - el.clientHeight > 30;
-  };
-
-  useEffect(() => {
-    if (phase === "done") {
-      const t = setTimeout(() => {
-        setBubbles([]); setInputText(""); setMsgIdx(0); setCharIdx(0);
-        userScrolledUp.current = false; nextId.current = 0;
+  useEffect(()=>{
+    if(phase==="done"){
+      if(!paidFired.current){paidFired.current=true;onPaid();}
+      const t=setTimeout(()=>{
+        setBubbles([]);setInputText("");setMsgIdx(0);setCharIdx(0);
+        scrolledUp.current=false;nextId.current=0;paidFired.current=false;
         setPhase("idle");
-      }, DONE_PAUSE);
-      return () => clearTimeout(t);
+      },DONE_PAUSE);
+      return ()=>clearTimeout(t);
     }
+    if(msgIdx>=sc.msgs.length){setPhase("done");return;}
+    const msg=sc.msgs[msgIdx];
 
-    if (msgIdx >= MSGS.length) {
-      setPhase("done");
-      return;
+    if(phase==="idle"){
+      const t=setTimeout(()=>setPhase(msg.from==="user"?"typing-user":"thinking"),PAUSE_BEFORE);
+      return ()=>clearTimeout(t);
     }
-
-    const msg = MSGS[msgIdx];
-
-    if (phase === "idle") {
-      const t = setTimeout(() => {
-        if (msg.from === "user") setPhase("typing-user");
-        else setPhase("thinking");
-      }, PAUSE_BEFORE);
-      return () => clearTimeout(t);
-    }
-
-    if (phase === "typing-user" && msg.type === "text") {
-      const text = msg.text as string;
-      if (charIdx < text.length) {
-        const t = setTimeout(() => {
-          setInputText(text.slice(0, charIdx + 1));
-          setCharIdx(c => c + 1);
-        }, rand(18, 45));
-        return () => clearTimeout(t);
+    if(phase==="typing-user"&&msg.type==="text"){
+      const txt=msg.text!;
+      if(charIdx<txt.length){
+        const t=setTimeout(()=>{setInputText(txt.slice(0,charIdx+1));setCharIdx(c=>c+1);},rand(18,45));
+        return ()=>clearTimeout(t);
       } else {
-        const t = setTimeout(() => { setInputText(""); setPhase("sending"); }, ENTER_PAUSE);
-        return () => clearTimeout(t);
+        const t=setTimeout(()=>{setInputText("");setPhase("sending");},ENTER_PAUSE);
+        return ()=>clearTimeout(t);
       }
     }
-
-    if (phase === "sending" && msg.type === "text") {
-      const id = nextId.current++;
-      setBubbles(prev => [...prev, { id, from: "user", type: "text", text: msg.text as string }]);
-      const t = setTimeout(() => { setMsgIdx(i => i + 1); setCharIdx(0); setPhase("idle"); }, PAUSE_AFTER);
-      return () => clearTimeout(t);
+    if(phase==="sending"){
+      setBubbles(prev=>[...prev,{id:nextId.current++,from:"user",type:"text",text:msg.text}]);
+      const t=setTimeout(()=>{setMsgIdx(i=>i+1);setCharIdx(0);setPhase("idle");},PAUSE_AFTER);
+      return ()=>clearTimeout(t);
     }
-
-    if (phase === "thinking") {
-      const thinkId = nextId.current++;
-      setBubbles(prev => [...prev, { id: thinkId, from: "ai", type: "thinking" }]);
-      const t = setTimeout(() => {
-        setBubbles(prev => prev.filter(b => b.type !== "thinking"));
-        if (msg.type === "text") { setPhase("typing-ai"); setCharIdx(0); }
-        else setPhase("card-in");
-      }, THINKING_DUR);
-      return () => clearTimeout(t);
+    if(phase==="thinking"){
+      setBubbles(prev=>{
+        if(prev.some(b=>b.type==="thinking")) return prev;
+        return [...prev,{id:nextId.current++,from:"ai",type:"thinking"}];
+      });
+      const t=setTimeout(()=>{
+        setBubbles(prev=>prev.filter(b=>b.type!=="thinking"));
+        setPhase(msg.type==="text"?"typing-ai":"card-in");
+        setCharIdx(0);
+      },THINKING_DUR);
+      return ()=>clearTimeout(t);
     }
-
-    if (phase === "typing-ai" && msg.type === "text") {
-      const text = msg.text as string;
-      if (charIdx < text.length) {
-        const t = setTimeout(() => {
-          setBubbles(prev => {
-            const next = [...prev];
-            const last = next[next.length - 1];
-            if (!last || last.type !== "text" || last.from !== "ai" || !last.partial) {
-              next.push({ id: nextId.current++, from: "ai", type: "text", text: text.slice(0, charIdx + 1), partial: true });
+    if(phase==="typing-ai"&&msg.type==="text"){
+      const txt=msg.text!;
+      if(charIdx<txt.length){
+        const t=setTimeout(()=>{
+          setBubbles(prev=>{
+            const next=[...prev];
+            const last=next[next.length-1];
+            if(!last||last.type!=="text"||last.from!=="ai"||!last.partial){
+              next.push({id:nextId.current++,from:"ai",type:"text",text:txt.slice(0,charIdx+1),partial:true});
             } else {
-              next[next.length - 1] = { ...last, text: text.slice(0, charIdx + 1) };
+              next[next.length-1]={...last,text:txt.slice(0,charIdx+1)};
             }
             return next;
           });
-          setCharIdx(c => c + 1);
-        }, rand(18, 42));
-        return () => clearTimeout(t);
+          setCharIdx(c=>c+1);
+        },rand(18,42));
+        return ()=>clearTimeout(t);
       } else {
-        setBubbles(prev => {
-          const next = [...prev];
-          if (next[next.length - 1]?.partial) next[next.length - 1] = { ...next[next.length - 1], partial: false };
+        setBubbles(prev=>{
+          const next=[...prev];
+          if(next[next.length-1]?.partial) next[next.length-1]={...next[next.length-1],partial:false};
           return next;
         });
-        const t = setTimeout(() => { setMsgIdx(i => i + 1); setCharIdx(0); setPhase("idle"); }, PAUSE_AFTER);
-        return () => clearTimeout(t);
+        const t=setTimeout(()=>{setMsgIdx(i=>i+1);setCharIdx(0);setPhase("idle");},PAUSE_AFTER);
+        return ()=>clearTimeout(t);
       }
     }
-
-    if (phase === "card-in") {
-      const id = nextId.current++;
-      setBubbles(prev => [...prev, { id, from: "ai", type: msg.type as "card" | "qpay" }]);
-      const t = setTimeout(() => { setMsgIdx(i => i + 1); setCharIdx(0); setPhase("idle"); }, PAUSE_AFTER + 200);
-      return () => clearTimeout(t);
+    if(phase==="card-in"){
+      setBubbles(prev=>[...prev,{id:nextId.current++,from:"ai",type:msg.type}]);
+      const t=setTimeout(()=>{setMsgIdx(i=>i+1);setCharIdx(0);setPhase("idle");},PAUSE_AFTER+300);
+      return ()=>clearTimeout(t);
     }
-  }, [phase, charIdx, msgIdx]);
+  },[phase,charIdx,msgIdx]);
+
+  const isTyping=phase==="typing-user";
+  const isSending=phase==="sending";
+  const Av=()=>(
+    <div style={{width:"26px",height:"26px",borderRadius:"50%",background:sc.avBg,color:"white",fontSize:"0.68rem",fontWeight:800,display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0,alignSelf:"flex-end"}}>{sc.avTxt}</div>
+  );
 
   return (
-    <section data-animate style={{ padding: "7rem 0" }}>
-      <div style={{ maxWidth: "72rem", margin: "0 auto", padding: "0 1.25rem" }}>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "4rem", alignItems: "center" }}>
-
-          {/* Left */}
-          <div>
-            <div className="section-tag" style={{ display: "inline-flex", marginBottom: "1rem" }}>AI Chatbot Demo</div>
-            <h2 style={{ fontSize: "clamp(1.7rem, 3.5vw, 2.4rem)", fontWeight: 800, letterSpacing: "-0.02em", marginBottom: "1.25rem", lineHeight: 1.15 }}>
-              Хэрэглэгч мессеж илгээнэ —{" "}
-              <span className="gradient-text">AI хариулна, захиалга авна</span>
-            </h2>
-            <p style={{ color: "var(--text-mid)", fontSize: "0.92rem", lineHeight: 1.8, marginBottom: "2rem" }}>
-              Асуухаас захиалга баталгаажуулах хүртэл — бүгдийг AI автоматаар хийнэ. Та зөвхөн ажлаа хий.
-            </p>
-            <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
-              {[
-                { icon: "🇲🇳", text: "Монгол хэлний бүрэн дэмжлэг" },
-                { icon: "💳", text: "QPay төлбөр автоматаар" },
-                { icon: "🤝", text: "Нарийн асуудлыг хүнд шилжүүлнэ" },
-              ].map(f => (
-                <div key={f.text} style={{ display: "flex", alignItems: "center", gap: "0.6rem", fontSize: "0.85rem", color: "var(--text-mid)" }}>
-                  <span style={{ fontSize: "1rem" }}>{f.icon}</span>
-                  {f.text}
-                </div>
-              ))}
-            </div>
+    <div style={{borderRadius:"1.5rem",overflow:"hidden",border:"1px solid var(--border2)",background:"var(--surface)",boxShadow:"0 20px 60px #6366f115"}}>
+      <div style={{padding:"0.75rem 1rem",background:"var(--surface)",borderBottom:"1px solid var(--border)",display:"flex",alignItems:"center",gap:"0.55rem"}}>
+        <div style={{width:"32px",height:"32px",borderRadius:"50%",background:sc.avBg,color:"white",fontWeight:800,fontSize:"0.82rem",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0}}>{sc.avTxt}</div>
+        <div style={{flex:1}}>
+          <div style={{fontSize:"0.8rem",fontWeight:700,color:"var(--text)",lineHeight:1.1}}>{sc.business}</div>
+          <div style={{fontSize:"0.6rem",color:"#10b981",fontWeight:600,display:"flex",alignItems:"center",gap:"3px"}}>
+            <span style={{width:"5px",height:"5px",borderRadius:"50%",background:"#10b981",display:"inline-block"}}/>
+            онлайн · AI ажиллаж байна
           </div>
+        </div>
+        <div style={{display:"flex",gap:"3px"}}>{[0,1,2].map(i=><div key={i} style={{width:"3.5px",height:"3.5px",borderRadius:"50%",background:"var(--text-light)"}}/>)}</div>
+      </div>
 
-          {/* Right: chat window */}
-          <div style={{
-            borderRadius: "1.5rem", overflow: "hidden",
-            border: "1px solid var(--border2)",
-            background: "var(--surface)",
-            boxShadow: "0 20px 60px #6366f11a, 0 4px 16px #00000008",
-          }}>
-            {/* Header */}
-            <div style={{
-              padding: "0.8rem 1rem",
-              background: "var(--surface)",
-              borderBottom: "1px solid var(--border)",
-              display: "flex", alignItems: "center", gap: "0.6rem",
+      <div ref={containerRef} onScroll={()=>{const el=containerRef.current;if(el) scrolledUp.current=el.scrollHeight-el.scrollTop-el.clientHeight>30;}}
+        style={{height:"320px",overflowY:"auto",padding:"0.875rem",display:"flex",flexDirection:"column",gap:"0.5rem",background:"#f7f6f4",scrollbarWidth:"thin",scrollbarColor:"var(--border2) transparent"}}>
+        {bubbles.map(b=>{
+          if(b.type==="thinking") return(
+            <div key={b.id} style={{display:"flex",alignItems:"flex-end",gap:"5px"}}>
+              <Av/>
+              <div style={{padding:"0.45rem 0.7rem",borderRadius:"1rem 1rem 1rem 0.2rem",background:"white",border:"1px solid #ede9fe",display:"flex",gap:"4px",alignItems:"center"}}>
+                {[0,1,2].map(d=><span key={d} style={{width:"5px",height:"5px",borderRadius:"50%",background:"#a78bfa",display:"inline-block",animation:`tdot 1.2s ease-in-out ${d*0.18}s infinite`}}/>)}
+              </div>
+            </div>
+          );
+          if(b.from==="ai"&&b.type==="text") return(
+            <div key={b.id} style={{display:"flex",alignItems:"flex-end",gap:"5px",maxWidth:"82%"}}>
+              <Av/>
+              <div style={{padding:"0.5rem 0.75rem",borderRadius:"1rem 1rem 1rem 0.2rem",background:"white",border:"1px solid #ede9fe",fontSize:"0.79rem",color:"#374151",lineHeight:1.55,boxShadow:"0 1px 4px #0000000a"}}>
+                {b.text}
+                {b.partial&&<span style={{display:"inline-block",width:"1.5px",height:"12px",background:"#8b5cf6",marginLeft:"1px",verticalAlign:"middle",animation:"blink .65s step-end infinite"}}/>}
+              </div>
+            </div>
+          );
+          if(b.from==="user"&&b.type==="text") return(
+            <div key={b.id} style={{display:"flex",justifyContent:"flex-end"}}>
+              <div style={{maxWidth:"76%",padding:"0.5rem 0.75rem",borderRadius:"1rem 1rem 0.2rem 1rem",background:"linear-gradient(135deg,#6366f1,#8b5cf6)",fontSize:"0.79rem",color:"white",lineHeight:1.55,boxShadow:"0 2px 12px #6366f128"}}>{b.text}</div>
+            </div>
+          );
+          if(b.type==="card") return(
+            <div key={b.id} style={{display:"flex",alignItems:"flex-end",gap:"5px"}}>
+              <Av/>
+              <div style={{borderRadius:"14px",overflow:"hidden",background:"white",border:"1px solid #ede9fe",width:"185px",boxShadow:"0 2px 10px #6366f110"}}>
+                <div style={{background:"linear-gradient(135deg,#f5f3ff,#ede9fe)",height:"70px",display:"flex",alignItems:"center",justifyContent:"center"}}>
+                  <span style={{fontSize:"2rem"}}>{sc.card.emoji}</span>
+                </div>
+                <div style={{padding:"0.5rem 0.65rem"}}>
+                  <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:"0.2rem"}}>
+                    <div style={{fontSize:"0.77rem",fontWeight:700,color:"#1f2937"}}>{sc.card.title}</div>
+                    <div style={{fontSize:"0.55rem",fontWeight:700,color:sc.card.tagColor,background:sc.card.tagColor+"18",border:`1px solid ${sc.card.tagColor}35`,borderRadius:"100px",padding:"0.1rem 0.35rem",whiteSpace:"nowrap"}}>{sc.card.tag}</div>
+                  </div>
+                  <div style={{fontSize:"0.75rem",fontWeight:700,color:"#6366f1",marginBottom:"0.45rem"}}>{sc.card.price}</div>
+                  <div style={{display:"flex",flexDirection:"column",gap:"0.28rem"}}>
+                    <button style={{borderRadius:"6px",border:"1.5px solid #c4b5fd",background:"transparent",color:"#6366f1",fontSize:"0.68rem",padding:"0.25rem",fontWeight:600,cursor:"default"}}>Дэлгэрэнгүй</button>
+                    <button style={{borderRadius:"6px",border:"none",background:"linear-gradient(135deg,#6366f1,#8b5cf6)",color:"white",fontSize:"0.68rem",padding:"0.27rem",fontWeight:600,cursor:"default"}}>📅 Захиалах</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          );
+          if(b.type==="qpay") return(
+            <div key={b.id} style={{display:"flex",alignItems:"flex-end",gap:"5px"}}>
+              <Av/>
+              <div style={{borderRadius:"14px",overflow:"hidden",background:"white",border:"1px solid #bfdbfe",width:"155px"}}>
+                <div style={{background:"linear-gradient(135deg,#1d4ed8,#2563eb)",padding:"0.4rem 0.65rem",display:"flex",alignItems:"center",gap:"0.35rem"}}>
+                  <div style={{width:"16px",height:"16px",borderRadius:"3px",background:"white",display:"flex",alignItems:"center",justifyContent:"center"}}>
+                    <div style={{width:"10px",height:"10px",background:"#1d4ed8",borderRadius:"2px"}}/>
+                  </div>
+                  <span style={{fontSize:"0.7rem",color:"white",fontWeight:800,letterSpacing:"0.04em"}}>QPay</span>
+                </div>
+                <div style={{padding:"0.6rem 0.65rem"}}>
+                  <div style={{display:"grid",gridTemplateColumns:"repeat(7,1fr)",gap:"1.5px",marginBottom:"0.45rem"}}>
+                    {QR.map((on,i)=><div key={i} style={{aspectRatio:"1",borderRadius:"1px",background:on?"#1e3a5f":"transparent"}}/>)}
+                  </div>
+                  <div style={{textAlign:"center"}}>
+                    <div style={{fontSize:"0.92rem",fontWeight:800,color:"#1d4ed8"}}>{sc.qpay}</div>
+                    <div style={{fontSize:"0.6rem",color:"#6b7280",marginTop:"1px"}}>{sc.business}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          );
+          return null;
+        })}
+      </div>
+
+      <div style={{padding:"0.6rem 0.875rem",borderTop:"1px solid var(--border)",display:"flex",alignItems:"center",gap:"0.45rem",background:"var(--surface)"}}>
+        <div style={{display:"flex",gap:"0.45rem",flexShrink:0}}>{["🎤","🖼️"].map(ico=><div key={ico} style={{fontSize:"0.85rem",opacity:0.4}}>{ico}</div>)}</div>
+        <div style={{flex:1,padding:"0.4rem 0.875rem",borderRadius:"100px",background:isTyping?"white":"#f0ede9",border:isTyping?"1.5px solid #a78bfa":"1px solid #e5e2dd",fontSize:"0.76rem",color:inputText?"#374151":"#b0aaa4",transition:"all 0.2s",minHeight:"32px",display:"flex",alignItems:"center"}}>
+          {inputText||"Aa"}
+          {isTyping&&<span style={{display:"inline-block",width:"1.5px",height:"12px",background:"#8b5cf6",marginLeft:"1px",verticalAlign:"middle",animation:"blink .65s step-end infinite"}}/>}
+        </div>
+        <div style={{width:"30px",height:"30px",borderRadius:"50%",flexShrink:0,background:"linear-gradient(135deg,#6366f1,#8b5cf6)",display:"flex",alignItems:"center",justifyContent:"center",boxShadow:"0 2px 8px #6366f128",transform:isSending?"scale(0.88)":"scale(1)",transition:"transform 0.15s"}}>
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M22 2L11 13M22 2L15 22L11 13M22 2L2 9L11 13" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function StatsPanel({appts,revenue,flash}:{appts:Appt[];revenue:number;flash:string}){
+  return(
+    <div style={{display:"flex",flexDirection:"column",gap:"1rem"}}>
+      <div style={{borderRadius:"1.25rem",padding:"1.25rem",background:"var(--surface)",border:"1px solid var(--border2)",boxShadow:"0 4px 20px #00000006"}}>
+        <div style={{fontSize:"0.62rem",color:"var(--text-light)",fontWeight:700,textTransform:"uppercase",letterSpacing:"0.08em",marginBottom:"0.5rem"}}>Өнөөдрийн орлого</div>
+        <div style={{position:"relative",marginBottom:"0.3rem"}}>
+          <div style={{fontSize:"1.55rem",fontWeight:800,color:"var(--text)",letterSpacing:"-0.02em",lineHeight:1}}>
+            {revenue.toLocaleString()}₮
+          </div>
+          {flash&&(
+            <div style={{position:"absolute",top:"-2px",right:"0",fontSize:"0.7rem",fontWeight:700,color:"#16a34a",background:"#dcfce7",border:"1px solid #bbf7d0",borderRadius:"100px",padding:"0.15rem 0.5rem",animation:"fadeUp 0.35s ease"}}>
+              ↑ {flash}
+            </div>
+          )}
+        </div>
+        <div style={{fontSize:"0.67rem",color:"var(--text-light)",marginBottom:"0.75rem"}}>AI автоматаар захиалга авсан</div>
+        <div style={{height:"3px",borderRadius:"100px",background:"var(--border)",overflow:"hidden"}}>
+          <div style={{height:"100%",width:"72%",borderRadius:"100px",background:"linear-gradient(90deg,#6366f1,#8b5cf6)"}}/>
+        </div>
+        <div style={{fontSize:"0.6rem",color:"var(--text-light)",marginTop:"0.3rem"}}>Сарын зорилтын 72%</div>
+      </div>
+
+      <div style={{borderRadius:"1.25rem",padding:"1.25rem",background:"var(--surface)",border:"1px solid var(--border2)",flex:1}}>
+        <div style={{fontSize:"0.62rem",color:"var(--text-light)",fontWeight:700,textTransform:"uppercase",letterSpacing:"0.08em",marginBottom:"0.75rem"}}>Шинэ захиалгууд</div>
+        <div style={{display:"flex",flexDirection:"column",gap:"0.45rem"}}>
+          {appts.map((a,i)=>(
+            <div key={i} style={{display:"flex",alignItems:"center",gap:"0.55rem",padding:"0.45rem 0.6rem",borderRadius:"0.65rem",background:a.done?"var(--surface2)":"#f0fdf4",border:a.done?"1px solid var(--border)":"1px solid #bbf7d0",animation:!a.done?"slideIn 0.4s ease":"none"}}>
+              <div style={{fontSize:"0.72rem"}}>{a.done?"✅":"🆕"}</div>
+              <div style={{flex:1,minWidth:0}}>
+                <div style={{fontSize:"0.74rem",fontWeight:600,color:"var(--text)",overflow:"hidden",whiteSpace:"nowrap",textOverflow:"ellipsis"}}>{a.name}</div>
+                <div style={{fontSize:"0.63rem",color:"var(--text-light)"}}>{a.detail}</div>
+              </div>
+              <div style={{fontSize:"0.63rem",fontWeight:600,color:a.done?"var(--text-light)":"#16a34a",whiteSpace:"nowrap"}}>{a.time}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default function AIChatDemo(){
+  const [activeIdx,setActiveIdx]=useState(0);
+  const sc=SC[activeIdx];
+  const [appts,setAppts]=useState<Appt[]>(()=>[...SC[0].baseAppts]);
+  const [revenue,setRevenue]=useState(SC[0].baseRev);
+  const [flash,setFlash]=useState("");
+  const flashTimer=useRef<ReturnType<typeof setTimeout>|null>(null);
+
+  useEffect(()=>{
+    setAppts([...sc.baseAppts]);
+    setRevenue(sc.baseRev);
+    setFlash("");
+  },[activeIdx]);
+
+  const handlePaid=useCallback(()=>{
+    const s=SC[activeIdx];
+    setAppts(prev=>[...prev,{...s.newAppt,done:false}]);
+    const start=s.baseRev;
+    const end=s.baseRev+s.addRev;
+    const dur=1800;const t0=performance.now();
+    const step=(now:number)=>{
+      const p=Math.min((now-t0)/dur,1);
+      const e=1-Math.pow(1-p,3);
+      setRevenue(Math.round(start+(end-start)*e));
+      if(p<1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+    setFlash(`+${s.addRev.toLocaleString()}₮`);
+    if(flashTimer.current) clearTimeout(flashTimer.current);
+    flashTimer.current=setTimeout(()=>setFlash(""),3200);
+  },[activeIdx]);
+
+  return(
+    <section data-animate style={{padding:"7rem 0"}}>
+      <div style={{maxWidth:"78rem",margin:"0 auto",padding:"0 1.25rem"}}>
+        <div style={{textAlign:"center",marginBottom:"2.5rem"}}>
+          <div className="section-tag" style={{display:"inline-flex",marginBottom:"1rem"}}>Live Demo</div>
+          <h2 style={{fontSize:"clamp(1.7rem,3.5vw,2.4rem)",fontWeight:800,letterSpacing:"-0.02em",lineHeight:1.15}}>
+            Ийм байдлаар ажиллана —{" "}
+            <span className="gradient-text">24/7, автоматаар</span>
+          </h2>
+        </div>
+
+        {/* Tabs */}
+        <div style={{display:"flex",justifyContent:"center",gap:"0.5rem",marginBottom:"2rem",flexWrap:"wrap"}}>
+          {SC.map((s,i)=>(
+            <button key={s.id} onClick={()=>setActiveIdx(i)} style={{display:"flex",alignItems:"center",gap:"0.4rem",padding:"0.5rem 1rem",borderRadius:"100px",fontSize:"0.8rem",fontWeight:600,cursor:"pointer",transition:"all 0.2s",
+              background:i===activeIdx?"linear-gradient(135deg,#6366f1,#8b5cf6)":"var(--surface2)",
+              color:i===activeIdx?"white":"var(--text-mid)",
+              border:i===activeIdx?"none":"1px solid var(--border2)",
+              boxShadow:i===activeIdx?"0 4px 14px #6366f130":"none",
             }}>
-              <div style={{ width: "34px", height: "34px", borderRadius: "50%", background: "linear-gradient(135deg, #f9a8d4, #ec4899)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, fontSize: "0.85rem", fontWeight: 800, color: "white", boxShadow: "0 2px 8px #ec489930" }}>L</div>
-              <div style={{ flex: 1 }}>
-                <div style={{ fontSize: "0.82rem", fontWeight: 700, color: "var(--text)", lineHeight: 1.1 }}>Lumière Salon</div>
-                <div style={{ fontSize: "0.62rem", color: "#10b981", fontWeight: 600, display: "flex", alignItems: "center", gap: "3px" }}>
-                  <span style={{ width: "5px", height: "5px", borderRadius: "50%", background: "#10b981", display: "inline-block" }} />
-                  онлайн · ихэвчлэн хариулдаг
-                </div>
-              </div>
-              {/* Menu dots */}
-              <div style={{ display: "flex", gap: "3px" }}>
-                {[0,1,2].map(i => <div key={i} style={{ width: "4px", height: "4px", borderRadius: "50%", background: "var(--text-light)" }} />)}
-              </div>
-            </div>
+              <span>{s.icon}</span>{s.label}
+            </button>
+          ))}
+        </div>
 
-            {/* Messages */}
-            <div
-              ref={containerRef}
-              onScroll={handleScroll}
-              style={{
-                height: "360px", overflowY: "auto", padding: "0.875rem",
-                display: "flex", flexDirection: "column", gap: "0.5rem",
-                background: "#f7f6f4",
-                scrollbarWidth: "thin", scrollbarColor: "var(--border2) transparent",
-              }}
-            >
-              {bubbles.map(b => {
-                if (b.type === "thinking") return (
-                  <div key={b.id} style={{ display: "flex", alignItems: "flex-end", gap: "5px" }}>
-                    <BizAvatar />
-                    <div style={{ padding: "0.45rem 0.7rem", borderRadius: "1rem 1rem 1rem 0.2rem", background: "white", border: "1px solid #ede9fe", display: "flex", gap: "4px", alignItems: "center", boxShadow: "0 1px 4px #0000000a" }}>
-                      {[0,1,2].map(d => (
-                        <span key={d} style={{ width: "5px", height: "5px", borderRadius: "50%", background: "#a78bfa", display: "inline-block", animation: `tdot 1.2s ease-in-out ${d * 0.18}s infinite` }} />
-                      ))}
-                    </div>
-                  </div>
-                );
-
-                if (b.from === "ai" && b.type === "text") return (
-                  <div key={b.id} style={{ display: "flex", alignItems: "flex-end", gap: "5px", maxWidth: "82%" }}>
-                    <BizAvatar />
-                    <div style={{ padding: "0.5rem 0.75rem", borderRadius: "1rem 1rem 1rem 0.2rem", background: "white", border: "1px solid #ede9fe", fontSize: "0.79rem", color: "#374151", lineHeight: 1.55, fontWeight: 450, boxShadow: "0 1px 5px #0000000a" }}>
-                      {b.text}
-                      {b.partial && <span style={{ display: "inline-block", width: "1.5px", height: "12px", background: "#8b5cf6", marginLeft: "1px", verticalAlign: "middle", animation: "blink 0.65s step-end infinite" }} />}
-                    </div>
-                  </div>
-                );
-
-                if (b.from === "user" && b.type === "text") return (
-                  <div key={b.id} style={{ display: "flex", justifyContent: "flex-end" }}>
-                    <div style={{ maxWidth: "76%", padding: "0.5rem 0.75rem", borderRadius: "1rem 1rem 0.2rem 1rem", background: "linear-gradient(135deg, #6366f1, #8b5cf6)", fontSize: "0.79rem", color: "white", lineHeight: 1.55, boxShadow: "0 2px 12px #6366f128" }}>
-                      {b.text}
-                    </div>
-                  </div>
-                );
-
-                if (b.type === "card") return (
-                  <div key={b.id} style={{ display: "flex", alignItems: "flex-end", gap: "5px" }}>
-                    <BizAvatar />
-                    <ServiceCard />
-                  </div>
-                );
-
-                if (b.type === "qpay") return (
-                  <div key={b.id} style={{ display: "flex", alignItems: "flex-end", gap: "5px" }}>
-                    <BizAvatar />
-                    <QPay />
-                  </div>
-                );
-
-                return null;
-              })}
-            </div>
-
-            {/* Input */}
-            <div style={{ padding: "0.65rem 0.875rem", borderTop: "1px solid var(--border)", display: "flex", alignItems: "center", gap: "0.5rem", background: "var(--surface)" }}>
-              {/* Mic + image icons */}
-              <div style={{ display: "flex", gap: "0.5rem", flexShrink: 0 }}>
-                {["🎤","🖼️"].map(ico => (
-                  <div key={ico} style={{ fontSize: "0.9rem", opacity: 0.45 }}>{ico}</div>
-                ))}
-              </div>
-              <div style={{
-                flex: 1, padding: "0.45rem 0.875rem", borderRadius: "100px",
-                background: phase === "typing-user" ? "white" : "#f0ede9",
-                border: phase === "typing-user" ? "1.5px solid #a78bfa" : "1px solid #e5e2dd",
-                fontSize: "0.77rem",
-                color: inputText ? "#374151" : "#b0aaa4",
-                transition: "border-color 0.2s, background 0.2s",
-                minHeight: "34px", display: "flex", alignItems: "center",
-              }}>
-                {inputText || "Aa"}
-                {phase === "typing-user" && <span style={{ display: "inline-block", width: "1.5px", height: "12px", background: "#8b5cf6", marginLeft: "1px", verticalAlign: "middle", animation: "blink 0.65s step-end infinite" }} />}
-              </div>
-              <div style={{ width: "32px", height: "32px", borderRadius: "50%", flexShrink: 0, background: phase === "sending" ? "linear-gradient(135deg, #4f46e5,#7c3aed)" : "linear-gradient(135deg, #6366f1, #8b5cf6)", display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 2px 10px #6366f128", transform: phase === "sending" ? "scale(0.9)" : "scale(1)", transition: "transform 0.15s, background 0.15s" }}>
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
-                  <path d="M22 2L11 13M22 2L15 22L11 13M22 2L2 9L11 13" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </div>
-            </div>
-          </div>
-
+        {/* Grid: chat + stats */}
+        <div style={{display:"grid",gridTemplateColumns:"1fr 0.6fr",gap:"1.5rem",alignItems:"start"}}>
+          <ChatWindow key={activeIdx} sc={sc} onPaid={handlePaid}/>
+          <StatsPanel appts={appts} revenue={revenue} flash={flash}/>
         </div>
       </div>
 
       <style>{`
-        @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
-        @keyframes tdot {
-          0%,60%,100%{transform:translateY(0);opacity:.35}
-          30%{transform:translateY(-5px);opacity:1}
-        }
+        @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+        @keyframes tdot{0%,60%,100%{transform:translateY(0);opacity:.35}30%{transform:translateY(-5px);opacity:1}}
+        @keyframes fadeUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+        @keyframes slideIn{from{opacity:0;transform:translateX(-8px)}to{opacity:1;transform:translateX(0)}}
       `}</style>
     </section>
   );
