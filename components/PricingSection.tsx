@@ -5,7 +5,7 @@ import Link from "next/link";
 interface ModalFeature { title: string; desc: string; }
 interface Plan {
   name: string; price: string; period: string; desc: string;
-  features: string[]; highlight: boolean; badge?: string; includesAll?: string;
+  features: string[]; highlight: boolean; badge?: string; includesAll?: string; inherits?: string;
   modal: { features: ModalFeature[]; target: string; caseStudy: string; };
 }
 
@@ -51,6 +51,7 @@ const PLANS: Plan[] = [
       "Telegram & Email мэдэгдэл",
     ],
     includesAll: "+ Starter бүгд",
+    inherits: "Starter",
     highlight: true,
     modal: {
       features: [
@@ -61,7 +62,6 @@ const PLANS: Plan[] = [
         { title: "Хүний handoff систем", desc: "AI шийдэж чадахгүй нарийн асуудлыг таны ажилтанд шилжүүлж, dashboard-аас шууд хариулах боломжтой." },
         { title: "Telegram & Email мэдэгдэл", desc: "Шинэ захиалга, lead ирэх бүрт Telegram болон Email-аар шуурхай мэдэгдэл ирнэ." },
         { title: "PDF → Мэдлэгийн сан", desc: "Каталог, дүрэм, гарын авлага PDF хэлбэрт байвал шууд upload хийхэд AI автоматаар Q&A болгоно." },
-        { title: "+ Starter бүгд", desc: "Builder AI, Lead цуглуулах, Мэдлэгийн сан, Үндсэн тайлан бүгд багтана." },
       ],
       target: "Онлайн захиалга авдаг, Instagram + Facebook хоёуланд идэвхтэй, цаг захиалгатай үйлчилгээ эрхлэгчид. Гоо сайхан, эмнэлэг, хоол хүргэлт, фитнес.",
       caseStudy: "Гоо сайхны салон Facebook + Instagram хоёроос нэгэн зэрэг захиалга авч, +1 automation-оор comment-уудыг DM руу татаж, цаг захиалгыг автоматаар авдаг болсон. Ажилтны ачаалал 60% буурсан.",
@@ -79,6 +79,7 @@ const PLANS: Plan[] = [
       "Telegram дэмжлэг",
     ],
     includesAll: "+ Growth бүгд",
+    inherits: "Growth",
     highlight: false,
     modal: {
       features: [
@@ -86,7 +87,6 @@ const PLANS: Plan[] = [
         { title: "AI тохиргоо (model, temp)", desc: "GPT model сонгох, температур тохируулах — хариултын хэв маяг, нарийвчлалыг бизнестээ тааруулан тохируулж болно." },
         { title: "Мэдлэгийн сан хязгааргүй", desc: "Бүтээгдэхүүн, үйлчилгээний мэдээлэл хэчнээн ч их байсан бүгдийг суулгаж болно. Starter-ийн 30 зүйлийн хязгаар байхгүй." },
         { title: "Funnel & дэвшилтэт analytics", desc: "Яриа → Lead → Захиалга хэдэн хувь болж хувирч байгааг харуулна. Хариулагдаагүй асуулт, алдаж байгаа цэгийг олоход тусална." },
-        { title: "+ Growth бүгд", desc: "Instagram DM AI, QPay, Consultation, +1 automation, Handoff, Telegram & Email мэдэгдэл бүгд багтана." },
       ],
       target: "Их хэмжээний мэдлэгийн сантай, нарийн тохируулга шаардлагатай, дэвшилтэт автоматжуулалт хийхийг хүсдэг дунд болон том бизнест.",
       caseStudy: "E-commerce дэлгүүр: 200+ бүтээгдэхүүнтэй, custom keyword automation-оор 'захиалах' гэсэн comment бүрт тусгай DM явуулдаг болсон. Conversion rate 35% өссөн.",
@@ -105,6 +105,7 @@ const PLANS: Plan[] = [
       "Олон хуудас (3+) + API",
     ],
     includesAll: "+ Business бүгд",
+    inherits: "Business",
     highlight: false,
     modal: {
       features: [
@@ -114,7 +115,6 @@ const PLANS: Plan[] = [
         { title: "White label", desc: "'Powered by Түрүү AI' гэсэн брэндинг хасагдаж таны компанийн нэрээр гарна." },
         { title: "Олон хуудас (3+) + API", desc: "3 болон түүнээс дээш Facebook/Instagram хуудсыг нэг account-аас удирдана. API хандалтаар өөрийн системтэй интеграц хийнэ." },
         { title: "Шууд утасны дэмжлэг + SLA", desc: "Техникийн асуудал гарвал 4 цагийн дотор шийдэгдэх баталгаа. Шууд утасны дэмжлэг." },
-        { title: "+ Business бүгд", desc: "Instagram, handoff, custom keyword, AI тохиргоо, QPay, analytics бүгд багтана." },
       ],
       target: "Олон салбартай, өдөр бүр их хэмжээний харилцаа явуулдаг, professional брэнд дүр төрхтэй том бизнест.",
       caseStudy: "Банк, даатгал, корпораци: захиалга авах, мэдэгдэл явуулах, тайлан гаргах бүх процессыг Custom AI Agent-аар автоматжуулсан. Сард 3+ ажилтны цалинтай тэнцэх зардал хэмнэсэн.",
@@ -238,7 +238,16 @@ export default function PricingSection() {
       </section>
 
       {/* Modal */}
-      {activePlan && (
+      {activePlan && (() => {
+        const chain: Plan[] = [];
+        let cur = activePlan;
+        while (cur.inherits) {
+          const parent = PLANS.find(p => p.name === cur.inherits);
+          if (!parent) break;
+          chain.push(parent);
+          cur = parent;
+        }
+        return (
         <div
           onClick={() => setActiveModal(null)}
           style={{ position: "fixed", inset: 0, zIndex: 100, display: "flex", alignItems: "center", justifyContent: "center", padding: "1rem", background: "rgba(0,0,0,0.75)", backdropFilter: "blur(8px)" }}>
@@ -272,6 +281,26 @@ export default function PricingSection() {
                     </div>
                   ))}
                 </div>
+
+                {chain.map(parentPlan => (
+                  <div key={parentPlan.name}>
+                    <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", margin: "1.25rem 0 1rem" }}>
+                      <div style={{ flex: 1, height: "1px", background: "var(--border)" }} />
+                      <span style={{ fontSize: "0.65rem", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.1em", color: "var(--text-light)", whiteSpace: "nowrap" }}>
+                        {parentPlan.name} багцаас
+                      </span>
+                      <div style={{ flex: 1, height: "1px", background: "var(--border)" }} />
+                    </div>
+                    <div style={{ display: "flex", flexDirection: "column", gap: "0.625rem" }}>
+                      {parentPlan.modal.features.map((f, i) => (
+                        <div key={i} style={{ padding: "0.75rem 1rem", borderRadius: "0.75rem", background: "var(--surface)", border: "1px solid var(--border)", opacity: 0.75 }}>
+                          <div style={{ fontSize: "0.82rem", fontWeight: 600, color: "var(--text-mid)", marginBottom: "0.2rem" }}>✦ {f.title}</div>
+                          <div style={{ fontSize: "0.78rem", color: "var(--text-light)", lineHeight: 1.6 }}>{f.desc}</div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ))}
               </div>
 
               <div style={{ marginBottom: "1.25rem", padding: "1rem 1.1rem", borderRadius: "0.875rem", background: "#6366f108", border: "1px solid #6366f122" }}>
@@ -292,7 +321,8 @@ export default function PricingSection() {
             </div>
           </div>
         </div>
-      )}
+        );
+      })()}
     </>
   );
 }
