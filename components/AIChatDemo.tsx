@@ -15,6 +15,7 @@ interface S {
 }
 
 const QR = [1,1,1,0,1,1,1,1,0,1,0,1,0,1,1,1,1,0,1,1,1,0,1,0,1,0,0,0,1,0,1,0,1,1,1,1,0,1,0,1,0,1,1,1,1,0,1,1,1];
+const AV_COLORS = ["#6366f1","#8b5cf6","#ec4899","#0284c7","#059669","#d97706","#dc2626","#0891b2"];
 
 const SC: S[] = [
   {
@@ -238,74 +239,88 @@ function ChatWindow({sc,onPaid}:{sc:S;onPaid:()=>void}){
 
   const isTyping=phase==="typing-user";
   const isSending=phase==="sending";
+
   const Av=()=>(
-    <div style={{width:"26px",height:"26px",borderRadius:"50%",background:sc.avBg,color:"white",fontSize:"0.68rem",fontWeight:800,display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0,alignSelf:"flex-end"}}>{sc.avTxt}</div>
+    <div style={{width:"27px",height:"27px",borderRadius:"50%",background:sc.avBg,color:"white",fontSize:"0.68rem",fontWeight:800,display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0,alignSelf:"flex-end",boxShadow:"0 2px 6px #00000018"}}>{sc.avTxt}</div>
   );
 
   return (
-    <div style={{borderRadius:"1.5rem",overflow:"hidden",border:"1px solid var(--border2)",background:"var(--surface)",boxShadow:"0 20px 60px #6366f115"}}>
-      <div style={{padding:"0.75rem 1rem",background:"var(--surface)",borderBottom:"1px solid var(--border)",display:"flex",alignItems:"center",gap:"0.55rem"}}>
-        <div style={{width:"32px",height:"32px",borderRadius:"50%",background:sc.avBg,color:"white",fontWeight:800,fontSize:"0.82rem",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0}}>{sc.avTxt}</div>
-        <div style={{flex:1}}>
-          <div style={{fontSize:"0.8rem",fontWeight:700,color:"var(--text)",lineHeight:1.1}}>{sc.business}</div>
-          <div style={{fontSize:"0.6rem",color:"#10b981",fontWeight:600,display:"flex",alignItems:"center",gap:"3px"}}>
-            <span style={{width:"5px",height:"5px",borderRadius:"50%",background:"#10b981",display:"inline-block"}}/>
-            онлайн · AI ажиллаж байна
-          </div>
+    <div style={{borderRadius:"1.5rem",overflow:"hidden",border:"1px solid var(--border2)",background:"var(--surface)",boxShadow:"0 24px 64px #6366f118"}}>
+      {/* Header */}
+      <div style={{padding:"0.75rem 1rem",background:"white",borderBottom:"1px solid #f0eef9",display:"flex",alignItems:"center",gap:"0.6rem"}}>
+        <div style={{position:"relative",flexShrink:0}}>
+          <div style={{width:"34px",height:"34px",borderRadius:"50%",background:sc.avBg,color:"white",fontWeight:800,fontSize:"0.82rem",display:"flex",alignItems:"center",justifyContent:"center",boxShadow:"0 2px 8px #00000015"}}>{sc.avTxt}</div>
+          <div style={{position:"absolute",bottom:"1px",right:"1px",width:"9px",height:"9px",borderRadius:"50%",background:"#10b981",border:"2px solid white"}}/>
         </div>
-        <div style={{display:"flex",gap:"3px"}}>{[0,1,2].map(i=><div key={i} style={{width:"3.5px",height:"3.5px",borderRadius:"50%",background:"var(--text-light)"}}/>)}</div>
+        <div style={{flex:1}}>
+          <div style={{fontSize:"0.8rem",fontWeight:700,color:"#111827",lineHeight:1.1}}>{sc.business}</div>
+          <div style={{fontSize:"0.6rem",color:"#10b981",fontWeight:600,marginTop:"1px"}}>● онлайн · AI ажиллаж байна</div>
+        </div>
+        <div style={{display:"flex",gap:"0.55rem",opacity:0.3}}>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.5 3.18 2 2 0 012.5 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.5a16 16 0 006.59 6.59l1.87-1.87a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><rect x="2" y="7" width="13" height="10" rx="2"/><path d="M17 9l4-2v10l-4-2"/></svg>
+        </div>
       </div>
 
-      <div ref={containerRef} onScroll={()=>{const el=containerRef.current;if(el) scrolledUp.current=el.scrollHeight-el.scrollTop-el.clientHeight>30;}}
-        style={{height:"320px",overflowY:"auto",padding:"0.875rem",display:"flex",flexDirection:"column",gap:"0.5rem",background:"#f7f6f4",scrollbarWidth:"thin",scrollbarColor:"var(--border2) transparent"}}>
+      {/* Messages */}
+      <div ref={containerRef}
+        onScroll={()=>{const el=containerRef.current;if(el) scrolledUp.current=el.scrollHeight-el.scrollTop-el.clientHeight>30;}}
+        style={{height:"330px",overflowY:"auto",padding:"1rem 0.875rem",display:"flex",flexDirection:"column",gap:"0.55rem",background:"#f9f8f6",scrollbarWidth:"thin",scrollbarColor:"var(--border2) transparent"}}>
+
+        {/* Date chip */}
+        <div style={{textAlign:"center",marginBottom:"0.25rem"}}>
+          <span style={{fontSize:"0.6rem",color:"#9ca3af",background:"#eeebe6",borderRadius:"100px",padding:"0.15rem 0.7rem",fontWeight:500}}>Өнөөдөр</span>
+        </div>
+
         {bubbles.map(b=>{
           if(b.type==="thinking") return(
-            <div key={b.id} style={{display:"flex",alignItems:"flex-end",gap:"5px"}}>
+            <div key={b.id} style={{display:"flex",alignItems:"flex-end",gap:"6px"}}>
               <Av/>
-              <div style={{padding:"0.45rem 0.7rem",borderRadius:"1rem 1rem 1rem 0.2rem",background:"white",border:"1px solid #ede9fe",display:"flex",gap:"4px",alignItems:"center"}}>
+              <div style={{padding:"0.5rem 0.75rem",borderRadius:"0.3rem 1rem 1rem 1rem",background:"white",boxShadow:"0 1px 8px #00000010",display:"flex",gap:"4px",alignItems:"center"}}>
                 {[0,1,2].map(d=><span key={d} style={{width:"5px",height:"5px",borderRadius:"50%",background:"#a78bfa",display:"inline-block",animation:`tdot 1.2s ease-in-out ${d*0.18}s infinite`}}/>)}
               </div>
             </div>
           );
           if(b.from==="ai"&&b.type==="text") return(
-            <div key={b.id} style={{display:"flex",alignItems:"flex-end",gap:"5px",maxWidth:"82%"}}>
+            <div key={b.id} style={{display:"flex",alignItems:"flex-end",gap:"6px",maxWidth:"82%"}}>
               <Av/>
-              <div style={{padding:"0.5rem 0.75rem",borderRadius:"1rem 1rem 1rem 0.2rem",background:"white",border:"1px solid #ede9fe",fontSize:"0.79rem",color:"#374151",lineHeight:1.55,boxShadow:"0 1px 4px #0000000a"}}>
+              <div style={{padding:"0.5rem 0.8rem",borderRadius:"0.3rem 1rem 1rem 1rem",background:"white",boxShadow:"0 1px 8px #00000010",fontSize:"0.78rem",color:"#374151",lineHeight:1.58}}>
                 {b.text}
-                {b.partial&&<span style={{display:"inline-block",width:"1.5px",height:"12px",background:"#8b5cf6",marginLeft:"1px",verticalAlign:"middle",animation:"blink .65s step-end infinite"}}/>}
+                {b.partial&&<span style={{display:"inline-block",width:"1.5px",height:"11px",background:"#8b5cf6",marginLeft:"1px",verticalAlign:"middle",animation:"blink .65s step-end infinite"}}/>}
               </div>
             </div>
           );
           if(b.from==="user"&&b.type==="text") return(
-            <div key={b.id} style={{display:"flex",justifyContent:"flex-end"}}>
-              <div style={{maxWidth:"76%",padding:"0.5rem 0.75rem",borderRadius:"1rem 1rem 0.2rem 1rem",background:"linear-gradient(135deg,#6366f1,#8b5cf6)",fontSize:"0.79rem",color:"white",lineHeight:1.55,boxShadow:"0 2px 12px #6366f128"}}>{b.text}</div>
+            <div key={b.id} style={{display:"flex",justifyContent:"flex-end",flexDirection:"column",alignItems:"flex-end",gap:"3px"}}>
+              <div style={{maxWidth:"76%",padding:"0.5rem 0.8rem",borderRadius:"1rem 0.3rem 1rem 1rem",background:"linear-gradient(135deg,#6366f1,#8b5cf6)",fontSize:"0.78rem",color:"white",lineHeight:1.58,boxShadow:"0 3px 14px #6366f130"}}>{b.text}</div>
+              <div style={{fontSize:"0.57rem",color:"#6366f1",fontWeight:700,paddingRight:"2px"}}>✓✓</div>
             </div>
           );
           if(b.type==="card") return(
-            <div key={b.id} style={{display:"flex",alignItems:"flex-end",gap:"5px"}}>
+            <div key={b.id} style={{display:"flex",alignItems:"flex-end",gap:"6px"}}>
               <Av/>
-              <div style={{borderRadius:"14px",overflow:"hidden",background:"white",border:"1px solid #ede9fe",width:"185px",boxShadow:"0 2px 10px #6366f110"}}>
-                <div style={{background:"linear-gradient(135deg,#f5f3ff,#ede9fe)",height:"70px",display:"flex",alignItems:"center",justifyContent:"center"}}>
+              <div style={{borderRadius:"14px",overflow:"hidden",background:"white",border:"1px solid #ede9fe",width:"185px",boxShadow:"0 4px 16px #6366f112"}}>
+                <div style={{background:"linear-gradient(135deg,#f5f3ff,#ede9fe)",height:"68px",display:"flex",alignItems:"center",justifyContent:"center"}}>
                   <span style={{fontSize:"2rem"}}>{sc.card.emoji}</span>
                 </div>
                 <div style={{padding:"0.5rem 0.65rem"}}>
                   <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:"0.2rem"}}>
-                    <div style={{fontSize:"0.77rem",fontWeight:700,color:"#1f2937"}}>{sc.card.title}</div>
-                    <div style={{fontSize:"0.55rem",fontWeight:700,color:sc.card.tagColor,background:sc.card.tagColor+"18",border:`1px solid ${sc.card.tagColor}35`,borderRadius:"100px",padding:"0.1rem 0.35rem",whiteSpace:"nowrap"}}>{sc.card.tag}</div>
+                    <div style={{fontSize:"0.76rem",fontWeight:700,color:"#1f2937"}}>{sc.card.title}</div>
+                    <div style={{fontSize:"0.54rem",fontWeight:700,color:sc.card.tagColor,background:sc.card.tagColor+"18",border:`1px solid ${sc.card.tagColor}35`,borderRadius:"100px",padding:"0.1rem 0.35rem",whiteSpace:"nowrap"}}>{sc.card.tag}</div>
                   </div>
-                  <div style={{fontSize:"0.75rem",fontWeight:700,color:"#6366f1",marginBottom:"0.45rem"}}>{sc.card.price}</div>
+                  <div style={{fontSize:"0.74rem",fontWeight:700,color:"#6366f1",marginBottom:"0.45rem"}}>{sc.card.price}</div>
                   <div style={{display:"flex",flexDirection:"column",gap:"0.28rem"}}>
-                    <button style={{borderRadius:"6px",border:"1.5px solid #c4b5fd",background:"transparent",color:"#6366f1",fontSize:"0.68rem",padding:"0.25rem",fontWeight:600,cursor:"default"}}>Дэлгэрэнгүй</button>
-                    <button style={{borderRadius:"6px",border:"none",background:"linear-gradient(135deg,#6366f1,#8b5cf6)",color:"white",fontSize:"0.68rem",padding:"0.27rem",fontWeight:600,cursor:"default"}}>📅 Захиалах</button>
+                    <button style={{borderRadius:"6px",border:"1.5px solid #c4b5fd",background:"transparent",color:"#6366f1",fontSize:"0.67rem",padding:"0.25rem",fontWeight:600,cursor:"default"}}>Дэлгэрэнгүй</button>
+                    <button style={{borderRadius:"6px",border:"none",background:"linear-gradient(135deg,#6366f1,#8b5cf6)",color:"white",fontSize:"0.67rem",padding:"0.28rem",fontWeight:600,cursor:"default"}}>📅 Захиалах</button>
                   </div>
                 </div>
               </div>
             </div>
           );
           if(b.type==="qpay") return(
-            <div key={b.id} style={{display:"flex",alignItems:"flex-end",gap:"5px"}}>
+            <div key={b.id} style={{display:"flex",alignItems:"flex-end",gap:"6px"}}>
               <Av/>
-              <div style={{borderRadius:"14px",overflow:"hidden",background:"white",border:"1px solid #bfdbfe",width:"155px"}}>
+              <div style={{borderRadius:"14px",overflow:"hidden",background:"white",border:"1px solid #bfdbfe",width:"155px",boxShadow:"0 4px 16px #2563eb12"}}>
                 <div style={{background:"linear-gradient(135deg,#1d4ed8,#2563eb)",padding:"0.4rem 0.65rem",display:"flex",alignItems:"center",gap:"0.35rem"}}>
                   <div style={{width:"16px",height:"16px",borderRadius:"3px",background:"white",display:"flex",alignItems:"center",justifyContent:"center"}}>
                     <div style={{width:"10px",height:"10px",background:"#1d4ed8",borderRadius:"2px"}}/>
@@ -318,7 +333,7 @@ function ChatWindow({sc,onPaid}:{sc:S;onPaid:()=>void}){
                   </div>
                   <div style={{textAlign:"center"}}>
                     <div style={{fontSize:"0.92rem",fontWeight:800,color:"#1d4ed8"}}>{sc.qpay}</div>
-                    <div style={{fontSize:"0.6rem",color:"#6b7280",marginTop:"1px"}}>{sc.business}</div>
+                    <div style={{fontSize:"0.6rem",color:"#9ca3af",marginTop:"1px"}}>{sc.business}</div>
                   </div>
                 </div>
               </div>
@@ -328,13 +343,14 @@ function ChatWindow({sc,onPaid}:{sc:S;onPaid:()=>void}){
         })}
       </div>
 
-      <div style={{padding:"0.6rem 0.875rem",borderTop:"1px solid var(--border)",display:"flex",alignItems:"center",gap:"0.45rem",background:"var(--surface)"}}>
-        <div style={{display:"flex",gap:"0.45rem",flexShrink:0}}>{["🎤","🖼️"].map(ico=><div key={ico} style={{fontSize:"0.85rem",opacity:0.4}}>{ico}</div>)}</div>
-        <div style={{flex:1,padding:"0.4rem 0.875rem",borderRadius:"100px",background:isTyping?"white":"#f0ede9",border:isTyping?"1.5px solid #a78bfa":"1px solid #e5e2dd",fontSize:"0.76rem",color:inputText?"#374151":"#b0aaa4",transition:"all 0.2s",minHeight:"32px",display:"flex",alignItems:"center"}}>
+      {/* Input bar */}
+      <div style={{padding:"0.65rem 0.875rem",borderTop:"1px solid #f0eef9",display:"flex",alignItems:"center",gap:"0.45rem",background:"white"}}>
+        <div style={{display:"flex",gap:"0.45rem",flexShrink:0}}>{["🎤","🖼️"].map(ico=><div key={ico} style={{fontSize:"0.85rem",opacity:0.35}}>{ico}</div>)}</div>
+        <div style={{flex:1,padding:"0.4rem 0.875rem",borderRadius:"100px",background:isTyping?"white":"#f4f2ef",border:isTyping?"1.5px solid #a78bfa":"1px solid #e8e4de",fontSize:"0.75rem",color:inputText?"#374151":"#b8b2ab",transition:"all 0.2s",minHeight:"32px",display:"flex",alignItems:"center",boxShadow:isTyping?"0 0 0 3px #a78bfa18":"none"}}>
           {inputText||"Aa"}
-          {isTyping&&<span style={{display:"inline-block",width:"1.5px",height:"12px",background:"#8b5cf6",marginLeft:"1px",verticalAlign:"middle",animation:"blink .65s step-end infinite"}}/>}
+          {isTyping&&<span style={{display:"inline-block",width:"1.5px",height:"11px",background:"#8b5cf6",marginLeft:"1px",verticalAlign:"middle",animation:"blink .65s step-end infinite"}}/>}
         </div>
-        <div style={{width:"30px",height:"30px",borderRadius:"50%",flexShrink:0,background:"linear-gradient(135deg,#6366f1,#8b5cf6)",display:"flex",alignItems:"center",justifyContent:"center",boxShadow:"0 2px 8px #6366f128",transform:isSending?"scale(0.88)":"scale(1)",transition:"transform 0.15s"}}>
+        <div style={{width:"30px",height:"30px",borderRadius:"50%",flexShrink:0,background:"linear-gradient(135deg,#6366f1,#8b5cf6)",display:"flex",alignItems:"center",justifyContent:"center",boxShadow:"0 3px 10px #6366f130",transform:isSending?"scale(0.86)":"scale(1)",transition:"transform 0.15s"}}>
           <svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M22 2L11 13M22 2L15 22L11 13M22 2L2 9L11 13" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
         </div>
       </div>
@@ -345,38 +361,56 @@ function ChatWindow({sc,onPaid}:{sc:S;onPaid:()=>void}){
 function StatsPanel({appts,revenue,flash}:{appts:Appt[];revenue:number;flash:string}){
   return(
     <div style={{display:"flex",flexDirection:"column",gap:"1rem"}}>
-      <div style={{borderRadius:"1.25rem",padding:"1.25rem",background:"var(--surface)",border:"1px solid var(--border2)",boxShadow:"0 4px 20px #00000006"}}>
-        <div style={{fontSize:"0.62rem",color:"var(--text-light)",fontWeight:700,textTransform:"uppercase",letterSpacing:"0.08em",marginBottom:"0.5rem"}}>Өнөөдрийн орлого</div>
-        <div style={{position:"relative",marginBottom:"0.3rem"}}>
-          <div style={{fontSize:"1.55rem",fontWeight:800,color:"var(--text)",letterSpacing:"-0.02em",lineHeight:1}}>
-            {revenue.toLocaleString()}₮
-          </div>
-          {flash&&(
-            <div style={{position:"absolute",top:"-2px",right:"0",fontSize:"0.7rem",fontWeight:700,color:"#16a34a",background:"#dcfce7",border:"1px solid #bbf7d0",borderRadius:"100px",padding:"0.15rem 0.5rem",animation:"fadeUp 0.35s ease"}}>
-              ↑ {flash}
+      {/* Revenue card */}
+      <div style={{borderRadius:"1.25rem",overflow:"hidden",background:"var(--surface)",border:"1px solid var(--border2)",boxShadow:"0 4px 20px #00000007"}}>
+        <div style={{height:"3px",background:"linear-gradient(90deg,#6366f1,#8b5cf6,#a78bfa)"}}/>
+        <div style={{padding:"1.2rem 1.25rem"}}>
+          <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:"0.6rem"}}>
+            <div style={{fontSize:"0.6rem",color:"var(--text-light)",fontWeight:700,textTransform:"uppercase",letterSpacing:"0.08em"}}>Өнөөдрийн орлого</div>
+            <div style={{fontSize:"0.59rem",fontWeight:700,color:"#6366f1",background:"#eef2ff",border:"1px solid #c7d2fe",borderRadius:"100px",padding:"0.15rem 0.55rem",whiteSpace:"nowrap"}}>
+              📅 {appts.length} захиалга
             </div>
-          )}
+          </div>
+          <div style={{position:"relative",marginBottom:"0.3rem"}}>
+            <div style={{fontSize:"1.55rem",fontWeight:800,color:"var(--text)",letterSpacing:"-0.02em",lineHeight:1}}>
+              {revenue.toLocaleString()}₮
+            </div>
+            {flash&&(
+              <div style={{position:"absolute",top:"-2px",right:"0",fontSize:"0.7rem",fontWeight:700,color:"#16a34a",background:"#dcfce7",border:"1px solid #bbf7d0",borderRadius:"100px",padding:"0.15rem 0.5rem",animation:"fadeUp 0.35s ease"}}>
+                ↑ {flash}
+              </div>
+            )}
+          </div>
+          <div style={{fontSize:"0.65rem",color:"var(--text-light)",marginBottom:"0.8rem"}}>AI автоматаар захиалга авсан</div>
+          <div style={{height:"3px",borderRadius:"100px",background:"var(--border)",overflow:"hidden"}}>
+            <div style={{height:"100%",width:"72%",borderRadius:"100px",background:"linear-gradient(90deg,#6366f1,#8b5cf6)"}}/>
+          </div>
+          <div style={{fontSize:"0.59rem",color:"var(--text-light)",marginTop:"0.3rem"}}>Сарын зорилтын 72%</div>
         </div>
-        <div style={{fontSize:"0.67rem",color:"var(--text-light)",marginBottom:"0.75rem"}}>AI автоматаар захиалга авсан</div>
-        <div style={{height:"3px",borderRadius:"100px",background:"var(--border)",overflow:"hidden"}}>
-          <div style={{height:"100%",width:"72%",borderRadius:"100px",background:"linear-gradient(90deg,#6366f1,#8b5cf6)"}}/>
-        </div>
-        <div style={{fontSize:"0.6rem",color:"var(--text-light)",marginTop:"0.3rem"}}>Сарын зорилтын 72%</div>
       </div>
 
-      <div style={{borderRadius:"1.25rem",padding:"1.25rem",background:"var(--surface)",border:"1px solid var(--border2)",flex:1}}>
-        <div style={{fontSize:"0.62rem",color:"var(--text-light)",fontWeight:700,textTransform:"uppercase",letterSpacing:"0.08em",marginBottom:"0.75rem"}}>Шинэ захиалгууд</div>
-        <div style={{display:"flex",flexDirection:"column",gap:"0.45rem"}}>
-          {appts.map((a,i)=>(
-            <div key={i} style={{display:"flex",alignItems:"center",gap:"0.55rem",padding:"0.45rem 0.6rem",borderRadius:"0.65rem",background:a.done?"var(--surface2)":"#f0fdf4",border:a.done?"1px solid var(--border)":"1px solid #bbf7d0",animation:!a.done?"slideIn 0.4s ease":"none"}}>
-              <div style={{fontSize:"0.72rem"}}>{a.done?"✅":"🆕"}</div>
-              <div style={{flex:1,minWidth:0}}>
-                <div style={{fontSize:"0.74rem",fontWeight:600,color:"var(--text)",overflow:"hidden",whiteSpace:"nowrap",textOverflow:"ellipsis"}}>{a.name}</div>
-                <div style={{fontSize:"0.63rem",color:"var(--text-light)"}}>{a.detail}</div>
+      {/* Appointments */}
+      <div style={{borderRadius:"1.25rem",padding:"1.2rem 1.25rem",background:"var(--surface)",border:"1px solid var(--border2)",boxShadow:"0 4px 20px #00000007"}}>
+        <div style={{fontSize:"0.6rem",color:"var(--text-light)",fontWeight:700,textTransform:"uppercase",letterSpacing:"0.08em",marginBottom:"0.75rem"}}>Шинэ захиалгууд</div>
+        <div style={{display:"flex",flexDirection:"column",gap:"0.4rem"}}>
+          {appts.map((a,i)=>{
+            const color=AV_COLORS[i%AV_COLORS.length];
+            return(
+              <div key={i} style={{display:"flex",alignItems:"center",gap:"0.5rem",padding:"0.45rem 0.55rem",borderRadius:"0.75rem",background:a.done?"var(--surface2)":"#f0fdf4",border:a.done?"1px solid var(--border)":"1px solid #bbf7d0",animation:!a.done?"slideIn 0.4s ease":"none"}}>
+                <div style={{width:"28px",height:"28px",borderRadius:"50%",background:a.done?color+"12":color+"20",color,fontSize:"0.68rem",fontWeight:800,display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0,border:`1px solid ${color}22`}}>
+                  {a.name.slice(0,1)}
+                </div>
+                <div style={{flex:1,minWidth:0}}>
+                  <div style={{fontSize:"0.73rem",fontWeight:600,color:"var(--text)",overflow:"hidden",whiteSpace:"nowrap",textOverflow:"ellipsis"}}>{a.name}</div>
+                  <div style={{fontSize:"0.62rem",color:"var(--text-light)",overflow:"hidden",whiteSpace:"nowrap",textOverflow:"ellipsis"}}>{a.detail}</div>
+                </div>
+                <div style={{display:"flex",flexDirection:"column",alignItems:"flex-end",gap:"3px",flexShrink:0}}>
+                  <div style={{fontSize:"0.62rem",fontWeight:600,color:a.done?"var(--text-light)":"#16a34a"}}>{a.time}</div>
+                  {!a.done&&<div style={{width:"6px",height:"6px",borderRadius:"50%",background:"#16a34a"}}/>}
+                </div>
               </div>
-              <div style={{fontSize:"0.63rem",fontWeight:600,color:a.done?"var(--text-light)":"#16a34a",whiteSpace:"nowrap"}}>{a.time}</div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </div>
@@ -399,7 +433,8 @@ export default function AIChatDemo(){
 
   const handlePaid=useCallback(()=>{
     const s=SC[activeIdx];
-    setAppts(prev=>[...prev,{...s.newAppt,done:false}]);
+    // replace instead of append — prevents duplicate entries on loop restart
+    setAppts([...s.baseAppts,{...s.newAppt,done:false}]);
     const start=s.baseRev;
     const end=s.baseRev+s.addRev;
     const dur=1800;const t0=performance.now();
@@ -427,21 +462,24 @@ export default function AIChatDemo(){
         </div>
 
         {/* Tabs */}
-        <div style={{display:"flex",justifyContent:"center",gap:"0.5rem",marginBottom:"2rem",flexWrap:"wrap"}}>
+        <div style={{display:"flex",justifyContent:"center",gap:"0.4rem",marginBottom:"2rem",flexWrap:"wrap"}}>
           {SC.map((s,i)=>(
-            <button key={s.id} onClick={()=>setActiveIdx(i)} style={{display:"flex",alignItems:"center",gap:"0.4rem",padding:"0.5rem 1rem",borderRadius:"100px",fontSize:"0.8rem",fontWeight:600,cursor:"pointer",transition:"all 0.2s",
-              background:i===activeIdx?"linear-gradient(135deg,#6366f1,#8b5cf6)":"var(--surface2)",
+            <button key={s.id} onClick={()=>setActiveIdx(i)} style={{
+              display:"flex",alignItems:"center",gap:"0.35rem",
+              padding:"0.42rem 0.9rem",borderRadius:"100px",
+              fontSize:"0.76rem",fontWeight:600,cursor:"pointer",transition:"all 0.2s",
+              background:i===activeIdx?"linear-gradient(135deg,#6366f1,#8b5cf6)":"white",
               color:i===activeIdx?"white":"var(--text-mid)",
               border:i===activeIdx?"none":"1px solid var(--border2)",
-              boxShadow:i===activeIdx?"0 4px 14px #6366f130":"none",
+              boxShadow:i===activeIdx?"0 4px 14px #6366f135":"0 1px 3px #0000000a",
             }}>
-              <span>{s.icon}</span>{s.label}
+              <span style={{fontSize:"0.9rem"}}>{s.icon}</span>{s.label}
             </button>
           ))}
         </div>
 
         {/* Grid: chat + stats */}
-        <div style={{display:"grid",gridTemplateColumns:"1fr 0.6fr",gap:"1.5rem",alignItems:"start"}}>
+        <div style={{display:"grid",gridTemplateColumns:"1fr 0.58fr",gap:"1.5rem",alignItems:"start"}}>
           <ChatWindow key={activeIdx} sc={sc} onPaid={handlePaid}/>
           <StatsPanel appts={appts} revenue={revenue} flash={flash}/>
         </div>
