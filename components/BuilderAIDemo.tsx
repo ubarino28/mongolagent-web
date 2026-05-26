@@ -39,9 +39,11 @@ export default function BuilderAIDemo() {
   const [qIndex, setQIndex] = useState(0);
   const [charIndex, setCharIndex] = useState(0);
   const bottomRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+    const container = containerRef.current;
+    if (container) container.scrollTop = container.scrollHeight;
   }, [bubbles]);
 
   useEffect(() => {
@@ -173,7 +175,7 @@ export default function BuilderAIDemo() {
             </div>
 
             {/* Messages */}
-            <div style={{
+            <div ref={containerRef} style={{
               height: "300px", overflowY: "auto", padding: "1.25rem",
               display: "flex", flexDirection: "column", gap: "0.875rem",
               scrollbarWidth: "thin", scrollbarColor: "var(--border2) transparent",
@@ -207,7 +209,6 @@ export default function BuilderAIDemo() {
                   </div>
                 </div>
               ))}
-              <div ref={bottomRef} />
             </div>
 
             {/* Footer */}
