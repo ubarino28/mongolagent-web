@@ -24,10 +24,8 @@
 html { scroll-behavior: smooth; }
 
 body {
-  background-color: var(--bg);
-  background-image:
-    linear-gradient(#e2e1dd 1px, transparent 1px),
-    linear-gradient(90deg, #e2e1dd 1px, transparent 1px);
+  background-color: #f2f1ed;
+  background-image: radial-gradient(circle, #c8c6c0 1.5px, transparent 1.5px);
   background-size: 40px 40px;
   color: var(--text);
   font-family: var(--font-sans, system-ui, sans-serif);
