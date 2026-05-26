@@ -12,7 +12,7 @@ const QA = [
   { q: "AI ажилтандаа ямар нэр, дүр өгмөөр байна вэ?", a: '"Lumi" нэртэй, эелдэг, мэргэжлийн залуу эмэгтэй дүртэй байна уу.' },
 ];
 
-type Phase = "thinking" | "typing-q" | "typing-a" | "done";
+type Phase = "thinking" | "typing-q" | "typing-a" | "sending" | "done";
 
 interface Bubble {
   type: "q" | "a" | "thinking" | "done";
@@ -22,9 +22,10 @@ interface Bubble {
 }
 
 const PAUSE_AFTER_Q = 700;
-const PAUSE_AFTER_A = 1000;
+const PAUSE_AFTER_A = 900;
 const THINKING_DURATION = 950;
 const DONE_DISPLAY = 5500;
+const ENTER_PAUSE = 320;
 
 function randSpeed(min: number, max: number) {
   return min + Math.floor(Math.random() * (max - min));
@@ -45,6 +46,7 @@ const AIAvatar = () => (
 
 export default function BuilderAIDemo() {
   const [bubbles, setBubbles] = useState<Bubble[]>([]);
+  const [inputText, setInputText] = useState("");
   const [phase, setPhase] = useState<Phase>("thinking");
   const [qIndex, setQIndex] = useState(0);
   const [charIndex, setCharIndex] = useState(0);
@@ -98,7 +100,7 @@ export default function BuilderAIDemo() {
       } else {
         setBubbles(prev => {
           const next = [...prev];
-          next[next.length - 1] = { ...next[next.length - 1], text: current.q, partial: false };
+          next[next.length - 1] = { ...next[next.length - 1], partial: false };
           return next;
         });
         const t = setTimeout(() => { setPhase("typing-a"); setCharIndex(0); }, PAUSE_AFTER_Q);
@@ -106,45 +108,48 @@ export default function BuilderAIDemo() {
       }
     }
 
+    // Type answer into input field
     if (phase === "typing-a") {
       if (charIndex < current.a.length) {
         const t = setTimeout(() => {
-          setBubbles(prev => {
-            const next = [...prev];
-            const last = next[next.length - 1];
-            if (!last || last.type !== "a" || !last.partial) {
-              next.push({ type: "a", text: current.a.slice(0, charIndex + 1), partial: true });
-            } else {
-              next[next.length - 1] = { ...last, text: current.a.slice(0, charIndex + 1) };
-            }
-            return next;
-          });
+          setInputText(current.a.slice(0, charIndex + 1));
           setCharIndex(c => c + 1);
         }, randSpeed(16, 38));
         return () => clearTimeout(t);
       } else {
-        setBubbles(prev => {
-          const next = [...prev];
-          next[next.length - 1] = { ...next[next.length - 1], text: current.a, partial: false };
-          return next;
-        });
-        const nextQ = qIndex + 1;
-        if (nextQ < QA.length) {
-          const t = setTimeout(() => { setQIndex(nextQ); setPhase("thinking"); setCharIndex(0); }, PAUSE_AFTER_A);
-          return () => clearTimeout(t);
-        } else {
-          const t = setTimeout(() => {
-            setBubbles(prev => [...prev, { type: "done", text: "" }]);
-            setPhase("done");
-          }, 600);
-          return () => clearTimeout(t);
-        }
+        // Pause like user is about to press enter, then send
+        const t = setTimeout(() => {
+          setInputText("");
+          setPhase("sending");
+        }, ENTER_PAUSE);
+        return () => clearTimeout(t);
+      }
+    }
+
+    // "Enter pressed" — add bubble, move to next question
+    if (phase === "sending") {
+      setBubbles(prev => {
+        const last = prev[prev.length - 1];
+        if (last?.type === "a" && last.text === current.a) return prev;
+        return [...prev, { type: "a", text: current.a, partial: false }];
+      });
+      const nextQ = qIndex + 1;
+      if (nextQ < QA.length) {
+        const t = setTimeout(() => { setQIndex(nextQ); setPhase("thinking"); setCharIndex(0); }, PAUSE_AFTER_A);
+        return () => clearTimeout(t);
+      } else {
+        const t = setTimeout(() => {
+          setBubbles(prev => [...prev, { type: "done", text: "" }]);
+          setPhase("done");
+        }, 600);
+        return () => clearTimeout(t);
       }
     }
 
     if (phase === "done") {
       const t = setTimeout(() => {
         setBubbles([]);
+        setInputText("");
         setQIndex(0);
         setPhase("thinking");
         setCharIndex(0);
@@ -156,7 +161,10 @@ export default function BuilderAIDemo() {
 
   const progressPct = phase === "done"
     ? 100
-    : (qIndex / QA.length) * 100 + (phase === "typing-a" ? (1 / QA.length) * 50 : 0);
+    : (qIndex / QA.length) * 100 + (phase === "typing-a" || phase === "sending" ? (1 / QA.length) * 50 : 0);
+
+  const isTypingInput = phase === "typing-a";
+  const isSending = phase === "sending";
 
   return (
     <section data-animate style={{ padding: "7rem 0" }}>
@@ -217,28 +225,17 @@ export default function BuilderAIDemo() {
                 </div>
               </div>
               {phase === "done" ? (
-                <div style={{
-                  fontSize: "0.65rem", color: "#15803d", fontWeight: 700,
-                  background: "#dcfce7", border: "1px solid #bbf7d0",
-                  padding: "0.25rem 0.65rem", borderRadius: "100px",
-                }}>✓ Дууслаа</div>
+                <div style={{ fontSize: "0.65rem", color: "#15803d", fontWeight: 700, background: "#dcfce7", border: "1px solid #bbf7d0", padding: "0.25rem 0.65rem", borderRadius: "100px" }}>✓ Дууслаа</div>
               ) : (
-                <div style={{
-                  fontSize: "0.65rem", color: "var(--text-light)", fontWeight: 600,
-                  background: "var(--surface2)", border: "1px solid var(--border)",
-                  padding: "0.25rem 0.65rem", borderRadius: "100px",
-                }}>{qIndex + 1} / {QA.length} асуулт</div>
+                <div style={{ fontSize: "0.65rem", color: "var(--text-light)", fontWeight: 600, background: "var(--surface2)", border: "1px solid var(--border)", padding: "0.25rem 0.65rem", borderRadius: "100px" }}>{qIndex + 1} / {QA.length} асуулт</div>
               )}
             </div>
 
             {/* Progress bar */}
             <div style={{ height: "2px", background: "var(--border)" }}>
               <div style={{
-                height: "100%",
-                width: `${progressPct}%`,
-                background: phase === "done"
-                  ? "linear-gradient(90deg, #10b981, #34d399)"
-                  : "linear-gradient(90deg, #6366f1, #8b5cf6)",
+                height: "100%", width: `${progressPct}%`,
+                background: phase === "done" ? "linear-gradient(90deg, #10b981, #34d399)" : "linear-gradient(90deg, #6366f1, #8b5cf6)",
                 transition: "width 0.5s ease, background 0.6s ease",
               }} />
             </div>
@@ -248,7 +245,7 @@ export default function BuilderAIDemo() {
               ref={containerRef}
               onScroll={handleScroll}
               style={{
-                height: "360px", overflowY: "auto", padding: "1rem",
+                height: "340px", overflowY: "auto", padding: "1rem",
                 display: "flex", flexDirection: "column", gap: "0.55rem",
                 background: "#f9f8f6",
                 scrollbarWidth: "thin", scrollbarColor: "var(--border2) transparent",
@@ -266,7 +263,7 @@ export default function BuilderAIDemo() {
                     }}>
                       {[0, 1, 2].map(d => (
                         <span key={d} style={{
-                          width: "6px", height: "6px", borderRadius: "50%", background: "#6366f1",
+                          width: "5px", height: "5px", borderRadius: "50%", background: "#6366f1",
                           display: "inline-block",
                           animation: `tdot 1.2s ease-in-out ${d * 0.18}s infinite`,
                         }} />
@@ -315,13 +312,6 @@ export default function BuilderAIDemo() {
                       boxShadow: "0 2px 12px #6366f128",
                     }}>
                       {b.text}
-                      {b.partial && (
-                        <span style={{
-                          display: "inline-block", width: "2px", height: "12px",
-                          background: "rgba(255,255,255,0.85)", marginLeft: "2px", verticalAlign: "middle",
-                          animation: "blink 0.65s step-end infinite",
-                        }} />
-                      )}
                     </div>
                   </div>
                 );
@@ -351,7 +341,7 @@ export default function BuilderAIDemo() {
               })}
             </div>
 
-            {/* Footer */}
+            {/* Footer — input field shows typing when phase=typing-a */}
             <div style={{
               padding: "0.7rem 0.875rem",
               borderTop: "1px solid var(--border)",
@@ -360,16 +350,31 @@ export default function BuilderAIDemo() {
             }}>
               <div style={{
                 flex: 1, padding: "0.5rem 1rem", borderRadius: "100px",
-                background: "#f5f4f0", border: "1px solid #e5e3df",
-                fontSize: "0.78rem", color: "#9ca3af",
+                background: isTypingInput ? "white" : "#f5f4f0",
+                border: isTypingInput ? "1.5px solid #6366f145" : "1px solid #e5e3df",
+                fontSize: "0.78rem",
+                color: inputText ? "#374151" : "#b0aaa4",
+                transition: "border-color 0.2s, background 0.2s",
+                minHeight: "36px", display: "flex", alignItems: "center",
               }}>
-                Хариултаа бичнэ үү...
+                {inputText || "Хариултаа бичнэ үү..."}
+                {isTypingInput && (
+                  <span style={{
+                    display: "inline-block", width: "1.5px", height: "13px",
+                    background: "#6366f1", marginLeft: "1px", verticalAlign: "middle",
+                    animation: "blink 0.65s step-end infinite",
+                  }} />
+                )}
               </div>
               <div style={{
                 width: "34px", height: "34px", borderRadius: "50%", flexShrink: 0,
-                background: "linear-gradient(135deg, #6366f1, #8b5cf6)",
+                background: isSending
+                  ? "linear-gradient(135deg, #4f46e5, #7c3aed)"
+                  : "linear-gradient(135deg, #6366f1, #8b5cf6)",
                 display: "flex", alignItems: "center", justifyContent: "center",
-                boxShadow: "0 2px 10px #6366f130",
+                boxShadow: isSending ? "0 2px 16px #6366f150" : "0 2px 10px #6366f130",
+                transition: "box-shadow 0.15s, background 0.15s",
+                transform: isSending ? "scale(0.93)" : "scale(1)",
               }}>
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none">
                   <path d="M22 2L11 13M22 2L15 22L11 13M22 2L2 9L11 13" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
