@@ -398,11 +398,11 @@ export default function HomePage() {
       {/* ─── BUILDER AI DEMO ──────────────────────────────── */}
       <BuilderAIDemo />
 
-      {/* ─── PRICING ──────────────────────────────────────── */}
-      <PricingSection />
-
       {/* ─── AI CHAT DEMO ─────────────────────────────────── */}
       <AIChatDemo />
+
+      {/* ─── PRICING ──────────────────────────────────────── */}
+      <PricingSection />
 
       {/* ─── SERVICES ─────────────────────────────────────── */}
       <section id="services" data-animate style={{ padding: "7rem 0" }}>
