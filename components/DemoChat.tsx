@@ -242,9 +242,9 @@ export default function DemoChat() {
             {/* AI info card */}
             <div style={{
               borderRadius: "1.25rem", padding: "1.5rem",
-              background: "linear-gradient(160deg, #13132a, #0d0d1f)",
-              border: "1px solid #6366f130",
-              boxShadow: "0 0 40px #6366f110",
+              background: "var(--surface2)",
+              border: "1px solid var(--border2)",
+              boxShadow: "0 0 40px #6366f108",
             }}>
               <div style={{ fontSize: "0.72rem", textTransform: "uppercase", letterSpacing: "0.1em", color: "var(--text-light)", marginBottom: "1rem" }}>
                 AI боломжууд
