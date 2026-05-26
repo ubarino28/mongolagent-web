@@ -66,6 +66,29 @@ const SC: S[] = [
     newAppt:{name:"Болд",detail:"7 хүн · 20:00",time:"20:00"},
   },
   {
+    id:"fitness", icon:"💪", label:"Фитнес клуб",
+    business:"FitZone Club", avBg:"linear-gradient(135deg,#34d399,#059669)", avTxt:"F",
+    msgs:[
+      {from:"user",type:"text",text:"Сайн уу! Сарын гишүүнчлэл хэд вэ?"},
+      {from:"ai",  type:"text",text:"Сайн байна уу! Манайд дараах subscription байна:"},
+      {from:"ai",  type:"card"},
+      {from:"user",type:"text",text:"Авъя! Яаж бүртгүүлэх вэ?"},
+      {from:"ai",  type:"text",text:"Нэр болон утасны дугаараа хэлнэ үү?"},
+      {from:"user",type:"text",text:"Дэлгэр, 99445566"},
+      {from:"ai",  type:"text",text:"89,000₮ QPay-ээр төлнө үү 👇"},
+      {from:"ai",  type:"qpay"},
+      {from:"user",type:"text",text:"Төлсөн!"},
+      {from:"ai",  type:"text",text:"✅ Гишүүнчлэл идэвхжлээ! Маргаашаас ирж болно 💪"},
+    ],
+    card:{emoji:"💪",title:"Сарын гишүүнчлэл",price:"89,000₮/сар",tag:"Хамгийн алдартай",tagColor:"#059669"},
+    qpay:"89,000₮", baseRev:3540000, addRev:89000,
+    baseAppts:[
+      {name:"Мөнхбаяр",detail:"Сарын гишүүнчлэл",time:"өчигдөр",done:true},
+      {name:"Цэцэг",detail:"Сарын гишүүнчлэл",time:"өнөөдөр",done:true},
+    ],
+    newAppt:{name:"Дэлгэр",detail:"Сарын гишүүнчлэл",time:"одоо"},
+  },
+  {
     id:"shop", icon:"👗", label:"Хувцасны дэлгүүр",
     business:"Zaya Fashion", avBg:"linear-gradient(135deg,#67e8f9,#0891b2)", avTxt:"Z",
     msgs:[
