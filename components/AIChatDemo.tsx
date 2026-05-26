@@ -8,10 +8,12 @@ const MSGS = [
   { from: "user", type: "text",  text: "Авъя! Маргааш 14:00 цагт боломжтой юу?" },
   { from: "ai",   type: "text",  text: "Тийм ээ, маргааш 14:00 чөлөөтэй байна 😊 Нэрээ хэлнэ үү?" },
   { from: "user", type: "text",  text: "Оюунаа" },
-  { from: "ai",   type: "text",  text: "Баярлалаа, Оюунаа! 10,000₮ урьдчилгаа QPay-ээр төлнө үү 👇" },
+  { from: "ai",   type: "text",  text: "Баярлалаа! Утасны дугаараа хэлнэ үү?" },
+  { from: "user", type: "text",  text: "99001234" },
+  { from: "ai",   type: "text",  text: "Оюунаа, 10,000₮ урьдчилгаа QPay-ээр төлнө үү 👇" },
   { from: "ai",   type: "qpay" },
   { from: "user", type: "text",  text: "Төлсөн!" },
-  { from: "ai",   type: "text",  text: "✅ Маргааш 14:00д тан руу хүлээж байна! 💜" },
+  { from: "ai",   type: "text",  text: "✅ Маргааш 14:00д таныг хүлээж байна! 💜" },
 ] as const;
 
 type MsgType = typeof MSGS[number]["type"];
