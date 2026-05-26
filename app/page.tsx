@@ -293,77 +293,8 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* ─── SERVICES ─────────────────────────────────────── */}
-      <section id="services" data-animate style={{ padding: "7rem 0", background: "var(--surface)" }}>
-        <div style={wrap}>
-          <div style={{ textAlign: "center", marginBottom: "4rem" }}>
-            <div className="section-tag" style={{ display: "inline-flex", marginBottom: "1rem" }}>Үйлчилгээ</div>
-            <h2 style={{ fontSize: "clamp(1.7rem, 3.5vw, 2.6rem)", fontWeight: 800, letterSpacing: "-0.02em", marginBottom: "1rem" }}>
-              Бизнесийн хэрэгцээнд тохирсон<br />
-              <span className="gradient-text">AI шийдлүүд</span>
-            </h2>
-            <p style={{ color: "var(--text-mid)", maxWidth: "440px", margin: "0 auto", fontSize: "0.92rem" }}>
-              Нэг платформоос — борлуулалт, харилцагч, лид, автоматжуулалт бүгд нэг дор.
-            </p>
-          </div>
-
-          <div className="services-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1.5rem" }}>
-            {SERVICES.map(s => (
-              <div key={s.title} className="card-glow" style={{
-                position: "relative", overflow: "hidden", borderRadius: "1.25rem",
-                background: "var(--surface2)", border: "1px solid var(--border2)",
-                padding: "2rem",
-              }}>
-                {/* Top corner glow */}
-                <div style={{ position: "absolute", top: 0, right: 0, width: "160px", height: "160px", borderRadius: "50%", background: `radial-gradient(circle, ${s.color}15, transparent 70%)`, transform: "translate(40%, -40%)", pointerEvents: "none" }} />
-
-                {/* Icon + Tag row */}
-                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "1.5rem" }}>
-                  <div style={{
-                    width: "48px", height: "48px", borderRadius: "12px", display: "flex", alignItems: "center", justifyContent: "center",
-                    background: `${s.color}15`, border: `1px solid ${s.color}25`, flexShrink: 0,
-                    color: s.color,
-                  }}>
-                    {s.icon}
-                  </div>
-                  <div className="section-tag" style={{ display: "inline-flex", background: `${s.color}12`, borderColor: `${s.color}28`, color: s.color, fontSize: "0.65rem" }}>
-                    {s.tag}
-                  </div>
-                </div>
-
-                {/* Title + desc */}
-                <h3 style={{ fontSize: "1.15rem", fontWeight: 700, letterSpacing: "-0.01em", marginBottom: "0.65rem" }}>{s.title}</h3>
-                <p style={{ color: "var(--text-mid)", fontSize: "0.84rem", lineHeight: 1.65, marginBottom: "1.25rem" }}>{s.desc}</p>
-
-                {/* Divider */}
-                <div style={{ height: "1px", background: "var(--border)", marginBottom: "1.25rem" }} />
-
-                {/* Features */}
-                <div style={{ display: "flex", flexDirection: "column", gap: "0.45rem", marginBottom: "1.5rem" }}>
-                  {s.items.map(item => (
-                    <div key={item} className="check-item">{item}</div>
-                  ))}
-                </div>
-
-                {/* Result badge */}
-                <div style={{ borderRadius: "0.65rem", padding: "0.7rem 1rem", background: `${s.color}08`, border: `1px solid ${s.color}25`, display: "flex", alignItems: "center", gap: "0.5rem" }}>
-                  <div style={{ width: "6px", height: "6px", borderRadius: "50%", background: s.color, flexShrink: 0 }} />
-                  <p style={{ fontSize: "0.78rem", color: s.color, fontWeight: 500, lineHeight: 1.4 }}>{s.result}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ─── PRICING ──────────────────────────────────────── */}
-      <PricingSection />
-
-      {/* ─── DEMO CHAT ────────────────────────────────────── */}
-      <DemoChat />
-
       {/* ─── WHY US ───────────────────────────────────────── */}
-      <section data-animate style={{ padding: "7rem 0" }}>
+      <section data-animate style={{ padding: "7rem 0", background: "var(--surface)" }}>
         <div style={wrap}>
           <div style={{ textAlign: "center", marginBottom: "3.5rem" }}>
             <div className="section-tag" style={{ display: "inline-flex", marginBottom: "1rem" }}>Яагаад биднийг сонгох вэ?</div>
@@ -417,7 +348,7 @@ export default function HomePage() {
             ].map(f => (
               <div key={f.title} style={{
                 borderRadius: "1.25rem", padding: "1.75rem",
-                background: "var(--surface)", border: "1px solid var(--border)",
+                background: "var(--surface2)", border: "1px solid var(--border2)",
                 display: "flex", flexDirection: "column", gap: "0.75rem",
                 transition: "border-color 0.2s, box-shadow 0.2s",
               }}>
@@ -445,6 +376,69 @@ export default function HomePage() {
                 <p style={{ fontSize: "0.82rem", color: "var(--text-mid)", lineHeight: 1.7 }}>
                   {f.desc}
                 </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ─── PRICING ──────────────────────────────────────── */}
+      <PricingSection />
+
+      {/* ─── DEMO CHAT ────────────────────────────────────── */}
+      <DemoChat />
+
+      {/* ─── SERVICES ─────────────────────────────────────── */}
+      <section id="services" data-animate style={{ padding: "7rem 0" }}>
+        <div style={wrap}>
+          <div style={{ textAlign: "center", marginBottom: "4rem" }}>
+            <div className="section-tag" style={{ display: "inline-flex", marginBottom: "1rem" }}>Үйлчилгээ</div>
+            <h2 style={{ fontSize: "clamp(1.7rem, 3.5vw, 2.6rem)", fontWeight: 800, letterSpacing: "-0.02em", marginBottom: "1rem" }}>
+              Бизнесийн хэрэгцээнд тохирсон<br />
+              <span className="gradient-text">AI шийдлүүд</span>
+            </h2>
+            <p style={{ color: "var(--text-mid)", maxWidth: "440px", margin: "0 auto", fontSize: "0.92rem" }}>
+              Нэг платформоос — борлуулалт, харилцагч, лид, автоматжуулалт бүгд нэг дор.
+            </p>
+          </div>
+
+          <div className="services-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1.5rem" }}>
+            {SERVICES.map(s => (
+              <div key={s.title} className="card-glow" style={{
+                position: "relative", overflow: "hidden", borderRadius: "1.25rem",
+                background: "var(--surface2)", border: "1px solid var(--border2)",
+                padding: "2rem",
+              }}>
+                <div style={{ position: "absolute", top: 0, right: 0, width: "160px", height: "160px", borderRadius: "50%", background: `radial-gradient(circle, ${s.color}15, transparent 70%)`, transform: "translate(40%, -40%)", pointerEvents: "none" }} />
+
+                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "1.5rem" }}>
+                  <div style={{
+                    width: "48px", height: "48px", borderRadius: "12px", display: "flex", alignItems: "center", justifyContent: "center",
+                    background: `${s.color}15`, border: `1px solid ${s.color}25`, flexShrink: 0,
+                    color: s.color,
+                  }}>
+                    {s.icon}
+                  </div>
+                  <div className="section-tag" style={{ display: "inline-flex", background: `${s.color}12`, borderColor: `${s.color}28`, color: s.color, fontSize: "0.65rem" }}>
+                    {s.tag}
+                  </div>
+                </div>
+
+                <h3 style={{ fontSize: "1.15rem", fontWeight: 700, letterSpacing: "-0.01em", marginBottom: "0.65rem" }}>{s.title}</h3>
+                <p style={{ color: "var(--text-mid)", fontSize: "0.84rem", lineHeight: 1.65, marginBottom: "1.25rem" }}>{s.desc}</p>
+
+                <div style={{ height: "1px", background: "var(--border)", marginBottom: "1.25rem" }} />
+
+                <div style={{ display: "flex", flexDirection: "column", gap: "0.45rem", marginBottom: "1.5rem" }}>
+                  {s.items.map(item => (
+                    <div key={item} className="check-item">{item}</div>
+                  ))}
+                </div>
+
+                <div style={{ borderRadius: "0.65rem", padding: "0.7rem 1rem", background: `${s.color}08`, border: `1px solid ${s.color}25`, display: "flex", alignItems: "center", gap: "0.5rem" }}>
+                  <div style={{ width: "6px", height: "6px", borderRadius: "50%", background: s.color, flexShrink: 0 }} />
+                  <p style={{ fontSize: "0.78rem", color: s.color, fontWeight: 500, lineHeight: 1.4 }}>{s.result}</p>
+                </div>
               </div>
             ))}
           </div>
