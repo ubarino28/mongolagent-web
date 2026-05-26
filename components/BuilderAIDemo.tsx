@@ -39,7 +39,7 @@ const AIAvatar = () => (
     alignSelf: "flex-end", overflow: "hidden",
   }}>
     {/* eslint-disable-next-line @next/next/no-img-element */}
-    <img src="/mascot.png" alt="AI" style={{ width: "22px", height: "22px", objectFit: "contain" }} />
+    <img src="/logo-profile.png" alt="AI" style={{ width: "22px", height: "22px", objectFit: "contain" }} />
   </div>
 );
 
@@ -206,7 +206,7 @@ export default function BuilderAIDemo() {
                   overflow: "hidden",
                 }}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src="/mascot.png" alt="Builder AI" style={{ width: "28px", height: "28px", objectFit: "contain" }} />
+                  <img src="/logo-profile.png" alt="Builder AI" style={{ width: "28px", height: "28px", objectFit: "contain" }} />
                 </div>
                 <div>
                   <div style={{ fontSize: "0.8rem", fontWeight: 700, color: "var(--text)", lineHeight: 1.1 }}>Builder AI</div>
