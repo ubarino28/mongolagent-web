@@ -1,6 +1,7 @@
 import Link from "next/link";
 import PricingSection from "@/components/PricingSection";
 import DemoChat from "@/components/DemoChat";
+import BuilderAIDemo from "@/components/BuilderAIDemo";
 
 const IconChat = () => (
   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
@@ -393,6 +394,9 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* ─── BUILDER AI DEMO ──────────────────────────────── */}
+      <BuilderAIDemo />
 
       {/* ─── PRICING ──────────────────────────────────────── */}
       <PricingSection />
