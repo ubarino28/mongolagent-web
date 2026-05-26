@@ -5,7 +5,7 @@ import Link from "next/link";
 interface ModalFeature { title: string; desc: string; }
 interface Plan {
   name: string; price: string; period: string; desc: string;
-  features: string[]; highlight: boolean; badge?: string;
+  features: string[]; highlight: boolean; badge?: string; includesAll?: string;
   modal: { features: ModalFeature[]; target: string; caseStudy: string; };
 }
 
@@ -49,8 +49,8 @@ const PLANS: Plan[] = [
       "+1 → DM автоматжуулалт",
       "Хүний handoff систем",
       "Telegram & Email мэдэгдэл",
-      "+ Starter бүгд",
     ],
+    includesAll: "+ Starter бүгд",
     highlight: true,
     modal: {
       features: [
@@ -77,8 +77,8 @@ const PLANS: Plan[] = [
       "Мэдлэгийн сан хязгааргүй",
       "Funnel & дэвшилтэт analytics",
       "Telegram дэмжлэг",
-      "+ Growth бүгд",
     ],
+    includesAll: "+ Growth бүгд",
     highlight: false,
     modal: {
       features: [
@@ -103,8 +103,8 @@ const PLANS: Plan[] = [
       "Custom Website хөгжүүлэлт",
       "White label (өөрийн брэнд)",
       "Олон хуудас (3+) + API",
-      "+ Business бүгд",
     ],
+    includesAll: "+ Business бүгд",
     highlight: false,
     modal: {
       features: [
@@ -188,7 +188,7 @@ export default function PricingSection() {
 
                 <div style={{ height: "1px", background: plan.highlight ? "#6366f125" : "var(--border)", marginBottom: "1rem" }} />
 
-                <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: "0.5rem", marginBottom: "1.25rem" }}>
+                <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: "0.5rem", marginBottom: plan.includesAll ? "0.75rem" : "1.25rem" }}>
                   {plan.features.map(f => (
                     <div key={f} style={{ display: "flex", alignItems: "flex-start", gap: "0.5rem", fontSize: "0.78rem", color: plan.highlight ? "rgba(255,255,255,0.7)" : "var(--text-light)" }}>
                       <span style={{ color: plan.highlight ? "#818cf8" : "#6366f1", flexShrink: 0, marginTop: "0.05rem" }}>✓</span>
@@ -196,6 +196,22 @@ export default function PricingSection() {
                     </div>
                   ))}
                 </div>
+
+                {plan.includesAll && (
+                  <div style={{
+                    marginBottom: "1.25rem",
+                    padding: "0.45rem 0.75rem",
+                    borderRadius: "0.5rem",
+                    background: plan.highlight ? "#6366f118" : "var(--surface3)",
+                    border: `1px solid ${plan.highlight ? "#6366f135" : "var(--border)"}`,
+                    fontSize: "0.72rem", fontWeight: 600,
+                    color: plan.highlight ? "#818cf8" : "var(--text-mid)",
+                    letterSpacing: "0.01em",
+                    textAlign: "center",
+                  }}>
+                    {plan.includesAll}
+                  </div>
+                )}
 
                 <button
                   onClick={() => setActiveModal(plan.name)}
