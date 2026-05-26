@@ -47,7 +47,7 @@ export default function AboutPage() {
   return (
     <>
       {/* ── HERO ── */}
-      <section style={{ padding: "6rem 0 5rem", background: "var(--surface)" }}>
+      <section style={{ padding: "6rem 0 5rem" }}>
         <div style={{ ...wrap3, textAlign: "center" }}>
           <div className="section-tag" style={{ display: "inline-flex", marginBottom: "1.25rem" }}>
             Бидний тухай
@@ -71,7 +71,7 @@ export default function AboutPage() {
       </section>
 
       {/* ── STATS ── */}
-      <section style={{ padding: "3rem 0", background: "var(--surface)" }}>
+      <section style={{ padding: "3rem 0" }}>
         <div style={wrap}>
           <div style={{
             display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "1rem",
@@ -95,7 +95,7 @@ export default function AboutPage() {
       </section>
 
       {/* ── MISSION ── */}
-      <section style={{ padding: "6rem 0", background: "var(--surface)" }}>
+      <section style={{ padding: "6rem 0" }}>
         <div style={wrap}>
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "4rem", alignItems: "center" }}>
             <div>
@@ -143,7 +143,7 @@ export default function AboutPage() {
       </section>
 
       {/* ── VALUES ── */}
-      <section style={{ padding: "6rem 0", background: "var(--surface)" }}>
+      <section style={{ padding: "6rem 0" }}>
         <div style={wrap5}>
           <div style={{ textAlign: "center", marginBottom: "3rem" }}>
             <div className="section-tag" style={{ display: "inline-flex", marginBottom: "1rem" }}>Манай үнэт зүйлс</div>
@@ -181,7 +181,7 @@ export default function AboutPage() {
       </section>
 
       {/* ── CASE STUDY ── */}
-      <section style={{ padding: "6rem 0", background: "var(--surface)" }}>
+      <section style={{ padding: "6rem 0" }}>
         <div style={wrap5}>
           <div style={{ textAlign: "center", marginBottom: "3rem" }}>
             <div className="section-tag" style={{ display: "inline-flex", marginBottom: "1rem" }}>Жишээ бүтээл</div>
@@ -239,7 +239,7 @@ export default function AboutPage() {
       </section>
 
       {/* ── TECH STACK ── */}
-      <section style={{ padding: "5rem 0", background: "var(--surface)" }}>
+      <section style={{ padding: "5rem 0" }}>
         <div style={wrap5}>
           <div style={{ textAlign: "center", marginBottom: "2rem" }}>
             <div className="section-tag" style={{ display: "inline-flex", marginBottom: "0.75rem" }}>Технологи</div>
@@ -263,7 +263,7 @@ export default function AboutPage() {
       </section>
 
       {/* ── CTA ── */}
-      <section style={{ padding: "5rem 0 6rem", background: "var(--surface)" }}>
+      <section style={{ padding: "5rem 0 6rem" }}>
         <div style={wrap3}>
           <div style={{
             position: "relative", borderRadius: "1.5rem", overflow: "hidden",
