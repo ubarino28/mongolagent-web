@@ -33,11 +33,14 @@ function randSpeed(min: number, max: number) {
 const AIAvatar = () => (
   <div style={{
     width: "26px", height: "26px", borderRadius: "8px", flexShrink: 0,
-    background: "linear-gradient(135deg, #6366f1, #8b5cf6)",
+    background: "linear-gradient(135deg, #6366f118, #8b5cf618)",
+    border: "1px solid #6366f122",
     display: "flex", alignItems: "center", justifyContent: "center",
-    fontSize: "0.6rem", color: "white", fontWeight: 800,
-    alignSelf: "flex-end", boxShadow: "0 2px 8px #6366f130",
-  }}>B</div>
+    alignSelf: "flex-end", overflow: "hidden",
+  }}>
+    {/* eslint-disable-next-line @next/next/no-img-element */}
+    <img src="/mascot.png" alt="AI" style={{ width: "22px", height: "22px", objectFit: "contain" }} />
+  </div>
 );
 
 export default function BuilderAIDemo() {
@@ -197,11 +200,14 @@ export default function BuilderAIDemo() {
               <div style={{ display: "flex", alignItems: "center", gap: "0.6rem" }}>
                 <div style={{
                   width: "32px", height: "32px", borderRadius: "10px",
-                  background: "linear-gradient(135deg, #6366f1, #8b5cf6)",
+                  background: "linear-gradient(135deg, #6366f115, #8b5cf615)",
+                  border: "1px solid #6366f120",
                   display: "flex", alignItems: "center", justifyContent: "center",
-                  fontSize: "0.72rem", color: "white", fontWeight: 800,
-                  boxShadow: "0 2px 10px #6366f130",
-                }}>B</div>
+                  overflow: "hidden",
+                }}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src="/mascot.png" alt="Builder AI" style={{ width: "28px", height: "28px", objectFit: "contain" }} />
+                </div>
                 <div>
                   <div style={{ fontSize: "0.8rem", fontWeight: 700, color: "var(--text)", lineHeight: 1.1 }}>Builder AI</div>
                   <div style={{ fontSize: "0.62rem", color: "#10b981", fontWeight: 600, display: "flex", alignItems: "center", gap: "3px" }}>
@@ -250,10 +256,10 @@ export default function BuilderAIDemo() {
             >
               {bubbles.map((b, i) => {
                 if (b.type === "thinking") return (
-                  <div key={i} style={{ display: "flex", alignItems: "flex-end", gap: "6px" }}>
+                  <div key={i} style={{ display: "flex", alignItems: "flex-end", gap: "5px" }}>
                     <AIAvatar />
                     <div style={{
-                      padding: "0.6rem 0.85rem", borderRadius: "1rem 1rem 1rem 0.25rem",
+                      padding: "0.5rem 0.75rem", borderRadius: "0.875rem 0.875rem 0.875rem 0.2rem",
                       background: "white", border: "1px solid #e9e7e3",
                       boxShadow: "0 1px 4px #00000008",
                       display: "flex", gap: "4px", alignItems: "center",
@@ -270,24 +276,24 @@ export default function BuilderAIDemo() {
                 );
 
                 if (b.type === "q") return (
-                  <div key={i} style={{ display: "flex", alignItems: "flex-end", gap: "6px" }}>
+                  <div key={i} style={{ display: "flex", alignItems: "flex-end", gap: "5px" }}>
                     <AIAvatar />
-                    <div style={{ display: "flex", flexDirection: "column", maxWidth: "82%" }}>
-                      <div style={{ fontSize: "0.6rem", color: "#9ca3af", fontWeight: 600, marginBottom: "3px", marginLeft: "2px" }}>
+                    <div style={{ display: "flex", flexDirection: "column", maxWidth: "80%" }}>
+                      <div style={{ fontSize: "0.57rem", color: "#b0aaa4", fontWeight: 600, marginBottom: "2px", marginLeft: "2px" }}>
                         Асуулт {(b.index ?? 0) + 1}
                       </div>
                       <div style={{
-                        padding: "0.65rem 0.9rem",
-                        borderRadius: "1rem 1rem 1rem 0.25rem",
+                        padding: "0.5rem 0.75rem",
+                        borderRadius: "0.875rem 0.875rem 0.875rem 0.2rem",
                         background: "white", border: "1px solid #e9e7e3",
-                        boxShadow: "0 1px 6px #00000009",
-                        fontSize: "0.83rem", color: "#374151",
+                        boxShadow: "0 1px 5px #00000008",
+                        fontSize: "0.78rem", color: "#374151",
                         lineHeight: 1.55, fontWeight: 500,
                       }}>
                         {b.text}
                         {b.partial && (
                           <span style={{
-                            display: "inline-block", width: "2px", height: "13px",
+                            display: "inline-block", width: "2px", height: "12px",
                             background: "#6366f1", marginLeft: "2px", verticalAlign: "middle",
                             animation: "blink 0.65s step-end infinite",
                           }} />
@@ -300,18 +306,18 @@ export default function BuilderAIDemo() {
                 if (b.type === "a") return (
                   <div key={i} style={{ display: "flex", justifyContent: "flex-end" }}>
                     <div style={{
-                      maxWidth: "78%",
-                      padding: "0.65rem 0.9rem",
-                      borderRadius: "1rem 1rem 0.25rem 1rem",
+                      maxWidth: "76%",
+                      padding: "0.5rem 0.75rem",
+                      borderRadius: "0.875rem 0.875rem 0.2rem 0.875rem",
                       background: "linear-gradient(135deg, #6366f1, #8b5cf6)",
-                      fontSize: "0.83rem", color: "white",
+                      fontSize: "0.78rem", color: "white",
                       lineHeight: 1.55,
-                      boxShadow: "0 3px 14px #6366f130",
+                      boxShadow: "0 2px 12px #6366f128",
                     }}>
                       {b.text}
                       {b.partial && (
                         <span style={{
-                          display: "inline-block", width: "2px", height: "13px",
+                          display: "inline-block", width: "2px", height: "12px",
                           background: "rgba(255,255,255,0.85)", marginLeft: "2px", verticalAlign: "middle",
                           animation: "blink 0.65s step-end infinite",
                         }} />
@@ -321,20 +327,20 @@ export default function BuilderAIDemo() {
                 );
 
                 if (b.type === "done") return (
-                  <div key={i} style={{ display: "flex", alignItems: "flex-end", gap: "6px" }}>
+                  <div key={i} style={{ display: "flex", alignItems: "flex-end", gap: "5px" }}>
                     <AIAvatar />
                     <div style={{
                       maxWidth: "85%",
-                      padding: "0.9rem 1rem",
-                      borderRadius: "1rem 1rem 1rem 0.25rem",
+                      padding: "0.65rem 0.875rem",
+                      borderRadius: "0.875rem 0.875rem 0.875rem 0.2rem",
                       background: "linear-gradient(135deg, #f0fdf4, #dcfce7)",
                       border: "1px solid #bbf7d0",
                       boxShadow: "0 2px 12px #10b98118",
                     }}>
-                      <div style={{ fontSize: "0.87rem", fontWeight: 700, color: "#15803d", marginBottom: "0.3rem" }}>
+                      <div style={{ fontSize: "0.8rem", fontWeight: 700, color: "#15803d", marginBottom: "0.25rem" }}>
                         🎉 Таны AI chatbot бэлэн боллоо!
                       </div>
-                      <div style={{ fontSize: "0.78rem", color: "#166534", lineHeight: 1.55 }}>
+                      <div style={{ fontSize: "0.74rem", color: "#166534", lineHeight: 1.55 }}>
                         Lumière салонд зориулсан AI ажилтан амжилттай тохируулагдлаа. Та одоо Messenger-ээр хэрэглэгчтэйгээ харилцаж эхлэх боломжтой.
                       </div>
                     </div>
