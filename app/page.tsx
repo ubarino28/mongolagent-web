@@ -1,6 +1,6 @@
 import Link from "next/link";
 import PricingSection from "@/components/PricingSection";
-import DemoChat from "@/components/DemoChat";
+import AIChatDemo from "@/components/AIChatDemo";
 import BuilderAIDemo from "@/components/BuilderAIDemo";
 
 const IconChat = () => (
@@ -401,8 +401,8 @@ export default function HomePage() {
       {/* ─── PRICING ──────────────────────────────────────── */}
       <PricingSection />
 
-      {/* ─── DEMO CHAT ────────────────────────────────────── */}
-      <DemoChat />
+      {/* ─── AI CHAT DEMO ─────────────────────────────────── */}
+      <AIChatDemo />
 
       {/* ─── SERVICES ─────────────────────────────────────── */}
       <section id="services" data-animate style={{ padding: "7rem 0" }}>
