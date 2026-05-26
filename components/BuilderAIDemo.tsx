@@ -2,56 +2,43 @@
 import { useState, useEffect, useRef } from "react";
 
 const QA = [
-  {
-    q: "1️⃣  Бизнесийнхээ нэр, чиглэлийг хэлнэ үү?",
-    a: '"Lumière" гоо сайхны салон — үсчин, арьс, хумсны үйлчилгээ.',
-  },
-  {
-    q: "2️⃣  Хэрэглэгчид ихэвчлэн ямар асуулт тавьдаг вэ?",
-    a: "Үнэ хэд вэ? Цаг захиалах боломжтой юу? Хаяг хаана байдаг вэ?",
-  },
-  {
-    q: "3️⃣  Ажлын цагаа хэлнэ үү?",
-    a: "Даваа–Бямба 10:00–20:00. Ням гарагт амарна.",
-  },
-  {
-    q: "4️⃣  Захиалга хэрхэн авдаг вэ? QPay ашигладаг уу?",
-    a: "Messenger-ээр цаг авна, урьдчилгаа QPay-ээр төлнө.",
-  },
-  {
-    q: "5️⃣  Үйлчилгээнийхээ үнийг хэлнэ үү?",
-    a: "Үс засах 25,000–80,000₮, хумс 35,000₮-аас, нүүр 45,000₮-аас.",
-  },
-  {
-    q: "6️⃣  Цаг захиалахад яаж баталгаажуулдаг вэ?",
-    a: "QPay-аар 10,000₮ урьдчилгаа төлөхөд цаг баталгаажиж, мессеж очно.",
-  },
-  {
-    q: "7️⃣  Ямар брэндийн бүтээгдэхүүн ашигладаг вэ?",
-    a: "Wella, L'Oréal Professional, OPI — гадаадаас оруулж ирдэг.",
-  },
-  {
-    q: "8️⃣  AI ажилтандаа ямар нэр, дүр өгмөөр байна вэ?",
-    a: '"Lumi" нэртэй, эелдэг, мэргэжлийн залуу эмэгтэй дүртэй байна уу.',
-  },
+  { q: "Бизнесийнхээ нэр, чиглэлийг хэлнэ үү?", a: '"Lumière" гоо сайхны салон — үсчин, арьс, хумсны үйлчилгээ.' },
+  { q: "Хэрэглэгчид ихэвчлэн ямар асуулт тавьдаг вэ?", a: "Үнэ хэд вэ? Цаг захиалах боломжтой юу? Хаяг хаана байдаг вэ?" },
+  { q: "Ажлын цагаа хэлнэ үү?", a: "Даваа–Бямба 10:00–20:00. Ням гарагт амарна." },
+  { q: "Захиалга хэрхэн авдаг вэ? QPay ашигладаг уу?", a: "Messenger-ээр цаг авна, урьдчилгаа QPay-ээр төлнө." },
+  { q: "Үйлчилгээнийхээ үнийг хэлнэ үү?", a: "Үс засах 25,000–80,000₮, хумс 35,000₮-аас, нүүр 45,000₮-аас." },
+  { q: "Цаг захиалахад яаж баталгаажуулдаг вэ?", a: "QPay-аар 10,000₮ урьдчилгаа төлөхөд цаг баталгаажиж, мессеж очно." },
+  { q: "Ямар брэндийн бүтээгдэхүүн ашигладаг вэ?", a: "Wella, L'Oréal Professional, OPI — гадаадаас оруулж ирдэг." },
+  { q: "AI ажилтандаа ямар нэр, дүр өгмөөр байна вэ?", a: '"Lumi" нэртэй, эелдэг, мэргэжлийн залуу эмэгтэй дүртэй байна уу.' },
 ];
 
-type Phase = "thinking" | "typing-q" | "typing-a";
+type Phase = "thinking" | "typing-q" | "typing-a" | "done";
 
 interface Bubble {
-  type: "q" | "a" | "thinking";
+  type: "q" | "a" | "thinking" | "done";
   text: string;
   partial?: boolean;
+  index?: number;
 }
 
 const PAUSE_AFTER_Q = 700;
-const PAUSE_AFTER_A = 1100;
-const RESTART_DELAY = 2800;
+const PAUSE_AFTER_A = 1000;
 const THINKING_DURATION = 950;
+const DONE_DISPLAY = 5500;
 
 function randSpeed(min: number, max: number) {
   return min + Math.floor(Math.random() * (max - min));
 }
+
+const AIAvatar = () => (
+  <div style={{
+    width: "26px", height: "26px", borderRadius: "8px", flexShrink: 0,
+    background: "linear-gradient(135deg, #6366f1, #8b5cf6)",
+    display: "flex", alignItems: "center", justifyContent: "center",
+    fontSize: "0.6rem", color: "white", fontWeight: 800,
+    alignSelf: "flex-end", boxShadow: "0 2px 8px #6366f130",
+  }}>B</div>
+);
 
 export default function BuilderAIDemo() {
   const [bubbles, setBubbles] = useState<Bubble[]>([]);
@@ -61,7 +48,6 @@ export default function BuilderAIDemo() {
   const containerRef = useRef<HTMLDivElement>(null);
   const userScrolledUp = useRef(false);
 
-  // Smart auto-scroll: only scroll if user hasn't scrolled up
   useEffect(() => {
     if (userScrolledUp.current) return;
     const el = containerRef.current;
@@ -80,7 +66,7 @@ export default function BuilderAIDemo() {
     if (phase === "thinking") {
       setBubbles(prev => {
         if (prev.length > 0 && prev[prev.length - 1].type === "thinking") return prev;
-        return [...prev, { type: "thinking", text: "" }];
+        return [...prev, { type: "thinking", text: "", index: qIndex }];
       });
       const t = setTimeout(() => {
         setBubbles(prev => prev.filter(b => b.type !== "thinking"));
@@ -97,9 +83,9 @@ export default function BuilderAIDemo() {
             const next = [...prev];
             const last = next[next.length - 1];
             if (!last || last.type !== "q" || !last.partial) {
-              next.push({ type: "q", text: current.q.slice(0, charIndex + 1), partial: true });
+              next.push({ type: "q", text: current.q.slice(0, charIndex + 1), partial: true, index: qIndex });
             } else {
-              next[next.length - 1] = { type: "q", text: current.q.slice(0, charIndex + 1), partial: true };
+              next[next.length - 1] = { ...last, text: current.q.slice(0, charIndex + 1) };
             }
             return next;
           });
@@ -109,7 +95,7 @@ export default function BuilderAIDemo() {
       } else {
         setBubbles(prev => {
           const next = [...prev];
-          next[next.length - 1] = { type: "q", text: current.q, partial: false };
+          next[next.length - 1] = { ...next[next.length - 1], text: current.q, partial: false };
           return next;
         });
         const t = setTimeout(() => { setPhase("typing-a"); setCharIndex(0); }, PAUSE_AFTER_Q);
@@ -126,17 +112,17 @@ export default function BuilderAIDemo() {
             if (!last || last.type !== "a" || !last.partial) {
               next.push({ type: "a", text: current.a.slice(0, charIndex + 1), partial: true });
             } else {
-              next[next.length - 1] = { type: "a", text: current.a.slice(0, charIndex + 1), partial: true };
+              next[next.length - 1] = { ...last, text: current.a.slice(0, charIndex + 1) };
             }
             return next;
           });
           setCharIndex(c => c + 1);
-        }, randSpeed(16, 40));
+        }, randSpeed(16, 38));
         return () => clearTimeout(t);
       } else {
         setBubbles(prev => {
           const next = [...prev];
-          next[next.length - 1] = { type: "a", text: current.a, partial: false };
+          next[next.length - 1] = { ...next[next.length - 1], text: current.a, partial: false };
           return next;
         });
         const nextQ = qIndex + 1;
@@ -145,24 +131,36 @@ export default function BuilderAIDemo() {
           return () => clearTimeout(t);
         } else {
           const t = setTimeout(() => {
-            setBubbles([]);
-            setQIndex(0);
-            setPhase("thinking");
-            setCharIndex(0);
-            userScrolledUp.current = false;
-          }, RESTART_DELAY);
+            setBubbles(prev => [...prev, { type: "done", text: "" }]);
+            setPhase("done");
+          }, 600);
           return () => clearTimeout(t);
         }
       }
     }
+
+    if (phase === "done") {
+      const t = setTimeout(() => {
+        setBubbles([]);
+        setQIndex(0);
+        setPhase("thinking");
+        setCharIndex(0);
+        userScrolledUp.current = false;
+      }, DONE_DISPLAY);
+      return () => clearTimeout(t);
+    }
   }, [phase, charIndex, qIndex]);
+
+  const progressPct = phase === "done"
+    ? 100
+    : (qIndex / QA.length) * 100 + (phase === "typing-a" ? (1 / QA.length) * 50 : 0);
 
   return (
     <section data-animate style={{ padding: "7rem 0" }}>
       <div style={{ maxWidth: "72rem", margin: "0 auto", padding: "0 1.25rem" }}>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "4rem", alignItems: "center" }}>
 
-          {/* Left: text */}
+          {/* Left */}
           <div>
             <div className="section-tag" style={{ display: "inline-flex", marginBottom: "1rem" }}>Builder AI</div>
             <h2 style={{ fontSize: "clamp(1.7rem, 3.5vw, 2.4rem)", fontWeight: 800, letterSpacing: "-0.02em", marginBottom: "1.25rem", lineHeight: 1.15 }}>
@@ -184,40 +182,58 @@ export default function BuilderAIDemo() {
 
           {/* Right: chat window */}
           <div style={{
-            borderRadius: "1.25rem", overflow: "hidden",
+            borderRadius: "1.5rem", overflow: "hidden",
             border: "1px solid var(--border2)",
             background: "var(--surface)",
-            boxShadow: "0 8px 40px #6366f115",
+            boxShadow: "0 20px 60px #6366f11a, 0 4px 16px #00000008",
           }}>
             {/* Header */}
             <div style={{
-              padding: "0.875rem 1.25rem",
-              background: "var(--surface2)",
+              padding: "0.875rem 1.1rem",
+              background: "var(--surface)",
               borderBottom: "1px solid var(--border)",
               display: "flex", alignItems: "center", justifyContent: "space-between",
             }}>
               <div style={{ display: "flex", alignItems: "center", gap: "0.6rem" }}>
                 <div style={{
-                  width: "28px", height: "28px", borderRadius: "8px",
+                  width: "32px", height: "32px", borderRadius: "10px",
                   background: "linear-gradient(135deg, #6366f1, #8b5cf6)",
                   display: "flex", alignItems: "center", justifyContent: "center",
-                  fontSize: "0.7rem", color: "white", fontWeight: 700,
-                }}>AI</div>
-                <span style={{ fontSize: "0.78rem", fontWeight: 600, color: "var(--text)" }}>Builder AI</span>
-                <span style={{ width: "6px", height: "6px", borderRadius: "50%", background: "#10b981", display: "inline-block" }} />
+                  fontSize: "0.72rem", color: "white", fontWeight: 800,
+                  boxShadow: "0 2px 10px #6366f130",
+                }}>B</div>
+                <div>
+                  <div style={{ fontSize: "0.8rem", fontWeight: 700, color: "var(--text)", lineHeight: 1.1 }}>Builder AI</div>
+                  <div style={{ fontSize: "0.62rem", color: "#10b981", fontWeight: 600, display: "flex", alignItems: "center", gap: "3px" }}>
+                    <span style={{ width: "5px", height: "5px", borderRadius: "50%", background: "#10b981", display: "inline-block" }} />
+                    онлайн
+                  </div>
+                </div>
               </div>
-              <span style={{ fontSize: "0.65rem", color: "var(--text-light)", fontWeight: 500 }}>
-                {qIndex + 1} / {QA.length} асуулт
-              </span>
+              {phase === "done" ? (
+                <div style={{
+                  fontSize: "0.65rem", color: "#15803d", fontWeight: 700,
+                  background: "#dcfce7", border: "1px solid #bbf7d0",
+                  padding: "0.25rem 0.65rem", borderRadius: "100px",
+                }}>✓ Дууслаа</div>
+              ) : (
+                <div style={{
+                  fontSize: "0.65rem", color: "var(--text-light)", fontWeight: 600,
+                  background: "var(--surface2)", border: "1px solid var(--border)",
+                  padding: "0.25rem 0.65rem", borderRadius: "100px",
+                }}>{qIndex + 1} / {QA.length} асуулт</div>
+              )}
             </div>
 
             {/* Progress bar */}
             <div style={{ height: "2px", background: "var(--border)" }}>
               <div style={{
                 height: "100%",
-                width: `${(qIndex / QA.length) * 100 + (phase === "typing-a" ? (1 / QA.length) * 50 : 0)}%`,
-                background: "linear-gradient(90deg, #6366f1, #8b5cf6)",
-                transition: "width 0.5s ease",
+                width: `${progressPct}%`,
+                background: phase === "done"
+                  ? "linear-gradient(90deg, #10b981, #34d399)"
+                  : "linear-gradient(90deg, #6366f1, #8b5cf6)",
+                transition: "width 0.5s ease, background 0.6s ease",
               }} />
             </div>
 
@@ -226,78 +242,128 @@ export default function BuilderAIDemo() {
               ref={containerRef}
               onScroll={handleScroll}
               style={{
-                height: "340px", overflowY: "auto", padding: "1.25rem",
-                display: "flex", flexDirection: "column", gap: "0.75rem",
+                height: "360px", overflowY: "auto", padding: "1rem",
+                display: "flex", flexDirection: "column", gap: "0.55rem",
+                background: "#f9f8f6",
                 scrollbarWidth: "thin", scrollbarColor: "var(--border2) transparent",
               }}
             >
-              {bubbles.map((b, i) =>
-                b.type === "thinking" ? (
-                  <div key={i} style={{ display: "flex", justifyContent: "flex-start" }}>
+              {bubbles.map((b, i) => {
+                if (b.type === "thinking") return (
+                  <div key={i} style={{ display: "flex", alignItems: "flex-end", gap: "6px" }}>
+                    <AIAvatar />
                     <div style={{
-                      padding: "0.6rem 0.9rem",
-                      borderRadius: "1rem 1rem 1rem 0.2rem",
-                      background: "var(--surface2)",
-                      border: "1px solid var(--border)",
-                      display: "flex", gap: "5px", alignItems: "center",
+                      padding: "0.6rem 0.85rem", borderRadius: "1rem 1rem 1rem 0.25rem",
+                      background: "white", border: "1px solid #e9e7e3",
+                      boxShadow: "0 1px 4px #00000008",
+                      display: "flex", gap: "4px", alignItems: "center",
                     }}>
                       {[0, 1, 2].map(d => (
                         <span key={d} style={{
-                          width: "6px", height: "6px", borderRadius: "50%",
-                          background: "#6366f1",
+                          width: "6px", height: "6px", borderRadius: "50%", background: "#6366f1",
                           display: "inline-block",
                           animation: `tdot 1.2s ease-in-out ${d * 0.18}s infinite`,
                         }} />
                       ))}
                     </div>
                   </div>
-                ) : (
-                  <div key={i} style={{ display: "flex", justifyContent: b.type === "a" ? "flex-end" : "flex-start" }}>
+                );
+
+                if (b.type === "q") return (
+                  <div key={i} style={{ display: "flex", alignItems: "flex-end", gap: "6px" }}>
+                    <AIAvatar />
+                    <div style={{ display: "flex", flexDirection: "column", maxWidth: "82%" }}>
+                      <div style={{ fontSize: "0.6rem", color: "#9ca3af", fontWeight: 600, marginBottom: "3px", marginLeft: "2px" }}>
+                        Асуулт {(b.index ?? 0) + 1}
+                      </div>
+                      <div style={{
+                        padding: "0.65rem 0.9rem",
+                        borderRadius: "1rem 1rem 1rem 0.25rem",
+                        background: "white", border: "1px solid #e9e7e3",
+                        boxShadow: "0 1px 6px #00000009",
+                        fontSize: "0.83rem", color: "#374151",
+                        lineHeight: 1.55, fontWeight: 500,
+                      }}>
+                        {b.text}
+                        {b.partial && (
+                          <span style={{
+                            display: "inline-block", width: "2px", height: "13px",
+                            background: "#6366f1", marginLeft: "2px", verticalAlign: "middle",
+                            animation: "blink 0.65s step-end infinite",
+                          }} />
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                );
+
+                if (b.type === "a") return (
+                  <div key={i} style={{ display: "flex", justifyContent: "flex-end" }}>
                     <div style={{
-                      maxWidth: "82%",
+                      maxWidth: "78%",
                       padding: "0.65rem 0.9rem",
-                      borderRadius: b.type === "a" ? "1rem 1rem 0.2rem 1rem" : "1rem 1rem 1rem 0.2rem",
-                      background: b.type === "a"
-                        ? "linear-gradient(135deg, #6366f1, #8b5cf6)"
-                        : "var(--surface2)",
-                      border: b.type === "a" ? "none" : "1px solid var(--border)",
-                      fontSize: "0.82rem",
-                      color: b.type === "a" ? "white" : "var(--text-mid)",
-                      lineHeight: 1.6,
-                      boxShadow: b.type === "a" ? "0 2px 12px #6366f125" : "none",
+                      borderRadius: "1rem 1rem 0.25rem 1rem",
+                      background: "linear-gradient(135deg, #6366f1, #8b5cf6)",
+                      fontSize: "0.83rem", color: "white",
+                      lineHeight: 1.55,
+                      boxShadow: "0 3px 14px #6366f130",
                     }}>
                       {b.text}
                       {b.partial && (
                         <span style={{
                           display: "inline-block", width: "2px", height: "13px",
-                          background: b.type === "a" ? "rgba(255,255,255,0.85)" : "#6366f1",
-                          marginLeft: "2px", verticalAlign: "middle",
+                          background: "rgba(255,255,255,0.85)", marginLeft: "2px", verticalAlign: "middle",
                           animation: "blink 0.65s step-end infinite",
                         }} />
                       )}
                     </div>
                   </div>
-                )
-              )}
+                );
+
+                if (b.type === "done") return (
+                  <div key={i} style={{ display: "flex", alignItems: "flex-end", gap: "6px" }}>
+                    <AIAvatar />
+                    <div style={{
+                      maxWidth: "85%",
+                      padding: "0.9rem 1rem",
+                      borderRadius: "1rem 1rem 1rem 0.25rem",
+                      background: "linear-gradient(135deg, #f0fdf4, #dcfce7)",
+                      border: "1px solid #bbf7d0",
+                      boxShadow: "0 2px 12px #10b98118",
+                    }}>
+                      <div style={{ fontSize: "0.87rem", fontWeight: 700, color: "#15803d", marginBottom: "0.3rem" }}>
+                        🎉 Таны AI chatbot бэлэн боллоо!
+                      </div>
+                      <div style={{ fontSize: "0.78rem", color: "#166534", lineHeight: 1.55 }}>
+                        Lumière салонд зориулсан AI ажилтан амжилттай тохируулагдлаа. Та одоо Messenger-ээр хэрэглэгчтэйгээ харилцаж эхлэх боломжтой.
+                      </div>
+                    </div>
+                  </div>
+                );
+
+                return null;
+              })}
             </div>
 
             {/* Footer */}
             <div style={{
-              padding: "0.75rem 1rem",
+              padding: "0.7rem 0.875rem",
               borderTop: "1px solid var(--border)",
               display: "flex", alignItems: "center", gap: "0.5rem",
+              background: "var(--surface)",
             }}>
               <div style={{
-                flex: 1, padding: "0.5rem 0.875rem", borderRadius: "0.65rem",
-                background: "var(--surface2)", border: "1px solid var(--border2)",
-                fontSize: "0.78rem", color: "var(--text-light)",
+                flex: 1, padding: "0.5rem 1rem", borderRadius: "100px",
+                background: "#f5f4f0", border: "1px solid #e5e3df",
+                fontSize: "0.78rem", color: "#9ca3af",
               }}>
                 Хариултаа бичнэ үү...
               </div>
               <div style={{
-                width: "32px", height: "32px", borderRadius: "0.65rem", flexShrink: 0,
+                width: "34px", height: "34px", borderRadius: "50%", flexShrink: 0,
                 background: "linear-gradient(135deg, #6366f1, #8b5cf6)",
                 display: "flex", alignItems: "center", justifyContent: "center",
+                boxShadow: "0 2px 10px #6366f130",
               }}>
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none">
                   <path d="M22 2L11 13M22 2L15 22L11 13M22 2L2 9L11 13" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
