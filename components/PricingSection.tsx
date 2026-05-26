@@ -293,7 +293,7 @@ export default function PricingSection() {
                     </div>
                     <div style={{ display: "flex", flexDirection: "column", gap: "0.625rem" }}>
                       {parentPlan.modal.features.map((f, i) => (
-                        <div key={i} style={{ padding: "0.75rem 1rem", borderRadius: "0.75rem", background: "var(--surface)", border: "1px solid var(--border)", opacity: 0.75 }}>
+                        <div key={i} style={{ padding: "0.75rem 1rem", borderRadius: "0.75rem", background: "var(--surface)", border: "1px solid var(--border)" }}>
                           <div style={{ fontSize: "0.82rem", fontWeight: 600, color: "var(--text-mid)", marginBottom: "0.2rem" }}>✦ {f.title}</div>
                           <div style={{ fontSize: "0.78rem", color: "var(--text-light)", lineHeight: 1.6 }}>{f.desc}</div>
                         </div>
