@@ -111,6 +111,29 @@ const SC: S[] = [
     ],
     newAppt:{name:"Сарнай",detail:"Цамц L",time:"одоо"},
   },
+  {
+    id:"vet", icon:"🐾", label:"Амьтны эмнэлэг",
+    business:"PetCare Эмнэлэг", avBg:"linear-gradient(135deg,#7dd3fc,#0284c7)", avTxt:"P",
+    msgs:[
+      {from:"user",type:"text",text:"Сайн уу! Нохойгоо үзлэгт оруулах цаг захиалахыг хүсч байна"},
+      {from:"ai",  type:"text",text:"Сайн байна уу! Дараах цагуудад боломжтой байна. Эмч Дэлгэрсайхан 13:00 14:00 15:00, Эмч Болдбаатар 14:00 16:00, Эмч Мөнхэрдэнэ 10:00 11:00"},
+      {from:"user",type:"text",text:"Дэлгэрсайхан эмч 14 цагаас захиалга авья"},
+      {from:"ai",  type:"card"},
+      {from:"ai",  type:"text",text:"Та нэр болон утасны дугаараа өгнө үү?"},
+      {from:"user",type:"text",text:"Анар, 99887766"},
+      {from:"ai",  type:"text",text:"10,000₮ урьдчилгаа QPay-ээр төлнө үү 👇"},
+      {from:"ai",  type:"qpay"},
+      {from:"user",type:"text",text:"Төлсөн!"},
+      {from:"ai",  type:"text",text:"✅ Маргааш Дэлгэрсайхан эмчийн 14:00 цагын захиалга амжилттай бүртгэгдлээ! 🐾"},
+    ],
+    card:{emoji:"🐾",title:"Дэлгэрсайхан эмч · 14:00",price:"30,000₮",tag:"Маргааш",tagColor:"#0284c7"},
+    qpay:"10,000₮", baseRev:890000, addRev:30000,
+    baseAppts:[
+      {name:"Мөнгөнчимэг",detail:"Муурны үзлэг",time:"10:00",done:true},
+      {name:"Тэгшбаяр",detail:"Нохойн вакцин",time:"11:30",done:true},
+    ],
+    newAppt:{name:"Анар",detail:"Нохойн үзлэг · 14:00",time:"14:00"},
+  },
 ];
 
 const PAUSE_BEFORE=400, PAUSE_AFTER=500, THINKING_DUR=950, ENTER_PAUSE=300, DONE_PAUSE=5000;
