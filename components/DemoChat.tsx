@@ -10,13 +10,13 @@ const QUICK_QS = [
 
 const ANSWERS: Record<string, string> = {
   "AI chatbot яаж ажилладаг вэ?":
-    "Mongol Agent-ийн AI Chatbot нь Facebook Messenger болон Instagram DM дээр Монгол хэлээр 24/7 автоматаар хариулдаг.\n\nТаны бизнесийн мэдлэгийн санд суурилан сургасны дараа захиалга авах, асуулт хариулах, мэдээлэл өгөх — бүгдийг хийнэ. Ажилтан шаардалгүй. ✨",
+    "Түрүү AI-ийн chatbot нь Facebook Messenger болон Instagram DM дээр Монгол хэлээр 24/7 автоматаар хариулдаг.\n\nBuilder AI-аар 8 асуултад хариулахад л таны мэдлэгийн сан, persona, хариултын загвар автоматаар үүснэ. Захиалга авах, QPay төлбөр баталгаажуулах, lead цуглуулах — бүгдийг хийнэ. ✨",
   "QPay интеграц байдаг уу?":
-    "Тийм! QPay нь манай Growth болон Enterprise багцад бүрэн интегратчилагдсан.\n\nХэрэглэгч чат дотроос захиалга өгмөгц AI автоматаар QPay QR код илгээдэг. Хэрэглэгч төлсний дараа система шууд баталгаажуулж, Telegram мэдэгдэл ирнэ. 💳",
+    "Тийм, бүх багцад QPay бэлэн байдаг!\n\nХэрэглэгч чат дотроос захиалга өгмөгц AI автоматаар QPay QR явуулна. Төлбөр шууд таны дансанд орно — манайхаар дамжихгүй, шимтгэлгүй. Үүнийг тохируулахад ердөө 10 минут л хангалттай. 💳",
   "Хэдэн хоногт бэлэн болох вэ?":
-    "Ихэнх тохиолдолд 3–7 хоног:\n• Энгийн chatbot → 3 хоног\n• QPay + интеграц → 5–7 хоног\n\nConsultation → Тохируулга → Туршилт гэсэн 3 алхмаар явагдана. Та зөвхөн бизнесийн мэдээллээ өгөхөд л хангалттай. 🚀",
+    "Builder AI-аар тохируулвал маш хурдан:\n• 8 асуулт хариулна → AI ажилтан бэлэн 🚀\n• QPay + захиалга → нэмж 10 минут\n\nБизнесийнхээ мэдээллийг оруулмагц систем автоматаар тохируулагдана. Программист, агенци хэрэггүй.",
   "Үнэ хэр байдаг вэ?":
-    "3 багц бий:\n• Starter — ₮79,900/сар\n• Growth — ₮149,900/сар (QPay + захиалга)\n• Enterprise — ₮399,000/сар (бүгд + custom)\n\nЭхний хэрэглэгчид 3 хоног үнэгүй туршиж болно! Pricing хэсгийг үзнэ үү. 👇",
+    "4 багц бий:\n• Starter — ₮79,900/сар (3 хоног үнэгүй)\n• Growth — ₮149,900/сар (Instagram + QPay)\n• Business — ₮249,900/сар (custom keyword, analytics)\n• Enterprise — ₮499,900/сар (custom хөгжүүлэлт)\n\nStarter-ийг карт шаардахгүйгээр 3 хоног үнэгүй туршиж болно! 👇",
 };
 
 const FALLBACKS = [
@@ -28,7 +28,7 @@ interface Msg { role: "user" | "ai"; text: string; }
 
 export default function DemoChat() {
   const [msgs, setMsgs] = useState<Msg[]>([
-    { role: "ai", text: "Сайн байна уу! 👋 Би Mongol Agent-ийн AI туслах.\n\nAI chatbot, QPay интеграц, автоматжуулалт — аль ч талаар асуугаарай. Доорх товч асуултуудаас сонгох эсвэл өөрийн асуултаа бичнэ үү." }
+    { role: "ai", text: "Сайн байна уу! 👋 Би Түрүү AI-ийн туслах.\n\n8 асуулт хариулахад л таны AI ажилтан бэлэн болно. Үнэ, тохируулга, QPay — аль ч талаар асуугаарай!" }
   ]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
@@ -250,10 +250,10 @@ export default function DemoChat() {
                 AI боломжууд
               </div>
               {[
-                { icon: "💬", text: "Монгол хэлээр ярилцах" },
-                { icon: "🛒", text: "Захиалга авах, QPay төлбөр" },
-                { icon: "🎯", text: "Лид цуглуулах, ангилах" },
-                { icon: "⚙️", text: "Workflow автоматжуулалт" },
+                { icon: "⚡", text: "8 асуулт → AI ажилтан бэлэн" },
+                { icon: "💳", text: "QPay — 10 минутад холбоно" },
+                { icon: "🎯", text: "+1 → DM автоматжуулалт" },
+                { icon: "🤝", text: "Хүний handoff систем" },
                 { icon: "📊", text: "Тайлан, аналитик" },
               ].map(f => (
                 <div key={f.text} style={{
@@ -280,12 +280,12 @@ export default function DemoChat() {
               background: "var(--surface2)", border: "1px solid var(--border2)",
             }}>
               <div style={{ fontSize: "0.88rem", fontWeight: 700, marginBottom: "0.4rem" }}>
-                Өөрийн агентаа бүтээх үү?
+                3 хоног үнэгүй туршина уу?
               </div>
               <p style={{ fontSize: "0.78rem", color: "var(--text-light)", lineHeight: 1.6, marginBottom: "1rem" }}>
-                30 минутын үнэгүй consultation-аар бизнестээ яг тохирсон шийдлийг олоорой.
+                Карт шаардахгүй. 8 асуулт хариулаад AI ажилтнаа өнөөдөр л ажиллуул.
               </p>
-              <a href="https://app.mongolagent.mn/register"
+              <a href="https://app.turuuai.mn/register"
                 style={{
                   display: "block", textAlign: "center",
                   background: "linear-gradient(135deg, #6366f1, #8b5cf6)",
@@ -293,7 +293,7 @@ export default function DemoChat() {
                   padding: "0.65rem 1rem", borderRadius: "0.65rem",
                   textDecoration: "none", transition: "opacity 0.15s",
                 }}>
-                Агентаа бүтээх →
+                Үнэгүй эхлэх →
               </a>
             </div>
           </div>
