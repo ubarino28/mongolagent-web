@@ -53,7 +53,7 @@ export default function DemoChat() {
   };
 
   return (
-    <section data-animate style={{ padding: "5rem 0" }}>
+    <section data-animate style={{ padding: "5rem 0", background: "var(--surface)" }}>
       <div style={{ maxWidth: "72rem", margin: "0 auto", padding: "0 1.25rem" }}>
         {/* Header */}
         <div style={{ textAlign: "center", marginBottom: "3rem" }}>

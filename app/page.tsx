@@ -294,7 +294,7 @@ export default function HomePage() {
       </div>
 
       {/* ─── WHY US ───────────────────────────────────────── */}
-      <section data-animate style={{ padding: "7rem 0" }}>
+      <section data-animate style={{ padding: "7rem 0", background: "var(--surface)" }}>
         <div style={wrap}>
           <div style={{ textAlign: "center", marginBottom: "3.5rem" }}>
             <div className="section-tag" style={{ display: "inline-flex", marginBottom: "1rem" }}>Яагаад биднийг сонгох вэ?</div>
@@ -401,7 +401,7 @@ export default function HomePage() {
       <DemoChat />
 
       {/* ─── SERVICES ─────────────────────────────────────── */}
-      <section id="services" data-animate style={{ padding: "7rem 0" }}>
+      <section id="services" data-animate style={{ padding: "7rem 0", background: "var(--surface)" }}>
         <div style={wrap}>
           <div style={{ textAlign: "center", marginBottom: "4rem" }}>
             <div className="section-tag" style={{ display: "inline-flex", marginBottom: "1rem" }}>Үйлчилгээ</div>
@@ -458,7 +458,7 @@ export default function HomePage() {
       </section>
 
       {/* ─── RESULTS ──────────────────────────────────────── */}
-      <section data-animate style={{ padding: "4rem 0" }}>
+      <section data-animate style={{ padding: "4rem 0", background: "var(--surface)" }}>
         <div style={wrap}>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "1rem" }} className="md:grid-cols-4">
             {RESULTS.map(r => (
@@ -472,7 +472,7 @@ export default function HomePage() {
       </section>
 
       {/* ─── PROCESS ──────────────────────────────────────── */}
-      <section data-animate style={{ padding: "7rem 0" }}>
+      <section data-animate style={{ padding: "7rem 0", background: "var(--surface)" }}>
         <div style={wrap5}>
           <div style={{ textAlign: "center", marginBottom: "3.5rem" }}>
             <div className="section-tag" style={{ display: "inline-flex", marginBottom: "1rem" }}>Процесс</div>
@@ -540,7 +540,7 @@ export default function HomePage() {
       </section>
 
       {/* ─── TESTIMONIALS ─────────────────────────────────── */}
-      <section data-animate style={{ padding: "7rem 0" }}>
+      <section data-animate style={{ padding: "7rem 0", background: "var(--surface)" }}>
         <div style={wrap5}>
           <div style={{ textAlign: "center", marginBottom: "3rem" }}>
             <div className="section-tag" style={{ display: "inline-flex", marginBottom: "1rem" }}>Сэтгэгдэл</div>
@@ -570,7 +570,7 @@ export default function HomePage() {
       </section>
 
       {/* ─── FAQ ──────────────────────────────────────────── */}
-      <section id="faq" data-animate style={{ padding: "7rem 0" }}>
+      <section id="faq" data-animate style={{ padding: "7rem 0", background: "var(--surface)" }}>
         <div style={wrap3}>
           <div style={{ textAlign: "center", marginBottom: "3rem" }}>
             <div className="section-tag" style={{ display: "inline-flex", marginBottom: "1rem" }}>FAQ</div>

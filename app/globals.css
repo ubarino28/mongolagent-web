@@ -24,9 +24,9 @@
 html { scroll-behavior: smooth; }
 
 body {
-  background-color: #f2f1ed;
-  background-image: radial-gradient(circle, #c8c6c0 1.5px, transparent 1.5px);
-  background-size: 40px 40px;
+  background-color: var(--bg);
+  background-image: radial-gradient(circle, #c8c7c3 1px, transparent 1px);
+  background-size: 24px 24px;
   color: var(--text);
   font-family: var(--font-sans, system-ui, sans-serif);
   -webkit-font-smoothing: antialiased;
