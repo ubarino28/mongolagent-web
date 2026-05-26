@@ -362,6 +362,95 @@ export default function HomePage() {
       {/* ─── DEMO CHAT ────────────────────────────────────── */}
       <DemoChat />
 
+      {/* ─── WHY US ───────────────────────────────────────── */}
+      <section data-animate style={{ padding: "7rem 0" }}>
+        <div style={wrap}>
+          <div style={{ textAlign: "center", marginBottom: "3.5rem" }}>
+            <div className="section-tag" style={{ display: "inline-flex", marginBottom: "1rem" }}>Яагаад биднийг сонгох вэ?</div>
+            <h2 style={{ fontSize: "clamp(1.7rem, 3.5vw, 2.6rem)", fontWeight: 800, letterSpacing: "-0.02em", marginBottom: "1rem" }}>
+              Борлуулалт, цаг захиалгын асуудлыг{" "}
+              <span className="gradient-text">чатбот дотор шийдсэн</span>
+            </h2>
+            <p style={{ color: "var(--text-mid)", maxWidth: "440px", margin: "0 auto", fontSize: "0.92rem", lineHeight: 1.7 }}>
+              AI борлуулагч, бүтээгдэхүүний каталог, QR төлбөр, тайлан — бүгд нэг чат дотор.
+            </p>
+          </div>
+
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1.25rem" }} className="services-grid">
+            {[
+              {
+                badge: "Монгол хэлний AI",
+                icon: "💬",
+                title: "Монгол хэлээр сурсан AI борлуулагч",
+                desc: "Кирилл, латин, slang, омоним үг — бүгдийг ойлгож, бизнесийн өнгө аясаар чанартай хариулна. Англи AI-н орчуулга биш, эх хэлний загвар.",
+              },
+              {
+                badge: "QPay-той хамтарсан",
+                icon: "💳",
+                title: "Төлбөрийн системд холбогдсон чатбот",
+                desc: "QPay-р шууд Messenger дотроос төлбөр хүлээн авна. Орлого таны банкны данс руу — гар утсан дээр гүйлгээ баталгаажмагц.",
+              },
+              {
+                badge: "0 апп татах",
+                icon: "🛒",
+                title: "Messenger дотор дэлгүүрээ ажиллуулна",
+                desc: "Хэрэглэгч апп татахгүй, бүртгэл хийхгүй. DM нь өөрөө бүтэн дэлгүүр болж бүтээгдэхүүний санал болгоно, захиалга авна, төлбөр цуглуулна.",
+              },
+              {
+                badge: "Удахгүй ирэх",
+                icon: "🤖",
+                title: "Agentic Commerce платформ",
+                desc: "AI агент өөрөө захиалга авч, нөөц шалгаж, хүргэлтийг хянаж, хэрэглэгчтэй нөхцөл тохирно. Удахгүй танай бизнест ирнэ.",
+              },
+              {
+                badge: "1 Dashboard",
+                icon: "📊",
+                title: "Олон channel — нэг тайлан",
+                desc: "Messenger, Instagram болон ирээдүйн channel-уудаас орох орлого, мессеж, AI хариултыг нэг дашбоард дээр аналитик хийнэ.",
+              },
+              {
+                badge: "Хэдхэн минутад асна",
+                icon: "⚡",
+                title: "Кодгүй холболт",
+                desc: "Facebook хуудсаа холбоод, мэдлэгийн санд PDF/линк оруулмагц AI борлуулагч ажиллаж эхэлнэ. Программист хэрэггүй.",
+              },
+            ].map(f => (
+              <div key={f.title} style={{
+                borderRadius: "1.25rem", padding: "1.75rem",
+                background: "var(--surface)", border: "1px solid var(--border)",
+                display: "flex", flexDirection: "column", gap: "0.75rem",
+                transition: "border-color 0.2s, box-shadow 0.2s",
+              }}>
+                <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
+                  <div style={{
+                    width: "44px", height: "44px", borderRadius: "12px", flexShrink: 0,
+                    background: "#0ea5e914", border: "1px solid #0ea5e928",
+                    display: "flex", alignItems: "center", justifyContent: "center",
+                    fontSize: "1.25rem",
+                  }}>
+                    {f.icon}
+                  </div>
+                  <span style={{
+                    fontSize: "0.63rem", fontWeight: 700, textTransform: "uppercase",
+                    letterSpacing: "0.08em", color: "#0ea5e9",
+                    background: "#0ea5e910", border: "1px solid #0ea5e920",
+                    padding: "0.2rem 0.55rem", borderRadius: "100px",
+                  }}>
+                    {f.badge}
+                  </span>
+                </div>
+                <h3 style={{ fontSize: "0.97rem", fontWeight: 700, letterSpacing: "-0.01em", color: "var(--text)", lineHeight: 1.35 }}>
+                  {f.title}
+                </h3>
+                <p style={{ fontSize: "0.82rem", color: "var(--text-mid)", lineHeight: 1.7 }}>
+                  {f.desc}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ─── RESULTS ──────────────────────────────────────── */}
       <section data-animate style={{ padding: "4rem 0", background: "var(--surface)" }}>
         <div style={wrap}>
