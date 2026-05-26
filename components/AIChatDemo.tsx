@@ -40,13 +40,13 @@ function rand(min: number, max: number) {
 const BizAvatar = () => (
   <div style={{
     width: "28px", height: "28px", borderRadius: "50%", flexShrink: 0,
-    background: "#f0eeff", border: "1.5px solid #e0dafb",
+    background: "linear-gradient(135deg, #f9a8d4, #ec4899)",
     display: "flex", alignItems: "center", justifyContent: "center",
-    alignSelf: "flex-end", overflow: "hidden",
-  }}>
-    {/* eslint-disable-next-line @next/next/no-img-element */}
-    <img src="/logo-profile.png" alt="" style={{ width: "22px", height: "22px", objectFit: "contain" }} />
-  </div>
+    alignSelf: "flex-end",
+    fontSize: "0.72rem", fontWeight: 800, color: "white",
+    letterSpacing: "-0.01em",
+    boxShadow: "0 2px 8px #ec489930",
+  }}>L</div>
 );
 
 const ServiceCard = () => (
@@ -251,10 +251,7 @@ export default function AIChatDemo() {
               borderBottom: "1px solid var(--border)",
               display: "flex", alignItems: "center", gap: "0.6rem",
             }}>
-              <div style={{ width: "34px", height: "34px", borderRadius: "50%", background: "#f0eeff", border: "1.5px solid #e0dafb", display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden", flexShrink: 0 }}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/logo-profile.png" alt="" style={{ width: "28px", height: "28px", objectFit: "contain" }} />
-              </div>
+              <div style={{ width: "34px", height: "34px", borderRadius: "50%", background: "linear-gradient(135deg, #f9a8d4, #ec4899)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, fontSize: "0.85rem", fontWeight: 800, color: "white", boxShadow: "0 2px 8px #ec489930" }}>L</div>
               <div style={{ flex: 1 }}>
                 <div style={{ fontSize: "0.82rem", fontWeight: 700, color: "var(--text)", lineHeight: 1.1 }}>Lumière Salon</div>
                 <div style={{ fontSize: "0.62rem", color: "#10b981", fontWeight: 600, display: "flex", alignItems: "center", gap: "3px" }}>
