@@ -102,27 +102,21 @@ const SERVICES = [
 const PROCESS = [
   {
     num: "01",
-    icon: "📝",
     title: "Бүртгэл хийнэ",
     desc: "app.mongolagent.mn дээр бүртгэл хийнэ. Нэр, имэйл, нууц үг — дууслаа. Код шаардахгүй.",
     duration: "2 минут",
-    color: "#6366f1",
   },
   {
     num: "02",
-    icon: "🤖",
     title: "Builder AI-д хариулна",
-    desc: "8 энгийн асуултад хариулна. AI чинь мэдлэгийн сан, persona, хариултын загвараа автоматаар үүсгэнэ.",
+    desc: "8 энгийн асуултад хариулна. AI чинь мэдлэгийн сан, persona, хариултаа автоматаар үүсгэнэ.",
     duration: "5 минут",
-    color: "#8b5cf6",
   },
   {
     num: "03",
-    icon: "⚡",
-    title: "Холбоод — шууд live",
-    desc: "Facebook эсвэл Instagram page-аа холбоно. Тэр даруй хэрэглэгчтэй Монгол хэлээр харилцаж эхэлнэ.",
+    title: "Facebook & Instagram холбоод live",
+    desc: "Facebook болон Instagram page-аа холбоно. Тэр даруй хэрэглэгчтэй Монгол хэлээр харилцаж эхэлнэ.",
     duration: "3 минут",
-    color: "#ec4899",
   },
 ];
 
@@ -471,69 +465,72 @@ export default function HomePage() {
           </div>
 
           <div style={{ position: "relative" }}>
-            {/* Gradient connector line */}
+            {/* Connector line */}
             <div className="process-connector" style={{
-              position: "absolute", top: "2.75rem",
-              left: "calc(16.66% + 2rem)", right: "calc(16.66% + 2rem)",
-              height: "2px",
-              background: "linear-gradient(90deg, #6366f1, #8b5cf6, #ec4899)",
-              opacity: 0.25, pointerEvents: "none", zIndex: 0,
+              position: "absolute", top: "3.35rem",
+              left: "calc(16.66% + 2.25rem)", right: "calc(16.66% + 2.25rem)",
+              height: "1px",
+              background: "var(--border2)",
+              pointerEvents: "none", zIndex: 0,
             }} />
 
             <div className="process-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "1.5rem", position: "relative", zIndex: 1 }}>
-              {PROCESS.map((p) => (
+              {PROCESS.map((p, i) => (
                 <div key={p.num} style={{
                   background: "var(--surface)", border: "1px solid var(--border)",
                   borderRadius: "1.5rem", padding: "2rem 1.75rem",
-                  position: "relative", overflow: "hidden",
                   transition: "border-color 0.25s, box-shadow 0.25s",
                 }}>
-                  {/* Watermark number */}
+                  {/* Step number */}
                   <div style={{
-                    position: "absolute", right: "-0.25rem", top: "-0.75rem",
-                    fontSize: "5.5rem", fontWeight: 900, lineHeight: 1,
-                    color: p.color + "09", letterSpacing: "-0.05em",
-                    userSelect: "none", pointerEvents: "none",
-                  }}>{p.num}</div>
+                    fontSize: "0.62rem", fontWeight: 700, letterSpacing: "0.1em",
+                    color: "var(--text-light)", marginBottom: "1.5rem",
+                    textTransform: "uppercase",
+                  }}>
+                    {p.num}
+                  </div>
 
                   {/* Icon */}
                   <div style={{
-                    width: "3.25rem", height: "3.25rem", borderRadius: "1rem",
-                    background: `linear-gradient(135deg, ${p.color}18, ${p.color}08)`,
-                    border: `1.5px solid ${p.color}22`,
+                    width: "44px", height: "44px", borderRadius: "12px",
+                    background: "var(--surface2)", border: "1px solid var(--border2)",
                     display: "flex", alignItems: "center", justifyContent: "center",
-                    fontSize: "1.4rem", marginBottom: "1.1rem",
-                    boxShadow: `0 4px 16px ${p.color}12`,
+                    color: "var(--text)", marginBottom: "1.25rem",
                   }}>
-                    {p.icon}
+                    {i === 0 && (
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                      </svg>
+                    )}
+                    {i === 1 && (
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/>
+                      </svg>
+                    )}
+                    {i === 2 && (
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+                        <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+                      </svg>
+                    )}
                   </div>
 
-                  {/* Step badge */}
-                  <div style={{
-                    display: "inline-flex", alignItems: "center",
-                    fontSize: "0.6rem", fontWeight: 700, letterSpacing: "0.08em",
-                    color: p.color, background: p.color + "12",
-                    border: `1px solid ${p.color}22`,
-                    borderRadius: "100px", padding: "0.15rem 0.6rem",
-                    marginBottom: "0.65rem",
-                  }}>
-                    ШАТ {p.num}
-                  </div>
-
-                  <h3 style={{ fontSize: "1rem", fontWeight: 700, letterSpacing: "-0.01em", marginBottom: "0.6rem", lineHeight: 1.3 }}>
+                  <h3 style={{ fontSize: "1rem", fontWeight: 700, letterSpacing: "-0.01em", marginBottom: "0.6rem", lineHeight: 1.3, color: "var(--text)" }}>
                     {p.title}
                   </h3>
-                  <p style={{ fontSize: "0.84rem", color: "var(--text-mid)", lineHeight: 1.7, marginBottom: "1.25rem" }}>
+                  <p style={{ fontSize: "0.84rem", color: "var(--text-mid)", lineHeight: 1.7, marginBottom: "1.5rem" }}>
                     {p.desc}
                   </p>
 
                   {/* Duration */}
                   <div style={{
-                    display: "flex", alignItems: "center", gap: "0.4rem",
-                    fontSize: "0.72rem", fontWeight: 600, color: "var(--text-light)",
-                    borderTop: "1px solid var(--border)", paddingTop: "0.875rem",
+                    display: "inline-flex", alignItems: "center", gap: "0.4rem",
+                    fontSize: "0.7rem", fontWeight: 600, color: "var(--text-light)",
+                    background: "var(--surface2)", border: "1px solid var(--border)",
+                    borderRadius: "100px", padding: "0.25rem 0.75rem",
                   }}>
-                    <span style={{ color: p.color }}>⏱</span>
+                    <span style={{ width: "5px", height: "5px", borderRadius: "50%", background: "#10b981", display: "inline-block", flexShrink: 0 }}/>
                     {p.duration}
                   </div>
                 </div>
