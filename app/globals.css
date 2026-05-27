@@ -416,6 +416,16 @@ main, nav, footer { position: relative; z-index: 1; }
   }
 }
 
+/* Chat message areas — shorter on mobile to avoid scroll trap */
+@media (max-width: 768px) {
+  .builder-messages {
+    height: 240px !important;
+  }
+  .chat-messages {
+    height: 240px !important;
+  }
+}
+
 /* Why-us grid — keep 2 columns even on mobile */
 @media (max-width: 768px) {
   .why-grid {

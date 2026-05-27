@@ -244,8 +244,9 @@ export default function BuilderAIDemo() {
             <div
               ref={containerRef}
               onScroll={handleScroll}
+              className="builder-messages"
               style={{
-                height: "340px", overflowY: "auto", padding: "1rem",
+                height: "340px", overflowY: "auto", overflowX: "hidden", padding: "1rem",
                 display: "flex", flexDirection: "column", gap: "0.55rem",
                 background: "#f9f8f6",
                 scrollbarWidth: "thin", scrollbarColor: "var(--border2) transparent",
@@ -286,6 +287,7 @@ export default function BuilderAIDemo() {
                         boxShadow: "0 1px 5px #00000008",
                         fontSize: "0.78rem", color: "#374151",
                         lineHeight: 1.55, fontWeight: 500,
+                        wordBreak: "break-word",
                       }}>
                         {b.text}
                         {b.partial && (
@@ -310,6 +312,7 @@ export default function BuilderAIDemo() {
                       fontSize: "0.78rem", color: "white",
                       lineHeight: 1.55,
                       boxShadow: "0 2px 12px #6366f128",
+                      wordBreak: "break-word",
                     }}>
                       {b.text}
                     </div>
