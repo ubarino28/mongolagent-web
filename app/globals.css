@@ -386,18 +386,14 @@ main, nav, footer { position: relative; z-index: 1; }
   }
 }
 
-/* Dashboard monitor: horizontal scroll on mobile */
-@media (max-width: 900px) {
-  .dashboard-monitor-outer {
-    overflow-x: auto !important;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    padding-bottom: 0.5rem;
-    cursor: grab;
+/* Dashboard section: single column on mobile */
+@media (max-width: 768px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr !important;
+    gap: 2.5rem !important;
   }
-  .dashboard-monitor-outer::-webkit-scrollbar { display: none; }
-  .dashboard-monitor-inner {
-    min-width: 720px !important;
+  .dashboard-float-wrap {
+    height: 360px !important;
   }
 }
 
