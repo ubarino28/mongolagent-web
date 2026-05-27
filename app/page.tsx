@@ -102,18 +102,27 @@ const SERVICES = [
 const PROCESS = [
   {
     num: "01",
+    icon: "🔍",
     title: "Consultation & Шинжилгээ",
     desc: "Бизнесийн онцлог, зорилго, workflow-г шинжилнэ. Тохирох AI шийдлийг тодорхойлно.",
+    duration: "1–2 өдөр",
+    color: "#6366f1",
   },
   {
     num: "02",
+    icon: "⚙️",
     title: "Тохируулга & Суурилуулалт",
     desc: "Системийг бизнест тохируулан тохиргоо хийнэ. Мэдлэгийн сан, prompt, интеграцийг бэлдэнэ.",
+    duration: "2–3 өдөр",
+    color: "#8b5cf6",
   },
   {
     num: "03",
+    icon: "🚀",
     title: "Туршилт & Нэвтрүүлэлт",
-    desc: "Нарийн туршиж, зохицуулсны дараа 3-7 хоногт амьд горимд нэвтрүүлнэ.",
+    desc: "Нарийн туршиж, зохицуулсны дараа 3–7 хоногт амьд горимд нэвтрүүлнэ.",
+    duration: "1–2 өдөр",
+    color: "#ec4899",
   },
 ];
 
@@ -448,66 +457,85 @@ export default function HomePage() {
 
 
       {/* ─── PROCESS ──────────────────────────────────────── */}
-      <section data-animate style={{ padding: "7rem 0" }}>
-        <div style={wrap5}>
-          <div style={{ textAlign: "center", marginBottom: "3.5rem" }}>
+      <section data-animate style={{ padding: "7rem 0", background: "var(--surface2)", position: "relative", overflow: "hidden" }}>
+        <div style={{ position: "absolute", inset: 0, pointerEvents: "none", background: "radial-gradient(ellipse 70% 55% at 50% 100%, #6366f10a 0%, transparent 65%)" }} />
+        <div style={{ ...wrap5, position: "relative" }}>
+          <div style={{ textAlign: "center", marginBottom: "4rem" }}>
             <div className="section-tag" style={{ display: "inline-flex", marginBottom: "1rem" }}>Процесс</div>
-            <h2 style={{ fontSize: "clamp(1.7rem, 3.5vw, 2.4rem)", fontWeight: 800, letterSpacing: "-0.02em" }}>
+            <h2 style={{ fontSize: "clamp(1.7rem, 3.5vw, 2.4rem)", fontWeight: 800, letterSpacing: "-0.02em", marginBottom: "0.75rem" }}>
               3 алхамд ажилладаг болно
             </h2>
+            <p style={{ color: "var(--text-mid)", fontSize: "0.9rem", lineHeight: 1.7, maxWidth: "360px", margin: "0 auto" }}>
+              Consultation-аас live нэвтрүүлэлт хүртэл дунджаар <strong>5–7 хоног</strong>
+            </p>
           </div>
 
-          {/* Grid + connectors wrapper */}
           <div style={{ position: "relative" }}>
-            {/* Connecting line */}
+            {/* Gradient connector line */}
             <div className="process-connector" style={{
-              position: "absolute", top: "2.6rem", left: "calc(16.66% + 1.6rem)", right: "calc(16.66% + 1.6rem)",
-              height: "1px",
-              background: "linear-gradient(90deg, transparent, #6366f140, #6366f140, transparent)",
-              pointerEvents: "none",
+              position: "absolute", top: "2.75rem",
+              left: "calc(16.66% + 2rem)", right: "calc(16.66% + 2rem)",
+              height: "2px",
+              background: "linear-gradient(90deg, #6366f1, #8b5cf6, #ec4899)",
+              opacity: 0.25, pointerEvents: "none", zIndex: 0,
             }} />
 
-            <div className="process-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "1.5rem" }}>
-              {PROCESS.map((p, i) => (
+            <div className="process-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "1.5rem", position: "relative", zIndex: 1 }}>
+              {PROCESS.map((p) => (
                 <div key={p.num} style={{
-                  position: "relative",
-                  borderRadius: "1.25rem",
-                  padding: "2rem 1.75rem",
-                  background: "var(--surface)",
-                  border: "1px solid var(--border)",
+                  background: "var(--surface)", border: "1px solid var(--border)",
+                  borderRadius: "1.5rem", padding: "2rem 1.75rem",
+                  position: "relative", overflow: "hidden",
                   transition: "border-color 0.25s, box-shadow 0.25s",
                 }}>
-                  {/* Step badge */}
+                  {/* Watermark number */}
                   <div style={{
-                    width: "3rem", height: "3rem", borderRadius: "0.875rem",
+                    position: "absolute", right: "-0.25rem", top: "-0.75rem",
+                    fontSize: "5.5rem", fontWeight: 900, lineHeight: 1,
+                    color: p.color + "09", letterSpacing: "-0.05em",
+                    userSelect: "none", pointerEvents: "none",
+                  }}>{p.num}</div>
+
+                  {/* Icon */}
+                  <div style={{
+                    width: "3.25rem", height: "3.25rem", borderRadius: "1rem",
+                    background: `linear-gradient(135deg, ${p.color}18, ${p.color}08)`,
+                    border: `1.5px solid ${p.color}22`,
                     display: "flex", alignItems: "center", justifyContent: "center",
-                    marginBottom: "1.5rem",
-                    fontSize: "0.9rem", fontWeight: 800, letterSpacing: "-0.02em",
-                    background: i === 1
-                      ? "linear-gradient(135deg, #6366f1, #8b5cf6)"
-                      : "linear-gradient(135deg, #6366f118, #8b5cf618)",
-                    border: i === 1 ? "none" : "1px solid #6366f130",
-                    color: i === 1 ? "white" : "var(--primary2)",
-                    boxShadow: i === 1 ? "0 4px 16px #6366f135" : "none",
+                    fontSize: "1.4rem", marginBottom: "1.1rem",
+                    boxShadow: `0 4px 16px ${p.color}12`,
                   }}>
-                    {p.num}
+                    {p.icon}
                   </div>
 
-                  <h3 style={{ fontSize: "1rem", fontWeight: 700, marginBottom: "0.65rem", letterSpacing: "-0.01em" }}>
+                  {/* Step badge */}
+                  <div style={{
+                    display: "inline-flex", alignItems: "center",
+                    fontSize: "0.6rem", fontWeight: 700, letterSpacing: "0.08em",
+                    color: p.color, background: p.color + "12",
+                    border: `1px solid ${p.color}22`,
+                    borderRadius: "100px", padding: "0.15rem 0.6rem",
+                    marginBottom: "0.65rem",
+                  }}>
+                    ШАТ {p.num}
+                  </div>
+
+                  <h3 style={{ fontSize: "1rem", fontWeight: 700, letterSpacing: "-0.01em", marginBottom: "0.6rem", lineHeight: 1.3 }}>
                     {p.title}
                   </h3>
-                  <p style={{ fontSize: "0.845rem", color: "var(--text-mid)", lineHeight: 1.7 }}>
+                  <p style={{ fontSize: "0.84rem", color: "var(--text-mid)", lineHeight: 1.7, marginBottom: "1.25rem" }}>
                     {p.desc}
                   </p>
 
-                  {/* Arrow hint (not last) */}
-                  {i < PROCESS.length - 1 && (
-                    <div className="process-connector" style={{
-                      position: "absolute", top: "2.55rem", right: "-1rem",
-                      fontSize: "0.75rem", color: "#6366f150", zIndex: 2,
-                      pointerEvents: "none",
-                    }}>→</div>
-                  )}
+                  {/* Duration */}
+                  <div style={{
+                    display: "flex", alignItems: "center", gap: "0.4rem",
+                    fontSize: "0.72rem", fontWeight: 600, color: "var(--text-light)",
+                    borderTop: "1px solid var(--border)", paddingTop: "0.875rem",
+                  }}>
+                    <span style={{ color: p.color }}>⏱</span>
+                    {p.duration}
+                  </div>
                 </div>
               ))}
             </div>
