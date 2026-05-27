@@ -356,8 +356,9 @@ export default function BuilderAIDemo() {
                 color: inputText ? "#374151" : "#b0aaa4",
                 transition: "border-color 0.2s, background 0.2s",
                 minHeight: "36px", display: "flex", alignItems: "center",
+                overflow: "hidden", whiteSpace: "nowrap",
               }}>
-                {inputText || "Хариултаа бичнэ үү..."}
+                {inputText ? (inputText.length > 38 ? inputText.slice(-35) : inputText) : "Хариултаа бичнэ үү..."}
                 {isTypingInput && (
                   <span style={{
                     display: "inline-block", width: "1.5px", height: "13px",
