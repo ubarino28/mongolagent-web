@@ -67,7 +67,8 @@ export default function DashboardSection() {
         </div>
 
         {/* Monitor mockup */}
-        <div style={{ maxWidth: "940px", margin: "0 auto" }}>
+        <div className="dashboard-monitor-outer" style={{ maxWidth: "940px", margin: "0 auto" }}>
+        <div className="dashboard-monitor-inner">
           {/* Bezel */}
           <div style={{
             background: "linear-gradient(160deg,#2a2a42,#1a1a2e)",
@@ -255,7 +256,8 @@ export default function DashboardSection() {
             <div style={{ width: "72px", height: "30px", background: "linear-gradient(180deg,#2a2a42,#1a1a2e)", clipPath: "polygon(18% 0%,82% 0%,100% 100%,0% 100%)" }} />
             <div style={{ width: "148px", height: "8px", background: "#1a1a2e", borderRadius: "0 0 8px 8px" }} />
           </div>
-        </div>
+        </div>{/* dashboard-monitor-inner */}
+        </div>{/* dashboard-monitor-outer */}
 
       </div>
     </section>

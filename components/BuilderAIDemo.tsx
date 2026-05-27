@@ -169,7 +169,7 @@ export default function BuilderAIDemo() {
   return (
     <section data-animate style={{ padding: "7rem 0" }}>
       <div style={{ maxWidth: "72rem", margin: "0 auto", padding: "0 1.25rem" }}>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "4rem", alignItems: "center" }}>
+        <div className="builder-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "4rem", alignItems: "center" }}>
 
           {/* Left */}
           <div>

@@ -462,7 +462,7 @@ export default function AIChatDemo(){
         </div>
 
         {/* Tabs */}
-        <div style={{display:"flex",justifyContent:"center",gap:"0.4rem",marginBottom:"2rem",flexWrap:"wrap"}}>
+        <div className="chat-demo-tabs" style={{display:"flex",justifyContent:"center",gap:"0.4rem",marginBottom:"2rem",flexWrap:"wrap"}}>
           {SC.map((s,i)=>(
             <button key={s.id} onClick={()=>setActiveIdx(i)} style={{
               display:"flex",alignItems:"center",gap:"0.35rem",
@@ -479,9 +479,11 @@ export default function AIChatDemo(){
         </div>
 
         {/* Grid: chat + stats */}
-        <div style={{display:"grid",gridTemplateColumns:"1fr 0.58fr",gap:"1.5rem",alignItems:"start"}}>
+        <div className="chat-demo-grid" style={{display:"grid",gridTemplateColumns:"1fr 0.58fr",gap:"1.5rem",alignItems:"start"}}>
           <ChatWindow key={activeIdx} sc={sc} onPaid={handlePaid}/>
-          <StatsPanel appts={appts} revenue={revenue} flash={flash}/>
+          <div className="chat-stats-panel">
+            <StatsPanel appts={appts} revenue={revenue} flash={flash}/>
+          </div>
         </div>
       </div>
 

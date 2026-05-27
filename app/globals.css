@@ -342,3 +342,80 @@ main, nav, footer { position: relative; z-index: 1; }
     display: none !important;
   }
 }
+
+/* ═══════════════════════════════════════════
+   MOBILE — comprehensive responsive fixes
+   ═══════════════════════════════════════════ */
+
+/* Reduce all section padding on mobile */
+@media (max-width: 768px) {
+  section {
+    padding-top: 3.5rem !important;
+    padding-bottom: 3.5rem !important;
+  }
+}
+
+/* Builder AI demo: single column, reasonable gap */
+@media (max-width: 768px) {
+  .builder-grid {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
+}
+
+/* AIChatDemo: scrollable tabs, single column, hide stats */
+@media (max-width: 768px) {
+  .chat-demo-tabs {
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    justify-content: flex-start !important;
+    padding-bottom: 6px !important;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    gap: 0.3rem !important;
+  }
+  .chat-demo-tabs::-webkit-scrollbar { display: none; }
+  .chat-demo-tabs button {
+    flex-shrink: 0;
+  }
+  .chat-demo-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .chat-stats-panel {
+    display: none !important;
+  }
+}
+
+/* Dashboard monitor: horizontal scroll on mobile */
+@media (max-width: 900px) {
+  .dashboard-monitor-outer {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-bottom: 0.5rem;
+    cursor: grab;
+  }
+  .dashboard-monitor-outer::-webkit-scrollbar { display: none; }
+  .dashboard-monitor-inner {
+    min-width: 720px !important;
+  }
+}
+
+/* Trust bar: tighter spacing on mobile */
+@media (max-width: 640px) {
+  .trust-bar {
+    gap: 1.5rem 2.5rem !important;
+    padding: 1.5rem 1.5rem !important;
+  }
+}
+
+/* Hero CTAs: stack on very small screens */
+@media (max-width: 480px) {
+  .hero-ctas {
+    flex-direction: column !important;
+  }
+  .hero-ctas a {
+    width: 100%;
+    justify-content: center;
+  }
+}

@@ -187,7 +187,7 @@ export default function HomePage() {
               </p>
 
               {/* CTAs */}
-              <div style={{ display: "flex", flexWrap: "wrap", gap: "1rem" }}>
+              <div className="hero-ctas" style={{ display: "flex", flexWrap: "wrap", gap: "1rem" }}>
                 <Link href="https://app.mongolagent.mn/register" className="btn-primary" style={{ fontSize: "0.95rem", padding: "0.85rem 2rem" }}>
                   Агентаа бүтээх
                 </Link>
@@ -244,7 +244,7 @@ export default function HomePage() {
       {/* ─── TRUST BAR ────────────────────────────────────── */}
       <div style={{ padding: "0 1.25rem 2.5rem" }}>
         <div style={{ maxWidth: "64rem", margin: "0 auto" }}>
-          <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "2rem 4rem", padding: "1.75rem 2.5rem", borderRadius: "1.25rem", background: "var(--surface)", border: "1px solid var(--border)" }}>
+          <div className="trust-bar" style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "2rem 4rem", padding: "1.75rem 2.5rem", borderRadius: "1.25rem", background: "var(--surface)", border: "1px solid var(--border)" }}>
             {[
               { num: "200+", label: "бизнес ашигладаг" },
               { num: "4.9★", label: "дундаж үнэлгээ" },
