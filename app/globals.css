@@ -416,6 +416,9 @@ main, nav, footer { position: relative; z-index: 1; }
   }
 }
 
+/* Dashboard tab content — hide scrollbar */
+.db-tab-content::-webkit-scrollbar { display: none; }
+
 /* Why-us grid — keep 2 columns even on mobile */
 @media (max-width: 768px) {
   .why-grid {
