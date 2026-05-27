@@ -480,15 +480,6 @@ export default function HomePage() {
                   borderRadius: "1.5rem", padding: "2rem 1.75rem",
                   transition: "border-color 0.25s, box-shadow 0.25s",
                 }}>
-                  {/* Step number */}
-                  <div style={{
-                    fontSize: "0.62rem", fontWeight: 700, letterSpacing: "0.1em",
-                    color: "var(--text-light)", marginBottom: "1.5rem",
-                    textTransform: "uppercase",
-                  }}>
-                    {p.num}
-                  </div>
-
                   {/* Icon */}
                   <div style={{
                     width: "44px", height: "44px", borderRadius: "12px",
