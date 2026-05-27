@@ -149,9 +149,10 @@ export default function PricingSection() {
             </p>
           </div>
 
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "1rem", alignItems: "stretch" }}>
+          <div className="pricing-grid" style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "1rem", alignItems: "stretch" }}>
             {PLANS.map(plan => (
               <div key={plan.name}
+                className={plan.highlight ? "pricing-featured" : ""}
                 style={{
                   position: "relative", borderRadius: "1.25rem",
                   padding: plan.highlight ? "2rem 1.5rem" : "1.75rem 1.5rem",
