@@ -60,13 +60,6 @@ const PLATFORMS = [
   { name: "Claude",       color: "#D97757", vb: "0 0 24 24",       path: "M17.3041 3.541h-3.6718l6.696 16.918H24Zm-10.6082 0L0 20.459h3.7442l1.3693-3.5527h7.0052l1.3693 3.5528h3.7442L10.5363 3.5409Zm-.3712 10.2232 2.2914-5.9456 2.2914 5.9456Z", letter: "", img: "" },
 ];
 
-const RESULTS = [
-  { num: "Ухаалаг Агент", label: "Хиймэл оюун дээр суурилсан" },
-  { num: "10 мин", label: "Агентаа бэлэн болгоход" },
-  { num: "24/7", label: "Тасралтгүй ажиллах агент" },
-  { num: "Автомат", label: "AI ажилтантай болоорой" },
-];
-
 const SERVICES = [
   {
     tag: "Мессенжер AI",
@@ -214,7 +207,7 @@ export default function HomePage() {
                 style={{ width: "400px", maxWidth: "88%", position: "relative", zIndex: 2, filter: "drop-shadow(0 16px 32px #6366f130)" }}
               />
               {/* Chat bubble — user */}
-              <div style={{
+              <div className="hero-bubble" style={{
                 position: "absolute", top: "72px", right: "44px", zIndex: 3,
                 background: "var(--surface2)", border: "1px solid var(--border2)",
                 borderRadius: "1rem 1rem 1rem 0.25rem",
@@ -225,7 +218,7 @@ export default function HomePage() {
                 Сайн байна уу?
               </div>
               {/* Chat bubble — AI */}
-              <div style={{
+              <div className="hero-bubble" style={{
                 position: "absolute", bottom: "110px", left: "28px", zIndex: 3,
                 background: "linear-gradient(135deg, #6366f1, #8b5cf6)",
                 borderRadius: "1rem 1rem 0.25rem 1rem",
@@ -309,7 +302,7 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1.25rem" }} className="services-grid">
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1.25rem" }} className="why-grid">
             {[
               {
                 badge: "Builder AI",
@@ -330,12 +323,6 @@ export default function HomePage() {
                 desc: "Facebook постод '+1' гэж бичсэн хэрэглэгч бүрт автоматаар DM явна. Viral пост дээр ч зардал бараг $0.",
               },
               {
-                badge: "Хүний handoff",
-                icon: "🤝",
-                title: "AI хийж чадахгүй үед хүнд шилжүүлнэ",
-                desc: "Нарийн асуудал, гомдол, тохиролцоо шаардсан яриаг таны ажилтанд автоматаар шилжүүлнэ. Dashboard-аас шууд хариулж, дахин AI-д буцаана.",
-              },
-              {
                 badge: "Мэдлэгийн сан",
                 icon: "📚",
                 title: "Таны брэндийн дуу хоолойгоор хариулна",
@@ -352,12 +339,6 @@ export default function HomePage() {
                 icon: "🧠",
                 title: "Өөрөө өөрийгөө сургадаг AI",
                 desc: "Таны бизнесийн чат бүрийг дүн шинжилгээ хийж, хариултаа өдөр бүр сайжруулна. Хэрэглэгчийн асуулт, зан төлөвт суурилан тасралтгүй хөгжинө.",
-              },
-              {
-                badge: "Захиалгат шийдэл",
-                icon: "🛠️",
-                title: "Зөвхөн танд зориулсан агент",
-                desc: "Custom вэбсайт, custom AI agent — таны бизнесийн онцлог, дизайн, процесст бүрэн тааруулсан шийдэл. Стандарт загвар биш, өөрийн брэндтэй.",
               },
             ].map(f => (
               <div key={f.title} style={{
@@ -465,19 +446,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ─── RESULTS ──────────────────────────────────────── */}
-      <section data-animate style={{ padding: "4rem 0" }}>
-        <div style={wrap}>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "1rem" }} className="md:grid-cols-4">
-            {RESULTS.map(r => (
-              <div key={r.label} style={{ textAlign: "center", padding: "1.5rem", borderRadius: "1rem", background: "var(--surface2)", border: "1px solid var(--border2)" }}>
-                <div className="stat-num" style={{ marginBottom: "0.5rem" }}>{r.num}</div>
-                <div style={{ fontSize: "0.78rem", color: "var(--text-light)", lineHeight: 1.4 }}>{r.label}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* ─── PROCESS ──────────────────────────────────────── */}
       <section data-animate style={{ padding: "7rem 0" }}>
@@ -555,7 +523,7 @@ export default function HomePage() {
             <h2 style={{ fontSize: "clamp(1.7rem, 3.5vw, 2.4rem)", fontWeight: 800, letterSpacing: "-0.02em" }}>Захиалагчдын сэтгэгдэл</h2>
           </div>
 
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(1, 1fr)", gap: "1.25rem" }} className="md:grid-cols-3">
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "1.25rem" }} className="testimonials-grid">
             {TESTIMONIALS.map(t => (
               <div key={t.name} className="card card-glow" style={{ padding: "1.75rem" }}>
                 <div style={{ display: "flex", gap: "0.25rem", marginBottom: "1rem" }}>

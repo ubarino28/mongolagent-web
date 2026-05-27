@@ -415,3 +415,65 @@ main, nav, footer { position: relative; z-index: 1; }
     justify-content: center;
   }
 }
+
+/* Why-us grid — keep 2 columns even on mobile */
+@media (max-width: 768px) {
+  .why-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 0.75rem !important;
+  }
+}
+
+/* Hero floating chat bubbles — hide on mobile */
+@media (max-width: 768px) {
+  .hero-bubble {
+    display: none !important;
+  }
+}
+
+/* stat-num — smaller on mobile */
+@media (max-width: 640px) {
+  .stat-num {
+    font-size: 1.6rem !important;
+  }
+}
+
+/* Results grid — 2 columns on mobile */
+@media (max-width: 640px) {
+  .results-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+/* Testimonials grid — 1 column on mobile */
+@media (max-width: 768px) {
+  .testimonials-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* Dashboard floating cards — stack on mobile */
+@media (max-width: 768px) {
+  .dashboard-float-wrap {
+    height: auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0.75rem !important;
+  }
+  .db-inbox {
+    position: static !important;
+    right: auto !important;
+  }
+  .db-revenue {
+    position: static !important;
+    width: 100% !important;
+    bottom: auto !important;
+    right: auto !important;
+  }
+  .db-ai-badge {
+    display: none !important;
+  }
+  .db-appt {
+    display: none !important;
+  }
+}

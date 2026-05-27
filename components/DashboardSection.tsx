@@ -67,7 +67,7 @@ export default function DashboardSection() {
           <div className="dashboard-float-wrap" style={{ position:"relative", height:"500px" }}>
 
             {/* Main inbox card */}
-            <div style={{
+            <div className="db-inbox" style={{
               position:"absolute", top:"30px", left:"0", right:"50px",
               borderRadius:"18px", background:"white",
               border:"1px solid #ece9f5",
@@ -103,7 +103,7 @@ export default function DashboardSection() {
             </div>
 
             {/* Revenue card — bottom right, floating */}
-            <div style={{
+            <div className="db-revenue" style={{
               position:"absolute", bottom:"60px", right:"0", width:"195px",
               borderRadius:"16px", padding:"16px",
               background:"linear-gradient(135deg,#6366f1,#8b5cf6)",
@@ -119,7 +119,7 @@ export default function DashboardSection() {
             </div>
 
             {/* AI stats badge — top right */}
-            <div style={{
+            <div className="db-ai-badge" style={{
               position:"absolute", top:"8px", right:"8px",
               borderRadius:"14px", padding:"10px 14px",
               background:"white", border:"1px solid #ece9f5",
@@ -134,7 +134,7 @@ export default function DashboardSection() {
             </div>
 
             {/* New appointment toast — bottom left */}
-            <div style={{
+            <div className="db-appt" style={{
               position:"absolute", bottom:"50px", left:"12px",
               borderRadius:"14px", padding:"10px 14px",
               background:"white", border:"1px solid #ece9f5",
