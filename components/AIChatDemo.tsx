@@ -346,8 +346,8 @@ function ChatWindow({sc,onPaid}:{sc:S;onPaid:()=>void}){
       {/* Input bar */}
       <div style={{padding:"0.65rem 0.875rem",borderTop:"1px solid #f0eef9",display:"flex",alignItems:"center",gap:"0.45rem",background:"white"}}>
         <div style={{display:"flex",gap:"0.45rem",flexShrink:0}}>{["🎤","🖼️"].map(ico=><div key={ico} style={{fontSize:"0.85rem",opacity:0.35}}>{ico}</div>)}</div>
-        <div style={{flex:1,padding:"0.4rem 0.875rem",borderRadius:"100px",background:isTyping?"white":"#f4f2ef",border:isTyping?"1.5px solid #a78bfa":"1px solid #e8e4de",fontSize:"0.75rem",color:inputText?"#374151":"#b8b2ab",transition:"all 0.2s",minHeight:"32px",display:"flex",alignItems:"center",boxShadow:isTyping?"0 0 0 3px #a78bfa18":"none"}}>
-          {inputText||"Aa"}
+        <div style={{flex:1,padding:"0.4rem 0.875rem",borderRadius:"100px",background:isTyping?"white":"#f4f2ef",border:isTyping?"1.5px solid #a78bfa":"1px solid #e8e4de",fontSize:"0.75rem",color:inputText?"#374151":"#b8b2ab",transition:"all 0.2s",minHeight:"32px",display:"flex",alignItems:"center",boxShadow:isTyping?"0 0 0 3px #a78bfa18":"none",overflow:"hidden",whiteSpace:"nowrap"}}>
+          {inputText ? (inputText.length > 38 ? inputText.slice(-35) : inputText) : "Aa"}
           {isTyping&&<span style={{display:"inline-block",width:"1.5px",height:"11px",background:"#8b5cf6",marginLeft:"1px",verticalAlign:"middle",animation:"blink .65s step-end infinite"}}/>}
         </div>
         <div style={{width:"30px",height:"30px",borderRadius:"50%",flexShrink:0,background:"linear-gradient(135deg,#6366f1,#8b5cf6)",display:"flex",alignItems:"center",justifyContent:"center",boxShadow:"0 3px 10px #6366f130",transform:isSending?"scale(0.86)":"scale(1)",transition:"transform 0.15s"}}>
