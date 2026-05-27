@@ -2,6 +2,7 @@ import Link from "next/link";
 import PricingSection from "@/components/PricingSection";
 import AIChatDemo from "@/components/AIChatDemo";
 import BuilderAIDemo from "@/components/BuilderAIDemo";
+import DashboardSection from "@/components/DashboardSection";
 
 const IconChat = () => (
   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
@@ -400,6 +401,9 @@ export default function HomePage() {
 
       {/* ─── AI CHAT DEMO ─────────────────────────────────── */}
       <AIChatDemo />
+
+      {/* ─── DASHBOARD SECTION ────────────────────────────── */}
+      <DashboardSection />
 
       {/* ─── PRICING ──────────────────────────────────────── */}
       <PricingSection />
