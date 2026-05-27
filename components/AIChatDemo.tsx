@@ -265,8 +265,7 @@ function ChatWindow({sc,onPaid}:{sc:S;onPaid:()=>void}){
       {/* Messages */}
       <div ref={containerRef}
         onScroll={()=>{const el=containerRef.current;if(el) scrolledUp.current=el.scrollHeight-el.scrollTop-el.clientHeight>30;}}
-        className="chat-messages"
-        style={{height:"330px",overflowY:"auto",overflowX:"hidden",padding:"1rem 0.875rem",display:"flex",flexDirection:"column",gap:"0.55rem",background:"#f9f8f6",scrollbarWidth:"thin",scrollbarColor:"var(--border2) transparent"}}>
+        style={{height:"330px",overflowY:"auto",padding:"1rem 0.875rem",display:"flex",flexDirection:"column",gap:"0.55rem",background:"#f9f8f6",scrollbarWidth:"thin",scrollbarColor:"var(--border2) transparent"}}>
 
         {/* Date chip */}
         <div style={{textAlign:"center",marginBottom:"0.25rem"}}>
@@ -285,7 +284,7 @@ function ChatWindow({sc,onPaid}:{sc:S;onPaid:()=>void}){
           if(b.from==="ai"&&b.type==="text") return(
             <div key={b.id} style={{display:"flex",alignItems:"flex-end",gap:"6px",maxWidth:"82%"}}>
               <Av/>
-              <div style={{padding:"0.5rem 0.8rem",borderRadius:"0.3rem 1rem 1rem 1rem",background:"white",boxShadow:"0 1px 8px #00000010",fontSize:"0.78rem",color:"#374151",lineHeight:1.58,wordBreak:"break-word"}}>
+              <div style={{padding:"0.5rem 0.8rem",borderRadius:"0.3rem 1rem 1rem 1rem",background:"white",boxShadow:"0 1px 8px #00000010",fontSize:"0.78rem",color:"#374151",lineHeight:1.58}}>
                 {b.text}
                 {b.partial&&<span style={{display:"inline-block",width:"1.5px",height:"11px",background:"#8b5cf6",marginLeft:"1px",verticalAlign:"middle",animation:"blink .65s step-end infinite"}}/>}
               </div>
@@ -293,7 +292,7 @@ function ChatWindow({sc,onPaid}:{sc:S;onPaid:()=>void}){
           );
           if(b.from==="user"&&b.type==="text") return(
             <div key={b.id} style={{display:"flex",justifyContent:"flex-end",flexDirection:"column",alignItems:"flex-end",gap:"3px"}}>
-              <div style={{maxWidth:"76%",padding:"0.5rem 0.8rem",borderRadius:"1rem 0.3rem 1rem 1rem",background:"linear-gradient(135deg,#6366f1,#8b5cf6)",fontSize:"0.78rem",color:"white",lineHeight:1.58,boxShadow:"0 3px 14px #6366f130",wordBreak:"break-word"}}>{b.text}</div>
+              <div style={{maxWidth:"76%",padding:"0.5rem 0.8rem",borderRadius:"1rem 0.3rem 1rem 1rem",background:"linear-gradient(135deg,#6366f1,#8b5cf6)",fontSize:"0.78rem",color:"white",lineHeight:1.58,boxShadow:"0 3px 14px #6366f130"}}>{b.text}</div>
               <div style={{fontSize:"0.57rem",color:"#6366f1",fontWeight:700,paddingRight:"2px"}}>✓✓</div>
             </div>
           );
