@@ -102,26 +102,26 @@ const SERVICES = [
 const PROCESS = [
   {
     num: "01",
-    icon: "🔍",
-    title: "Consultation & Шинжилгээ",
-    desc: "Бизнесийн онцлог, зорилго, workflow-г шинжилнэ. Тохирох AI шийдлийг тодорхойлно.",
-    duration: "1–2 өдөр",
+    icon: "📝",
+    title: "Бүртгэл хийнэ",
+    desc: "app.mongolagent.mn дээр бүртгэл хийнэ. Нэр, имэйл, нууц үг — дууслаа. Код шаардахгүй.",
+    duration: "2 минут",
     color: "#6366f1",
   },
   {
     num: "02",
-    icon: "⚙️",
-    title: "Тохируулга & Суурилуулалт",
-    desc: "Системийг бизнест тохируулан тохиргоо хийнэ. Мэдлэгийн сан, prompt, интеграцийг бэлдэнэ.",
-    duration: "2–3 өдөр",
+    icon: "🤖",
+    title: "Builder AI-д хариулна",
+    desc: "8 энгийн асуултад хариулна. AI чинь мэдлэгийн сан, persona, хариултын загвараа автоматаар үүсгэнэ.",
+    duration: "5 минут",
     color: "#8b5cf6",
   },
   {
     num: "03",
-    icon: "🚀",
-    title: "Туршилт & Нэвтрүүлэлт",
-    desc: "Нарийн туршиж, зохицуулсны дараа 3–7 хоногт амьд горимд нэвтрүүлнэ.",
-    duration: "1–2 өдөр",
+    icon: "⚡",
+    title: "Холбоод — шууд live",
+    desc: "Facebook эсвэл Instagram page-аа холбоно. Тэр даруй хэрэглэгчтэй Монгол хэлээр харилцаж эхэлнэ.",
+    duration: "3 минут",
     color: "#ec4899",
   },
 ];
@@ -461,12 +461,12 @@ export default function HomePage() {
         <div style={{ position: "absolute", inset: 0, pointerEvents: "none", background: "radial-gradient(ellipse 70% 55% at 50% 100%, #6366f10a 0%, transparent 65%)" }} />
         <div style={{ ...wrap5, position: "relative" }}>
           <div style={{ textAlign: "center", marginBottom: "4rem" }}>
-            <div className="section-tag" style={{ display: "inline-flex", marginBottom: "1rem" }}>Процесс</div>
+            <div className="section-tag" style={{ display: "inline-flex", marginBottom: "1rem" }}>Хэрхэн эхлэх вэ?</div>
             <h2 style={{ fontSize: "clamp(1.7rem, 3.5vw, 2.4rem)", fontWeight: 800, letterSpacing: "-0.02em", marginBottom: "0.75rem" }}>
-              3 алхамд ажилладаг болно
+              10 минутад AI ажилтан бэлэн
             </h2>
-            <p style={{ color: "var(--text-mid)", fontSize: "0.9rem", lineHeight: 1.7, maxWidth: "360px", margin: "0 auto" }}>
-              Consultation-аас live нэвтрүүлэлт хүртэл дунджаар <strong>5–7 хоног</strong>
+            <p style={{ color: "var(--text-mid)", fontSize: "0.9rem", lineHeight: 1.7, maxWidth: "380px", margin: "0 auto" }}>
+              Бүртгэлээс Facebook холболт хүртэл — кодгүй, суулгалтгүй, шууд ажиллана
             </p>
           </div>
 
