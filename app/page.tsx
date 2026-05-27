@@ -451,8 +451,7 @@ export default function HomePage() {
 
 
       {/* ─── PROCESS ──────────────────────────────────────── */}
-      <section data-animate style={{ padding: "7rem 0", background: "var(--surface2)", position: "relative", overflow: "hidden" }}>
-        <div style={{ position: "absolute", inset: 0, pointerEvents: "none", background: "radial-gradient(ellipse 70% 55% at 50% 100%, #6366f10a 0%, transparent 65%)" }} />
+      <section data-animate style={{ padding: "7rem 0" }}>
         <div style={{ ...wrap5, position: "relative" }}>
           <div style={{ textAlign: "center", marginBottom: "4rem" }}>
             <div className="section-tag" style={{ display: "inline-flex", marginBottom: "1rem" }}>Хэрхэн эхлэх вэ?</div>
