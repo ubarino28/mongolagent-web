@@ -60,7 +60,7 @@ export default function AboutPage() {
             Түрүү AI нь жижиг, дунд бизнесүүдэд хурдан, хямд, бодит үр дүнтэй AI chatbot шийдэл хүргэхийн тулд байгуулагдсан.
           </p>
           <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
-            <Link href="https://app.turuuai.mn/register" className="btn-primary">
+            <Link href="https://app.mongolagent.mn/register" className="btn-primary">
               Үнэгүй эхлэх →
             </Link>
             <a href="https://m.me/turuuai" target="_blank" rel="noopener noreferrer" className="btn-outline">
@@ -284,7 +284,7 @@ export default function AboutPage() {
                 30 минутын үнэгүй consultation-аар бизнестээ яг тохирсон шийдлийг олж мэдээрэй.
               </p>
               <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
-                <Link href="https://app.turuuai.mn/register"
+                <Link href="https://app.mongolagent.mn/register"
                   style={{ display: "inline-flex", alignItems: "center", padding: "0.9rem 2rem", fontSize: "0.92rem", fontWeight: 600, textDecoration: "none", borderRadius: "0.75rem", background: "white", color: "#1e1b4b", transition: "all 0.2s" }}>
                   Үнэгүй эхлэх →
                 </Link>

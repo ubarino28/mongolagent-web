@@ -285,7 +285,7 @@ export default function DemoChat() {
               <p style={{ fontSize: "0.78rem", color: "var(--text-light)", lineHeight: 1.6, marginBottom: "1rem" }}>
                 Карт шаардахгүй. 8 асуулт хариулаад AI ажилтнаа өнөөдөр л ажиллуул.
               </p>
-              <a href="https://app.turuuai.mn/register"
+              <a href="https://app.mongolagent.mn/register"
                 style={{
                   display: "block", textAlign: "center",
                   background: "linear-gradient(135deg, #6366f1, #8b5cf6)",

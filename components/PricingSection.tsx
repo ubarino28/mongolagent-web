@@ -221,7 +221,7 @@ export default function PricingSection() {
                 </button>
 
                 <Link
-                  href="https://app.turuuai.mn/register"
+                  href="https://app.mongolagent.mn/register"
                   style={{ display: "flex", justifyContent: "center", alignItems: "center", padding: "0.7rem 1rem", borderRadius: "0.7rem", fontWeight: 600, fontSize: "0.85rem", textDecoration: "none", transition: "all 0.2s", ...(plan.highlight ? { background: "linear-gradient(135deg, #6366f1, #8b5cf6)", color: "white", boxShadow: "0 4px 16px #6366f130" } : { background: "transparent", color: "var(--text-mid)", border: "1px solid var(--border2)" }) }}>
                   {plan.name === "Starter" ? "Үнэгүй эхлэх →" : "Эхлэх →"}
                 </Link>
@@ -315,7 +315,7 @@ export default function PricingSection() {
               </div>
 
               <Link
-                href="https://app.turuuai.mn/register"
+                href="https://app.mongolagent.mn/register"
                 style={{ display: "flex", justifyContent: "center", alignItems: "center", padding: "0.875rem", borderRadius: "0.875rem", fontWeight: 600, fontSize: "0.95rem", textDecoration: "none", background: "linear-gradient(135deg, #6366f1, #8b5cf6)", color: "white", boxShadow: "0 4px 20px #6366f130" }}>
                 {activePlan.name} багцаар эхлэх →
               </Link>
