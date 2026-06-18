@@ -27,14 +27,14 @@ export default function Footer() {
           <div className="md:col-span-1">
             <div className="flex items-center gap-2.5 mb-4">
               <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
-                style={{ background: "linear-gradient(135deg, #6366f1, #8b5cf6)" }}>
+                style={{ background: "var(--accent)" }}>
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                  <path d="M8 2L13 5V11L8 14L3 11V5L8 2Z" fill="white" opacity="0.9" />
+                  <path d="M8 2L13 5V11L8 14L3 11V5L8 2Z" fill="white" opacity="0.7" />
                   <path d="M8 5L11 7V11L8 13L5 11V7L8 5Z" fill="white" />
                 </svg>
               </div>
               <span style={{ fontWeight: 700, fontSize: "1rem", color: "var(--text)" }}>
-                Mongol<span style={{ color: "#818cf8" }}>Agent</span>
+                MongolAgent
               </span>
             </div>
             <p style={{ fontSize: "0.82rem", color: "var(--text-light)", lineHeight: 1.7, maxWidth: 200 }}>
@@ -44,7 +44,7 @@ export default function Footer() {
 
           {/* Services */}
           <div>
-            <h4 style={{ fontSize: "0.72rem", fontWeight: 700, color: "var(--text-mid)", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "1rem" }}>
+            <h4 style={{ fontSize: "0.7rem", fontWeight: 700, color: "var(--text-mid)", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "1rem" }}>
               Үйлчилгээ
             </h4>
             <ul className="space-y-2.5">
@@ -63,7 +63,7 @@ export default function Footer() {
 
           {/* Company */}
           <div>
-            <h4 style={{ fontSize: "0.72rem", fontWeight: 700, color: "var(--text-mid)", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "1rem" }}>
+            <h4 style={{ fontSize: "0.7rem", fontWeight: 700, color: "var(--text-mid)", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "1rem" }}>
               Компани
             </h4>
             <ul className="space-y-2.5">
@@ -82,7 +82,7 @@ export default function Footer() {
 
           {/* Contact */}
           <div>
-            <h4 style={{ fontSize: "0.72rem", fontWeight: 700, color: "var(--text-mid)", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "1rem" }}>
+            <h4 style={{ fontSize: "0.7rem", fontWeight: 700, color: "var(--text-mid)", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "1rem" }}>
               Холбоо барих
             </h4>
             <ul className="space-y-2.5">
@@ -111,7 +111,7 @@ export default function Footer() {
             © {new Date().getFullYear()} Mongol Agent. Бүх эрх хуулиар хамгаалагдсан.
           </span>
           <div className="flex items-center gap-2">
-            <div className="w-1.5 h-1.5 rounded-full" style={{ background: "#10b981" }} />
+            <div className="w-1.5 h-1.5 rounded-full" style={{ background: "var(--text-light)" }} />
             <span style={{ fontSize: "0.78rem", color: "var(--text-light)" }}>Бүх систем ажиллаж байна</span>
           </div>
         </div>

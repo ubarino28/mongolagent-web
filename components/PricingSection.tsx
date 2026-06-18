@@ -141,11 +141,11 @@ export default function PricingSection() {
         <div style={{ maxWidth: "72rem", margin: "0 auto", padding: "0 1.25rem" }}>
           <div style={{ textAlign: "center", marginBottom: "3.5rem" }}>
             <div className="section-tag" style={{ display: "inline-flex", marginBottom: "1rem" }}>Үнэ</div>
-            <h2 style={{ fontSize: "clamp(1.7rem, 3.5vw, 2.4rem)", fontWeight: 800, letterSpacing: "-0.02em", marginBottom: "0.75rem" }}>
-              Бизнестээ тохируулан <span className="gradient-text">багцаа сонгоорой</span>
+            <h2 style={{ fontSize: "clamp(1.7rem, 3.5vw, 2.4rem)", fontWeight: 800, letterSpacing: "-0.025em", marginBottom: "0.75rem" }}>
+              Бизнестээ тохируулан багцаа сонгоорой
             </h2>
             <p style={{ color: "var(--text-mid)", fontSize: "0.875rem", marginBottom: "0.6rem" }}>
-              Starter багцыг <span style={{ color: "#818cf8", fontWeight: 600 }}>3 хоног үнэгүй</span> туршаад үзээрэй — карт шаардахгүй
+              Starter багцыг <strong style={{ color: "var(--text)" }}>3 хоног үнэгүй</strong> туршаад үзээрэй — карт шаардахгүй
             </p>
           </div>
 
@@ -154,12 +154,11 @@ export default function PricingSection() {
               <div key={plan.name}
                 className={plan.highlight ? "pricing-featured" : ""}
                 style={{
-                  position: "relative", borderRadius: "1.25rem",
+                  position: "relative", borderRadius: "1rem",
                   padding: plan.highlight ? "2rem 1.5rem" : "1.75rem 1.5rem",
                   display: "flex", flexDirection: "column",
-                  background: plan.highlight ? "linear-gradient(160deg, #16163a 0%, #0e0e24 100%)" : "var(--surface)",
-                  border: plan.highlight ? "1px solid #6366f160" : "1px solid var(--border)",
-                  boxShadow: plan.highlight ? "0 0 60px #6366f122, inset 0 1px 0 #6366f130" : "none",
+                  background: plan.highlight ? "var(--accent)" : "var(--surface)",
+                  border: plan.highlight ? "1px solid var(--accent)" : "1px solid var(--border)",
                   transform: plan.highlight ? "scale(1.03)" : "scale(1)",
                   zIndex: plan.highlight ? 2 : 1,
                 }}>
@@ -169,9 +168,9 @@ export default function PricingSection() {
                     position: "absolute", top: "-1px", left: "50%", transform: "translateX(-50%)",
                     padding: "0.25rem 0.9rem", borderRadius: "0 0 0.65rem 0.65rem",
                     fontSize: "0.65rem", fontWeight: 700, letterSpacing: "0.05em", whiteSpace: "nowrap",
-                    background: plan.highlight ? "linear-gradient(135deg, #6366f1, #8b5cf6)" : "var(--surface3)",
+                    background: plan.highlight ? "rgba(255,255,255,0.15)" : "var(--surface3)",
                     color: plan.highlight ? "white" : "var(--text-mid)",
-                    border: plan.highlight ? "none" : "1px solid var(--border)",
+                    border: plan.highlight ? "1px solid rgba(255,255,255,0.1)" : "1px solid var(--border)",
                     borderTop: "none",
                   }}>
                     {plan.badge}
@@ -179,20 +178,20 @@ export default function PricingSection() {
                 )}
 
                 <div style={{ marginBottom: "0.35rem", marginTop: plan.badge ? "0.5rem" : "0" }}>
-                  <span style={{ fontSize: "0.68rem", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.1em", color: plan.highlight ? "#818cf8" : "var(--text-light)" }}>{plan.name}</span>
+                  <span style={{ fontSize: "0.65rem", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.1em", color: plan.highlight ? "rgba(255,255,255,0.55)" : "var(--text-light)" }}>{plan.name}</span>
                 </div>
                 <div style={{ display: "flex", alignItems: "flex-end", gap: "0.25rem", marginBottom: "0.35rem" }}>
-                  <span style={{ fontSize: "1.9rem", fontWeight: 800, letterSpacing: "-0.03em", lineHeight: 1, color: plan.highlight ? "#f1f5f9" : "var(--text)" }}>{plan.price}</span>
-                  <span style={{ fontSize: "0.78rem", color: "var(--text-light)", paddingBottom: "0.25rem" }}>{plan.period}</span>
+                  <span style={{ fontSize: "1.9rem", fontWeight: 800, letterSpacing: "-0.03em", lineHeight: 1, color: plan.highlight ? "white" : "var(--text)" }}>{plan.price}</span>
+                  <span style={{ fontSize: "0.78rem", color: plan.highlight ? "rgba(255,255,255,0.45)" : "var(--text-light)", paddingBottom: "0.25rem" }}>{plan.period}</span>
                 </div>
-                <p style={{ fontSize: "0.75rem", color: plan.highlight ? "rgba(255,255,255,0.5)" : "var(--text-light)", marginBottom: "1.25rem", lineHeight: 1.5 }}>{plan.desc}</p>
+                <p style={{ fontSize: "0.75rem", color: plan.highlight ? "rgba(255,255,255,0.55)" : "var(--text-light)", marginBottom: "1.25rem", lineHeight: 1.5 }}>{plan.desc}</p>
 
-                <div style={{ height: "1px", background: plan.highlight ? "#6366f125" : "var(--border)", marginBottom: "1rem" }} />
+                <div style={{ height: "1px", background: plan.highlight ? "rgba(255,255,255,0.1)" : "var(--border)", marginBottom: "1rem" }} />
 
                 <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: "0.5rem", marginBottom: plan.includesAll ? "0.75rem" : "1.25rem" }}>
                   {plan.features.map(f => (
-                    <div key={f} style={{ display: "flex", alignItems: "flex-start", gap: "0.5rem", fontSize: "0.78rem", color: plan.highlight ? "rgba(255,255,255,0.7)" : "var(--text-light)" }}>
-                      <span style={{ color: plan.highlight ? "#818cf8" : "#6366f1", flexShrink: 0, marginTop: "0.05rem" }}>✓</span>
+                    <div key={f} style={{ display: "flex", alignItems: "flex-start", gap: "0.5rem", fontSize: "0.78rem", color: plan.highlight ? "rgba(255,255,255,0.75)" : "var(--text-mid)" }}>
+                      <span style={{ color: plan.highlight ? "rgba(255,255,255,0.6)" : "var(--text-light)", flexShrink: 0, marginTop: "0.05rem" }}>✓</span>
                       <span>{f}</span>
                     </div>
                   ))}
@@ -203,10 +202,10 @@ export default function PricingSection() {
                     marginBottom: "1.25rem",
                     padding: "0.45rem 0.75rem",
                     borderRadius: "0.5rem",
-                    background: plan.highlight ? "#6366f118" : "var(--surface3)",
-                    border: `1px solid ${plan.highlight ? "#6366f135" : "var(--border)"}`,
+                    background: plan.highlight ? "rgba(255,255,255,0.08)" : "var(--surface3)",
+                    border: `1px solid ${plan.highlight ? "rgba(255,255,255,0.1)" : "var(--border)"}`,
                     fontSize: "0.72rem", fontWeight: 600,
-                    color: plan.highlight ? "#818cf8" : "var(--text-mid)",
+                    color: plan.highlight ? "rgba(255,255,255,0.6)" : "var(--text-mid)",
                     letterSpacing: "0.01em",
                     textAlign: "center",
                   }}>
@@ -216,13 +215,26 @@ export default function PricingSection() {
 
                 <button
                   onClick={() => setActiveModal(plan.name)}
-                  style={{ width: "100%", padding: "0.5rem", borderRadius: "0.6rem", marginBottom: "0.6rem", fontSize: "0.75rem", fontWeight: 500, cursor: "pointer", background: "transparent", border: `1px solid ${plan.highlight ? "#6366f140" : "var(--border)"}`, color: plan.highlight ? "#818cf8" : "var(--text-light)", transition: "all 0.15s" }}>
+                  style={{
+                    width: "100%", padding: "0.5rem", borderRadius: "0.6rem", marginBottom: "0.6rem",
+                    fontSize: "0.75rem", fontWeight: 500, cursor: "pointer", background: "transparent",
+                    border: `1px solid ${plan.highlight ? "rgba(255,255,255,0.2)" : "var(--border2)"}`,
+                    color: plan.highlight ? "rgba(255,255,255,0.6)" : "var(--text-light)",
+                    transition: "all 0.15s",
+                  }}>
                   Дэлгэрэнгүй →
                 </button>
 
                 <Link
                   href="https://app.mongolagent.mn/register"
-                  style={{ display: "flex", justifyContent: "center", alignItems: "center", padding: "0.7rem 1rem", borderRadius: "0.7rem", fontWeight: 600, fontSize: "0.85rem", textDecoration: "none", transition: "all 0.2s", ...(plan.highlight ? { background: "linear-gradient(135deg, #6366f1, #8b5cf6)", color: "white", boxShadow: "0 4px 16px #6366f130" } : { background: "transparent", color: "var(--text-mid)", border: "1px solid var(--border2)" }) }}>
+                  style={{
+                    display: "flex", justifyContent: "center", alignItems: "center",
+                    padding: "0.7rem 1rem", borderRadius: "0.7rem",
+                    fontWeight: 600, fontSize: "0.85rem", textDecoration: "none", transition: "all 0.2s",
+                    ...(plan.highlight
+                      ? { background: "white", color: "var(--accent)" }
+                      : { background: "transparent", color: "var(--text-mid)", border: "1px solid var(--border2)" })
+                  }}>
                   {plan.name === "Starter" ? "Үнэгүй эхлэх →" : "Эхлэх →"}
                 </Link>
               </div>
@@ -232,8 +244,8 @@ export default function PricingSection() {
           {/* Bottom note */}
           <p style={{ textAlign: "center", fontSize: "0.78rem", color: "var(--text-light)", marginTop: "2rem" }}>
             Enterprise багцын <strong style={{ color: "var(--text-mid)" }}>Custom хөгжүүлэлт</strong> нь сарын төлбөрөөс гадна нэмэлт үнийн саналтай байна
-            {" "}· {" "}
-            <a href="https://m.me/turuuai" target="_blank" rel="noopener noreferrer" style={{ color: "#818cf8", textDecoration: "none" }}>Асуух →</a>
+            {" "}·{" "}
+            <a href="https://m.me/turuuai" target="_blank" rel="noopener noreferrer" style={{ color: "var(--text)", textDecoration: "underline", textUnderlineOffset: "2px" }}>Асуух →</a>
           </p>
         </div>
       </section>
@@ -249,79 +261,79 @@ export default function PricingSection() {
           cur = parent;
         }
         return (
-        <div
-          onClick={() => setActiveModal(null)}
-          style={{ position: "fixed", inset: 0, zIndex: 100, display: "flex", alignItems: "center", justifyContent: "center", padding: "1rem", background: "rgba(0,0,0,0.75)", backdropFilter: "blur(8px)" }}>
           <div
-            onClick={e => e.stopPropagation()}
-            style={{ width: "100%", maxWidth: "580px", maxHeight: "88vh", overflowY: "auto", borderRadius: "1.5rem", background: "var(--surface2)", border: "1px solid var(--border2)", boxShadow: "0 24px 80px #00000060" }}>
+            onClick={() => setActiveModal(null)}
+            style={{ position: "fixed", inset: 0, zIndex: 100, display: "flex", alignItems: "center", justifyContent: "center", padding: "1rem", background: "rgba(0,0,0,0.55)", backdropFilter: "blur(6px)" }}>
+            <div
+              onClick={e => e.stopPropagation()}
+              style={{ width: "100%", maxWidth: "580px", maxHeight: "88vh", overflowY: "auto", borderRadius: "1.25rem", background: "var(--bg)", border: "1px solid var(--border)", boxShadow: "0 24px 80px rgba(0,0,0,0.2)" }}>
 
-            <div style={{ position: "sticky", top: 0, zIndex: 10, padding: "1.5rem 1.75rem 1.25rem", background: "var(--surface2)", borderBottom: "1px solid var(--border)", display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: "1rem" }}>
-              <div>
-                <div style={{ fontSize: "0.68rem", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.1em", color: "var(--primary2)", marginBottom: "0.3rem" }}>{activePlan.name}</div>
-                <div style={{ display: "flex", alignItems: "flex-end", gap: "0.3rem" }}>
-                  <span style={{ fontSize: "1.8rem", fontWeight: 800, letterSpacing: "-0.03em", lineHeight: 1 }}>{activePlan.price}</span>
-                  <span style={{ fontSize: "0.82rem", color: "var(--text-light)", paddingBottom: "0.2rem" }}>{activePlan.period}</span>
+              <div style={{ position: "sticky", top: 0, zIndex: 10, padding: "1.5rem 1.75rem 1.25rem", background: "var(--bg)", borderBottom: "1px solid var(--border)", display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: "1rem" }}>
+                <div>
+                  <div style={{ fontSize: "0.65rem", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.1em", color: "var(--text-light)", marginBottom: "0.3rem" }}>{activePlan.name}</div>
+                  <div style={{ display: "flex", alignItems: "flex-end", gap: "0.3rem" }}>
+                    <span style={{ fontSize: "1.8rem", fontWeight: 800, letterSpacing: "-0.03em", lineHeight: 1 }}>{activePlan.price}</span>
+                    <span style={{ fontSize: "0.82rem", color: "var(--text-light)", paddingBottom: "0.2rem" }}>{activePlan.period}</span>
+                  </div>
                 </div>
+                <button
+                  onClick={() => setActiveModal(null)}
+                  style={{ flexShrink: 0, width: "32px", height: "32px", borderRadius: "8px", border: "1px solid var(--border)", background: "var(--surface2)", color: "var(--text-mid)", fontSize: "1rem", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                  ✕
+                </button>
               </div>
-              <button
-                onClick={() => setActiveModal(null)}
-                style={{ flexShrink: 0, width: "32px", height: "32px", borderRadius: "8px", border: "1px solid var(--border2)", background: "var(--surface3)", color: "var(--text-mid)", fontSize: "1rem", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                ✕
-              </button>
-            </div>
 
-            <div style={{ padding: "1.75rem" }}>
-              <div style={{ marginBottom: "2rem" }}>
-                <div style={{ fontSize: "0.72rem", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.1em", color: "var(--text-light)", marginBottom: "1rem" }}>Юу хийж чадах вэ</div>
-                <div style={{ display: "flex", flexDirection: "column", gap: "0.875rem" }}>
-                  {activePlan.modal.features.map((f, i) => (
-                    <div key={i} style={{ padding: "1rem 1.1rem", borderRadius: "0.875rem", background: "var(--surface3)", border: "1px solid var(--border)" }}>
-                      <div style={{ fontSize: "0.875rem", fontWeight: 600, color: "var(--text)", marginBottom: "0.35rem" }}>✦ {f.title}</div>
-                      <div style={{ fontSize: "0.82rem", color: "var(--text-mid)", lineHeight: 1.7 }}>{f.desc}</div>
+              <div style={{ padding: "1.75rem" }}>
+                <div style={{ marginBottom: "2rem" }}>
+                  <div style={{ fontSize: "0.7rem", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.1em", color: "var(--text-light)", marginBottom: "1rem" }}>Юу хийж чадах вэ</div>
+                  <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
+                    {activePlan.modal.features.map((f, i) => (
+                      <div key={i} style={{ padding: "1rem 1.1rem", borderRadius: "0.75rem", background: "var(--surface)", border: "1px solid var(--border)" }}>
+                        <div style={{ fontSize: "0.875rem", fontWeight: 600, color: "var(--text)", marginBottom: "0.3rem" }}>— {f.title}</div>
+                        <div style={{ fontSize: "0.82rem", color: "var(--text-mid)", lineHeight: 1.7 }}>{f.desc}</div>
+                      </div>
+                    ))}
+                  </div>
+
+                  {chain.map(parentPlan => (
+                    <div key={parentPlan.name}>
+                      <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", margin: "1.25rem 0 1rem" }}>
+                        <div style={{ flex: 1, height: "1px", background: "var(--border)" }} />
+                        <span style={{ fontSize: "0.65rem", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.1em", color: "var(--text-light)", whiteSpace: "nowrap" }}>
+                          {parentPlan.name} багцаас
+                        </span>
+                        <div style={{ flex: 1, height: "1px", background: "var(--border)" }} />
+                      </div>
+                      <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
+                        {parentPlan.modal.features.map((f, i) => (
+                          <div key={i} style={{ padding: "0.75rem 1rem", borderRadius: "0.65rem", background: "var(--surface2)", border: "1px solid var(--border)" }}>
+                            <div style={{ fontSize: "0.82rem", fontWeight: 600, color: "var(--text-mid)", marginBottom: "0.2rem" }}>— {f.title}</div>
+                            <div style={{ fontSize: "0.78rem", color: "var(--text-light)", lineHeight: 1.6 }}>{f.desc}</div>
+                          </div>
+                        ))}
+                      </div>
                     </div>
                   ))}
                 </div>
 
-                {chain.map(parentPlan => (
-                  <div key={parentPlan.name}>
-                    <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", margin: "1.25rem 0 1rem" }}>
-                      <div style={{ flex: 1, height: "1px", background: "var(--border)" }} />
-                      <span style={{ fontSize: "0.65rem", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.1em", color: "var(--text-light)", whiteSpace: "nowrap" }}>
-                        {parentPlan.name} багцаас
-                      </span>
-                      <div style={{ flex: 1, height: "1px", background: "var(--border)" }} />
-                    </div>
-                    <div style={{ display: "flex", flexDirection: "column", gap: "0.625rem" }}>
-                      {parentPlan.modal.features.map((f, i) => (
-                        <div key={i} style={{ padding: "0.75rem 1rem", borderRadius: "0.75rem", background: "var(--surface)", border: "1px solid var(--border)" }}>
-                          <div style={{ fontSize: "0.82rem", fontWeight: 600, color: "var(--text-mid)", marginBottom: "0.2rem" }}>✦ {f.title}</div>
-                          <div style={{ fontSize: "0.78rem", color: "var(--text-light)", lineHeight: 1.6 }}>{f.desc}</div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                ))}
-              </div>
+                <div style={{ marginBottom: "1.25rem", padding: "1rem 1.1rem", borderRadius: "0.75rem", background: "var(--surface2)", border: "1px solid var(--border)" }}>
+                  <div style={{ fontSize: "0.7rem", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.1em", color: "var(--text-mid)", marginBottom: "0.5rem" }}>Хэнд тохиромжтой вэ</div>
+                  <p style={{ fontSize: "0.84rem", color: "var(--text-mid)", lineHeight: 1.7 }}>{activePlan.modal.target}</p>
+                </div>
 
-              <div style={{ marginBottom: "1.25rem", padding: "1rem 1.1rem", borderRadius: "0.875rem", background: "#6366f108", border: "1px solid #6366f122" }}>
-                <div style={{ fontSize: "0.72rem", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.1em", color: "var(--primary2)", marginBottom: "0.5rem" }}>Хэнд тохиромжтой вэ</div>
-                <p style={{ fontSize: "0.84rem", color: "var(--text-mid)", lineHeight: 1.7 }}>{activePlan.modal.target}</p>
-              </div>
+                <div style={{ marginBottom: "1.75rem", padding: "1rem 1.1rem", borderRadius: "0.75rem", background: "var(--surface2)", border: "1px solid var(--border)" }}>
+                  <div style={{ fontSize: "0.7rem", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.1em", color: "var(--text-mid)", marginBottom: "0.5rem" }}>Жишээ кейс</div>
+                  <p style={{ fontSize: "0.84rem", color: "var(--text-mid)", lineHeight: 1.7 }}>{activePlan.modal.caseStudy}</p>
+                </div>
 
-              <div style={{ marginBottom: "1.75rem", padding: "1rem 1.1rem", borderRadius: "0.875rem", background: "#10b98108", border: "1px solid #10b98122" }}>
-                <div style={{ fontSize: "0.72rem", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.1em", color: "#34d399", marginBottom: "0.5rem" }}>📈 Жишээ кейс</div>
-                <p style={{ fontSize: "0.84rem", color: "var(--text-mid)", lineHeight: 1.7 }}>{activePlan.modal.caseStudy}</p>
+                <Link
+                  href="https://app.mongolagent.mn/register"
+                  style={{ display: "flex", justifyContent: "center", alignItems: "center", padding: "0.875rem", borderRadius: "0.75rem", fontWeight: 600, fontSize: "0.95rem", textDecoration: "none", background: "var(--accent)", color: "white" }}>
+                  {activePlan.name} багцаар эхлэх →
+                </Link>
               </div>
-
-              <Link
-                href="https://app.mongolagent.mn/register"
-                style={{ display: "flex", justifyContent: "center", alignItems: "center", padding: "0.875rem", borderRadius: "0.875rem", fontWeight: 600, fontSize: "0.95rem", textDecoration: "none", background: "linear-gradient(135deg, #6366f1, #8b5cf6)", color: "white", boxShadow: "0 4px 20px #6366f130" }}>
-                {activePlan.name} багцаар эхлэх →
-              </Link>
             </div>
           </div>
-        </div>
         );
       })()}
     </>

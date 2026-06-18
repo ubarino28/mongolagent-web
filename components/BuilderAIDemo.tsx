@@ -34,8 +34,8 @@ function randSpeed(min: number, max: number) {
 const AIAvatar = () => (
   <div style={{
     width: "26px", height: "26px", borderRadius: "8px", flexShrink: 0,
-    background: "linear-gradient(135deg, #6366f118, #8b5cf618)",
-    border: "1px solid #6366f122",
+    background: "var(--surface2)",
+    border: "1px solid var(--border)",
     display: "flex", alignItems: "center", justifyContent: "center",
     alignSelf: "flex-end", overflow: "hidden",
   }}>
@@ -184,7 +184,7 @@ export default function BuilderAIDemo() {
             <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
               {["Код шаардахгүй", "10 минутад бэлэн", "QPay шууд холбогдоно"].map(item => (
                 <div key={item} style={{ display: "flex", alignItems: "center", gap: "0.6rem", fontSize: "0.85rem", color: "var(--text-mid)" }}>
-                  <span style={{ color: "#6366f1", fontWeight: 700, fontSize: "1rem" }}>✓</span>
+                  <span style={{ color: "var(--text)", fontWeight: 700, fontSize: "1rem" }}>✓</span>
                   {item}
                 </div>
               ))}
@@ -193,10 +193,10 @@ export default function BuilderAIDemo() {
 
           {/* Right: chat window */}
           <div style={{
-            borderRadius: "1.5rem", overflow: "hidden",
-            border: "1px solid var(--border2)",
+            borderRadius: "1.25rem", overflow: "hidden",
+            border: "1px solid var(--border)",
             background: "var(--surface)",
-            boxShadow: "0 20px 60px #6366f11a, 0 4px 16px #00000008",
+            boxShadow: "0 20px 60px rgba(0,0,0,0.07), 0 4px 16px rgba(0,0,0,0.04)",
           }}>
             {/* Header */}
             <div style={{
@@ -218,16 +218,16 @@ export default function BuilderAIDemo() {
                 </div>
                 <div>
                   <div style={{ fontSize: "0.8rem", fontWeight: 700, color: "var(--text)", lineHeight: 1.1 }}>Builder AI</div>
-                  <div style={{ fontSize: "0.62rem", color: "#10b981", fontWeight: 600, display: "flex", alignItems: "center", gap: "3px" }}>
-                    <span style={{ width: "5px", height: "5px", borderRadius: "50%", background: "#10b981", display: "inline-block" }} />
+                  <div style={{ fontSize: "0.62rem", color: "var(--text-light)", fontWeight: 600, display: "flex", alignItems: "center", gap: "3px" }}>
+                    <span style={{ width: "5px", height: "5px", borderRadius: "50%", background: "var(--text-light)", display: "inline-block" }} />
                     онлайн
                   </div>
                 </div>
               </div>
               {phase === "done" ? (
-                <div style={{ fontSize: "0.65rem", color: "#15803d", fontWeight: 700, background: "#dcfce7", border: "1px solid #bbf7d0", padding: "0.25rem 0.65rem", borderRadius: "100px" }}>✓ Дууслаа</div>
+                <div style={{ fontSize: "0.65rem", color: "var(--text)", fontWeight: 700, background: "var(--surface2)", border: "1px solid var(--border)", padding: "0.25rem 0.65rem", borderRadius: "100px" }}>✓ Дууслаа</div>
               ) : (
-                <div style={{ fontSize: "0.65rem", color: "var(--text-light)", fontWeight: 600, background: "var(--surface2)", border: "1px solid var(--border)", padding: "0.25rem 0.65rem", borderRadius: "100px" }}>{qIndex + 1} / {QA.length} асуулт</div>
+                <div style={{ fontSize: "0.65rem", color: "var(--text-light)", fontWeight: 600, background: "var(--surface2)", border: "1px solid var(--border)", padding: "0.25rem 0.65rem", borderRadius: "100px" }}>{qIndex + 1} / {QA.length}</div>
               )}
             </div>
 
@@ -235,7 +235,7 @@ export default function BuilderAIDemo() {
             <div style={{ height: "2px", background: "var(--border)" }}>
               <div style={{
                 height: "100%", width: `${progressPct}%`,
-                background: phase === "done" ? "linear-gradient(90deg, #10b981, #34d399)" : "linear-gradient(90deg, #6366f1, #8b5cf6)",
+                background: "var(--accent)",
                 transition: "width 0.5s ease, background 0.6s ease",
               }} />
             </div>
@@ -263,7 +263,7 @@ export default function BuilderAIDemo() {
                     }}>
                       {[0, 1, 2].map(d => (
                         <span key={d} style={{
-                          width: "5px", height: "5px", borderRadius: "50%", background: "#6366f1",
+                          width: "5px", height: "5px", borderRadius: "50%", background: "var(--border2)",
                           display: "inline-block",
                           animation: `tdot 1.2s ease-in-out ${d * 0.18}s infinite`,
                         }} />
@@ -291,7 +291,7 @@ export default function BuilderAIDemo() {
                         {b.partial && (
                           <span style={{
                             display: "inline-block", width: "2px", height: "12px",
-                            background: "#6366f1", marginLeft: "2px", verticalAlign: "middle",
+                            background: "var(--text-mid)", marginLeft: "2px", verticalAlign: "middle",
                             animation: "blink 0.65s step-end infinite",
                           }} />
                         )}
@@ -306,10 +306,9 @@ export default function BuilderAIDemo() {
                       maxWidth: "76%",
                       padding: "0.5rem 0.75rem",
                       borderRadius: "0.875rem 0.875rem 0.2rem 0.875rem",
-                      background: "linear-gradient(135deg, #6366f1, #8b5cf6)",
+                      background: "var(--accent)",
                       fontSize: "0.78rem", color: "white",
                       lineHeight: 1.55,
-                      boxShadow: "0 2px 12px #6366f128",
                     }}>
                       {b.text}
                     </div>
@@ -323,14 +322,13 @@ export default function BuilderAIDemo() {
                       maxWidth: "85%",
                       padding: "0.65rem 0.875rem",
                       borderRadius: "0.875rem 0.875rem 0.875rem 0.2rem",
-                      background: "linear-gradient(135deg, #f0fdf4, #dcfce7)",
-                      border: "1px solid #bbf7d0",
-                      boxShadow: "0 2px 12px #10b98118",
+                      background: "var(--surface2)",
+                      border: "1px solid var(--border)",
                     }}>
-                      <div style={{ fontSize: "0.8rem", fontWeight: 700, color: "#15803d", marginBottom: "0.25rem" }}>
-                        🎉 Таны AI chatbot бэлэн боллоо!
+                      <div style={{ fontSize: "0.8rem", fontWeight: 700, color: "var(--text)", marginBottom: "0.25rem" }}>
+                        Таны AI chatbot бэлэн боллоо!
                       </div>
-                      <div style={{ fontSize: "0.74rem", color: "#166534", lineHeight: 1.55 }}>
+                      <div style={{ fontSize: "0.74rem", color: "var(--text-mid)", lineHeight: 1.55 }}>
                         Lumière салонд зориулсан AI ажилтан амжилттай тохируулагдлаа. Та одоо Messenger-ээр хэрэглэгчтэйгээ харилцаж эхлэх боломжтой.
                       </div>
                     </div>
@@ -350,8 +348,8 @@ export default function BuilderAIDemo() {
             }}>
               <div style={{
                 flex: 1, padding: "0.5rem 1rem", borderRadius: "100px",
-                background: isTypingInput ? "white" : "#f5f4f0",
-                border: isTypingInput ? "1.5px solid #6366f145" : "1px solid #e5e3df",
+                background: isTypingInput ? "white" : "var(--surface2)",
+                border: isTypingInput ? "1.5px solid var(--border2)" : "1px solid var(--border)",
                 fontSize: "0.78rem",
                 color: inputText ? "#374151" : "#b0aaa4",
                 transition: "border-color 0.2s, background 0.2s",
@@ -362,20 +360,18 @@ export default function BuilderAIDemo() {
                 {isTypingInput && (
                   <span style={{
                     display: "inline-block", width: "1.5px", height: "13px",
-                    background: "#6366f1", marginLeft: "1px", verticalAlign: "middle",
+                    background: "var(--text-mid)", marginLeft: "1px", verticalAlign: "middle",
                     animation: "blink 0.65s step-end infinite",
                   }} />
                 )}
               </div>
               <div style={{
                 width: "34px", height: "34px", borderRadius: "50%", flexShrink: 0,
-                background: isSending
-                  ? "linear-gradient(135deg, #4f46e5, #7c3aed)"
-                  : "linear-gradient(135deg, #6366f1, #8b5cf6)",
+                background: "var(--accent)",
                 display: "flex", alignItems: "center", justifyContent: "center",
-                boxShadow: isSending ? "0 2px 16px #6366f150" : "0 2px 10px #6366f130",
-                transition: "box-shadow 0.15s, background 0.15s",
+                transition: "opacity 0.15s",
                 transform: isSending ? "scale(0.93)" : "scale(1)",
+                opacity: isSending ? 0.7 : 1,
               }}>
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none">
                   <path d="M22 2L11 13M22 2L15 22L11 13M22 2L2 9L11 13" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
