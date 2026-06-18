@@ -159,9 +159,6 @@ export default function HomePage() {
     <>
       {/* ─── HERO ─────────────────────────────────────────── */}
       <section style={{ position: "relative", overflow: "hidden", padding: "6rem 0 7rem" }}>
-        {/* Subtle color glows */}
-        <div style={{ position: "absolute", inset: 0, pointerEvents: "none", background: "radial-gradient(ellipse 50% 55% at 18% 38%, #2563eb08 0%, transparent 65%)" }} />
-        <div style={{ position: "absolute", inset: 0, pointerEvents: "none", background: "radial-gradient(ellipse 55% 65% at 78% 50%, #6366f10a 0%, #2563eb06 40%, transparent 70%)" }} />
 
         <div style={{ ...wrap, position: "relative" }}>
           {/* Two-column grid */}
@@ -195,39 +192,33 @@ export default function HomePage() {
 
             {/* ── Right: mascot ── */}
             <div className="hero-mascot" style={{ position: "relative", display: "flex", justifyContent: "center", alignItems: "center", minHeight: "460px" }}>
-              {/* Subtle glow */}
-              <div style={{
-                position: "absolute", width: "420px", height: "420px", borderRadius: "50%",
-                background: "radial-gradient(ellipse at center, #6366f120 0%, #8b5cf612 50%, transparent 72%)",
-                filter: "blur(48px)",
-              }} />
               {/* Mascot */}
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/mascot.png"
                 alt="Mongol Agent AI"
                 className="mascot-float"
-                style={{ width: "400px", maxWidth: "88%", position: "relative", zIndex: 2, filter: "drop-shadow(0 16px 32px #6366f130)" }}
+                style={{ width: "400px", maxWidth: "88%", position: "relative", zIndex: 2, filter: "drop-shadow(0 24px 48px rgba(0,0,0,0.12))" }}
               />
               {/* Chat bubble — user */}
               <div className="hero-bubble" style={{
                 position: "absolute", top: "72px", right: "44px", zIndex: 3,
-                background: "var(--surface2)", border: "1px solid var(--border2)",
+                background: "var(--surface2)", border: "1px solid var(--border)",
                 borderRadius: "1rem 1rem 1rem 0.25rem",
                 padding: "0.55rem 0.85rem",
                 fontSize: "0.75rem", color: "var(--text-mid)",
-                boxShadow: "0 4px 24px #00000050",
+                boxShadow: "0 4px 24px rgba(0,0,0,0.1)",
               }}>
                 Сайн байна уу?
               </div>
               {/* Chat bubble — AI */}
               <div className="hero-bubble" style={{
                 position: "absolute", bottom: "110px", left: "28px", zIndex: 3,
-                background: "linear-gradient(135deg, #6366f1, #8b5cf6)",
+                background: "var(--accent)",
                 borderRadius: "1rem 1rem 0.25rem 1rem",
                 padding: "0.55rem 0.85rem",
                 fontSize: "0.75rem", color: "white",
-                boxShadow: "0 4px 24px #6366f128",
+                boxShadow: "0 4px 24px rgba(0,0,0,0.18)",
               }}>
                 Захиалга баталгаажлаа!
               </div>
@@ -262,16 +253,16 @@ export default function HomePage() {
           Интеграцтай платформууд
         </p>
         <div style={{ overflow: "hidden", position: "relative" }}>
-          <div style={{ position: "absolute", left: 0, top: 0, bottom: 0, width: "6rem", zIndex: 10, background: "linear-gradient(90deg, #f4f3ef, transparent)", pointerEvents: "none" }} />
-          <div style={{ position: "absolute", right: 0, top: 0, bottom: 0, width: "6rem", zIndex: 10, background: "linear-gradient(-90deg, #f4f3ef, transparent)", pointerEvents: "none" }} />
+          <div style={{ position: "absolute", left: 0, top: 0, bottom: 0, width: "6rem", zIndex: 10, background: "linear-gradient(90deg, var(--bg), transparent)", pointerEvents: "none" }} />
+          <div style={{ position: "absolute", right: 0, top: 0, bottom: 0, width: "6rem", zIndex: 10, background: "linear-gradient(-90deg, var(--bg), transparent)", pointerEvents: "none" }} />
           <div className="marquee-inner">
             {[...PLATFORMS, ...PLATFORMS].map((p, i) => (
               <div key={i} style={{ display: "flex", alignItems: "center", gap: "0.65rem", margin: "0 2.5rem", flexShrink: 0 }}>
                 <div style={{
                   width: "32px", height: "32px", borderRadius: "8px", flexShrink: 0,
                   display: "flex", alignItems: "center", justifyContent: "center",
-                  background: p.img ? "var(--surface2)" : p.color + "18",
-                  border: p.img ? "1px solid var(--border2)" : `1px solid ${p.color}30`,
+                  background: "var(--surface2)",
+                  border: "1px solid var(--border)",
                 }}>
                   {p.img ? (
                     // eslint-disable-next-line @next/next/no-img-element
@@ -353,7 +344,7 @@ export default function HomePage() {
                 <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
                   <div style={{
                     width: "44px", height: "44px", borderRadius: "12px", flexShrink: 0,
-                    background: "#0ea5e914", border: "1px solid #0ea5e928",
+                    background: "var(--surface3)", border: "1px solid var(--border)",
                     display: "flex", alignItems: "center", justifyContent: "center",
                     fontSize: "1.25rem",
                   }}>
@@ -361,8 +352,8 @@ export default function HomePage() {
                   </div>
                   <span style={{
                     fontSize: "0.63rem", fontWeight: 700, textTransform: "uppercase",
-                    letterSpacing: "0.08em", color: "#0ea5e9",
-                    background: "#0ea5e910", border: "1px solid #0ea5e920",
+                    letterSpacing: "0.08em", color: "var(--text-mid)",
+                    background: "var(--surface3)", border: "1px solid var(--border)",
                     padding: "0.2rem 0.55rem", borderRadius: "100px",
                   }}>
                     {f.badge}
@@ -413,17 +404,15 @@ export default function HomePage() {
                 background: "var(--surface2)", border: "1px solid var(--border2)",
                 padding: "2rem",
               }}>
-                <div style={{ position: "absolute", top: 0, right: 0, width: "160px", height: "160px", borderRadius: "50%", background: `radial-gradient(circle, ${s.color}15, transparent 70%)`, transform: "translate(40%, -40%)", pointerEvents: "none" }} />
-
                 <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "1.5rem" }}>
                   <div style={{
                     width: "48px", height: "48px", borderRadius: "12px", display: "flex", alignItems: "center", justifyContent: "center",
-                    background: `${s.color}15`, border: `1px solid ${s.color}25`, flexShrink: 0,
-                    color: s.color,
+                    background: "var(--surface3)", border: "1px solid var(--border)", flexShrink: 0,
+                    color: "var(--text-mid)",
                   }}>
                     {s.icon}
                   </div>
-                  <div className="section-tag" style={{ display: "inline-flex", background: `${s.color}12`, borderColor: `${s.color}28`, color: s.color, fontSize: "0.65rem" }}>
+                  <div className="section-tag" style={{ display: "inline-flex", fontSize: "0.65rem" }}>
                     {s.tag}
                   </div>
                 </div>
@@ -439,9 +428,9 @@ export default function HomePage() {
                   ))}
                 </div>
 
-                <div style={{ borderRadius: "0.65rem", padding: "0.7rem 1rem", background: `${s.color}08`, border: `1px solid ${s.color}25`, display: "flex", alignItems: "center", gap: "0.5rem" }}>
-                  <div style={{ width: "6px", height: "6px", borderRadius: "50%", background: s.color, flexShrink: 0 }} />
-                  <p style={{ fontSize: "0.78rem", color: s.color, fontWeight: 500, lineHeight: 1.4 }}>{s.result}</p>
+                <div style={{ borderRadius: "0.65rem", padding: "0.7rem 1rem", background: "var(--surface3)", border: "1px solid var(--border)", display: "flex", alignItems: "center", gap: "0.5rem" }}>
+                  <div style={{ width: "6px", height: "6px", borderRadius: "50%", background: "var(--text-light)", flexShrink: 0 }} />
+                  <p style={{ fontSize: "0.78rem", color: "var(--text-mid)", fontWeight: 500, lineHeight: 1.4 }}>{s.result}</p>
                 </div>
               </div>
             ))}
@@ -520,7 +509,7 @@ export default function HomePage() {
                     background: "var(--surface2)", border: "1px solid var(--border)",
                     borderRadius: "100px", padding: "0.25rem 0.75rem",
                   }}>
-                    <span style={{ width: "5px", height: "5px", borderRadius: "50%", background: "#10b981", display: "inline-block", flexShrink: 0 }}/>
+                    <span style={{ width: "5px", height: "5px", borderRadius: "50%", background: "var(--border2)", display: "inline-block", flexShrink: 0 }}/>
                     {p.duration}
                   </div>
                 </div>
@@ -542,11 +531,11 @@ export default function HomePage() {
             {TESTIMONIALS.map(t => (
               <div key={t.name} className="card card-glow" style={{ padding: "1.75rem" }}>
                 <div style={{ display: "flex", gap: "0.25rem", marginBottom: "1rem" }}>
-                  {Array.from({ length: 5 }).map((_, i) => <span key={i} style={{ color: "#f59e0b", fontSize: "0.85rem" }}>★</span>)}
+                  {Array.from({ length: 5 }).map((_, i) => <span key={i} style={{ color: "var(--text)", fontSize: "0.85rem" }}>★</span>)}
                 </div>
                 <p style={{ fontSize: "0.875rem", color: "var(--text-mid)", lineHeight: 1.7, marginBottom: "1.5rem" }}>"{t.text}"</p>
                 <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
-                  <div style={{ width: "2.25rem", height: "2.25rem", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "0.85rem", fontWeight: 700, flexShrink: 0, background: "linear-gradient(135deg, #6366f1, #8b5cf6)", color: "white" }}>
+                  <div style={{ width: "2.25rem", height: "2.25rem", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "0.85rem", fontWeight: 700, flexShrink: 0, background: "var(--accent)", color: "white" }}>
                     {t.av}
                   </div>
                   <div>
@@ -572,7 +561,7 @@ export default function HomePage() {
             {FAQS.map((f, i) => (
               <div key={i} style={{ borderRadius: "1rem", padding: "1.5rem", background: "var(--surface)", border: "1px solid var(--border)" }}>
                 <div style={{ display: "flex", gap: "1rem" }}>
-                  <div style={{ width: "1.5rem", height: "1.5rem", borderRadius: "0.4rem", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, marginTop: "2px", background: "#6366f118", color: "var(--primary2)", fontSize: "0.65rem", fontWeight: 700 }}>Q</div>
+                  <div style={{ width: "1.5rem", height: "1.5rem", borderRadius: "0.4rem", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, marginTop: "2px", background: "var(--surface3)", color: "var(--text-mid)", fontSize: "0.65rem", fontWeight: 700 }}>Q</div>
                   <div>
                     <div style={{ fontWeight: 600, fontSize: "0.92rem", marginBottom: "0.4rem" }}>{f.q}</div>
                     <div style={{ fontSize: "0.85rem", color: "var(--text-mid)", lineHeight: 1.65 }}>{f.a}</div>
@@ -587,26 +576,25 @@ export default function HomePage() {
       {/* ─── CTA ──────────────────────────────────────────── */}
       <section data-animate style={{ padding: "5rem 0 6rem" }}>
         <div style={wrap3}>
-          <div style={{ position: "relative", borderRadius: "1.5rem", overflow: "hidden", padding: "4rem 3rem", textAlign: "center", background: "linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #1e1b4b 100%)", border: "1px solid rgba(255,255,255,0.08)" }}>
-            <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 80% 60% at 50% 50%, #6366f120 0%, transparent 70%)", pointerEvents: "none" }} />
+          <div style={{ position: "relative", borderRadius: "1.5rem", overflow: "hidden", padding: "4rem 3rem", textAlign: "center", background: "var(--accent)", border: "none" }}>
             <div style={{ position: "relative", color: "white" }}>
               <div className="section-tag" style={{ display: "inline-flex", marginBottom: "1.5rem", background: "rgba(255,255,255,0.1)", borderColor: "rgba(255,255,255,0.15)", color: "rgba(255,255,255,0.85)" }}>Өнөөдөр эхэл</div>
               <h2 style={{ fontSize: "clamp(1.7rem, 4vw, 2.8rem)", fontWeight: 800, letterSpacing: "-0.03em", marginBottom: "1rem", color: "white" }}>
-                Бизнесийнхээ <span className="gradient-text">AI хувьсгалыг</span><br />
+                Бизнесийнхээ AI хувьсгалыг<br />
                 эхлүүлэх цаг болсон
               </h2>
-              <p style={{ color: "rgba(255,255,255,0.72)", fontSize: "0.97rem", lineHeight: 1.65, maxWidth: "440px", margin: "0 auto 2.5rem" }}>
+              <p style={{ color: "rgba(255,255,255,0.65)", fontSize: "0.97rem", lineHeight: 1.65, maxWidth: "440px", margin: "0 auto 2.5rem" }}>
                 30 минутын үнэгүй consultation-аар бизнестээ яг тохирсон AI шийдлийг олж мэдээрэй.
               </p>
               <div style={{ display: "flex", flexWrap: "wrap", gap: "1rem", justifyContent: "center" }}>
-                <Link href="https://app.mongolagent.mn/register" style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem", padding: "0.95rem 2rem", fontSize: "0.95rem", fontWeight: 600, textDecoration: "none", borderRadius: "0.75rem", background: "white", color: "#1e1b4b", transition: "all 0.2s" }}>
+                <Link href="https://app.mongolagent.mn/register" style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem", padding: "0.95rem 2rem", fontSize: "0.95rem", fontWeight: 600, textDecoration: "none", borderRadius: "0.75rem", background: "white", color: "var(--accent)", transition: "all 0.2s" }}>
                   Агентаа бүтээх →
                 </Link>
                 <Link href="tel:80952821" style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem", padding: "0.95rem 2rem", fontSize: "0.95rem", fontWeight: 500, textDecoration: "none", borderRadius: "0.75rem", background: "transparent", color: "rgba(255,255,255,0.85)", border: "1px solid rgba(255,255,255,0.25)", transition: "all 0.2s" }}>
                   <IconPhone /> 80952821
                 </Link>
               </div>
-              <p style={{ marginTop: "2rem", fontSize: "0.75rem", color: "rgba(255,255,255,0.45)" }}>
+              <p style={{ marginTop: "2rem", fontSize: "0.75rem", color: "rgba(255,255,255,0.4)" }}>
                 Нэвтрүүлснийхээ дараа ч тасралтгүй дэмжлэг · Нуугдмал нэмэлт төлбөргүй
               </p>
             </div>
