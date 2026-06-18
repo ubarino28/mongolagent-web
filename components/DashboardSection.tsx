@@ -16,8 +16,8 @@ const ORDERS = [
 ];
 
 const STATUS_CFG = {
-  confirmed: { label:"Баталгаажсан",      color:"#0a0a0a", bg:"#f4f4f4", border:"#d0d0d0" },
-  paid:      { label:"Төлсөн ✓",          color:"#0a0a0a", bg:"#f4f4f4", border:"#d0d0d0" },
+  confirmed: { label:"Баталгаажсан",      color:"#18181b", bg:"#f4f4f4", border:"#d0d0d0" },
+  paid:      { label:"Төлсөн ✓",          color:"#18181b", bg:"#f4f4f4", border:"#d0d0d0" },
   pending:   { label:"Хүлээгдэж байна",   color:"#525252", bg:"#f4f4f4", border:"#e8e8e8" },
   done:      { label:"Дууссан",           color:"#a3a3a3", bg:"#fafafa", border:"#e8e8e8" },
 };
