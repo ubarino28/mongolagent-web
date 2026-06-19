@@ -61,7 +61,7 @@ export default function Navbar() {
 
         {/* Actions */}
         <div className="hidden md:flex items-center gap-3">
-          <Link href="https://app.mongolagent.mn/login" className="nav-link"
+          <Link href="https://app.mongolagent.mn" className="nav-link"
             style={{ fontSize: "0.875rem", fontWeight: 500, padding: "0.45rem 1rem" }}>
             Нэвтрэх
           </Link>
@@ -88,7 +88,7 @@ export default function Navbar() {
               className="nav-link block px-3 py-2.5 rounded-lg text-sm font-medium" />
           ))}
           <div className="pt-3 space-y-2">
-            <Link href="https://app.mongolagent.mn/login" onClick={() => setOpen(false)}
+            <Link href="https://app.mongolagent.mn" onClick={() => setOpen(false)}
               className="block text-center py-2.5 rounded-xl text-sm nav-link"
               style={{ border: "1px solid var(--border)" }}>
               Нэвтрэх
