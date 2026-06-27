@@ -1,10 +1,18 @@
 "use client";
 import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 
 export default function ScrollAnimations() {
+  const pathname = usePathname();
+
   useEffect(() => {
+    // Хуудас солигдох бүрд (soft navigation) дахин ажиллана —
+    // layout нэг л удаа mount хийгддэг тул pathname-ийг dependency болгож дахин observe хийнэ.
     const els = Array.from(document.querySelectorAll<HTMLElement>("[data-animate]"));
     if (!els.length) return;
+
+    // Шинэ хуудсанд орвол өмнөх "animated" төлвийг цэвэрлэж, дахин анимэйшнлэх боломжтой болгоно
+    els.forEach((el) => el.classList.remove("animated"));
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -21,8 +29,7 @@ export default function ScrollAnimations() {
 
     els.forEach((el) => observer.observe(el));
 
-    // Аюулгүйн нөөц: observer ажиллахгүй / full-page render / scroll хийгээгүй үед
-    // контент opacity:0-д гацаж нуугдахаас сэргийлж, 1 секундын дараа бүгдийг харуулна.
+    // Аюулгүйн нөөц: observer ажиллахгүй / scroll хийгээгүй үед контент нуугдаж үлдэхгүй
     const fallback = window.setTimeout(() => {
       els.forEach((el) => el.classList.add("animated"));
     }, 1000);
@@ -31,7 +38,7 @@ export default function ScrollAnimations() {
       observer.disconnect();
       window.clearTimeout(fallback);
     };
-  }, []);
+  }, [pathname]);
 
   return null;
 }
