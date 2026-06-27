@@ -81,7 +81,10 @@ export default function HomePage() {
         Ногоон цамц хэрэгтэй, 200мянгаас доош 🧥
       </div>
       <div style={{ position: "absolute", top: "96px", right: "26px", width: "186px", background: "#fff", borderRadius: "0.9rem", overflow: "hidden", boxShadow: "0 18px 44px rgba(0,0,0,0.4)", zIndex: 1 }}>
-        <div style={{ aspectRatio: "4/5", background: "linear-gradient(150deg, #3A6B5C, #16382E)" }} />
+        <div style={{ aspectRatio: "4/5", overflow: "hidden", background: "#16382E" }}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=400&q=80&auto=format&fit=crop" alt="Ойн ногоон цамц" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+        </div>
         <div style={{ padding: "0.7rem 0.85rem" }}>
           <div style={{ fontSize: "0.78rem", fontWeight: 600, color: "#1C2B3A" }}>Ойн ногоон цамц</div>
           <div style={{ fontSize: "0.85rem", fontWeight: 800, color: "#143A6B", marginTop: "0.15rem" }}>189,000₮</div>
@@ -101,13 +104,16 @@ export default function HomePage() {
             <div style={{ height: 9, width: "45%", background: "#E4E8ED", borderRadius: 4, marginBottom: 11 }} />
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 9 }}>
               {[
-                { bg: "linear-gradient(150deg,#3A6B5C,#1C4A3E)", price: "189,000₮" },
-                { bg: "linear-gradient(150deg,#2B5A8F,#143A6B)", price: "129,000₮" },
-                { bg: "linear-gradient(150deg,#B8895A,#8A5A3A)", price: "99,000₮" },
-                { bg: "linear-gradient(150deg,#5A6B80,#2B3A4D)", price: "159,000₮" },
+                { img: "1576566588028-4147f3842f27", price: "189,000₮" },
+                { img: "1521572163474-6864f9cf17ab", price: "129,000₮" },
+                { img: "1542272604-787c3835535d", price: "99,000₮" },
+                { img: "1620799140408-edc6dcb6d633", price: "159,000₮" },
               ].map((t, i) => (
                 <div key={i} style={{ borderRadius: 8, overflow: "hidden", border: "1px solid #E4E8ED" }}>
-                  <div style={{ aspectRatio: "1/1", background: t.bg }} />
+                  <div style={{ aspectRatio: "1/1", overflow: "hidden", background: "#EAF0F8" }}>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={`https://images.unsplash.com/photo-${t.img}?w=240&q=80&auto=format&fit=crop`} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+                  </div>
                   <div style={{ padding: "0.4rem 0.5rem" }}>
                     <div style={{ height: 6, width: "70%", background: "#E4E8ED", borderRadius: 3, marginBottom: 5 }} />
                     <div style={{ fontSize: "0.62rem", fontWeight: 800, color: "#143A6B" }}>{t.price}</div>
