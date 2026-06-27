@@ -75,7 +75,7 @@ export default function DemoChat() {
             borderRadius: "1.5rem", overflow: "hidden",
             border: "1px solid var(--border2)",
             background: "var(--surface2)",
-            boxShadow: "0 0 60px #6366f110",
+            boxShadow: "0 0 60px #143a6b10",
           }}>
             {/* Chat header */}
             <div style={{
@@ -86,7 +86,7 @@ export default function DemoChat() {
             }}>
               <div style={{
                 width: "2.25rem", height: "2.25rem", borderRadius: "50%", flexShrink: 0,
-                background: "linear-gradient(135deg, #6366f1, #8b5cf6)",
+                background: "linear-gradient(135deg, #143a6b, #143a6b)",
                 display: "flex", alignItems: "center", justifyContent: "center",
               }}>
                 <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
@@ -123,7 +123,7 @@ export default function DemoChat() {
                   {m.role === "ai" && (
                     <div style={{
                       width: "1.75rem", height: "1.75rem", borderRadius: "50%", flexShrink: 0,
-                      background: "linear-gradient(135deg, #6366f1, #8b5cf6)",
+                      background: "linear-gradient(135deg, #143a6b, #143a6b)",
                       display: "flex", alignItems: "center", justifyContent: "center", fontSize: "0.6rem",
                     }}>
                       <svg width="10" height="10" viewBox="0 0 16 16" fill="none">
@@ -139,7 +139,7 @@ export default function DemoChat() {
                       ? "1rem 1rem 0.2rem 1rem"
                       : "1rem 1rem 1rem 0.2rem",
                     background: m.role === "user"
-                      ? "linear-gradient(135deg, #6366f1, #8b5cf6)"
+                      ? "linear-gradient(135deg, #143a6b, #143a6b)"
                       : "var(--surface)",
                     border: m.role === "user" ? "none" : "1px solid var(--border2)",
                     fontSize: "0.84rem",
@@ -157,7 +157,7 @@ export default function DemoChat() {
                 <div style={{ display: "flex", gap: "0.5rem", alignItems: "flex-end" }}>
                   <div style={{
                     width: "1.75rem", height: "1.75rem", borderRadius: "50%", flexShrink: 0,
-                    background: "linear-gradient(135deg, #6366f1, #8b5cf6)",
+                    background: "linear-gradient(135deg, #143a6b, #143a6b)",
                     display: "flex", alignItems: "center", justifyContent: "center",
                   }}>
                     <svg width="10" height="10" viewBox="0 0 16 16" fill="none">
@@ -184,7 +184,7 @@ export default function DemoChat() {
                 <button key={q} onClick={() => send(q)} disabled={loading}
                   style={{
                     padding: "0.3rem 0.8rem", borderRadius: "100px", fontSize: "0.73rem",
-                    background: "#6366f110", border: "1px solid #6366f128",
+                    background: "#143a6b10", border: "1px solid #143a6b28",
                     color: "var(--primary2)", cursor: "pointer", fontWeight: 500,
                     transition: "all 0.15s",
                     opacity: loading ? 0.5 : 1,
@@ -213,7 +213,7 @@ export default function DemoChat() {
                   color: "var(--text)", fontSize: "0.875rem", outline: "none",
                   transition: "border-color 0.15s",
                 }}
-                onFocus={e => (e.target.style.borderColor = "#6366f160")}
+                onFocus={e => (e.target.style.borderColor = "#143a6b60")}
                 onBlur={e => (e.target.style.borderColor = "var(--border2)")}
               />
               <button
@@ -222,7 +222,7 @@ export default function DemoChat() {
                 style={{
                   width: "2.5rem", height: "2.5rem", borderRadius: "0.75rem", flexShrink: 0,
                   background: input.trim() && !loading
-                    ? "linear-gradient(135deg, #6366f1, #8b5cf6)"
+                    ? "linear-gradient(135deg, #143a6b, #143a6b)"
                     : "var(--surface)",
                   border: "1px solid var(--border2)",
                   cursor: input.trim() && !loading ? "pointer" : "default",
@@ -244,7 +244,7 @@ export default function DemoChat() {
               borderRadius: "1.25rem", padding: "1.5rem",
               background: "var(--surface2)",
               border: "1px solid var(--border2)",
-              boxShadow: "0 0 40px #6366f108",
+              boxShadow: "0 0 40px #143a6b08",
             }}>
               <div style={{ fontSize: "0.72rem", textTransform: "uppercase", letterSpacing: "0.1em", color: "var(--text-light)", marginBottom: "1rem" }}>
                 AI боломжууд
@@ -288,7 +288,7 @@ export default function DemoChat() {
               <a href="https://app.mongolagent.mn/register"
                 style={{
                   display: "block", textAlign: "center",
-                  background: "linear-gradient(135deg, #6366f1, #8b5cf6)",
+                  background: "linear-gradient(135deg, #143a6b, #143a6b)",
                   color: "white", fontWeight: 600, fontSize: "0.82rem",
                   padding: "0.65rem 1rem", borderRadius: "0.65rem",
                   textDecoration: "none", transition: "opacity 0.15s",

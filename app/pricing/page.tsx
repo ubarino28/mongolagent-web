@@ -50,10 +50,10 @@ export default function PricingPage() {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-16">
         {PLANS.map(p => (
           <div key={p.name} className={`card p-6 flex flex-col ${p.highlight ? "relative" : ""}`}
-            style={p.highlight ? { borderColor: "#6366f160", background: "#6366f108" } : {}}>
+            style={p.highlight ? { borderColor: "#143a6b60", background: "#143a6b08" } : {}}>
             {p.highlight && (
               <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full text-xs font-bold"
-                style={{ background: "linear-gradient(135deg, #6366f1, #8b5cf6)", color: "white" }}>
+                style={{ background: "linear-gradient(135deg, #143a6b, #143a6b)", color: "white" }}>
                 Хамгийн их сонгогддог
               </div>
             )}
@@ -68,7 +68,7 @@ export default function PricingPage() {
             <ul className="space-y-2 mb-6 flex-1">
               {p.features.map(f => (
                 <li key={f} className="flex items-center gap-2 text-sm">
-                  <span style={{ color: "#6366f1" }}>✓</span>
+                  <span style={{ color: "#143a6b" }}>✓</span>
                   <span style={{ color: "var(--text-mid)" }}>{f}</span>
                 </li>
               ))}
@@ -102,7 +102,7 @@ export default function PricingPage() {
       </div>
 
       {/* Free consultation */}
-      <div className="card p-8 text-center mb-16" style={{ background: "linear-gradient(135deg, #6366f115, #8b5cf615)", borderColor: "#6366f130" }}>
+      <div className="card p-8 text-center mb-16" style={{ background: "linear-gradient(135deg, #143a6b15, #143a6b15)", borderColor: "#143a6b30" }}>
         <h2 className="text-2xl font-bold mb-3">Үнэгүй 30 минутын consultation</h2>
         <p className="mb-6" style={{ color: "var(--text-mid)" }}>
           Бизнестээ ямар AI шийдэл тохирохыг хамтдаа тодорхойлно. Танилцуулга, санал, үнийн тооцооллыг үнэгүй гаргаж өгнө.

@@ -4,7 +4,8 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 
 const LINKS = [
-  { href: "/#pricing", hash: "#pricing", label: "Үнэ" },
+  { href: "/ai",       hash: null,       label: "AI Agent" },
+  { href: "/store",    hash: null,       label: "Онлайн дэлгүүр" },
   { href: "/#faq",     hash: "#faq",     label: "FAQ" },
   { href: "/about",    hash: null,        label: "Бидний тухай" },
 ];

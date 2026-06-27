@@ -15,7 +15,7 @@ interface S {
 }
 
 const QR = [1,1,1,0,1,1,1,1,0,1,0,1,0,1,1,1,1,0,1,1,1,0,1,0,1,0,0,0,1,0,1,0,1,1,1,1,0,1,0,1,0,1,1,1,1,0,1,1,1];
-const AV_COLORS = ["#525252","#737373","#404040","#525252","#404040","#737373","#525252","#404040"];
+const AV_COLORS = ["#5a6b80","#5a6b80","#5a6b80","#5a6b80","#5a6b80","#5a6b80","#5a6b80","#5a6b80"];
 
 const SC: S[] = [
   {
@@ -45,7 +45,7 @@ const SC: S[] = [
   },
   {
     id:"restaurant", icon:"🍽️", label:"Ресторан",
-    business:"Khan Restaurant", avBg:"#404040", avTxt:"K",
+    business:"Khan Restaurant", avBg:"#5a6b80", avTxt:"K",
     msgs:[
       {from:"user",type:"text",text:"Сайн уу! Маргааш 7 хүний ширээ 19:00 цагт захиалах боломжтой юу?"},
       {from:"ai",  type:"text",text:"Сайн байна уу! Маргааш 19:00 цагаас сул ширээ байхгүй байна, Та 20:00 | 21:00 | 22:00 цагуудаас захиалах боломжтой 😊"},
@@ -68,7 +68,7 @@ const SC: S[] = [
   },
   {
     id:"fitness", icon:"💪", label:"Фитнес клуб",
-    business:"FitZone Club", avBg:"#525252", avTxt:"F",
+    business:"FitZone Club", avBg:"#5a6b80", avTxt:"F",
     msgs:[
       {from:"user",type:"text",text:"Сайн уу! Сарын гишүүнчлэл хэд вэ?"},
       {from:"ai",  type:"text",text:"Сайн байна уу! Манайд дараах subscription байна:"},
@@ -91,7 +91,7 @@ const SC: S[] = [
   },
   {
     id:"shop", icon:"👗", label:"Хувцасны дэлгүүр",
-    business:"Zaya Fashion", avBg:"#737373", avTxt:"Z",
+    business:"Zaya Fashion", avBg:"#5a6b80", avTxt:"Z",
     msgs:[
       {from:"user",type:"text",text:"Сайн уу! Энэ цамц L хэмжээтэй байна уу?"},
       {from:"ai",  type:"text",text:"Сайн байна уу! Тийм, L хэмжээ байна 😊"},
@@ -114,7 +114,7 @@ const SC: S[] = [
   },
   {
     id:"vet", icon:"🐾", label:"Амьтны эмнэлэг",
-    business:"PetCare Эмнэлэг", avBg:"#404040", avTxt:"P",
+    business:"PetCare Эмнэлэг", avBg:"#5a6b80", avTxt:"P",
     msgs:[
       {from:"user",type:"text",text:"Сайн уу! Нохойгоо үзлэгт оруулах цаг захиалахыг хүсч байна"},
       {from:"ai",  type:"text",text:"Сайн байна уу! Дараах цагуудад боломжтой байна. Эмч Дэлгэрсайхан 13:00 14:00 15:00, Эмч Болдбаатар 14:00 16:00, Эмч Мөнхэрдэнэ 10:00 11:00"},
@@ -284,7 +284,7 @@ function ChatWindow({sc,onPaid}:{sc:S;onPaid:()=>void}){
           if(b.from==="ai"&&b.type==="text") return(
             <div key={b.id} style={{display:"flex",alignItems:"flex-end",gap:"6px",maxWidth:"82%"}}>
               <Av/>
-              <div style={{padding:"0.5rem 0.8rem",borderRadius:"0.3rem 1rem 1rem 1rem",background:"white",boxShadow:"0 1px 8px #00000010",fontSize:"0.78rem",color:"#374151",lineHeight:1.58}}>
+              <div style={{padding:"0.5rem 0.8rem",borderRadius:"0.3rem 1rem 1rem 1rem",background:"white",boxShadow:"0 1px 8px #00000010",fontSize:"0.78rem",color:"#5a6b80",lineHeight:1.58}}>
                 {b.text}
                 {b.partial&&<span style={{display:"inline-block",width:"1.5px",height:"11px",background:"var(--text-mid)",marginLeft:"1px",verticalAlign:"middle",animation:"blink .65s step-end infinite"}}/>}
               </div>
@@ -321,9 +321,9 @@ function ChatWindow({sc,onPaid}:{sc:S;onPaid:()=>void}){
             <div key={b.id} style={{display:"flex",alignItems:"flex-end",gap:"6px"}}>
               <Av/>
               <div style={{borderRadius:"14px",overflow:"hidden",background:"white",border:"1px solid var(--border)",width:"155px",boxShadow:"0 4px 16px rgba(0,0,0,0.06)"}}>
-                <div style={{background:"linear-gradient(135deg,#1d4ed8,#2563eb)",padding:"0.4rem 0.65rem",display:"flex",alignItems:"center",gap:"0.35rem"}}>
+                <div style={{background:"#143a6b",padding:"0.4rem 0.65rem",display:"flex",alignItems:"center",gap:"0.35rem"}}>
                   <div style={{width:"16px",height:"16px",borderRadius:"3px",background:"white",display:"flex",alignItems:"center",justifyContent:"center"}}>
-                    <div style={{width:"10px",height:"10px",background:"#1d4ed8",borderRadius:"2px"}}/>
+                    <div style={{width:"10px",height:"10px",background:"#143a6b",borderRadius:"2px"}}/>
                   </div>
                   <span style={{fontSize:"0.7rem",color:"white",fontWeight:800,letterSpacing:"0.04em"}}>QPay</span>
                 </div>
@@ -332,7 +332,7 @@ function ChatWindow({sc,onPaid}:{sc:S;onPaid:()=>void}){
                     {QR.map((on,i)=><div key={i} style={{aspectRatio:"1",borderRadius:"1px",background:on?"#1e3a5f":"transparent"}}/>)}
                   </div>
                   <div style={{textAlign:"center"}}>
-                    <div style={{fontSize:"0.92rem",fontWeight:800,color:"#1d4ed8"}}>{sc.qpay}</div>
+                    <div style={{fontSize:"0.92rem",fontWeight:800,color:"#143a6b"}}>{sc.qpay}</div>
                     <div style={{fontSize:"0.6rem",color:"#9ca3af",marginTop:"1px"}}>{sc.business}</div>
                   </div>
                 </div>

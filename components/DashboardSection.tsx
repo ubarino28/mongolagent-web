@@ -16,10 +16,10 @@ const ORDERS = [
 ];
 
 const STATUS_CFG = {
-  confirmed: { label:"Баталгаажсан",      color:"#18181b", bg:"#f4f4f4", border:"#d0d0d0" },
-  paid:      { label:"Төлсөн ✓",          color:"#18181b", bg:"#f4f4f4", border:"#d0d0d0" },
-  pending:   { label:"Хүлээгдэж байна",   color:"#525252", bg:"#f4f4f4", border:"#e8e8e8" },
-  done:      { label:"Дууссан",           color:"#a3a3a3", bg:"#fafafa", border:"#e8e8e8" },
+  confirmed: { label:"Баталгаажсан",      color:"#1c2b3a", bg:"#f6f8fb", border:"#d3dbe5" },
+  paid:      { label:"Төлсөн ✓",          color:"#1c2b3a", bg:"#f6f8fb", border:"#d3dbe5" },
+  pending:   { label:"Хүлээгдэж байна",   color:"#5a6b80", bg:"#f6f8fb", border:"#e4e8ed" },
+  done:      { label:"Дууссан",           color:"#8a98a8", bg:"#f6f8fb", border:"#e4e8ed" },
 };
 
 const CONVOS = [
@@ -116,7 +116,7 @@ export default function DashboardSection() {
           }}>
             {/* Browser chrome */}
             <div style={{ padding:"10px 14px", background:"var(--surface2)", borderBottom:"1px solid var(--border)", display:"flex", alignItems:"center", gap:"6px" }}>
-              {["#e8e8e8","#d0d0d0","#bebebe"].map(c => (
+              {["#e4e8ed","#d3dbe5","#cdd8e6"].map(c => (
                 <div key={c} style={{ width:"10px", height:"10px", borderRadius:"50%", background:c }} />
               ))}
               <div style={{ flex:1, marginLeft:"8px", background:"white", border:"1px solid var(--border)", borderRadius:"6px", padding:"3px 10px", fontSize:"0.6rem", color:"var(--text-light)" }}>

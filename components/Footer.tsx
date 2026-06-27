@@ -20,39 +20,37 @@ const MailIcon = () => (
 
 export default function Footer() {
   return (
-    <footer style={{ borderTop: "1px solid var(--border)", background: "var(--surface)" }}>
+    <footer style={{ background: "var(--navy)" }}>
       <div style={{ maxWidth: "72rem", margin: "0 auto", padding: "3.5rem 1.25rem" }}>
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-10">
           {/* Brand */}
           <div className="md:col-span-1">
             <div className="flex items-center gap-2.5 mb-4">
               <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
-                style={{ background: "var(--accent)" }}>
+                style={{ background: "rgba(255,255,255,0.12)" }}>
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                   <path d="M8 2L13 5V11L8 14L3 11V5L8 2Z" fill="white" opacity="0.7" />
                   <path d="M8 5L11 7V11L8 13L5 11V7L8 5Z" fill="white" />
                 </svg>
               </div>
-              <span style={{ fontWeight: 700, fontSize: "1rem", color: "var(--text)" }}>
+              <span style={{ fontWeight: 700, fontSize: "1rem", color: "#fff" }}>
                 MongolAgent
               </span>
             </div>
-            <p style={{ fontSize: "0.82rem", color: "var(--text-light)", lineHeight: 1.7, maxWidth: 200 }}>
+            <p style={{ fontSize: "0.82rem", color: "rgba(255,255,255,0.6)", lineHeight: 1.7, maxWidth: 200 }}>
               Монголын бизнесийг AI-аар хүчирхэгжүүл. Premium, найдвартай, хурдан.
             </p>
           </div>
 
           {/* Services */}
           <div>
-            <h4 style={{ fontSize: "0.7rem", fontWeight: 700, color: "var(--text-mid)", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "1rem" }}>
-              Үйлчилгээ
+            <h4 style={{ fontSize: "0.7rem", fontWeight: 700, color: "rgba(255,255,255,0.55)", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "1rem" }}>
+              Бүтээгдэхүүн
             </h4>
             <ul className="space-y-2.5">
               {[
-                { label: "AI Chatbot", href: "/#services" },
-                { label: "AI Sales Agent", href: "/#services" },
-                { label: "AI Lead Machine", href: "/#services" },
-                { label: "AI Automation", href: "/#services" },
+                { label: "AI Agent", href: "/ai" },
+                { label: "Онлайн дэлгүүр", href: "/store" },
               ].map(l => (
                 <li key={l.label}>
                   <Link href={l.href} className="footer-link">{l.label}</Link>
@@ -63,15 +61,14 @@ export default function Footer() {
 
           {/* Company */}
           <div>
-            <h4 style={{ fontSize: "0.7rem", fontWeight: 700, color: "var(--text-mid)", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "1rem" }}>
+            <h4 style={{ fontSize: "0.7rem", fontWeight: 700, color: "rgba(255,255,255,0.55)", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "1rem" }}>
               Компани
             </h4>
             <ul className="space-y-2.5">
               {[
                 { label: "Бидний тухай", href: "/about" },
-                { label: "Case Studies", href: "/#case-study" },
-                { label: "Үнэ", href: "/#pricing" },
                 { label: "FAQ", href: "/#faq" },
+                { label: "Нэвтрэх", href: "https://app.mongolagent.mn" },
               ].map(l => (
                 <li key={l.label}>
                   <Link href={l.href} className="footer-link">{l.label}</Link>
@@ -82,7 +79,7 @@ export default function Footer() {
 
           {/* Contact */}
           <div>
-            <h4 style={{ fontSize: "0.7rem", fontWeight: 700, color: "var(--text-mid)", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "1rem" }}>
+            <h4 style={{ fontSize: "0.7rem", fontWeight: 700, color: "rgba(255,255,255,0.55)", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "1rem" }}>
               Холбоо барих
             </h4>
             <ul className="space-y-2.5">
@@ -96,7 +93,7 @@ export default function Footer() {
                   <MailIcon /> info@mongolagent.mn
                 </Link>
               </li>
-              <li style={{ fontSize: "0.83rem", color: "var(--text-light)", display: "flex", alignItems: "flex-start", gap: "0.4rem" }}>
+              <li style={{ fontSize: "0.83rem", color: "rgba(255,255,255,0.6)", display: "flex", alignItems: "flex-start", gap: "0.4rem" }}>
                 <MapPinIcon />
                 <span>БЗД 3р хороо,<br />Энэрэлцогцолбор 24а,<br />Улаанбаатар</span>
               </li>
@@ -106,13 +103,13 @@ export default function Footer() {
 
         {/* Bottom bar */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-3 pt-8"
-          style={{ borderTop: "1px solid var(--border)" }}>
-          <span style={{ fontSize: "0.78rem", color: "var(--text-light)" }}>
+          style={{ borderTop: "1px solid rgba(255,255,255,0.12)" }}>
+          <span style={{ fontSize: "0.78rem", color: "rgba(255,255,255,0.6)" }}>
             © {new Date().getFullYear()} Mongol Agent. Бүх эрх хуулиар хамгаалагдсан.
           </span>
           <div className="flex items-center gap-2">
-            <div className="w-1.5 h-1.5 rounded-full" style={{ background: "var(--text-light)" }} />
-            <span style={{ fontSize: "0.78rem", color: "var(--text-light)" }}>Бүх систем ажиллаж байна</span>
+            <div className="w-1.5 h-1.5 rounded-full" style={{ background: "#34d399" }} />
+            <span style={{ fontSize: "0.78rem", color: "rgba(255,255,255,0.6)" }}>Бүх систем ажиллаж байна</span>
           </div>
         </div>
       </div>

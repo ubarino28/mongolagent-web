@@ -1,17 +1,31 @@
 @import "tailwindcss";
 
 :root {
-  --bg: #ffffff;
-  --surface: #fafafa;
-  --surface2: #f4f4f4;
-  --surface3: #ebebeb;
-  --border: #e8e8e8;
-  --border2: #d0d0d0;
-  --accent: #18181b;
-  --accent-mid: #27272a;
-  --text: #18181b;
-  --text-mid: #525252;
-  --text-light: #a3a3a3;
+  /* ═══ Брэндийн өнгөний систем — гүн хөх + цагаан корпорацийн палетт ═══ */
+  --navy: #143A6B;            /* гол брэндийн өнгө — товч, гарчиг, линк */
+  --navy-dark: #1C2B3A;       /* үндсэн текст, толгой хэсгийн текст */
+  --text-secondary: #5A6B80;  /* туслах, тайлбар текст */
+  --bg-white: #FFFFFF;        /* карт, контентын үндсэн фон */
+  --bg-section: #F6F8FB;      /* зэрэгцээ хэсгүүдийг ялгах сул хөхөвтөр фон */
+  --bg-tint: #EAF0F8;         /* icon-ы ард, badge, онцлох жижиг хэсэг */
+  --border: #E4E8ED;          /* картны нимгэн хүрээ */
+  --gold: #C8A24B;            /* зөвхөн ★ үнэлгээ, премиум badge */
+
+  /* Hero хэсгийн зөөлөн хүйтэн хөх градиент */
+  --hero-gradient: linear-gradient(135deg, #F4F8FD 0%, #EBF1F9 50%, #F7F9FB 100%);
+
+  /* Хуучин нэрсийг шинэ палеттаар дахин холбоно (хуучин var() хэрэглээ автоматаар шинэчлэгдэнэ) */
+  --bg: var(--bg-white);
+  --surface: var(--bg-section);
+  --surface2: var(--bg-tint);
+  --surface3: #DCE5F0;
+  --border2: #D3DBE5;
+  --accent: var(--navy);
+  --accent-mid: #0F2D54;      /* navy hover (бараантар) */
+  --text: var(--navy-dark);
+  --text-mid: var(--text-secondary);
+  --text-light: #8A98A8;
+  --secondary-bg: #EEF1F5;    /* хоёрдогч товчны фон */
   --font-sans: var(--font-jakarta);
 }
 
@@ -28,9 +42,9 @@ body {
 
 main, nav, footer { position: relative; z-index: 1; }
 
-/* Gradient text — subtle black */
+/* Онцолсон үг — брэндийн гүн хөх */
 .gradient-text {
-  color: var(--text);
+  color: var(--navy);
 }
 
 /* Buttons */
@@ -53,16 +67,17 @@ main, nav, footer { position: relative; z-index: 1; }
 .btn-primary:hover {
   background: var(--accent-mid);
   transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.18);
+  box-shadow: 0 6px 18px rgba(20, 58, 107, 0.22);
 }
 
+/* Хоёрдогч товч — сул хөх фон, гүн хөх текст, хүрээгүй */
 .btn-outline {
-  background: var(--bg);
-  color: var(--text-mid);
-  font-weight: 500;
+  background: var(--secondary-bg);
+  color: var(--navy);
+  font-weight: 600;
   padding: 0.8rem 1.8rem;
   border-radius: 0.75rem;
-  border: 1px solid var(--border2);
+  border: none;
   cursor: pointer;
   transition: all 0.18s;
   display: inline-flex;
@@ -72,14 +87,13 @@ main, nav, footer { position: relative; z-index: 1; }
   font-size: 0.9rem;
 }
 .btn-outline:hover {
-  border-color: var(--accent);
-  color: var(--text);
-  background: var(--surface);
+  background: var(--bg-tint);
+  color: var(--navy);
 }
 
-/* Card */
+/* Card — цагаан фон + нимгэн хүрээ (цагаан фон дээр алга болохгүй) */
 .card {
-  background: var(--surface);
+  background: var(--bg-white);
   border: 1px solid var(--border);
   border-radius: 1rem;
 }
@@ -87,8 +101,8 @@ main, nav, footer { position: relative; z-index: 1; }
   transition: border-color 0.2s, box-shadow 0.2s;
 }
 .card-glow:hover {
-  border-color: var(--border2);
-  box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+  border-color: #CDD8E6;
+  box-shadow: 0 6px 22px rgba(20, 58, 107, 0.08);
 }
 
 /* Section label */
@@ -102,16 +116,16 @@ main, nav, footer { position: relative; z-index: 1; }
   font-weight: 600;
   letter-spacing: 0.07em;
   text-transform: uppercase;
-  background: var(--surface2);
+  background: var(--bg-tint);
   border: 1px solid var(--border);
-  color: var(--text-mid);
+  color: var(--navy);
 }
 .section-tag::before {
   content: '';
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  background: var(--text-light);
+  background: var(--navy);
   flex-shrink: 0;
 }
 
@@ -128,11 +142,11 @@ main, nav, footer { position: relative; z-index: 1; }
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  background-color: var(--surface3);
-  border: 1px solid var(--border2);
+  background-color: var(--bg-tint);
+  border: 1px solid #CDD8E6;
   flex-shrink: 0;
   margin-top: 1px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' fill='none'%3E%3Cpath d='M2.5 6L5 8.5 9.5 4' stroke='%230a0a0a' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' fill='none'%3E%3Cpath d='M2.5 6L5 8.5 9.5 4' stroke='%23143A6B' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
   background-size: 70%;
   background-position: center;
   background-repeat: no-repeat;
@@ -156,14 +170,14 @@ main, nav, footer { position: relative; z-index: 1; }
 }
 .nav-link:hover { color: var(--text); }
 
-/* Footer link hover */
+/* Footer link (navy туузан дээр) */
 .footer-link {
   font-size: 0.83rem;
-  color: var(--text-light);
+  color: rgba(255,255,255,0.6);
   text-decoration: none;
   transition: color 0.15s;
 }
-.footer-link:hover { color: var(--text); }
+.footer-link:hover { color: #fff; }
 
 /* Marquee */
 @keyframes marquee {

@@ -103,7 +103,7 @@ export default function ServicesPage() {
                 <ul className="space-y-2">
                   {s.features.map(f => (
                     <li key={f} className="flex items-center gap-2 text-sm">
-                      <span style={{ color: "#6366f1" }}>✓</span>
+                      <span style={{ color: "#143a6b" }}>✓</span>
                       <span style={{ color: "var(--text-mid)" }}>{f}</span>
                     </li>
                   ))}
@@ -112,7 +112,7 @@ export default function ServicesPage() {
               <div className="space-y-3">
                 {s.packages.map(p => (
                   <div key={p.name} className={`card p-4 ${p.highlight ? "border-indigo-500/40" : ""}`}
-                    style={p.highlight ? { borderColor: "#6366f160", background: "#6366f108" } : {}}>
+                    style={p.highlight ? { borderColor: "#143a6b60", background: "#143a6b08" } : {}}>
                     <div className="flex items-start justify-between gap-2">
                       <div>
                         <div className="font-semibold text-sm">{p.name}</div>
@@ -133,7 +133,7 @@ export default function ServicesPage() {
       </div>
 
       <div className="text-center mt-16">
-        <div className="card p-8 inline-block" style={{ background: "linear-gradient(135deg, #6366f115, #8b5cf615)", borderColor: "#6366f130" }}>
+        <div className="card p-8 inline-block" style={{ background: "linear-gradient(135deg, #143a6b15, #143a6b15)", borderColor: "#143a6b30" }}>
           <h3 className="text-xl font-bold mb-3">Тохирох үйлчилгээгээ сонгоход тусалъя</h3>
           <p className="mb-5 text-sm" style={{ color: "var(--text-mid)" }}>Үнэгүй 30 минутын consultation-аар бизнестээ ямар шийдэл хамгийн тохиромжтойг олж мэдэх боломжтой.</p>
           <Link href="/pricing" className="btn-primary">Consultation авах →</Link>

@@ -130,8 +130,8 @@ export default function AboutPage() {
               ))}
               <div style={{
                 padding: "1rem 1.25rem", borderRadius: "0.875rem",
-                background: "linear-gradient(135deg, #6366f110, #8b5cf610)",
-                border: "1px solid #6366f130",
+                background: "linear-gradient(135deg, #143a6b10, #143a6b10)",
+                border: "1px solid #143a6b30",
                 fontSize: "0.85rem", fontWeight: 600, color: "var(--primary2)",
                 textAlign: "center",
               }}>
@@ -160,7 +160,7 @@ export default function AboutPage() {
               }}>
                 <div style={{
                   width: "44px", height: "44px", borderRadius: "12px", flexShrink: 0,
-                  background: "#6366f110", border: "1px solid #6366f120",
+                  background: "#143a6b10", border: "1px solid #143a6b20",
                   display: "flex", alignItems: "center", justifyContent: "center",
                   fontSize: "1.25rem",
                 }}>
@@ -196,12 +196,12 @@ export default function AboutPage() {
           }}>
             <div style={{
               padding: "2.5rem", borderBottom: "1px solid var(--border)",
-              background: "linear-gradient(135deg, #6366f108, #8b5cf608)",
+              background: "linear-gradient(135deg, #143a6b08, #143a6b08)",
             }}>
               <div style={{ display: "flex", alignItems: "center", gap: "1rem", marginBottom: "1.25rem" }}>
                 <div style={{
                   width: "48px", height: "48px", borderRadius: "12px",
-                  background: "linear-gradient(135deg, #6366f1, #8b5cf6)",
+                  background: "linear-gradient(135deg, #143a6b, #143a6b)",
                   display: "flex", alignItems: "center", justifyContent: "center",
                   fontSize: "1.4rem",
                 }}>
@@ -229,7 +229,7 @@ export default function AboutPage() {
               ))}
               <div style={{ marginLeft: "auto", display: "flex", alignItems: "center" }}>
                 <a href="https://kittyhouse.mn" target="_blank" rel="noopener noreferrer"
-                  style={{ fontSize: "0.82rem", fontWeight: 600, color: "#6366f1", textDecoration: "none" }}>
+                  style={{ fontSize: "0.82rem", fontWeight: 600, color: "#143a6b", textDecoration: "none" }}>
                   Сайт үзэх →
                 </a>
               </div>
@@ -268,10 +268,10 @@ export default function AboutPage() {
           <div style={{
             position: "relative", borderRadius: "1.5rem", overflow: "hidden",
             padding: "4rem 3rem", textAlign: "center",
-            background: "linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #1e1b4b 100%)",
+            background: "linear-gradient(135deg, #1c2b3a 0%, #312e81 50%, #1c2b3a 100%)",
             border: "1px solid rgba(255,255,255,0.08)",
           }}>
-            <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 80% 60% at 50% 50%, #6366f120 0%, transparent 70%)", pointerEvents: "none" }} />
+            <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 80% 60% at 50% 50%, #143a6b20 0%, transparent 70%)", pointerEvents: "none" }} />
             <div style={{ position: "relative" }}>
               <div className="section-tag" style={{ display: "inline-flex", marginBottom: "1.25rem", background: "rgba(255,255,255,0.1)", borderColor: "rgba(255,255,255,0.15)", color: "rgba(255,255,255,0.85)" }}>
                 Хамтран ажиллая
@@ -285,7 +285,7 @@ export default function AboutPage() {
               </p>
               <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
                 <Link href="https://app.mongolagent.mn/register"
-                  style={{ display: "inline-flex", alignItems: "center", padding: "0.9rem 2rem", fontSize: "0.92rem", fontWeight: 600, textDecoration: "none", borderRadius: "0.75rem", background: "white", color: "#1e1b4b", transition: "all 0.2s" }}>
+                  style={{ display: "inline-flex", alignItems: "center", padding: "0.9rem 2rem", fontSize: "0.92rem", fontWeight: 600, textDecoration: "none", borderRadius: "0.75rem", background: "white", color: "#1c2b3a", transition: "all 0.2s" }}>
                   Үнэгүй эхлэх →
                 </Link>
                 <a href="https://m.me/turuuai" target="_blank" rel="noopener noreferrer"

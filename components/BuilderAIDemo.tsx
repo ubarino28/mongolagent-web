@@ -208,8 +208,8 @@ export default function BuilderAIDemo() {
               <div style={{ display: "flex", alignItems: "center", gap: "0.6rem" }}>
                 <div style={{
                   width: "32px", height: "32px", borderRadius: "10px",
-                  background: "linear-gradient(135deg, #6366f115, #8b5cf615)",
-                  border: "1px solid #6366f120",
+                  background: "linear-gradient(135deg, #143a6b15, #143a6b15)",
+                  border: "1px solid #143a6b20",
                   display: "flex", alignItems: "center", justifyContent: "center",
                   overflow: "hidden",
                 }}>
@@ -247,7 +247,7 @@ export default function BuilderAIDemo() {
               style={{
                 height: "340px", overflowY: "auto", padding: "1rem",
                 display: "flex", flexDirection: "column", gap: "0.55rem",
-                background: "#f9f8f6",
+                background: "#f6f8fb",
                 scrollbarWidth: "thin", scrollbarColor: "var(--border2) transparent",
               }}
             >
@@ -257,7 +257,7 @@ export default function BuilderAIDemo() {
                     <AIAvatar />
                     <div style={{
                       padding: "0.5rem 0.75rem", borderRadius: "0.875rem 0.875rem 0.875rem 0.2rem",
-                      background: "white", border: "1px solid #e9e7e3",
+                      background: "white", border: "1px solid #eaf0f8",
                       boxShadow: "0 1px 4px #00000008",
                       display: "flex", gap: "4px", alignItems: "center",
                     }}>
@@ -276,15 +276,15 @@ export default function BuilderAIDemo() {
                   <div key={i} style={{ display: "flex", alignItems: "flex-end", gap: "5px" }}>
                     <AIAvatar />
                     <div style={{ display: "flex", flexDirection: "column", maxWidth: "80%" }}>
-                      <div style={{ fontSize: "0.57rem", color: "#b0aaa4", fontWeight: 600, marginBottom: "2px", marginLeft: "2px" }}>
+                      <div style={{ fontSize: "0.57rem", color: "#8a98a8", fontWeight: 600, marginBottom: "2px", marginLeft: "2px" }}>
                         Асуулт {(b.index ?? 0) + 1}
                       </div>
                       <div style={{
                         padding: "0.5rem 0.75rem",
                         borderRadius: "0.875rem 0.875rem 0.875rem 0.2rem",
-                        background: "white", border: "1px solid #e9e7e3",
+                        background: "white", border: "1px solid #eaf0f8",
                         boxShadow: "0 1px 5px #00000008",
-                        fontSize: "0.78rem", color: "#374151",
+                        fontSize: "0.78rem", color: "#5a6b80",
                         lineHeight: 1.55, fontWeight: 500,
                       }}>
                         {b.text}
@@ -351,7 +351,7 @@ export default function BuilderAIDemo() {
                 background: isTypingInput ? "white" : "var(--surface2)",
                 border: isTypingInput ? "1.5px solid var(--border2)" : "1px solid var(--border)",
                 fontSize: "0.78rem",
-                color: inputText ? "#374151" : "#b0aaa4",
+                color: inputText ? "#5a6b80" : "#8a98a8",
                 transition: "border-color 0.2s, background 0.2s",
                 minHeight: "36px", display: "flex", alignItems: "center",
                 overflow: "hidden", whiteSpace: "nowrap",
