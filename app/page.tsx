@@ -1,17 +1,14 @@
 import Link from "next/link";
+import type { ReactNode } from "react";
 
-/* ─── Icons ─── */
-const IconChat = () => (
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-  </svg>
-);
-const IconStore = () => (
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M3 9l1-5h16l1 5"/><path d="M5 9v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9"/>
-    <path d="M3 9a3 3 0 0 0 6 0 3 3 0 0 0 6 0 3 3 0 0 0 6 0"/><path d="M9 21v-6h6v6"/>
-  </svg>
-);
+/* ─── Brand glyphs (showcase logo circles) ─── */
+const FbGlyph = () => (<svg width="17" height="17" viewBox="0 0 24 24" fill="#1877F2"><path d="M24 12.07C24 5.4 18.6 0 12 0S0 5.4 0 12.07c0 6 4.39 10.97 10.13 11.85v-8.38H7.08v-3.47h3.05V9.43c0-3 1.79-4.67 4.53-4.67 1.31 0 2.69.24 2.69.24v2.95h-1.52c-1.5 0-1.96.93-1.96 1.87v2.25h3.33l-.53 3.47h-2.8v8.38C19.6 23.04 24 18.07 24 12.07z"/></svg>);
+const IgGlyph = () => (<svg width="17" height="17" viewBox="0 0 24 24" fill="#E1306C"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.64.07-4.85.07s-3.58-.01-4.85-.07c-3.26-.15-4.77-1.7-4.92-4.92-.06-1.27-.07-1.64-.07-4.85s.01-3.58.07-4.85C2.38 3.92 3.9 2.38 7.15 2.23 8.42 2.17 8.8 2.16 12 2.16M12 0C8.74 0 8.33.01 7.05.07 2.7.27.27 2.69.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.2 4.36 2.62 6.78 6.98 6.98C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c4.35-.2 6.78-2.62 6.98-6.98.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.2-4.35-2.62-6.78-6.98-6.98C15.67.01 15.26 0 12 0zm0 5.84a6.16 6.16 0 1 0 0 12.32 6.16 6.16 0 0 0 0-12.32zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.41-10.85a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"/></svg>);
+const MsgGlyph = () => (<svg width="17" height="17" viewBox="0 0 24 24" fill="#0084FF"><path d="M12 0C5.37 0 0 4.97 0 11.11c0 3.5 1.74 6.62 4.47 8.66V24l4.09-2.25c1.09.3 2.25.47 3.44.47 6.63 0 12-4.97 12-11.11C24 4.97 18.63 0 12 0zm1.19 14.96l-3.06-3.26-5.97 3.26 6.56-6.97 3.13 3.26 5.9-3.26-6.59 6.97z"/></svg>);
+const BagGlyph = () => (<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#143A6B" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18M16 10a4 4 0 0 1-8 0"/></svg>);
+const GlobeGlyph = () => (<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#143A6B" strokeWidth="1.8"><circle cx="12" cy="12" r="10"/><path d="M2 12h20" /><path d="M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20z"/></svg>);
+const QpayGlyph = () => (<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#16a34a" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>);
+
 const IconArrow = () => (
   <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
     <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
@@ -23,26 +20,36 @@ const IconPhone = () => (
   </svg>
 );
 
-const PRODUCTS = [
-  {
-    tag: "Автоматжуулалт",
-    icon: <IconChat />,
-    title: "AI Agent",
-    desc: "Facebook, Instagram мессенжерт холбогдсон AI ажилтан — хэрэглэгчтэй 24/7 Монгол хэлээр харилцаж, захиалга авч, QPay-аар төлбөр баталгаажуулна.",
-    items: ["Facebook & Instagram chatbot", "Чат дотроос QPay захиалга, төлбөр", "Мэдлэгийн санд суурилсан, өөрөө суралцдаг"],
-    href: "/ai",
-    cta: "AI Agent үзэх",
-  },
-  {
-    tag: "Цахим худалдаа",
-    icon: <IconStore />,
-    title: "Онлайн дэлгүүр",
-    desc: "Shopify шиг — кодгүйгээр өөрийн онлайн дэлгүүрээ хормын дотор нээ. Бараа, захиалга, төлбөр, хүргэлт, домэйн бүгд нэг дор.",
-    items: ["Drag-and-drop сайт бүтээгч", "QPay төлбөр + хүргэлт + өөрийн домэйн", "Захиалга, бараа, аналитик, хямдрал"],
-    href: "/store",
-    cta: "Онлайн дэлгүүр үзэх",
-  },
-];
+const CARD_BG = "linear-gradient(150deg, #16314F 0%, #0E2540 55%, #0A1B2E 100%)";
+
+function Circle({ children }: { children: ReactNode }) {
+  return <div style={{ width: 42, height: 42, borderRadius: "50%", background: "#fff", display: "flex", alignItems: "center", justifyContent: "center", border: "3px solid #0E2540", boxShadow: "0 3px 12px rgba(0,0,0,0.4)" }}>{children}</div>;
+}
+
+function Showcase({ eyebrow, logos, title, titleAccent, desc, href, cta, visual }: {
+  eyebrow: string; logos: ReactNode[]; title: string; titleAccent: string;
+  desc: string; href: string; cta: string; visual: ReactNode;
+}) {
+  return (
+    <div style={{ position: "relative", overflow: "hidden", borderRadius: "1.75rem", background: CARD_BG, border: "1px solid rgba(255,255,255,0.08)", padding: "clamp(2rem, 4vw, 3.5rem)" }}>
+      <div style={{ position: "absolute", top: "-25%", right: "-8%", width: "55%", height: "80%", background: "radial-gradient(circle, rgba(43,90,143,0.32), transparent 70%)", pointerEvents: "none" }} />
+      <div className="showcase-grid" style={{ position: "relative", display: "grid", gridTemplateColumns: "1.05fr 1fr", gap: "2.5rem", alignItems: "center" }}>
+        <div>
+          <div style={{ fontSize: "0.7rem", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.1em", color: "rgba(255,255,255,0.5)", marginBottom: "1rem" }}>{eyebrow}</div>
+          <div style={{ display: "flex", marginBottom: "1.5rem" }}>
+            {logos.map((l, i) => <div key={i} style={{ marginLeft: i ? -11 : 0, zIndex: logos.length - i, position: "relative" }}><Circle>{l}</Circle></div>)}
+          </div>
+          <h2 style={{ fontSize: "clamp(1.8rem, 3.4vw, 2.85rem)", fontWeight: 800, lineHeight: 1.08, letterSpacing: "-0.03em", color: "#fff", marginBottom: "1.1rem" }}>
+            {title} <span style={{ color: "#9DC0E8" }}>{titleAccent}</span>
+          </h2>
+          <p style={{ fontSize: "0.97rem", lineHeight: 1.75, color: "rgba(255,255,255,0.62)", maxWidth: "430px", marginBottom: "2rem" }}>{desc}</p>
+          <Link href={href} style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem", padding: "0.82rem 1.9rem", borderRadius: "0.75rem", background: "#fff", color: "var(--navy)", fontWeight: 700, fontSize: "0.9rem", textDecoration: "none" }}>{cta} <IconArrow /></Link>
+        </div>
+        <div style={{ position: "relative", minHeight: "330px" }}>{visual}</div>
+      </div>
+    </div>
+  );
+}
 
 const FLOW = [
   { num: "01", title: "Онлайн дэлгүүрээ нээ", desc: "Бэлэн загвараас сонгож, бараагаа оруулаад хэдхэн минутад дэлгүүрээ нийтэл." },
@@ -68,6 +75,54 @@ const wrap5 = { maxWidth: "64rem", margin: "0 auto", padding: "0 1.25rem" } as c
 const wrap3 = { maxWidth: "48rem", margin: "0 auto", padding: "0 1.25rem" } as const;
 
 export default function HomePage() {
+  const aiVisual = (
+    <>
+      <div style={{ position: "absolute", top: 0, right: 0, background: "#fff", color: "#1C2B3A", borderRadius: "1rem 1rem 0.25rem 1rem", padding: "0.7rem 1rem", fontSize: "0.82rem", fontWeight: 500, maxWidth: "230px", boxShadow: "0 10px 30px rgba(0,0,0,0.3)", lineHeight: 1.45, zIndex: 2 }}>
+        Ногоон цамц хэрэгтэй, 200мянгаас доош 🧥
+      </div>
+      <div style={{ position: "absolute", top: "96px", right: "26px", width: "186px", background: "#fff", borderRadius: "0.9rem", overflow: "hidden", boxShadow: "0 18px 44px rgba(0,0,0,0.4)", zIndex: 1 }}>
+        <div style={{ aspectRatio: "4/5", background: "linear-gradient(150deg, #3A6B5C, #16382E)" }} />
+        <div style={{ padding: "0.7rem 0.85rem" }}>
+          <div style={{ fontSize: "0.78rem", fontWeight: 600, color: "#1C2B3A" }}>Ойн ногоон цамц</div>
+          <div style={{ fontSize: "0.85rem", fontWeight: 800, color: "#143A6B", marginTop: "0.15rem" }}>189,000₮</div>
+        </div>
+      </div>
+    </>
+  );
+  const webVisual = (
+    <>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "center", height: "100%" }}>
+        <div style={{ width: "100%", maxWidth: "330px", borderRadius: "0.9rem", overflow: "hidden", background: "#fff", boxShadow: "0 18px 44px rgba(0,0,0,0.4)" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 5, padding: "0.55rem 0.75rem", background: "#F6F8FB", borderBottom: "1px solid #E4E8ED" }}>
+            {[0, 1, 2].map(i => <span key={i} style={{ width: 8, height: 8, borderRadius: "50%", background: "#E4E8ED" }} />)}
+            <span style={{ marginLeft: 8, fontSize: "0.6rem", color: "#8A98A8", background: "#fff", border: "1px solid #E4E8ED", borderRadius: 5, padding: "0.12rem 0.5rem" }}>миний-дэлгүүр.mn</span>
+          </div>
+          <div style={{ padding: "0.9rem" }}>
+            <div style={{ height: 9, width: "45%", background: "#E4E8ED", borderRadius: 4, marginBottom: 11 }} />
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 9 }}>
+              {[
+                { bg: "linear-gradient(150deg,#3A6B5C,#1C4A3E)", price: "189,000₮" },
+                { bg: "linear-gradient(150deg,#2B5A8F,#143A6B)", price: "129,000₮" },
+                { bg: "linear-gradient(150deg,#B8895A,#8A5A3A)", price: "99,000₮" },
+                { bg: "linear-gradient(150deg,#5A6B80,#2B3A4D)", price: "159,000₮" },
+              ].map((t, i) => (
+                <div key={i} style={{ borderRadius: 8, overflow: "hidden", border: "1px solid #E4E8ED" }}>
+                  <div style={{ aspectRatio: "1/1", background: t.bg }} />
+                  <div style={{ padding: "0.4rem 0.5rem" }}>
+                    <div style={{ height: 6, width: "70%", background: "#E4E8ED", borderRadius: 3, marginBottom: 5 }} />
+                    <div style={{ fontSize: "0.62rem", fontWeight: 800, color: "#143A6B" }}>{t.price}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style={{ position: "absolute", bottom: "8%", left: "-4%", background: "#fff", borderRadius: "0.7rem", padding: "0.5rem 0.85rem", boxShadow: "0 10px 28px rgba(0,0,0,0.3)", display: "inline-flex", alignItems: "center", gap: 7, fontSize: "0.72rem", fontWeight: 700, color: "#16a34a" }}>
+        ✓ QPay төлбөр амжилттай
+      </div>
+    </>
+  );
   return (
     <>
       {/* ─── HERO ─────────────────────────────────────────── */}
@@ -129,41 +184,37 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* ─── PRODUCTS (2 тэнцүү) ──────────────────────────── */}
-      <section id="products" data-animate style={{ padding: "7rem 0" }}>
+      {/* ─── PRODUCTS — premium showcase ──────────────────── */}
+      <section id="products" data-animate style={{ padding: "7rem 0 6rem" }}>
         <div style={wrap}>
-          <div style={{ textAlign: "center", marginBottom: "3.5rem" }}>
+          <div style={{ textAlign: "center", marginBottom: "3rem" }}>
             <div className="section-tag" style={{ display: "inline-flex", marginBottom: "1rem" }}>Хоёр шийдэл, нэг платформ</div>
             <h2 style={{ fontSize: "clamp(1.7rem, 3.5vw, 2.6rem)", fontWeight: 800, letterSpacing: "-0.02em", marginBottom: "1rem" }}>
               Бизнесээ ургуулах <span className="gradient-text">хоёр хүчирхэг хэрэгсэл</span>
             </h2>
-            <p style={{ color: "var(--text-mid)", maxWidth: "480px", margin: "0 auto", fontSize: "0.92rem", lineHeight: 1.7 }}>
-              Аль нэгийг нь дангаар, эсвэл хоёуланг хослуулан ашиглаж болно. Эхлэхэд тань тохирсон шийдлээ сонго.
-            </p>
           </div>
 
-          <div className="services-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1.5rem" }}>
-            {PRODUCTS.map(p => (
-              <div key={p.title} className="card card-glow" style={{ display: "flex", flexDirection: "column", padding: "2.25rem" }}>
-                <div style={{ display: "flex", alignItems: "center", gap: "0.9rem", marginBottom: "1.25rem" }}>
-                  <div style={{ width: "52px", height: "52px", borderRadius: "14px", display: "flex", alignItems: "center", justifyContent: "center", background: "var(--navy)", color: "#fff", flexShrink: 0 }}>
-                    {p.icon}
-                  </div>
-                  <div className="section-tag" style={{ display: "inline-flex", fontSize: "0.63rem" }}>{p.tag}</div>
-                </div>
-
-                <h3 style={{ fontSize: "1.4rem", fontWeight: 800, letterSpacing: "-0.02em", marginBottom: "0.6rem" }}>{p.title}</h3>
-                <p style={{ color: "var(--text-mid)", fontSize: "0.88rem", lineHeight: 1.7, marginBottom: "1.5rem" }}>{p.desc}</p>
-
-                <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem", marginBottom: "2rem" }}>
-                  {p.items.map(item => <div key={item} className="check-item">{item}</div>)}
-                </div>
-
-                <Link href={p.href} className="btn-primary" style={{ marginTop: "auto", justifyContent: "center", fontSize: "0.9rem" }}>
-                  {p.cta} <IconArrow />
-                </Link>
-              </div>
-            ))}
+          <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
+            <Showcase
+              eyebrow="AI Agent · Чатбот"
+              logos={[<FbGlyph key="f" />, <IgGlyph key="i" />, <MsgGlyph key="m" />]}
+              title="Таны брэнд"
+              titleAccent="чат руу оров."
+              desc="Хэрэглэгч Facebook, Instagram дээр AI-тай Монгол хэлээр чатлаж, шууд захиалга өгнө. Чат дотроос QPay-аар төлж, та бүх захиалгаа нэг дороос хянана."
+              href="/ai"
+              cta="AI Agent үзэх"
+              visual={aiVisual}
+            />
+            <Showcase
+              eyebrow="Онлайн дэлгүүр · Цахим худалдаа"
+              logos={[<BagGlyph key="b" />, <GlobeGlyph key="g" />, <QpayGlyph key="q" />]}
+              title="Онлайн дэлгүүрээ"
+              titleAccent="хормын дотор нээ."
+              desc="Кодгүйгээр дэлгүүрээ угсар. Бараа, QPay төлбөр, хүргэлт, өөрийн домэйн — бүгд бэлэн. Хэрэглэгч шууд төлж, орлого таны дансанд орно."
+              href="/store"
+              cta="Онлайн дэлгүүр үзэх"
+              visual={webVisual}
+            />
           </div>
         </div>
       </section>

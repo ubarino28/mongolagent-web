@@ -237,6 +237,7 @@ main, nav, footer { position: relative; z-index: 1; }
   .hero-mascot img { width: 200px !important; }
   .hero-bubble { display: none !important; }
   .services-grid { grid-template-columns: 1fr !important; }
+  .showcase-grid { grid-template-columns: 1fr !important; gap: 2rem !important; }
   .pricing-grid { grid-template-columns: 1fr !important; }
   .pricing-featured { transform: none !important; }
   .why-grid {
