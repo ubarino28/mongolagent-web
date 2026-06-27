@@ -457,11 +457,13 @@ export default function AIChatDemo(){
     <section data-animate style={{padding:"7rem 0"}}>
       <div style={{maxWidth:"78rem",margin:"0 auto",padding:"0 1.25rem"}}>
         <div style={{textAlign:"center",marginBottom:"2.5rem"}}>
-          <div className="section-tag" style={{display:"inline-flex",marginBottom:"1rem"}}>Live Demo</div>
           <h2 style={{fontSize:"clamp(1.7rem,3.5vw,2.4rem)",fontWeight:800,letterSpacing:"-0.02em",lineHeight:1.15}}>
             Ийм байдлаар ажиллана —{" "}
             <span className="gradient-text">24/7, автоматаар</span>
           </h2>
+          <p style={{color:"var(--text-mid)",maxWidth:"460px",margin:"0.9rem auto 0",fontSize:"0.95rem",lineHeight:1.7}}>
+            Дээрх жишээ чат шиг — хэрэглэгчтэй ярьж, бараа санал болгож, QPay-аар төлбөр авна. Доороос өөрөө туршаад үзээрэй.
+          </p>
         </div>
 
         {/* Tabs */}

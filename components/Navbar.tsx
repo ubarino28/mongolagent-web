@@ -4,10 +4,10 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 
 const LINKS = [
-  { href: "/ai",       hash: null,       label: "AI Agent" },
-  { href: "/store",    hash: null,       label: "Онлайн дэлгүүр" },
-  { href: "/#faq",     hash: "#faq",     label: "FAQ" },
-  { href: "/about",    hash: null,        label: "Бидний тухай" },
+  { href: "/ai", hash: null as string | null, label: "AI Agent" },
+  { href: "/store", hash: null as string | null, label: "Онлайн дэлгүүр" },
+  { href: "/#faq", hash: "#faq" as string | null, label: "FAQ" },
+  { href: "/about", hash: null as string | null, label: "Бидний тухай" },
 ];
 
 export default function Navbar() {
@@ -15,93 +15,55 @@ export default function Navbar() {
   const pathname = usePathname();
   const isHome = pathname === "/";
 
-  function NavLink({ href, hash, label, onClick, className, style }: {
-    href: string; hash: string | null; label: string;
-    onClick?: () => void; className?: string; style?: React.CSSProperties;
-  }) {
-    if (isHome && hash) {
-      return (
-        <a href={hash} onClick={onClick} className={className} style={style}>
-          {label}
-        </a>
-      );
-    }
-    return (
-      <Link href={href} onClick={onClick} className={className} style={style}>
-        {label}
-      </Link>
-    );
+  const linkStyle: React.CSSProperties = { padding: "0.5rem 0.95rem", borderRadius: 8, fontSize: "0.875rem", fontWeight: 500, textDecoration: "none", whiteSpace: "nowrap" };
+
+  function NavItem({ href, hash, label, style }: { href: string; hash: string | null; label: string; style?: React.CSSProperties }) {
+    const s = { ...linkStyle, ...style };
+    if (isHome && hash) return <a href={hash} className="nav-link" style={s} onClick={() => setOpen(false)}>{label}</a>;
+    return <Link href={href} className="nav-link" style={s} onClick={() => setOpen(false)}>{label}</Link>;
   }
 
   return (
-    <header className="sticky top-0 z-50"
-      style={{ background: "rgba(255,255,255,0.94)", backdropFilter: "blur(16px)", borderBottom: "1px solid var(--border)" }}>
-      <div style={{ maxWidth: "72rem", margin: "0 auto", padding: "0 1.25rem", height: "4rem", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+    <header style={{ position: "sticky", top: 0, zIndex: 50, background: "rgba(255,255,255,0.9)", backdropFilter: "blur(16px)", WebkitBackdropFilter: "blur(16px)", borderBottom: "1px solid var(--border)" }}>
+      <div style={{ maxWidth: "72rem", margin: "0 auto", padding: "0 1.5rem", height: "4rem", display: "flex", alignItems: "center", justifyContent: "space-between", gap: "1rem" }}>
 
         {/* Logo */}
-        <Link href="/" style={{ textDecoration: "none", display: "flex", alignItems: "center", gap: "0.6rem" }}>
-          <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
-            style={{ background: "var(--accent)" }}>
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <path d="M8 2L13 5V11L8 14L3 11V5L8 2Z" fill="white" opacity="0.7" />
-              <path d="M8 5L11 7V11L8 13L5 11V7L8 5Z" fill="white" />
-            </svg>
-          </div>
-          <span style={{ fontWeight: 700, fontSize: "1rem", color: "var(--text)", letterSpacing: "-0.01em" }}>
-            MongolAgent
-          </span>
+        <Link href="/" style={{ textDecoration: "none", display: "flex", alignItems: "center", gap: "0.55rem", flexShrink: 0 }}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/m_logo.svg" alt="Mongol Agent" width={32} height={32} style={{ display: "block", flexShrink: 0 }} />
+          <span style={{ fontWeight: 700, fontSize: "1.05rem", color: "var(--navy-dark)", letterSpacing: "-0.01em" }}>MongolAgent</span>
         </Link>
 
         {/* Desktop nav */}
-        <nav className="hidden md:flex items-center gap-1">
-          {LINKS.map(l => (
-            <NavLink key={l.href} {...l}
-              className="nav-link px-4 py-2 rounded-lg text-sm font-medium" />
-          ))}
+        <nav className="nav-desktop" style={{ alignItems: "center", gap: "0.25rem" }}>
+          {LINKS.map((l) => <NavItem key={l.href} {...l} />)}
         </nav>
 
-        {/* Actions */}
-        <div className="hidden md:flex items-center gap-3">
-          <Link href="https://app.mongolagent.mn" className="nav-link"
-            style={{ fontSize: "0.875rem", fontWeight: 500, padding: "0.45rem 1rem" }}>
-            Нэвтрэх
-          </Link>
-          <Link href="https://app.mongolagent.mn/register" className="btn-primary"
-            style={{ padding: "0.5rem 1.25rem", fontSize: "0.875rem" }}>
-            Эхлэх →
-          </Link>
+        {/* Desktop actions */}
+        <div className="nav-desktop" style={{ alignItems: "center", gap: "0.75rem", flexShrink: 0 }}>
+          <Link href="https://app.mongolagent.mn" className="nav-link" style={linkStyle}>Нэвтрэх</Link>
+          <Link href="https://app.mongolagent.mn/register" style={{ display: "inline-flex", alignItems: "center", gap: "0.4rem", padding: "0.55rem 1.25rem", borderRadius: "0.65rem", background: "var(--navy)", color: "#fff", fontWeight: 600, fontSize: "0.875rem", textDecoration: "none", whiteSpace: "nowrap" }}>Эхлэх →</Link>
         </div>
 
         {/* Mobile toggle */}
-        <button onClick={() => setOpen(v => !v)} className="md:hidden p-2 rounded-lg"
-          style={{ color: "var(--text-mid)", background: "var(--surface2)", border: "1px solid var(--border)" }}>
+        <button className="nav-mobile-btn" onClick={() => setOpen((v) => !v)} aria-label="Цэс"
+          style={{ alignItems: "center", justifyContent: "center", width: 40, height: 40, borderRadius: 10, border: "1px solid var(--border)", background: "var(--bg-tint)", color: "var(--navy-dark)", cursor: "pointer", fontSize: "1.05rem", flexShrink: 0 }}>
           {open ? "✕" : "☰"}
         </button>
       </div>
 
       {/* Mobile menu */}
-      <div className={`md:hidden overflow-hidden transition-all duration-200 ${open ? "max-h-72 opacity-100" : "max-h-0 opacity-0 pointer-events-none"}`}
-        style={{ borderTop: "1px solid var(--border)", background: "var(--bg)" }}>
-        <div className="px-5 py-4 space-y-1">
-          {LINKS.map(l => (
-            <NavLink key={l.href} {...l}
-              onClick={() => setOpen(false)}
-              className="nav-link block px-3 py-2.5 rounded-lg text-sm font-medium" />
-          ))}
-          <div className="pt-3 space-y-2">
-            <Link href="https://app.mongolagent.mn" onClick={() => setOpen(false)}
-              className="block text-center py-2.5 rounded-xl text-sm nav-link"
-              style={{ border: "1px solid var(--border)" }}>
-              Нэвтрэх
-            </Link>
-            <Link href="https://app.mongolagent.mn/register" className="btn-primary justify-center"
-              onClick={() => setOpen(false)}
-              style={{ display: "flex", width: "100%", fontSize: "0.9rem" }}>
-              Үнэгүй demo авах →
-            </Link>
+      {open && (
+        <div className="nav-mobile-menu" style={{ borderTop: "1px solid var(--border)", background: "#fff", padding: "0.75rem 1.25rem 1.25rem" }}>
+          <div style={{ display: "flex", flexDirection: "column", gap: "0.15rem" }}>
+            {LINKS.map((l) => <NavItem key={l.href} {...l} style={{ display: "block", padding: "0.7rem 0.75rem" }} />)}
+          </div>
+          <div style={{ display: "flex", flexDirection: "column", gap: "0.6rem", marginTop: "0.9rem" }}>
+            <Link href="https://app.mongolagent.mn" onClick={() => setOpen(false)} style={{ textAlign: "center", padding: "0.7rem", borderRadius: "0.65rem", border: "1px solid var(--border)", color: "var(--navy-dark)", textDecoration: "none", fontSize: "0.9rem", fontWeight: 600 }}>Нэвтрэх</Link>
+            <Link href="https://app.mongolagent.mn/register" onClick={() => setOpen(false)} style={{ textAlign: "center", padding: "0.7rem", borderRadius: "0.65rem", background: "var(--navy)", color: "#fff", textDecoration: "none", fontSize: "0.9rem", fontWeight: 700 }}>Эхлэх →</Link>
           </div>
         </div>
-      </div>
+      )}
     </header>
   );
 }

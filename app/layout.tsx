@@ -1,16 +1,17 @@
 export const revalidate = false;
 
 import type { Metadata } from "next";
-import { Plus_Jakarta_Sans } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollAnimations from "@/components/ScrollAnimations";
 
-const jakarta = Plus_Jakarta_Sans({
-  subsets: ["latin"],
+// Inter — Латин + Кирилл (Монгол) хоёуланг төгс дэмждэг нэг фонт.
+// (Plus Jakarta Sans кирилл дэмждэггүй тул Монгол текст өөр фонтоор унадаг байсан.)
+const inter = Inter({
+  subsets: ["latin", "cyrillic"],
   variable: "--font-jakarta",
-  weight: ["400", "500", "600", "700", "800"],
   display: "swap",
 });
 
@@ -26,7 +27,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="mn" className={jakarta.variable}>
+    <html lang="mn" className={inter.variable}>
       <body className="min-h-screen flex flex-col">
         <Navbar />
         <main className="flex-1">{children}</main>

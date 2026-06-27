@@ -203,12 +203,33 @@ main, nav, footer { position: relative; z-index: 1; }
 /* Scroll animations */
 [data-animate] {
   opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateY(36px);
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
 }
 [data-animate].animated {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* Staggered child reveal — карт бүр дараалан гарч ирнэ (premium cascade) */
+.stagger > * {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+.stagger.in > * { opacity: 1; transform: translateY(0); }
+.stagger.in > *:nth-child(1) { transition-delay: 0.06s; }
+.stagger.in > *:nth-child(2) { transition-delay: 0.18s; }
+.stagger.in > *:nth-child(3) { transition-delay: 0.30s; }
+.stagger.in > *:nth-child(4) { transition-delay: 0.42s; }
+.stagger.in > *:nth-child(5) { transition-delay: 0.54s; }
+.stagger.in > *:nth-child(6) { transition-delay: 0.66s; }
+.stagger.in > *:nth-child(7) { transition-delay: 0.78s; }
+.stagger.in > *:nth-child(8) { transition-delay: 0.90s; }
+
+@media (prefers-reduced-motion: reduce) {
+  [data-animate], .stagger > * { transition: none !important; opacity: 1 !important; transform: none !important; }
 }
 
 /* Typing indicator dots */
@@ -239,6 +260,9 @@ main, nav, footer { position: relative; z-index: 1; }
   .services-grid { grid-template-columns: 1fr !important; }
   .showcase-grid { grid-template-columns: 1fr !important; gap: 2rem !important; }
   .sell-grid { grid-template-columns: 1fr !important; }
+  .adv-grid { grid-template-columns: 1fr 1fr !important; gap: 2rem 1.25rem !important; }
+  .adv-stats { grid-template-columns: 1fr !important; }
+  .store-grid { grid-template-columns: repeat(2, 1fr) !important; }
   .pricing-grid { grid-template-columns: 1fr !important; }
   .pricing-featured { transform: none !important; }
   .why-grid {
@@ -327,3 +351,97 @@ main, nav, footer { position: relative; z-index: 1; }
 
 /* Dashboard tab content — hide scrollbar */
 .db-tab-content::-webkit-scrollbar { display: none; }
+
+/* ─── Navbar (inline-style based, reliable responsive) ─── */
+.nav-desktop { display: flex; }
+.nav-mobile-btn { display: none; }
+@media (max-width: 880px) {
+  .nav-desktop { display: none !important; }
+  .nav-mobile-btn { display: inline-flex !important; }
+}
+
+/* ─── Automate tabbed section ─── */
+@media (max-width: 920px) {
+  .automate-grid { grid-template-columns: 1fr !important; gap: 2.75rem !important; }
+  .automate-tablet { margin: 0 auto; }
+}
+
+/* ─── Утасны захиалгын мэдэгдэл — 1-1-ээр "ирэх" animation ─── */
+@keyframes orderIn {
+  0%   { opacity: 0; transform: translateY(-26px) scale(0.88); }
+  9%   { opacity: 1; transform: translateY(3px) scale(1.03); }
+  16%  { opacity: 1; transform: translateY(0) scale(1); }
+  78%  { opacity: 1; transform: translateY(0) scale(1); }
+  90%  { opacity: 0; transform: translateY(-14px) scale(0.95); }
+  100% { opacity: 0; transform: translateY(-14px) scale(0.95); }
+}
+.order-notif {
+  opacity: 0;
+  animation: orderIn 5s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+  will-change: transform, opacity;
+}
+.order-notif:nth-child(1) { animation-delay: 0.15s; }
+.order-notif:nth-child(2) { animation-delay: 0.7s; }
+.order-notif:nth-child(3) { animation-delay: 1.25s; }
+@media (prefers-reduced-motion: reduce) {
+  .order-notif { animation: none; opacity: 1; }
+}
+
+/* ─── Hero AI чат — мессеж ар араасаа гарч ирэх (синхрон давталт) ─── */
+@keyframes chatA { 0%,3% { opacity:0; transform: translateY(16px) scale(.96); } 8%,88% { opacity:1; transform:none; } 95%,100% { opacity:0; transform: translateY(8px); } }
+@keyframes chatB { 0%,15% { opacity:0; transform: translateY(16px) scale(.96); } 20%,88% { opacity:1; transform:none; } 95%,100% { opacity:0; transform: translateY(8px); } }
+@keyframes chatC { 0%,28% { opacity:0; transform: translateY(16px) scale(.96); } 33%,88% { opacity:1; transform:none; } 95%,100% { opacity:0; transform: translateY(8px); } }
+@keyframes chatD { 0%,42% { opacity:0; transform: translateY(16px) scale(.96); } 47%,88% { opacity:1; transform:none; } 95%,100% { opacity:0; transform: translateY(8px); } }
+@keyframes chatE { 0%,56% { opacity:0; transform: translateY(16px) scale(.96); } 61%,88% { opacity:1; transform:none; } 95%,100% { opacity:0; transform: translateY(8px); } }
+.ai-chat-msg { opacity: 0; animation-duration: 7.5s; animation-iteration-count: infinite; animation-timing-function: cubic-bezier(0.22,1,0.36,1); will-change: transform, opacity; }
+.ai-chat-msg:nth-child(1) { animation-name: chatA; }
+.ai-chat-msg:nth-child(2) { animation-name: chatB; }
+.ai-chat-msg:nth-child(3) { animation-name: chatC; }
+.ai-chat-msg:nth-child(4) { animation-name: chatD; }
+.ai-chat-msg:nth-child(5) { animation-name: chatE; }
+/* typing indicator — байнгын хөдөлгөөн */
+@keyframes chatTypeShow { 0%,58% { opacity:1; } 60%,100% { opacity:0; } }
+.ai-typing { display: inline-flex; gap: 4px; align-items: center; animation: chatTypeShow 7.5s steps(1) infinite; }
+.ai-typing span { width: 6px; height: 6px; border-radius: 50%; background: var(--text-light); animation: typeBounce 1.1s ease-in-out infinite; }
+.ai-typing span:nth-child(2) { animation-delay: 0.18s; }
+.ai-typing span:nth-child(3) { animation-delay: 0.36s; }
+@keyframes typeBounce { 0%,60%,100% { transform: translateY(0); opacity: 0.4; } 30% { transform: translateY(-5px); opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .ai-chat-msg, .ai-typing, .ai-typing span { animation: none; opacity: 1; } }
+
+/* ─── Hero AI чат (client) — мессеж нэмэгдэхэд smooth scroll ─── */
+@keyframes heroChatIn { from { opacity: 0; transform: translateY(12px) scale(0.98); } to { opacity: 1; transform: none; } }
+.hero-chat-scroll { scrollbar-width: none; scroll-behavior: smooth; }
+.hero-chat-scroll::-webkit-scrollbar { display: none; }
+.ai-typing-live span { width: 6px; height: 6px; border-radius: 50%; background: var(--text-light); display: inline-block; animation: typeBounce 1.1s ease-in-out infinite; }
+.ai-typing-live span:nth-child(2) { animation-delay: 0.18s; }
+.ai-typing-live span:nth-child(3) { animation-delay: 0.36s; }
+@media (prefers-reduced-motion: reduce) { .ai-typing-live span { animation: none; } }
+
+/* ─── Trust strip (premium stat bar) ─── */
+@media (max-width: 620px) {
+  .trust-strip > div { flex-basis: 50% !important; min-width: 0 !important; }
+  .trust-strip > div:nth-child(odd) { border-left: none !important; }
+  .trust-strip > div:nth-child(n+3) { border-top: 1px solid var(--border); }
+}
+
+/* ─── Store hero (2-column, Shopify-style) ─── */
+@media (max-width: 920px) {
+  .hero-store-grid { grid-template-columns: 1fr !important; gap: 2.75rem !important; }
+  .hero-store-copy { text-align: center; }
+  .hero-store-copy p { margin-left: auto !important; margin-right: auto !important; }
+  .hero-store-copy .hero-ctas,
+  .hero-store-copy .hero-trust { justify-content: center; }
+  .hero-cluster { justify-content: center !important; }
+}
+@media (max-width: 600px) {
+  .cluster-phone { display: none !important; }
+}
+
+/* ─── Footer responsive ─── */
+@media (max-width: 760px) {
+  .footer-grid { grid-template-columns: 1fr 1fr !important; gap: 2rem !important; }
+}
+@media (max-width: 460px) {
+  .footer-grid { grid-template-columns: 1fr !important; }
+  .footer-bottom { flex-direction: column; align-items: flex-start !important; }
+}

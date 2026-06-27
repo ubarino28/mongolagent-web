@@ -1,5 +1,8 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
+import HomePlatform from "../components/HomePlatform";
+import TrustBar from "../components/TrustBar";
+import PlatformMarquee from "../components/PlatformMarquee";
 
 /* ─── Brand glyphs (showcase logo circles) ─── */
 const FbGlyph = () => (<svg width="17" height="17" viewBox="0 0 24 24" fill="#1877F2"><path d="M24 12.07C24 5.4 18.6 0 12 0S0 5.4 0 12.07c0 6 4.39 10.97 10.13 11.85v-8.38H7.08v-3.47h3.05V9.43c0-3 1.79-4.67 4.53-4.67 1.31 0 2.69.24 2.69.24v2.95h-1.52c-1.5 0-1.96.93-1.96 1.87v2.25h3.33l-.53 3.47h-2.8v8.38C19.6 23.04 24 18.07 24 12.07z"/></svg>);
@@ -66,7 +69,7 @@ const TESTIMONIALS = [
 const FAQS = [
   { q: "Хоёр үйлчилгээг хамтад нь авах шаардлагатай юу?", a: "Үгүй. AI Agent эсвэл Онлайн дэлгүүрийн аль нэгийг нь дангаар авч болно. Гэхдээ хоёуланг хослуулбал захиалгаас төлбөр хүртэлх бүх урсгал бүрэн автоматжина." },
   { q: "Код бичих, программист хэрэгтэй юу?", a: "Үгүй. Хоёр бүтээгдэхүүн хоёулаа кодгүй. Бүртгүүлээд, заавраар дагаад л өөрөө тохируулна." },
-  { q: "Нэвтрүүлэхэд хэр хугацаа шаардагдах вэ?", a: "Онлайн дэлгүүр хэдхэн минутад, AI Agent ихэвчлэн 3-7 хоногт бэлэн болдог." },
+  { q: "Нэвтрүүлэхэд хэр хугацаа шаардагдах вэ?", a: "Хоёулаа маш хурдан. Онлайн дэлгүүр болон AI Agent-аа 30 минутын дотор өөрөө угсарч, тэр даруй ажиллуулж эхэлнэ." },
   { q: "Төлбөр хэрхэн төлөгдөх вэ?", a: "QPay-ээр. Хэрэглэгчийн төлбөр Mongol Agent-аар дамжихгүй, шууд таны дансанд орно." },
 ];
 
@@ -136,9 +139,6 @@ export default function HomePage() {
         <div style={{ ...wrap, position: "relative" }}>
           <div className="hero-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "2rem", alignItems: "center" }}>
             <div>
-              <div className="section-tag" style={{ marginBottom: "1.75rem", display: "inline-flex" }}>
-                Монголын бизнесийн AI платформ
-              </div>
               <h1 style={{ fontSize: "clamp(2.2rem, 4.5vw, 3.8rem)", fontWeight: 800, lineHeight: 1.08, letterSpacing: "-0.035em", marginBottom: "1.5rem" }}>
                 Бизнесээ онлайн<br />болгож,{" "}
                 <span className="gradient-text">AI-аар автоматжуул.</span>
@@ -153,6 +153,13 @@ export default function HomePage() {
                 <a href="#products" className="btn-outline" style={{ fontSize: "0.95rem", padding: "0.85rem 2rem" }}>
                   Бүтээгдэхүүн үзэх ↓
                 </a>
+              </div>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: "0.85rem 1.75rem", marginTop: "2.25rem" }}>
+                {["Кодгүй угсардаг", "AI чатбот", "QPay төлбөр"].map((t) => (
+                  <span key={t} style={{ display: "inline-flex", alignItems: "center", gap: "0.45rem", fontSize: "0.86rem", color: "var(--text-mid)", fontWeight: 500 }}>
+                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" /><polyline points="22 4 12 14.01 9 11.01" /></svg> {t}
+                  </span>
+                ))}
               </div>
             </div>
 
@@ -172,35 +179,28 @@ export default function HomePage() {
       </section>
 
       {/* ─── TRUST BAR ────────────────────────────────────── */}
-      <div style={{ padding: "0 1.25rem 0", marginTop: "-2.5rem", position: "relative", zIndex: 5 }}>
+      <div style={{ padding: "0 1.25rem 0", marginTop: "-2.5rem", marginBottom: "-3rem", position: "relative", zIndex: 5 }}>
         <div style={{ maxWidth: "64rem", margin: "0 auto" }}>
-          <div className="trust-bar" style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "2rem 4rem", padding: "1.75rem 2.5rem", borderRadius: "1.25rem", background: "var(--bg-white)", border: "1px solid var(--border)", boxShadow: "0 8px 30px rgba(20,58,107,0.06)" }}>
-            {[
-              { num: "200+", label: "бизнес ашигладаг" },
-              { num: "4.9★", label: "дундаж үнэлгээ" },
-              { num: "24/7", label: "тасралтгүй ажиллагаа" },
-              { num: "10 мин", label: "тохируулахад хангалттай" },
-            ].map(s => (
-              <div key={s.label} style={{ textAlign: "center" }}>
-                <div style={{ fontSize: "1.45rem", fontWeight: 800, letterSpacing: "-0.02em", color: "var(--text)", lineHeight: 1 }}>{s.num}</div>
-                <div style={{ fontSize: "0.73rem", color: "var(--text-light)", marginTop: "0.3rem" }}>{s.label}</div>
-              </div>
-            ))}
-          </div>
+          <TrustBar />
         </div>
       </div>
+
+      {/* ─── PLATFORM MARQUEE (integrations) ──────────────── */}
+      <PlatformMarquee />
 
       {/* ─── PRODUCTS — premium showcase ──────────────────── */}
       <section id="products" data-animate style={{ padding: "7rem 0 6rem" }}>
         <div style={wrap}>
           <div style={{ textAlign: "center", marginBottom: "3rem" }}>
-            <div className="section-tag" style={{ display: "inline-flex", marginBottom: "1rem" }}>Хоёр шийдэл, нэг платформ</div>
             <h2 style={{ fontSize: "clamp(1.7rem, 3.5vw, 2.6rem)", fontWeight: 800, letterSpacing: "-0.02em", marginBottom: "1rem" }}>
               Бизнесээ ургуулах <span className="gradient-text">хоёр хүчирхэг хэрэгсэл</span>
             </h2>
+            <p style={{ color: "var(--text-mid)", maxWidth: "440px", margin: "0 auto", fontSize: "0.95rem", lineHeight: 1.7 }}>
+              AI Agent болон Онлайн дэлгүүр — дангаар нь ч, хамтад нь ч ажиллана.
+            </p>
           </div>
 
-          <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
+          <div className="stagger" style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
             <Showcase
               eyebrow="AI Agent · Чатбот"
               logos={[<FbGlyph key="f" />, <IgGlyph key="i" />, <MsgGlyph key="m" />]}
@@ -229,7 +229,6 @@ export default function HomePage() {
       <section data-animate style={{ padding: "7rem 0", background: "var(--bg-section)" }}>
         <div style={wrap5}>
           <div style={{ textAlign: "center", marginBottom: "4rem" }}>
-            <div className="section-tag" style={{ display: "inline-flex", marginBottom: "1rem" }}>Хамтдаа хүчтэй</div>
             <h2 style={{ fontSize: "clamp(1.7rem, 3.5vw, 2.4rem)", fontWeight: 800, letterSpacing: "-0.02em", marginBottom: "0.9rem" }}>
               Захиалгаас төлбөр хүртэл — бүрэн автомат
             </h2>
@@ -238,7 +237,7 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div className="process-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "1.5rem" }}>
+          <div className="process-grid stagger" style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "1.5rem" }}>
             {FLOW.map(f => (
               <div key={f.num} style={{ background: "var(--bg-white)", border: "1px solid var(--border)", borderRadius: "1.5rem", padding: "2rem 1.75rem" }}>
                 <div style={{ fontSize: "0.95rem", fontWeight: 800, color: "var(--navy)", background: "var(--bg-tint)", width: "40px", height: "40px", borderRadius: "11px", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "1.25rem" }}>
@@ -252,14 +251,16 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ─── PLATFORM (interactive tabbed section) ────────── */}
+      <HomePlatform />
+
       {/* ─── TESTIMONIALS ─────────────────────────────────── */}
       <section data-animate style={{ padding: "7rem 0" }}>
         <div style={wrap5}>
           <div style={{ textAlign: "center", marginBottom: "3rem" }}>
-            <div className="section-tag" style={{ display: "inline-flex", marginBottom: "1rem" }}>Сэтгэгдэл</div>
             <h2 style={{ fontSize: "clamp(1.7rem, 3.5vw, 2.4rem)", fontWeight: 800, letterSpacing: "-0.02em" }}>Захиалагчдын сэтгэгдэл</h2>
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "1.25rem" }} className="testimonials-grid">
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "1.25rem" }} className="testimonials-grid stagger">
             {TESTIMONIALS.map(t => (
               <div key={t.name} className="card card-glow" style={{ padding: "1.75rem" }}>
                 <div style={{ display: "flex", gap: "0.25rem", marginBottom: "1rem" }}>
@@ -283,10 +284,9 @@ export default function HomePage() {
       <section id="faq" data-animate style={{ padding: "7rem 0", background: "var(--bg-section)" }}>
         <div style={wrap3}>
           <div style={{ textAlign: "center", marginBottom: "3rem" }}>
-            <div className="section-tag" style={{ display: "inline-flex", marginBottom: "1rem" }}>FAQ</div>
             <h2 style={{ fontSize: "clamp(1.7rem, 3.5vw, 2.4rem)", fontWeight: 800, letterSpacing: "-0.02em" }}>Түгээмэл асуултууд</h2>
           </div>
-          <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
+          <div className="stagger" style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
             {FAQS.map((f, i) => (
               <div key={i} style={{ borderRadius: "1rem", padding: "1.5rem", background: "var(--bg-white)", border: "1px solid var(--border)" }}>
                 <div style={{ display: "flex", gap: "1rem" }}>
@@ -307,7 +307,6 @@ export default function HomePage() {
         <div style={wrap3}>
           <div style={{ position: "relative", borderRadius: "1.5rem", overflow: "hidden", padding: "4rem 3rem", textAlign: "center", background: "var(--navy)" }}>
             <div style={{ position: "relative", color: "white" }}>
-              <div className="section-tag" style={{ display: "inline-flex", marginBottom: "1.5rem", background: "rgba(255,255,255,0.1)", borderColor: "rgba(255,255,255,0.15)", color: "rgba(255,255,255,0.85)" }}>Өнөөдөр эхэл</div>
               <h2 style={{ fontSize: "clamp(1.7rem, 4vw, 2.8rem)", fontWeight: 800, letterSpacing: "-0.03em", marginBottom: "1rem", color: "white" }}>
                 Бизнесийнхээ дараагийн<br />шатыг эхлүүлэх цаг
               </h2>
