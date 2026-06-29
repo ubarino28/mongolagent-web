@@ -33,7 +33,7 @@ function FooterCol({ title, links }: { title: string; links: { label: string; hr
 
 export default function Footer() {
   return (
-    <footer style={{ background: "var(--navy)", color: "#fff" }}>
+    <footer style={{ background: "#25202A", color: "#fff" }}>
       <div style={{ maxWidth: "72rem", margin: "0 auto", padding: "3.75rem 1.5rem 2rem" }}>
         <div className="footer-grid" style={{ display: "grid", gridTemplateColumns: "1.7fr 1fr 1fr 1.4fr", gap: "2.5rem", marginBottom: "2.75rem" }}>
 
@@ -59,7 +59,7 @@ export default function Footer() {
           <FooterCol title="Компани" links={[
             { label: "Бидний тухай", href: "/about" },
             { label: "FAQ", href: "/#faq" },
-            { label: "Нэвтрэх", href: "https://app.mongolagent.mn" },
+            { label: "Нэвтрэх", href: "/start?mode=login" },
           ]} />
 
           {/* Холбоо барих */}

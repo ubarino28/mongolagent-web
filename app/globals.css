@@ -5,27 +5,29 @@
   --navy: #143A6B;            /* гол брэндийн өнгө — товч, гарчиг, линк */
   --navy-dark: #1C2B3A;       /* үндсэн текст, толгой хэсгийн текст */
   --text-secondary: #5A6B80;  /* туслах, тайлбар текст */
-  --bg-white: #FFFFFF;        /* карт, контентын үндсэн фон */
-  --bg-section: #F6F8FB;      /* зэрэгцээ хэсгүүдийг ялгах сул хөхөвтөр фон */
-  --bg-tint: #EAF0F8;         /* icon-ы ард, badge, онцлох жижиг хэсэг */
-  --border: #E4E8ED;          /* картны нимгэн хүрээ */
+  --bg-white: #FFFFFF;        /* карт, контентын үндсэн фон (blush дээр тодрох цагаан) */
+  --bg-section: #EFDED9;      /* зэрэгцээ хэсгүүдийг ялгах нарийн blush фон (body-той ойр) */
+  --bg-tint: #FBEDEA;         /* icon-ы ард, badge, онцлох жижиг хэсэг (цайвар blush) */
+  --border: #ECDAD5;          /* картны нимгэн хүрээ (дулаан) */
   --gold: #C8A24B;            /* зөвхөн ★ үнэлгээ, премиум badge */
+  --ink: #25202A;             /* дулаан гүн (charcoal-plum) — том дарк гадаргуу, blush-тэй зохицно */
+  --ink-grad: linear-gradient(150deg, #2d2733 0%, #241f2a 55%, #1b1720 100%);
 
-  /* Hero хэсгийн зөөлөн хүйтэн хөх градиент */
-  --hero-gradient: linear-gradient(135deg, #F4F8FD 0%, #EBF1F9 50%, #F7F9FB 100%);
+  /* Hero хэсгийн зөөлөн blush градиент */
+  --hero-gradient: linear-gradient(135deg, #FBEEEB 0%, #F4E4E0 50%, #EFDCD6 100%);
 
   /* Хуучин нэрсийг шинэ палеттаар дахин холбоно (хуучин var() хэрэглээ автоматаар шинэчлэгдэнэ) */
-  --bg: var(--bg-white);
+  --bg: #F4E4E0;              /* хуудасны үндсэн blush фон */
   --surface: var(--bg-section);
   --surface2: var(--bg-tint);
-  --surface3: #DCE5F0;
-  --border2: #D3DBE5;
+  --surface3: #E6D3CE;
+  --border2: #E2CFC9;
   --accent: var(--navy);
   --accent-mid: #0F2D54;      /* navy hover (бараантар) */
   --text: var(--navy-dark);
   --text-mid: var(--text-secondary);
-  --text-light: #8A98A8;
-  --secondary-bg: #EEF1F5;    /* хоёрдогч товчны фон */
+  --text-light: #9A8C88;
+  --secondary-bg: #F6E5E1;    /* хоёрдогч товчны фон (blush) */
   --font-sans: var(--font-jakarta);
 }
 
@@ -101,7 +103,7 @@ main, nav, footer { position: relative; z-index: 1; }
   transition: border-color 0.2s, box-shadow 0.2s;
 }
 .card-glow:hover {
-  border-color: #CDD8E6;
+  border-color: #D5CCC6;
   box-shadow: 0 6px 22px rgba(20, 58, 107, 0.08);
 }
 
@@ -143,7 +145,7 @@ main, nav, footer { position: relative; z-index: 1; }
   height: 16px;
   border-radius: 50%;
   background-color: var(--bg-tint);
-  border: 1px solid #CDD8E6;
+  border: 1px solid #D5CCC6;
   flex-shrink: 0;
   margin-top: 1px;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' fill='none'%3E%3Cpath d='M2.5 6L5 8.5 9.5 4' stroke='%23143A6B' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
@@ -250,6 +252,7 @@ main, nav, footer { position: relative; z-index: 1; }
     padding-top: 3.5rem !important;
     padding-bottom: 3.5rem !important;
   }
+  .hero-full { min-height: auto !important; }
   .hero-grid { grid-template-columns: 1fr !important; }
   .hero-mascot {
     min-height: 260px !important;
@@ -445,3 +448,112 @@ main, nav, footer { position: relative; z-index: 1; }
   .footer-grid { grid-template-columns: 1fr !important; }
   .footer-bottom { flex-direction: column; align-items: flex-start !important; }
 }
+
+/* ─── Үйлчилгээ сонгох карт (/start) ─── */
+.start-card:hover { transform: translateY(-4px); box-shadow: 0 18px 44px rgba(20,58,107,0.13) !important; border-color: var(--navy) !important; }
+@media (max-width: 640px) { .start-cards { grid-template-columns: 1fr !important; } }
+
+/* ─── Тунгалаг header (нүүрний blush hero дээр — navy текст) ─── */
+.nav-transparent .nav-link { color: var(--navy-dark); }
+.nav-transparent .nav-link:hover { color: var(--navy); background: rgba(20,58,107,0.06); }
+
+/* ─── Hero (зөөлөн blush, төвлөрсөн, бүтэн дэлгэц) ─── */
+.hero-dark {
+  position: relative; overflow: hidden;
+  min-height: 100vh; margin-top: -4rem; /* header-ийн доогуур ороож, ард нь hero харагдана */
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; padding: 7rem 1.5rem 6rem;
+  background: radial-gradient(120% 85% at 50% 36%, #FCF2EF 0%, #F8EAE6 34%, #F4E4E0 74%, #F0DFD9 100%);
+  color: var(--navy-dark);
+}
+.hero-dark-glow {
+  position: absolute; top: 26%; left: 50%; transform: translate(-50%, -50%);
+  width: min(960px, 120%); height: 540px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,0.55), rgba(255,240,236,0.2) 52%, transparent 72%);
+  filter: blur(54px); pointer-events: none; z-index: 0;
+}
+.hero-dark-inner { position: relative; z-index: 1; max-width: 780px; }
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 600;
+  color: var(--navy); background: #fff; border: 1px solid var(--border);
+  padding: 8px 16px; border-radius: 980px; margin-bottom: 28px; box-shadow: 0 4px 16px rgba(20,58,107,0.06);
+}
+.hero-dark-h1 { font-size: clamp(2.6rem, 6vw, 5rem); font-weight: 800; line-height: 1.04; letter-spacing: -0.04em; margin: 0 0 1.5rem; color: var(--navy-dark); }
+.hero-dark-h1 .grad { color: var(--navy); }
+.hero-dark-sub { font-size: clamp(1rem, 1.5vw, 1.2rem); color: var(--text-mid); line-height: 1.7; max-width: 580px; margin: 0 auto 2.6rem; }
+.hero-dark-ctas { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin-bottom: 2.4rem; }
+.hd-btn-primary { background: var(--navy); color: #fff; font-weight: 700; font-size: 1rem; padding: 0.95rem 2.2rem; border-radius: 980px; text-decoration: none; box-shadow: 0 14px 34px rgba(20,58,107,0.28); transition: transform .15s, box-shadow .15s; }
+.hd-btn-primary:hover { transform: translateY(-2px); box-shadow: 0 20px 44px rgba(20,58,107,0.36); }
+.hd-btn-ghost { background: #fff; color: var(--navy); font-weight: 600; font-size: 1rem; padding: 0.95rem 2rem; border-radius: 980px; text-decoration: none; border: 1px solid var(--border); transition: background .15s; }
+.hd-btn-ghost:hover { background: var(--bg-tint); }
+.hero-dark-chips { display: flex; flex-wrap: wrap; gap: 0.9rem 1.6rem; justify-content: center; }
+.hero-dark-chips span { display: inline-flex; align-items: center; gap: 0.45rem; font-size: 0.9rem; color: var(--text-mid); font-weight: 500; }
+.hero-scroll {
+  position: absolute; bottom: 28px; left: 50%; z-index: 1; width: 42px; height: 42px; border-radius: 50%;
+  background: #fff; border: 1px solid var(--border); color: var(--navy);
+  box-shadow: 0 6px 18px rgba(20,58,107,0.1);
+  display: flex; align-items: center; justify-content: center; text-decoration: none;
+  transform: translateX(-50%);
+  animation: hero-bounce 2s ease-in-out infinite;
+}
+@keyframes hero-bounce { 0%, 100% { transform: translate(-50%, 0); } 50% { transform: translate(-50%, 7px); } }
+@media (max-width: 768px) { .hero-dark { min-height: auto; padding: 4.5rem 1.25rem 5rem; } }
+@media (prefers-reduced-motion: reduce) { .hero-scroll { animation: none; } }
+
+/* ─── Hero visual — 2 үйлчилгээ: AI чат утас (урд) + онлайн дэлгүүр (ард) ─── */
+.hv-stage { position: relative; width: 100%; height: 540px; display: flex; align-items: center; justify-content: center; }
+.hv-glow { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 440px; height: 440px; border-radius: 50%; background: radial-gradient(circle, rgba(20,58,107,0.16), transparent 70%); filter: blur(38px); z-index: 0; }
+
+/* Онлайн дэлгүүр (browser, ард) */
+.hv-store { position: absolute; z-index: 1; top: 64px; left: 0; width: 296px; border-radius: 16px; overflow: hidden; background: #fff; box-shadow: 0 28px 60px rgba(20,58,107,0.18); border: 1px solid rgba(20,58,107,0.06); transform: rotate(-3.5deg); animation: hv-floatA 6.5s ease-in-out infinite; }
+.hv-bar { height: 30px; background: #f4f6fa; display: flex; align-items: center; gap: 5px; padding: 0 12px; border-bottom: 1px solid #e8edf3; }
+.hv-bar i { width: 8px; height: 8px; border-radius: 50%; background: #d6deea; display: block; }
+.hv-url { margin-left: 7px; flex: 1; height: 17px; background: #fff; border: 1px solid #e8edf3; border-radius: 5px; font-size: 9px; color: #8a98a8; display: flex; align-items: center; padding: 0 8px; }
+.hv-snav { display: flex; align-items: center; justify-content: space-between; padding: 10px 13px; border-bottom: 1px solid #eef1f6; }
+.hv-logo { font-size: 13px; font-weight: 800; color: #143A6B; letter-spacing: -0.01em; }
+.hv-navr { font-size: 9px; color: #8a98a8; font-weight: 600; display: flex; gap: 9px; align-items: center; }
+.hv-banner { position: relative; height: 98px; margin: 11px 13px 0; border-radius: 10px; overflow: hidden; background-size: cover; background-position: center; display: flex; align-items: center; }
+.hv-banner::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(14,37,64,0.8), rgba(14,37,64,0.22)); }
+.hv-banner-in { position: relative; z-index: 1; padding: 0 14px; color: #fff; }
+.hv-btag { font-size: 8px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.85; margin-bottom: 5px; }
+.hv-bh { font-size: 16px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.1; }
+.hv-grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; padding: 11px 13px 14px; }
+.hv-card { border-radius: 9px; overflow: hidden; border: 1px solid #eef1f6; }
+.hv-cimg { aspect-ratio: 4/3; background-size: cover; background-position: center; }
+.hv-cpad { padding: 7px 9px 9px; }
+.hv-cname { font-size: 9.5px; font-weight: 600; color: #1C2B3A; }
+.hv-cprice { font-size: 10.5px; font-weight: 800; color: #143A6B; margin-top: 2px; }
+
+/* AI Agent чат (утас, урд) */
+.hv-phone { position: absolute; z-index: 2; top: 8px; right: 0; width: 238px; border-radius: 32px; background: #0E2540; padding: 7px; box-shadow: 0 40px 76px rgba(14,37,64,0.34); transform: rotate(2.5deg); animation: hv-floatB 5.6s ease-in-out infinite 0.3s; }
+.hv-screen { border-radius: 26px; overflow: hidden; background: #eef1f6; }
+.hv-ph-head { background: #143A6B; color: #fff; padding: 13px 14px 12px; display: flex; align-items: center; gap: 9px; }
+.hv-ph-av { width: 32px; height: 32px; border-radius: 50%; background: #fff; color: #143A6B; font-weight: 800; font-size: 14px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.hv-ph-name { font-size: 12px; font-weight: 800; }
+.hv-ph-on { font-size: 9px; opacity: 0.82; margin-top: 1px; display: flex; align-items: center; gap: 4px; }
+.hv-ph-on::before { content: ""; width: 5px; height: 5px; border-radius: 50%; background: #5fd07a; }
+.hv-ph-chat { padding: 12px 11px 14px; display: flex; flex-direction: column; gap: 8px; }
+.hv-m { font-size: 10px; line-height: 1.4; padding: 8px 11px; border-radius: 13px; max-width: 84%; }
+.hv-m.them { background: #fff; color: #1C2B3A; align-self: flex-start; border-bottom-left-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+.hv-m.me { background: #143A6B; color: #fff; align-self: flex-end; border-bottom-right-radius: 4px; }
+.hv-mprod { align-self: flex-end; width: 78%; background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 9px rgba(20,58,107,0.13); }
+.hv-mprod-img { height: 72px; background-size: cover; background-position: center; }
+.hv-mprod-b { padding: 7px 9px 9px; }
+.hv-mprod-n { font-size: 9.5px; font-weight: 700; color: #1C2B3A; }
+.hv-mprod-p { font-size: 10px; font-weight: 800; color: #143A6B; margin-top: 2px; }
+.hv-qbtn { align-self: stretch; margin-top: 2px; background: #143A6B; color: #fff; font-size: 10px; font-weight: 800; text-align: center; padding: 9px; border-radius: 9px; }
+
+/* Үйлчилгээний шошго */
+.hv-label { position: absolute; z-index: 4; display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 700; padding: 7px 13px; border-radius: 980px; background: #fff; color: #143A6B; box-shadow: 0 10px 26px rgba(20,58,107,0.18); border: 1px solid rgba(20,58,107,0.06); white-space: nowrap; }
+.hv-lab-store { top: 36px; left: 6px; }
+.hv-lab-ai { top: 0; right: 46px; }
+
+@keyframes hv-floatA { 0%, 100% { transform: rotate(-3.5deg) translateY(0); } 50% { transform: rotate(-3.5deg) translateY(-9px); } }
+@keyframes hv-floatB { 0%, 100% { transform: rotate(2.5deg) translateY(0); } 50% { transform: rotate(2.5deg) translateY(9px); } }
+
+@media (max-width: 980px) {
+  .hv-stage { height: auto; min-height: 460px; }
+  .hv-store, .hv-label { display: none; }
+  .hv-phone { position: static; transform: none; animation: none; }
+}
+@media (prefers-reduced-motion: reduce) { .hv-store, .hv-phone { animation: none; } }

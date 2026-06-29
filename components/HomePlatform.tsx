@@ -167,7 +167,7 @@ export default function HomePlatform() {
             <p style={{ fontSize: "1rem", color: "var(--text-mid)", lineHeight: 1.75, marginTop: "1.75rem", maxWidth: "440px", minHeight: "5.2rem" }}>
               {TABS[active].desc}
             </p>
-            <Link href="https://app.mongolagent.mn/register" className="btn-primary" style={{ marginTop: "1.5rem", fontSize: "0.95rem", padding: "0.9rem 2.1rem" }}>
+            <Link href="/start" className="btn-primary" style={{ marginTop: "1.5rem", fontSize: "0.95rem", padding: "0.9rem 2.1rem" }}>
               Үнэгүй эхлэх →
             </Link>
           </div>

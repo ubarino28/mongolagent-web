@@ -1,7 +1,6 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 import HomePlatform from "../components/HomePlatform";
-import TrustBar from "../components/TrustBar";
 import PlatformMarquee from "../components/PlatformMarquee";
 
 /* ─── Brand glyphs (showcase logo circles) ─── */
@@ -23,10 +22,10 @@ const IconPhone = () => (
   </svg>
 );
 
-const CARD_BG = "linear-gradient(150deg, #16314F 0%, #0E2540 55%, #0A1B2E 100%)";
+const CARD_BG = "linear-gradient(150deg, #2d2733 0%, #241f2a 55%, #1b1720 100%)";
 
 function Circle({ children }: { children: ReactNode }) {
-  return <div style={{ width: 42, height: 42, borderRadius: "50%", background: "#fff", display: "flex", alignItems: "center", justifyContent: "center", border: "3px solid #0E2540", boxShadow: "0 3px 12px rgba(0,0,0,0.4)" }}>{children}</div>;
+  return <div style={{ width: 42, height: 42, borderRadius: "50%", background: "#fff", display: "flex", alignItems: "center", justifyContent: "center", border: "3px solid #25202A", boxShadow: "0 3px 12px rgba(0,0,0,0.4)" }}>{children}</div>;
 }
 
 function Showcase({ eyebrow, logos, title, titleAccent, desc, href, cta, visual }: {
@@ -35,7 +34,7 @@ function Showcase({ eyebrow, logos, title, titleAccent, desc, href, cta, visual 
 }) {
   return (
     <div style={{ position: "relative", overflow: "hidden", borderRadius: "1.75rem", background: CARD_BG, border: "1px solid rgba(255,255,255,0.08)", padding: "clamp(2rem, 4vw, 3.5rem)" }}>
-      <div style={{ position: "absolute", top: "-25%", right: "-8%", width: "55%", height: "80%", background: "radial-gradient(circle, rgba(43,90,143,0.32), transparent 70%)", pointerEvents: "none" }} />
+      <div style={{ position: "absolute", top: "-25%", right: "-8%", width: "55%", height: "80%", background: "radial-gradient(circle, rgba(196,142,128,0.3), transparent 70%)", pointerEvents: "none" }} />
       <div className="showcase-grid" style={{ position: "relative", display: "grid", gridTemplateColumns: "1.05fr 1fr", gap: "2.5rem", alignItems: "center" }}>
         <div>
           <div style={{ fontSize: "0.7rem", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.1em", color: "rgba(255,255,255,0.5)", marginBottom: "1rem" }}>{eyebrow}</div>
@@ -43,7 +42,7 @@ function Showcase({ eyebrow, logos, title, titleAccent, desc, href, cta, visual 
             {logos.map((l, i) => <div key={i} style={{ marginLeft: i ? -11 : 0, zIndex: logos.length - i, position: "relative" }}><Circle>{l}</Circle></div>)}
           </div>
           <h2 style={{ fontSize: "clamp(1.8rem, 3.4vw, 2.85rem)", fontWeight: 800, lineHeight: 1.08, letterSpacing: "-0.03em", color: "#fff", marginBottom: "1.1rem" }}>
-            {title} <span style={{ color: "#9DC0E8" }}>{titleAccent}</span>
+            {title} <span style={{ color: "#fff", opacity: 0.62 }}>{titleAccent}</span>
           </h2>
           <p style={{ fontSize: "0.97rem", lineHeight: 1.75, color: "rgba(255,255,255,0.62)", maxWidth: "430px", marginBottom: "2rem" }}>{desc}</p>
           <Link href={href} style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem", padding: "0.82rem 1.9rem", borderRadius: "0.75rem", background: "#fff", color: "var(--navy)", fontWeight: 700, fontSize: "0.9rem", textDecoration: "none" }}>{cta} <IconArrow /></Link>
@@ -134,59 +133,33 @@ export default function HomePage() {
   );
   return (
     <>
-      {/* ─── HERO ─────────────────────────────────────────── */}
-      <section style={{ position: "relative", overflow: "hidden", padding: "6rem 0 7rem", background: "var(--hero-gradient)" }}>
-        <div style={{ ...wrap, position: "relative" }}>
-          <div className="hero-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "2rem", alignItems: "center" }}>
-            <div>
-              <h1 style={{ fontSize: "clamp(2.2rem, 4.5vw, 3.8rem)", fontWeight: 800, lineHeight: 1.08, letterSpacing: "-0.035em", marginBottom: "1.5rem" }}>
-                Бизнесээ онлайн<br />болгож,{" "}
-                <span className="gradient-text">AI-аар автоматжуул.</span>
-              </h1>
-              <p style={{ fontSize: "1rem", color: "var(--text-mid)", lineHeight: 1.8, maxWidth: "470px", marginBottom: "2.5rem" }}>
-                Нэг платформ — онлайн дэлгүүрээ нээж, AI ажилтнаар захиалга авч, QPay-аар төлбөр баталгаажуул. Код шаардахгүй, хэдхэн минутад.
-              </p>
-              <div className="hero-ctas" style={{ display: "flex", flexWrap: "wrap", gap: "1rem" }}>
-                <Link href="https://app.mongolagent.mn/register" className="btn-primary" style={{ fontSize: "0.95rem", padding: "0.85rem 2rem" }}>
-                  Үнэгүй эхлэх
-                </Link>
-                <a href="#products" className="btn-outline" style={{ fontSize: "0.95rem", padding: "0.85rem 2rem" }}>
-                  Бүтээгдэхүүн үзэх ↓
-                </a>
-              </div>
-              <div style={{ display: "flex", flexWrap: "wrap", gap: "0.85rem 1.75rem", marginTop: "2.25rem" }}>
-                {["Кодгүй угсардаг", "AI чатбот", "QPay төлбөр"].map((t) => (
-                  <span key={t} style={{ display: "inline-flex", alignItems: "center", gap: "0.45rem", fontSize: "0.86rem", color: "var(--text-mid)", fontWeight: 500 }}>
-                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" /><polyline points="22 4 12 14.01 9 11.01" /></svg> {t}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            <div className="hero-mascot" style={{ position: "relative", display: "flex", justifyContent: "center", alignItems: "center", minHeight: "460px" }}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/mascot.png" alt="Mongol Agent AI" className="mascot-float"
-                style={{ width: "400px", maxWidth: "88%", position: "relative", zIndex: 2, filter: "drop-shadow(0 24px 48px rgba(20,58,107,0.16))" }} />
-              <div className="hero-bubble" style={{ position: "absolute", top: "72px", right: "44px", zIndex: 3, background: "var(--bg-white)", border: "1px solid var(--border)", borderRadius: "1rem 1rem 1rem 0.25rem", padding: "0.55rem 0.85rem", fontSize: "0.75rem", color: "var(--text-mid)", boxShadow: "0 4px 24px rgba(20,58,107,0.1)" }}>
-                Сайн байна уу?
-              </div>
-              <div className="hero-bubble" style={{ position: "absolute", bottom: "110px", left: "28px", zIndex: 3, background: "var(--navy)", borderRadius: "1rem 1rem 0.25rem 1rem", padding: "0.55rem 0.85rem", fontSize: "0.75rem", color: "white", boxShadow: "0 6px 22px rgba(20,58,107,0.28)" }}>
-                Захиалга баталгаажлаа!
-              </div>
-            </div>
+      {/* ─── HERO (бараан, төвлөрсөн, бүтэн дэлгэц) ───────────── */}
+      <section className="hero-dark">
+        <div className="hero-dark-glow" />
+        <div className="hero-dark-inner">
+          <h1 className="hero-dark-h1">
+            Бизнесээ онлайн болгож,<br />
+            <span className="grad">AI-аар автоматжуул</span>
+          </h1>
+          <p className="hero-dark-sub">
+            Онлайн дэлгүүрээ нээж, AI ажилтнаар захиалга авч, QPay-аар төлбөр баталгаажуул — код шаардахгүй, хэдхэн минутад.
+          </p>
+          <div className="hero-dark-ctas">
+            <Link href="/start" className="hd-btn-primary">Үнэгүй эхлэх →</Link>
+            <a href="#products" className="hd-btn-ghost">Бүтээгдэхүүн үзэх</a>
+          </div>
+          <div className="hero-dark-chips">
+            {["Кодгүй угсардаг", "AI чатбот", "QPay төлбөр"].map((t) => (
+              <span key={t}>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg> {t}
+              </span>
+            ))}
           </div>
         </div>
+        <a href="#products" className="hero-scroll" aria-label="Доош үзэх">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9" /></svg>
+        </a>
       </section>
-
-      {/* ─── TRUST BAR ────────────────────────────────────── */}
-      <div style={{ padding: "0 1.25rem 0", marginTop: "-2.5rem", marginBottom: "-3rem", position: "relative", zIndex: 5 }}>
-        <div style={{ maxWidth: "64rem", margin: "0 auto" }}>
-          <TrustBar />
-        </div>
-      </div>
-
-      {/* ─── PLATFORM MARQUEE (integrations) ──────────────── */}
-      <PlatformMarquee />
 
       {/* ─── PRODUCTS — premium showcase ──────────────────── */}
       <section id="products" data-animate style={{ padding: "7rem 0 6rem" }}>
@@ -224,6 +197,9 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* ─── PLATFORM MARQUEE (integrations) ──────────────── */}
+      <PlatformMarquee />
 
       {/* ─── ХАМТДАА (combine flow) ───────────────────────── */}
       <section data-animate style={{ padding: "7rem 0", background: "var(--bg-section)" }}>
@@ -305,7 +281,7 @@ export default function HomePage() {
       {/* ─── CTA ──────────────────────────────────────────── */}
       <section data-animate style={{ padding: "5rem 0 6rem" }}>
         <div style={wrap3}>
-          <div style={{ position: "relative", borderRadius: "1.5rem", overflow: "hidden", padding: "4rem 3rem", textAlign: "center", background: "var(--navy)" }}>
+          <div style={{ position: "relative", borderRadius: "1.5rem", overflow: "hidden", padding: "4rem 3rem", textAlign: "center", background: "linear-gradient(150deg, #2d2733 0%, #241f2a 55%, #1b1720 100%)" }}>
             <div style={{ position: "relative", color: "white" }}>
               <h2 style={{ fontSize: "clamp(1.7rem, 4vw, 2.8rem)", fontWeight: 800, letterSpacing: "-0.03em", marginBottom: "1rem", color: "white" }}>
                 Бизнесийнхээ дараагийн<br />шатыг эхлүүлэх цаг
@@ -314,7 +290,7 @@ export default function HomePage() {
                 30 минутын үнэгүй зөвлөгөөгөөр бизнестээ яг тохирсон шийдлийг олж мэдээрэй.
               </p>
               <div style={{ display: "flex", flexWrap: "wrap", gap: "1rem", justifyContent: "center" }}>
-                <Link href="https://app.mongolagent.mn/register" style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem", padding: "0.95rem 2rem", fontSize: "0.95rem", fontWeight: 600, textDecoration: "none", borderRadius: "0.75rem", background: "white", color: "var(--navy)", transition: "all 0.2s" }}>
+                <Link href="/start" style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem", padding: "0.95rem 2rem", fontSize: "0.95rem", fontWeight: 600, textDecoration: "none", borderRadius: "0.75rem", background: "white", color: "var(--navy)", transition: "all 0.2s" }}>
                   Үнэгүй эхлэх →
                 </Link>
                 <Link href="tel:80952821" style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem", padding: "0.95rem 2rem", fontSize: "0.95rem", fontWeight: 500, textDecoration: "none", borderRadius: "0.75rem", background: "transparent", color: "rgba(255,255,255,0.85)", border: "1px solid rgba(255,255,255,0.25)", transition: "all 0.2s" }}>

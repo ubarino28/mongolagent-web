@@ -268,10 +268,10 @@ export default function AboutPage() {
           <div style={{
             position: "relative", borderRadius: "1.5rem", overflow: "hidden",
             padding: "4rem 3rem", textAlign: "center",
-            background: "linear-gradient(135deg, #1c2b3a 0%, #312e81 50%, #1c2b3a 100%)",
+            background: "linear-gradient(150deg, #2d2733 0%, #241f2a 55%, #1b1720 100%)",
             border: "1px solid rgba(255,255,255,0.08)",
           }}>
-            <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 80% 60% at 50% 50%, #143a6b20 0%, transparent 70%)", pointerEvents: "none" }} />
+            <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 80% 60% at 50% 50%, rgba(196,142,128,0.14) 0%, transparent 70%)", pointerEvents: "none" }} />
             <div style={{ position: "relative" }}>
               <div className="section-tag" style={{ display: "inline-flex", marginBottom: "1.25rem", background: "rgba(255,255,255,0.1)", borderColor: "rgba(255,255,255,0.15)", color: "rgba(255,255,255,0.85)" }}>
                 Хамтран ажиллая

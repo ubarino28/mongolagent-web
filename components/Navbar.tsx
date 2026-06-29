@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const LINKS = [
   { href: "/ai", hash: null as string | null, label: "AI Agent" },
@@ -12,8 +12,18 @@ const LINKS = [
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
   const isHome = pathname === "/";
+
+  // Нүүрний бараан hero дээр (дээд талд) header тунгалаг; гүйлгэхэд цагаан болно
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+  const transparent = isHome && !scrolled && !open;
 
   const linkStyle: React.CSSProperties = { padding: "0.5rem 0.95rem", borderRadius: 8, fontSize: "0.875rem", fontWeight: 500, textDecoration: "none", whiteSpace: "nowrap" };
 
@@ -24,7 +34,7 @@ export default function Navbar() {
   }
 
   return (
-    <header style={{ position: "sticky", top: 0, zIndex: 50, background: "rgba(255,255,255,0.9)", backdropFilter: "blur(16px)", WebkitBackdropFilter: "blur(16px)", borderBottom: "1px solid var(--border)" }}>
+    <header className={transparent ? "site-nav nav-transparent" : "site-nav"} style={{ position: "sticky", top: 0, zIndex: 50, transition: "background .25s ease, border-color .25s ease", background: transparent ? "transparent" : "rgba(255,255,255,0.9)", backdropFilter: transparent ? "none" : "blur(14px)", WebkitBackdropFilter: transparent ? "none" : "blur(14px)", borderBottom: transparent ? "1px solid transparent" : "1px solid var(--border)" }}>
       <div style={{ maxWidth: "72rem", margin: "0 auto", padding: "0 1.5rem", height: "4rem", display: "flex", alignItems: "center", justifyContent: "space-between", gap: "1rem" }}>
 
         {/* Logo */}
@@ -41,8 +51,8 @@ export default function Navbar() {
 
         {/* Desktop actions */}
         <div className="nav-desktop" style={{ alignItems: "center", gap: "0.75rem", flexShrink: 0 }}>
-          <Link href="https://app.mongolagent.mn" className="nav-link" style={linkStyle}>Нэвтрэх</Link>
-          <Link href="https://app.mongolagent.mn/register" style={{ display: "inline-flex", alignItems: "center", gap: "0.4rem", padding: "0.55rem 1.25rem", borderRadius: "0.65rem", background: "var(--navy)", color: "#fff", fontWeight: 600, fontSize: "0.875rem", textDecoration: "none", whiteSpace: "nowrap" }}>Эхлэх →</Link>
+          <Link href="/start?mode=login" className="nav-link" style={linkStyle}>Нэвтрэх</Link>
+          <Link href="/start" style={{ display: "inline-flex", alignItems: "center", gap: "0.4rem", padding: "0.55rem 1.25rem", borderRadius: "0.65rem", background: "var(--navy)", color: "#fff", fontWeight: 600, fontSize: "0.875rem", textDecoration: "none", whiteSpace: "nowrap" }}>Эхлэх →</Link>
         </div>
 
         {/* Mobile toggle */}
@@ -59,8 +69,8 @@ export default function Navbar() {
             {LINKS.map((l) => <NavItem key={l.href} {...l} style={{ display: "block", padding: "0.7rem 0.75rem" }} />)}
           </div>
           <div style={{ display: "flex", flexDirection: "column", gap: "0.6rem", marginTop: "0.9rem" }}>
-            <Link href="https://app.mongolagent.mn" onClick={() => setOpen(false)} style={{ textAlign: "center", padding: "0.7rem", borderRadius: "0.65rem", border: "1px solid var(--border)", color: "var(--navy-dark)", textDecoration: "none", fontSize: "0.9rem", fontWeight: 600 }}>Нэвтрэх</Link>
-            <Link href="https://app.mongolagent.mn/register" onClick={() => setOpen(false)} style={{ textAlign: "center", padding: "0.7rem", borderRadius: "0.65rem", background: "var(--navy)", color: "#fff", textDecoration: "none", fontSize: "0.9rem", fontWeight: 700 }}>Эхлэх →</Link>
+            <Link href="/start?mode=login" onClick={() => setOpen(false)} style={{ textAlign: "center", padding: "0.7rem", borderRadius: "0.65rem", border: "1px solid var(--border)", color: "var(--navy-dark)", textDecoration: "none", fontSize: "0.9rem", fontWeight: 600 }}>Нэвтрэх</Link>
+            <Link href="/start" onClick={() => setOpen(false)} style={{ textAlign: "center", padding: "0.7rem", borderRadius: "0.65rem", background: "var(--navy)", color: "#fff", textDecoration: "none", fontSize: "0.9rem", fontWeight: 700 }}>Эхлэх →</Link>
           </div>
         </div>
       )}

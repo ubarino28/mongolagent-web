@@ -95,7 +95,7 @@ export default function HeroChatThread() {
   }, [count, typing]);
 
   return (
-    <div ref={scrollRef} className="hero-chat-scroll" style={{ position: "relative", flex: 1, minHeight: 0, padding: "1rem 1.2rem", display: "flex", flexDirection: "column", gap: 9, background: "#EEF2F7", overflowY: "auto" }}>
+    <div ref={scrollRef} className="hero-chat-scroll" style={{ position: "relative", flex: 1, minHeight: 0, padding: "1rem 1.2rem", display: "flex", flexDirection: "column", gap: 9, background: "var(--bg-tint)", overflowY: "auto" }}>
       {MSGS.slice(0, count).map((m, i) => <Bubble key={i} m={m} />)}
       {typing && (
         <div className="ai-typing-live" style={{ alignSelf: "flex-start", display: "inline-flex", gap: 4, alignItems: "center", background: "#fff", border: "1px solid var(--border)", borderRadius: "12px 12px 12px 4px", padding: "9px 13px", boxShadow: "0 4px 14px rgba(10,27,46,0.06)" }}>

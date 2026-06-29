@@ -41,7 +41,7 @@ const IconMapPin = () => (
   </svg>
 );
 
-const CARD_BG = "linear-gradient(150deg, #16314F 0%, #0E2540 55%, #0A1B2E 100%)";
+const CARD_BG = "linear-gradient(150deg, #2d2733 0%, #241f2a 55%, #1b1720 100%)";
 
 const SERVICES = [
   {
@@ -144,7 +144,7 @@ export default function HomePage() {
       <section style={{ position: "relative", overflow: "hidden", padding: "6rem 0 7rem", background: "var(--hero-gradient)" }}>
 
         <div style={{ ...wrap, maxWidth: "90rem", position: "relative" }}>
-          <div style={{ position: "absolute", top: "-30%", right: "-12%", width: "62%", height: "125%", background: "radial-gradient(circle, rgba(43,90,143,0.1), transparent 62%)", pointerEvents: "none" }} />
+          <div style={{ position: "absolute", top: "-30%", right: "-12%", width: "62%", height: "125%", background: "radial-gradient(circle, rgba(196,142,128,0.16), transparent 62%)", pointerEvents: "none" }} />
           {/* Two-column grid */}
           <div className="hero-store-grid" style={{ position: "relative", display: "grid", gridTemplateColumns: "0.82fr 1.42fr", gap: "3.25rem", alignItems: "center" }}>
 
@@ -213,8 +213,8 @@ export default function HomePage() {
                   <div style={{ position: "absolute", left: -2, top: 78, width: 2.5, height: 22, background: "#3a3b40", borderRadius: 2 }} />
                   <div style={{ position: "absolute", left: -2, top: 108, width: 2.5, height: 22, background: "#3a3b40", borderRadius: 2 }} />
                   <div style={{ position: "absolute", right: -2, top: 96, width: 2.5, height: 34, background: "#3a3b40", borderRadius: 2 }} />
-                  <div style={{ position: "relative", borderRadius: 29, overflow: "hidden", background: "linear-gradient(165deg, #1E436E 0%, #123255 40%, #0A1E36 100%)", aspectRatio: "192/406" }}>
-                    <div style={{ position: "absolute", top: "-12%", left: "50%", transform: "translateX(-50%)", width: "130%", height: "52%", background: "radial-gradient(circle, rgba(120,170,230,0.3), transparent 64%)", pointerEvents: "none" }} />
+                  <div style={{ position: "relative", borderRadius: 29, overflow: "hidden", background: "linear-gradient(165deg, #2d2733 0%, #241f2a 40%, #1b1720 100%)", aspectRatio: "192/406" }}>
+                    <div style={{ position: "absolute", top: "-12%", left: "50%", transform: "translateX(-50%)", width: "130%", height: "52%", background: "radial-gradient(circle, rgba(196,142,128,0.22), transparent 64%)", pointerEvents: "none" }} />
                     <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, transparent 40%, rgba(7,17,32,0.4) 100%)", pointerEvents: "none" }} />
                     <div style={{ position: "relative", height: "100%", padding: "9px 11px 12px", display: "flex", flexDirection: "column" }}>
                       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", color: "#fff", fontSize: 9.5, fontWeight: 600, padding: "0 4px" }}>
@@ -334,8 +334,8 @@ export default function HomePage() {
                   </div>
                   <span style={{
                     fontSize: "0.63rem", fontWeight: 700, textTransform: "uppercase",
-                    letterSpacing: "0.08em", color: "#9DC0E8",
-                    background: "rgba(157,192,232,0.12)", border: "1px solid rgba(157,192,232,0.22)",
+                    letterSpacing: "0.08em", color: "rgba(255,255,255,0.66)",
+                    background: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.18)",
                     padding: "0.2rem 0.6rem", borderRadius: "100px",
                   }}>
                     {f.badge}

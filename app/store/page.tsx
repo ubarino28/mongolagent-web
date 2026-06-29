@@ -22,7 +22,7 @@ const IconPhone = () => (
 );
 
 /* ─── Premium dark cards (ways to sell) ─── */
-const CARD_BG = "linear-gradient(150deg, #16314F 0%, #0E2540 55%, #0A1B2E 100%)";
+const CARD_BG = "linear-gradient(150deg, #2d2733 0%, #241f2a 55%, #1b1720 100%)";
 
 const FbG = () => (<svg width="15" height="15" viewBox="0 0 24 24" fill="#1877F2"><path d="M24 12.07C24 5.4 18.6 0 12 0S0 5.4 0 12.07c0 6 4.39 10.97 10.13 11.85v-8.38H7.08v-3.47h3.05V9.43c0-3 1.79-4.67 4.53-4.67 1.31 0 2.69.24 2.69.24v2.95h-1.52c-1.5 0-1.96.93-1.96 1.87v2.25h3.33l-.53 3.47h-2.8v8.38C19.6 23.04 24 18.07 24 12.07z"/></svg>);
 const IgG = () => (<svg width="15" height="15" viewBox="0 0 24 24" fill="#E1306C"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.64.07-4.85.07s-3.58-.01-4.85-.07c-3.26-.15-4.77-1.7-4.92-4.92-.06-1.27-.07-1.64-.07-4.85s.01-3.58.07-4.85C2.38 3.92 3.9 2.38 7.15 2.23 8.42 2.17 8.8 2.16 12 2.16M12 0C8.74 0 8.33.01 7.05.07 2.7.27.27 2.69.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.2 4.36 2.62 6.78 6.98 6.98C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c4.35-.2 6.78-2.62 6.98-6.98.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.2-4.35-2.62-6.78-6.98-6.98C15.67.01 15.26 0 12 0zm0 5.84a6.16 6.16 0 1 0 0 12.32 6.16 6.16 0 0 0 0-12.32zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.41-10.85a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"/></svg>);
@@ -75,7 +75,7 @@ const channelVisual = (
 
 // 2) Гар утас — phone mockup
 const phoneVisual = (
-  <div style={{ width: 168, borderRadius: 24, border: "6px solid #0A1B2E", background: "#fff", overflow: "hidden", boxShadow: "0 20px 48px rgba(0,0,0,0.55)" }}>
+  <div style={{ width: 168, borderRadius: 24, border: "6px solid #1b1720", background: "#fff", overflow: "hidden", boxShadow: "0 20px 48px rgba(0,0,0,0.55)" }}>
     <div style={{ height: 28, background: "#143A6B", display: "flex", alignItems: "center", justifyContent: "center", color: "#fff", fontSize: 9.5, fontWeight: 800, letterSpacing: "0.05em" }}>МИНИЙ ДЭЛГҮҮР</div>
     <div style={{ padding: 8, display: "grid", gridTemplateColumns: "1fr 1fr", gap: 6 }}>
       {[
@@ -163,7 +163,7 @@ export default function StorePage() {
       {/* ─── HERO (Shopify-style: copy зүүн, төхөөрөмж баруун) ─ */}
       <section style={{ position: "relative", overflow: "hidden", padding: "5.5rem 0 6.5rem", background: "var(--hero-gradient)" }}>
         <div style={{ ...wrap, maxWidth: "90rem", position: "relative" }}>
-          <div style={{ position: "absolute", top: "-30%", right: "-12%", width: "62%", height: "125%", background: "radial-gradient(circle, rgba(43,90,143,0.1), transparent 62%)", pointerEvents: "none" }} />
+          <div style={{ position: "absolute", top: "-30%", right: "-12%", width: "62%", height: "125%", background: "radial-gradient(circle, rgba(196,142,128,0.16), transparent 62%)", pointerEvents: "none" }} />
 
           <div className="hero-store-grid" style={{ position: "relative", display: "grid", gridTemplateColumns: "1fr 1.25fr", gap: "4rem", alignItems: "center" }}>
             {/* LEFT — copy */}
@@ -273,10 +273,10 @@ export default function StorePage() {
                   <div style={{ position: "absolute", left: -2, top: 108, width: 2.5, height: 22, background: "#3a3b40", borderRadius: 2 }} />
                   <div style={{ position: "absolute", right: -2, top: 96, width: 2.5, height: 34, background: "#3a3b40", borderRadius: 2 }} />
                   {/* дэлгэц */}
-                  <div style={{ position: "relative", borderRadius: 29, overflow: "hidden", background: "linear-gradient(165deg, #1E436E 0%, #123255 40%, #0A1E36 100%)", aspectRatio: "192/406" }}>
-                    {/* navy wallpaper — дээд талын зөөлөн гэрэл */}
-                    <div style={{ position: "absolute", top: "-12%", left: "50%", transform: "translateX(-50%)", width: "130%", height: "52%", background: "radial-gradient(circle, rgba(120,170,230,0.3), transparent 64%)", pointerEvents: "none" }} />
-                    <div style={{ position: "absolute", bottom: "-10%", right: "-20%", width: "70%", height: "45%", background: "radial-gradient(circle, rgba(40,90,143,0.35), transparent 68%)", pointerEvents: "none" }} />
+                  <div style={{ position: "relative", borderRadius: 29, overflow: "hidden", background: "linear-gradient(165deg, #2d2733 0%, #241f2a 40%, #1b1720 100%)", aspectRatio: "192/406" }}>
+                    {/* warm wallpaper — дээд талын зөөлөн гэрэл */}
+                    <div style={{ position: "absolute", top: "-12%", left: "50%", transform: "translateX(-50%)", width: "130%", height: "52%", background: "radial-gradient(circle, rgba(196,142,128,0.26), transparent 64%)", pointerEvents: "none" }} />
+                    <div style={{ position: "absolute", bottom: "-10%", right: "-20%", width: "70%", height: "45%", background: "radial-gradient(circle, rgba(70,55,75,0.4), transparent 68%)", pointerEvents: "none" }} />
                     <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, transparent 40%, rgba(7,17,32,0.4) 100%)", pointerEvents: "none" }} />
 
                     {/* content layer */}
@@ -396,7 +396,7 @@ export default function StorePage() {
                 <div style={{ position: "relative", height: "152px", overflow: "hidden" }}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img src={`https://images.unsplash.com/photo-${f.img}?w=520&q=80&auto=format&fit=crop`} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
-                  <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, rgba(10,27,46,0.05) 35%, rgba(10,27,46,0.92))" }} />
+                  <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, rgba(20,16,24,0.05) 35%, rgba(20,16,24,0.92))" }} />
                 </div>
                 <div style={{ padding: "1.25rem 1.65rem 1.75rem", marginTop: "-2.25rem", position: "relative" }}>
                   <h3 style={{ fontSize: "1.05rem", fontWeight: 700, letterSpacing: "-0.01em", color: "#fff", marginBottom: "0.5rem" }}>{f.title}</h3>
@@ -412,10 +412,10 @@ export default function StorePage() {
       <StoreAutomate />
 
       {/* ─── ADVANTAGES (dark band + stats) ───────────────── */}
-      <section data-animate style={{ position: "relative", overflow: "hidden", padding: "7rem 0", background: "linear-gradient(120deg, #0E2540 0%, #0A1B2E 100%)", color: "#fff" }}>
-        <div style={{ position: "absolute", top: "8%", left: "-10%", width: "45%", height: "75%", background: "radial-gradient(circle, rgba(43,90,143,0.32), transparent 70%)", pointerEvents: "none" }} />
+      <section data-animate style={{ position: "relative", overflow: "hidden", padding: "7rem 0", background: "linear-gradient(120deg, #25202A 0%, #1b1720 100%)", color: "#fff" }}>
+        <div style={{ position: "absolute", top: "8%", left: "-10%", width: "45%", height: "75%", background: "radial-gradient(circle, rgba(196,142,128,0.22), transparent 70%)", pointerEvents: "none" }} />
         <div style={{ ...wrap, position: "relative" }}>
-          <div style={{ fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "#9DC0E8", marginBottom: "1rem" }}>Давуу тал</div>
+          <div style={{ fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(255,255,255,0.55)", marginBottom: "1rem" }}>Давуу тал</div>
           <h2 style={{ fontSize: "clamp(1.9rem, 3.6vw, 2.9rem)", fontWeight: 800, letterSpacing: "-0.025em", color: "#fff", marginBottom: "1.1rem", maxWidth: "640px", lineHeight: 1.12 }}>
             Урт хугацаанд ажиллах дэлгүүрийн платформ
           </h2>
@@ -426,7 +426,7 @@ export default function StorePage() {
           <div className="adv-grid stagger" style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "2.75rem 2rem", marginBottom: "4rem" }}>
             {ADVANTAGES.map(a => (
               <div key={a.title}>
-                <div style={{ width: 44, height: 44, borderRadius: "50%", background: "#9DC0E8", color: "#0E2540", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "1.1rem" }}>{a.ic}</div>
+                <div style={{ width: 44, height: 44, borderRadius: "50%", background: "rgba(255,255,255,0.14)", color: "#fff", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "1.1rem" }}>{a.ic}</div>
                 <h3 style={{ fontSize: "1.1rem", fontWeight: 700, color: "#fff", marginBottom: "0.55rem", letterSpacing: "-0.01em" }}>{a.title}</h3>
                 <p style={{ fontSize: "0.88rem", lineHeight: 1.7, color: "rgba(255,255,255,0.6)" }}>{a.desc}</p>
               </div>
@@ -435,7 +435,7 @@ export default function StorePage() {
 
           <div className="adv-stats stagger" style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "1.25rem" }}>
             {STATS.map(s => (
-              <div key={s.label} style={{ borderRadius: "1.25rem", padding: "2.25rem 2rem", background: "linear-gradient(150deg, #DCE8F6, #EAF0F8)" }}>
+              <div key={s.label} style={{ borderRadius: "1.25rem", padding: "2.25rem 2rem", background: "linear-gradient(150deg, #FBEDEA, #F4E4E0)" }}>
                 <div style={{ fontSize: "2.5rem", fontWeight: 800, letterSpacing: "-0.03em", color: "#143A6B", marginBottom: "0.5rem", lineHeight: 1 }}>{s.num}</div>
                 <div style={{ fontSize: "1rem", fontWeight: 700, color: "#1C2B3A", marginBottom: "0.5rem" }}>{s.label}</div>
                 <p style={{ fontSize: "0.85rem", color: "#5A6B80", lineHeight: 1.6 }}>{s.desc}</p>
@@ -470,7 +470,7 @@ export default function StorePage() {
       {/* ─── CTA ──────────────────────────────────────────── */}
       <section data-animate style={{ padding: "5rem 0 6rem" }}>
         <div style={wrap3}>
-          <div style={{ borderRadius: "1.5rem", overflow: "hidden", padding: "4rem 3rem", textAlign: "center", background: "var(--navy)", color: "white" }}>
+          <div style={{ borderRadius: "1.5rem", overflow: "hidden", padding: "4rem 3rem", textAlign: "center", background: "linear-gradient(150deg, #2d2733 0%, #241f2a 55%, #1b1720 100%)", color: "white" }}>
             <h2 style={{ fontSize: "clamp(1.7rem, 4vw, 2.8rem)", fontWeight: 800, letterSpacing: "-0.03em", marginBottom: "1rem", color: "white" }}>
               Онлайн дэлгүүрээ<br />өнөөдөр нээ
             </h2>

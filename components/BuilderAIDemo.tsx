@@ -247,7 +247,7 @@ export default function BuilderAIDemo() {
               style={{
                 height: "340px", overflowY: "auto", padding: "1rem",
                 display: "flex", flexDirection: "column", gap: "0.55rem",
-                background: "#f6f8fb",
+                background: "var(--bg-tint)",
                 scrollbarWidth: "thin", scrollbarColor: "var(--border2) transparent",
               }}
             >
